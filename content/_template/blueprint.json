@@ -1,0 +1,69 @@
+{
+  "_template": true,
+  "formatVersion": 1,
+  "sources": [
+    {
+      "title": "TODO: official exam guide title and version, exactly as printed",
+      "url": "https://example.com/TODO",
+      "retrievedOn": "2000-01-01",
+      "note": "TODO: what was taken from this source (domains, weights, task statements, scoring) and what was condensed"
+    },
+    {
+      "title": "TODO: vendor certification landing page (second source for cross-checking format and weights)",
+      "url": "https://example.com/TODO",
+      "retrievedOn": "2000-01-01",
+      "note": "TODO: which facts came only from this page (for example time limit, price) and are not in the guide"
+    }
+  ],
+  "version": {
+    "current": "TODO: exam version/code in use, e.g. XYZ-C01",
+    "note": "TODO: delete this whole block if the vendor has no announced version change. Otherwise record registrationOpens / supersededLastExamDay (YYYY-MM-DD) and what the new version replaces."
+  },
+  "exam": {
+    "code": "TODO-CODE",
+    "name": "TODO: official exam name",
+    "vendor": "TODO: vendor",
+    "passMarkPct": 70,
+    "passMarkNote": "TODO: if the vendor reports a scaled score, say the raw % is only a proxy; otherwise delete scaledPassScore, scaleRange and this note",
+    "readinessTargetPct": 80,
+    "readinessTargetNote": "Your own per-exam target for dashboard/map status (default 80%). Not a vendor figure.",
+    "scaledPassScore": 700,
+    "scaleRange": [100, 1000],
+    "timeLimitMin": 90,
+    "questionCount": 65,
+    "scoredQuestionCount": 50,
+    "unscoredQuestionCount": 15,
+    "unscoredNote": "TODO: delete scored/unscored fields if the vendor doesn't publish them",
+    "questionTypes": {
+      "single": "TODO: describe the vendor's single-answer format",
+      "multi": "TODO: describe the multiple-response format, or delete this key if the exam has none"
+    },
+    "domains": [
+      {
+        "key": "d1",
+        "name": "TODO: domain name exactly as printed",
+        "weightPct": 50,
+        "objectives": [
+          {
+            "code": "1.1",
+            "title": "TODO: task statement / objective title as printed",
+            "scope": ["TODO: condensed service/concept names the vendor lists for this objective"]
+          }
+        ]
+      },
+      {
+        "key": "d2",
+        "name": "TODO: domain name exactly as printed",
+        "weightPct": 50,
+        "objectives": [
+          {
+            "code": "2.1",
+            "title": "TODO: task statement / objective title as printed",
+            "scope": ["TODO: condensed service/concept names the vendor lists for this objective"]
+          }
+        ]
+      }
+    ]
+  },
+  "questions": []
+}

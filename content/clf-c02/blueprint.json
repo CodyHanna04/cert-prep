@@ -1,0 +1,266 @@
+{
+  "formatVersion": 1,
+  "sources": [
+    {
+      "title": "AWS Certified Cloud Practitioner (CLF-C02) Exam Guide, Version 1.0",
+      "url": "https://d1.awsstatic.com/training-and-certification/docs-cloud-practitioner/AWS-Certified-Cloud-Practitioner_Exam-Guide.pdf",
+      "retrievedOn": "2026-10-30",
+      "note": "Domains, weights, task statements, format and scoring transcribed from the official PDF (pages 1-13, appendices A-B). Guide footer reads 'Version 1.0 CLF-C02'. AWS may publish a newer guide; re-check https://aws.amazon.com/certification/certified-cloud-practitioner/ before relying on weights. The `scope` arrays below are CONDENSED from the guide's 'Knowledge of / Skills in' bullets (pages 4-13): service and concept names only, no new claims."
+    }
+  ],
+  "exam": {
+    "code": "CLF-C02",
+    "name": "AWS Certified Cloud Practitioner",
+    "vendor": "Amazon Web Services",
+    "passMarkPct": 70,
+    "passMarkNote": "Official pass mark is a scaled score of 700 on a 100-1000 scale (compensatory scoring: only the overall result matters). The raw-percentage equivalent is not published, so 70% is a PROXY for display on mock results only.",
+    "readinessTargetPct": 80,
+    "readinessTargetNote": "Your own per-exam target for dashboard/map status (default 80%). Not a vendor figure.",
+    "scaledPassScore": 700,
+    "scaleRange": [100, 1000],
+    "timeLimitMin": 90,
+    "questionCount": 65,
+    "scoredQuestionCount": 50,
+    "unscoredQuestionCount": 15,
+    "unscoredNote": "15 unscored questions are not identified on the real exam. Unanswered = incorrect; no penalty for guessing.",
+    "questionTypes": {
+      "single": "Multiple choice: 1 correct response, 3 distractors (4 options).",
+      "multi": "Multiple response: 2 or more correct responses out of 5 or more options."
+    },
+    "domains": [
+      {
+        "key": "d1",
+        "name": "Cloud Concepts",
+        "weightPct": 24,
+        "objectives": [
+          {
+            "code": "1.1",
+            "title": "Define the benefits of the AWS Cloud.",
+            "scope": [
+              "Value proposition of the AWS Cloud",
+              "Economies of scale (e.g. cost savings)",
+              "Global infrastructure benefits (speed of deployment, global reach)",
+              "High availability, elasticity, agility"
+            ]
+          },
+          {
+            "code": "1.2",
+            "title": "Identify design principles of the AWS Cloud.",
+            "scope": [
+              "AWS Well-Architected Framework",
+              "Six pillars: operational excellence, security, reliability, performance efficiency, cost optimization, sustainability",
+              "Differences between the pillars"
+            ]
+          },
+          {
+            "code": "1.3",
+            "title": "Understand the benefits of and strategies for migration to the AWS Cloud.",
+            "scope": [
+              "Cloud adoption strategies",
+              "AWS Cloud Adoption Framework (AWS CAF) benefits (reduced business risk, improved ESG performance, increased revenue, increased operational efficiency)",
+              "Migration strategies (e.g. database replication, AWS Snowball)",
+              "Resources that support the migration journey"
+            ]
+          },
+          {
+            "code": "1.4",
+            "title": "Understand concepts of cloud economics.",
+            "scope": [
+              "Fixed vs variable costs",
+              "On-premises cost components",
+              "Licensing strategies (Bring Your Own License vs included)",
+              "Rightsizing",
+              "Automation benefits (e.g. AWS CloudFormation)",
+              "Managed services (e.g. Amazon RDS, Amazon ECS, Amazon EKS, Amazon DynamoDB)"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "d2",
+        "name": "Security and Compliance",
+        "weightPct": 30,
+        "objectives": [
+          {
+            "code": "2.1",
+            "title": "Understand the AWS shared responsibility model.",
+            "scope": [
+              "Components of the shared responsibility model",
+              "Customer responsibilities",
+              "AWS responsibilities",
+              "Shared responsibilities",
+              "How responsibilities shift by service (e.g. Amazon RDS, AWS Lambda, Amazon EC2)"
+            ]
+          },
+          {
+            "code": "2.2",
+            "title": "Understand AWS Cloud security, governance, and compliance concepts.",
+            "scope": [
+              "Where to find compliance information (AWS Artifact, AWS Compliance)",
+              "Securing resources (Amazon Inspector, AWS Security Hub, Amazon GuardDuty, AWS Shield)",
+              "Encryption in transit and at rest",
+              "Governance/compliance services: Amazon CloudWatch (monitoring), AWS CloudTrail, AWS Audit Manager, AWS Config (auditing), access reports",
+              "Where to capture and locate security-related logs",
+              "Compliance requirements vary among AWS services"
+            ]
+          },
+          {
+            "code": "2.3",
+            "title": "Identify AWS access management capabilities.",
+            "scope": [
+              "AWS IAM: users, groups, custom and managed policies, least privilege",
+              "Root user: importance of protecting it, tasks only root can perform, protection methods",
+              "MFA, IAM Identity Center, cross-account IAM roles",
+              "Access keys, password policies, credential storage (AWS Secrets Manager, AWS Systems Manager)",
+              "Federated identity management"
+            ]
+          },
+          {
+            "code": "2.4",
+            "title": "Identify components and resources for security.",
+            "scope": [
+              "Security features/services: security groups, network ACLs, AWS WAF",
+              "Third-party security products in AWS Marketplace",
+              "Where AWS security information lives: AWS Knowledge Center, AWS Security Center, AWS Security Blog",
+              "AWS Trusted Advisor for identifying security issues"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "d3",
+        "name": "Cloud Technology and Services",
+        "weightPct": 34,
+        "objectives": [
+          {
+            "code": "3.1",
+            "title": "Define methods of deploying and operating in the AWS Cloud.",
+            "scope": [
+              "Ways to access/provision: APIs, SDKs, CLI, Management Console, infrastructure as code",
+              "One-time operations vs repeatable processes",
+              "Deployment models: cloud, hybrid, on-premises",
+              "Connectivity: AWS VPN, AWS Direct Connect, public internet"
+            ]
+          },
+          {
+            "code": "3.2",
+            "title": "Define the AWS global infrastructure.",
+            "scope": [
+              "Regions, Availability Zones, edge locations and how they relate",
+              "High availability via multiple AZs; AZs do not share single points of failure",
+              "When to use multiple Regions (disaster recovery, business continuity, low latency, data sovereignty)",
+              "Edge benefits: Amazon CloudFront, AWS Global Accelerator",
+              "AWS Wavelength Zones, AWS Local Zones"
+            ]
+          },
+          {
+            "code": "3.3",
+            "title": "Identify AWS compute services.",
+            "scope": [
+              "EC2 instance types (e.g. compute optimized, storage optimized)",
+              "Containers: Amazon ECS, Amazon EKS",
+              "Serverless compute: AWS Fargate, AWS Lambda",
+              "Auto scaling provides elasticity",
+              "Purpose of load balancers"
+            ]
+          },
+          {
+            "code": "3.4",
+            "title": "Identify AWS database services.",
+            "scope": [
+              "EC2-hosted databases vs AWS managed databases",
+              "Relational: Amazon RDS, Amazon Aurora",
+              "NoSQL: Amazon DynamoDB",
+              "Memory-based databases",
+              "Migration tools: AWS DMS, AWS Schema Conversion Tool"
+            ]
+          },
+          {
+            "code": "3.5",
+            "title": "Identify AWS network services.",
+            "scope": [
+              "VPC components (subnets, gateways)",
+              "VPC security: network ACLs, security groups",
+              "Amazon Route 53",
+              "Edge services: Amazon CloudFront, AWS Global Accelerator",
+              "Connectivity to AWS: AWS VPN, AWS Direct Connect"
+            ]
+          },
+          {
+            "code": "3.6",
+            "title": "Identify AWS storage services.",
+            "scope": [
+              "Object storage uses; Amazon S3 storage classes",
+              "Block storage: Amazon EBS, instance store",
+              "File services: Amazon EFS, Amazon FSx",
+              "Cached file systems: AWS Storage Gateway",
+              "Lifecycle policies",
+              "AWS Backup"
+            ]
+          },
+          {
+            "code": "3.7",
+            "title": "Identify AWS artificial intelligence and machine learning (AI/ML) services and analytics services.",
+            "scope": [
+              "AI/ML services and tasks: Amazon SageMaker, Amazon Lex, Amazon Kendra",
+              "Analytics: Amazon Athena, Amazon Kinesis, AWS Glue, Amazon QuickSight"
+            ]
+          },
+          {
+            "code": "3.8",
+            "title": "Identify services from other in-scope AWS service categories.",
+            "scope": [
+              "Application integration: Amazon EventBridge, Amazon SNS, Amazon SQS",
+              "Business applications: Amazon Connect, Amazon SES",
+              "Customer engagement: AWS Activate for Startups, AWS IQ, AWS Managed Services (AMS), AWS Support",
+              "Developer tools: AWS AppConfig, AWS Cloud9, AWS CloudShell, AWS CodeArtifact, AWS CodeBuild, AWS CodeCommit, AWS CodeDeploy, AWS CodePipeline, AWS CodeStar, AWS X-Ray",
+              "End-user computing: Amazon AppStream 2.0, Amazon WorkSpaces, Amazon WorkSpaces Web",
+              "Frontend web and mobile: AWS Amplify, AWS AppSync",
+              "IoT: AWS IoT Core, AWS IoT Greengrass"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "d4",
+        "name": "Billing, Pricing, and Support",
+        "weightPct": 12,
+        "objectives": [
+          {
+            "code": "4.1",
+            "title": "Compare AWS pricing models.",
+            "scope": [
+              "Compute purchasing options: On-Demand, Reserved Instances, Spot Instances, Savings Plans, Dedicated Hosts, Dedicated Instances, Capacity Reservations",
+              "Reserved Instance flexibility and behavior in AWS Organizations",
+              "Data transfer charges (incoming/outgoing, cross-Region, same Region)",
+              "Pricing for storage options and tiers"
+            ]
+          },
+          {
+            "code": "4.2",
+            "title": "Understand resources for billing, budget, and cost management.",
+            "scope": [
+              "AWS Budgets, AWS Cost Explorer, AWS Billing Conductor",
+              "AWS Pricing Calculator",
+              "AWS Organizations consolidated billing and cost allocation",
+              "Cost allocation tags and AWS Cost and Usage Report"
+            ]
+          },
+          {
+            "code": "4.3",
+            "title": "Identify AWS technical resources and AWS Support options.",
+            "scope": [
+              "Official docs, whitepapers, blogs; AWS Prescriptive Guidance, AWS Knowledge Center, AWS re:Post",
+              "AWS Support plans: Developer, Business, Enterprise On-Ramp, Enterprise; AWS Support Center",
+              "AWS Trusted Advisor, AWS Health Dashboard, AWS Health API (monitoring/cost optimization)",
+              "AWS Trust and Safety team (report abuse)",
+              "AWS Partner Network: AWS Marketplace, ISVs, system integrators; partner benefits",
+              "AWS Professional Services, AWS Solutions Architects"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "questions": []
+}

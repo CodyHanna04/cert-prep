@@ -1,0 +1,35 @@
+# dependencies
+node_modules/
+
+# Next.js / build output
+.next/
+out/
+build/
+dist/
+
+# env and secrets (keep the example file)
+.env
+.env.*
+!.env.example
+
+# logs and test output
+*.log
+npm-debug.log*
+coverage/
+playwright-report/
+test-results/
+
+# database data and dumps (never commit user data)
+pgdata/
+*.dump
+*.sql.gz
+backups/
+
+# deploy tooling
+.vercel/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
