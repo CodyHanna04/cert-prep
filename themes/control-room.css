@@ -1,0 +1,49 @@
+/* Theme "Control room": cool slate, monospace headings, cyan accent. */
+[data-theme="control-room"] {
+  --c-bg: #eef2f6;
+  --c-surface: #ffffff;
+  --c-raised: #f8fafc;
+  --c-line: #cbd5e1;
+  --c-text: #0f1b2a;
+  --c-muted: #4b5b6e;
+  --c-accent: #0b6e99;
+  --c-on-accent: #ffffff;
+  --c-focus: #7c3aed;
+  --c-ok: #166534;
+  --c-ok-soft: #dcf5e4;
+  --c-warn: #8a4b00;
+  --c-warn-soft: #fdecc8;
+  --c-bad: #b42318;
+  --c-bad-soft: #fde2df;
+  --c-info: #0b5cad;
+  --c-info-soft: #dbeafe;
+  --c-idle: #4b5b6e;
+  --c-idle-soft: #e2e8f0;
+  --f-display: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, monospace;
+  --f-body: ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  --radius: 0.125rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-theme="control-room"]:not([data-mode="light"]) {
+    --c-bg: #0e1217;
+    --c-surface: #151b22;
+    --c-raised: #1b232c;
+    --c-line: #2a3541;
+    --c-text: #d8e1ea;
+    --c-muted: #92a2b3;
+    --c-accent: #4cc2ff;
+    --c-on-accent: #04202e;
+    --c-focus: #c4a1ff;
+    --c-ok: #6ee7a0;
+    --c-ok-soft: #12301f;
+    --c-warn: #fbbf24;
+    --c-warn-soft: #33270a;
+    --c-bad: #ff8a80;
+    --c-bad-soft: #3b1714;
+    --c-info: #7cc4ff;
+    --c-info-soft: #112a42;
+    --c-idle: #92a2b3;
+    --c-idle-soft: #1f2933;
+  }
+}

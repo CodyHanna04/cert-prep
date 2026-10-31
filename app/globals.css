@@ -1,0 +1,53 @@
+@import "tailwindcss";
+@import "../themes/ledger.css";
+@import "../themes/control-room.css";
+
+/* Tailwind's default palette is removed: components may only use the semantic tokens below (docs/12). */
+@theme {
+  --color-*: initial;
+}
+
+@theme inline {
+  --color-bg: var(--c-bg);
+  --color-surface: var(--c-surface);
+  --color-raised: var(--c-raised);
+  --color-line: var(--c-line);
+  --color-text: var(--c-text);
+  --color-muted: var(--c-muted);
+  --color-accent: var(--c-accent);
+  --color-on-accent: var(--c-on-accent);
+  --color-focus: var(--c-focus);
+  --color-ok: var(--c-ok);
+  --color-ok-soft: var(--c-ok-soft);
+  --color-warn: var(--c-warn);
+  --color-warn-soft: var(--c-warn-soft);
+  --color-bad: var(--c-bad);
+  --color-bad-soft: var(--c-bad-soft);
+  --color-info: var(--c-info);
+  --color-info-soft: var(--c-info-soft);
+  --color-idle: var(--c-idle);
+  --color-idle-soft: var(--c-idle-soft);
+  --font-display: var(--f-display);
+  --font-sans: var(--f-body);
+  --radius-theme: var(--radius);
+}
+
+body {
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-family: var(--f-body);
+}
+
+:focus-visible {
+  outline: 2px solid var(--c-focus);
+  outline-offset: 2px;
+}
+
+/* Rendered markdown (components/ui/Markdown.js) */
+.md p { margin: 0 0 0.75rem; }
+.md p:last-child { margin-bottom: 0; }
+.md ul, .md ol { margin: 0 0 0.75rem 1.25rem; list-style: revert; }
+.md code { font-family: ui-monospace, "Cascadia Mono", Menlo, monospace; font-size: 0.9em; background: var(--c-idle-soft); padding: 0.1em 0.3em; border-radius: 0.25rem; }
+.md pre { margin: 0 0 0.75rem; padding: 0.75rem; overflow-x: auto; background: var(--c-idle-soft); border-radius: var(--radius); }
+.md pre code { background: none; padding: 0; }
+.md a { color: var(--c-accent); text-decoration: underline; }

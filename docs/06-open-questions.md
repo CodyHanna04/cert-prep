@@ -31,24 +31,26 @@
 | **D49** | **React Aria Components** is the behavior library. | 2026-10-31 |
 | **D50** | **Migrations: a tiny in-repo runner**, with the rule that applied migrations are never edited. | 2026-10-31 |
 
+| **D51** | **Admin destructive actions use typed confirmation** (type the user's name). | 2026-10-31 |
+| **D52** | **Admin is the same codebase run as a second container** (`APP_MODE=admin`). | 2026-10-31 |
+| **D53** | **Planning docs committed** (initial commit made). | 2026-10-31 |
+
 ## Open
 
 | # | Question | Recommendation | Where |
 |---|---|---|---|
-| D51 | **Admin site: typed confirmation or a passkey tap** for destructive actions? | Typed confirmation (tailnet + identity already gate it); add a passkey step-up later if you want it. | [11](11-auth-and-tenancy.md) |
-| D52 | **Admin deployment: same codebase, second container** (recommended) or a fully separate app/repo? | Same codebase; credentials and routes are separated at runtime. | [11](11-auth-and-tenancy.md) |
-| D53 | **Commit the planning docs?** The repo has no commits yet. | Yes, as one initial commit. | — |
+| — | Nothing open from planning. See [docs/13](13-build-status.md) for what the build left open. | | |
 
 ## Things I haven't verified
 
-- **Better Auth** from plain JavaScript (its docs show only TypeScript), passkey-first users without an email, where `rpID`/`origin` are configured with `@better-auth/passkey`, database-backed rate limits, and CLI migration with a raw `Pool`. The first auth ticket (T-006) is a spike to settle these.
+- ~~Better Auth from plain JavaScript~~ **Verified in the build** (passkey-first without email, rate limits, token consumption); findings in [doc 13](13-build-status.md). Still untested: a real platform authenticator in a real browser.
 - **SimpleWebAuthn's** current maintenance status (my search returned nothing on it); relevant only to the fallback.
 - **The argument for the exact-host rpID** over the parent domain comes from one practitioner blog and my own reasoning; no primary source found.
 - **Tailwind v4** details: resetting default colors, `@theme` mapping, `inline` behavior, Next.js integration. From memory.
 - **Tailscale Serve identity headers and Docker sidecar configuration**, including that headers aren't populated for tagged devices (from third-party summaries of Tailscale's docs); your tailnet needs HTTPS certificates and MagicDNS enabled.
 - **Namecheap API** access for DNS-01 certificate renewal (only if you choose that route); **your nginx's** current rate-limit and header hardening; **Vercel** terms (only if option C is ever used).
-- **Whether Postgres foreign-key cascades work under RLS** for admin account deletion (tested in the isolation suite).
-- **Whether Better Auth has an admin plugin** worth using, or whether the admin portal is built on our own tables.
+- ~~Whether Postgres foreign-key cascades work under RLS~~ **Verified** (isolation suite, account-deletion test).
+- ~~Better Auth admin plugin~~ Not used; the admin site is built on our own tables (`lib/admin/store.js`).
 - **Behavior-library facts** (maintenance status, versions, accessibility test coverage) come from third-party comparison blogs.
 - **Postgres RLS pattern** (`set_config(..., true)` in a transaction) comes from one third-party write-up; the isolation tests are how we verify it.
 - **DVA-C03:** the 130-minute limit and 150 USD price come from AWS's certification page, not the guide. Question formats listed in the guide: multiple choice and multiple response only.

@@ -27,6 +27,11 @@
       "single": "Multiple choice: 1 correct response, 3 distractors (4 options).",
       "multi": "Multiple response: 2 or more correct responses out of 5 or more options."
     },
+    "profile": {
+      "single": { "options": 4 },
+      "multi": { "minOptions": 5, "minCorrect": 2 },
+      "bannedOptionText": ["all of the above", "none of the above"]
+    },
     "domains": [
       {
         "key": "d1",

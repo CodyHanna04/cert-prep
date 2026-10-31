@@ -1,0 +1,96 @@
+# Production-shaped base: the database is on an internal network and is NOT published.
+# Local development adds a loopback database port via docker-compose.override.yml (auto-loaded).
+# On the homelab run:  docker compose -f docker-compose.yml up -d
+#
+#   docker compose -f docker-compose.yml run --rm migrate                                  # apply migrations
+#   docker compose -f docker-compose.yml run --rm migrate node scripts/create-user.mjs "Your Name"   # first account link
+#   docker compose -f docker-compose.yml up -d web                                          # public site (behind your nginx)
+#   docker compose -f docker-compose.yml --profile admin up -d                              # admin site over Tailscale
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set in .env}
+      POSTGRES_DB: postgres
+      OWNER_PASSWORD: ${OWNER_PASSWORD:?}
+      APP_PASSWORD: ${APP_PASSWORD:?}
+      AUTH_PASSWORD: ${AUTH_PASSWORD:?}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./docker/initdb:/docker-entrypoint-initdb.d:ro
+    networks: [internal]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  # One-off: migrations and the break-glass CLI. Has the owner credential; never runs long-term.
+  migrate:
+    build: { context: ., target: tools }
+    profiles: ["tools"]
+    environment:
+      DATABASE_URL_OWNER: postgres://certprep_owner:${OWNER_PASSWORD}@db:5432/certprep
+      DATABASE_URL_ADMIN: postgres://admin_app:${ADMIN_PASSWORD}@db:5432/certprep
+      APP_ORIGIN: ${APP_ORIGIN:-}
+    depends_on:
+      db: { condition: service_healthy }
+    networks: [internal]
+
+  # Public site. No admin credentials, no admin routes.
+  web:
+    build: { context: ., target: runner }
+    image: certprep-app:local
+    restart: unless-stopped
+    environment:
+      APP_MODE: web
+      APP_ORIGIN: ${APP_ORIGIN:-}
+      PASSKEY_RP_ID: ${PASSKEY_RP_ID:-}
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:-}
+      DATABASE_URL_APP: postgres://app_user:${APP_PASSWORD}@db:5432/certprep
+      DATABASE_URL_AUTH: postgres://auth_app:${AUTH_PASSWORD}@db:5432/certprep
+    depends_on:
+      db: { condition: service_healthy }
+    # Your existing nginx proxies to this. Bind to loopback (or the docker bridge IP nginx can reach).
+    ports:
+      - "${WEB_BIND:-127.0.0.1}:3000:3000"
+    networks: [internal]
+
+  # Admin site: same image, second container, reachable only through the Tailscale sidecar (tailnet-only HTTPS).
+  ts-admin:
+    profiles: ["admin"]
+    image: tailscale/tailscale:stable
+    hostname: certprep-admin
+    environment:
+      TS_AUTHKEY: ${TS_AUTHKEY:-}
+      TS_STATE_DIR: /var/lib/tailscale
+      TS_SERVE_CONFIG: /config/ts-serve.json
+    volumes:
+      - ts-state:/var/lib/tailscale
+      - ./docker/ts-serve.json:/config/ts-serve.json:ro
+    networks: [internal]
+    restart: unless-stopped
+
+  admin:
+    profiles: ["admin"]
+    image: certprep-app:local
+    network_mode: service:ts-admin
+    environment:
+      APP_MODE: admin
+      ADMIN_TAILSCALE_LOGINS: ${ADMIN_TAILSCALE_LOGINS:-}
+      PUBLIC_ORIGIN: ${APP_ORIGIN}
+      DATABASE_URL_ADMIN: postgres://admin_app:${ADMIN_PASSWORD}@db:5432/certprep
+    depends_on:
+      db: { condition: service_healthy }
+      ts-admin: { condition: service_started }
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+  ts-state:
+
+networks:
+  internal:

@@ -1,0 +1,85 @@
+{
+  "formatVersion": 1,
+  "questions": [
+    {
+      "id": "t-001",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "A company wants to add or remove resources automatically as demand changes instead of guessing capacity. Which cloud benefit does this describe?",
+      "options": [
+        { "text": "Elasticity", "correct": true, "rationale": "Resources scale out and in with demand." },
+        { "text": "Data sovereignty", "correct": false, "rationale": "About where data is stored and which laws apply." },
+        { "text": "Fixed capacity planning", "correct": false, "rationale": "The opposite of what the company wants." },
+        { "text": "Physical security", "correct": false, "rationale": "Unrelated to matching capacity to demand." }
+      ],
+      "explanation": "Elasticity lets capacity follow demand.",
+      "difficulty": 1,
+      "tags": ["benefits"],
+      "source": "own"
+    },
+    {
+      "id": "t-002",
+      "domain": "d2",
+      "objective": "2.1",
+      "type": "single",
+      "stem": "Under the AWS shared responsibility model, which task is the customer's responsibility for Amazon EC2 instances?",
+      "options": [
+        { "text": "Applying guest operating system patches", "correct": true, "rationale": "The customer manages the guest OS and everything above it." },
+        { "text": "Physical security of data centers", "correct": false, "rationale": "AWS secures the facilities." },
+        { "text": "Replacing failed host hardware", "correct": false, "rationale": "AWS maintains the underlying hardware." },
+        { "text": "Operating the hypervisor", "correct": false, "rationale": "AWS manages virtualization." }
+      ],
+      "explanation": "Security OF the cloud is AWS's; security IN the cloud is the customer's.",
+      "difficulty": 2,
+      "tags": ["shared-responsibility"],
+      "source": "own"
+    },
+    {
+      "id": "t-003",
+      "domain": "d2",
+      "objective": "2.3",
+      "type": "single",
+      "stem": "Which AWS service is used to create users and manage their permissions?",
+      "options": [
+        { "text": "AWS Identity and Access Management (IAM)", "correct": true, "rationale": "IAM manages identities and access." },
+        { "text": "AWS Shield", "correct": false, "rationale": "DDoS protection." },
+        { "text": "Amazon Inspector", "correct": false, "rationale": "Vulnerability scanning." },
+        { "text": "AWS Artifact", "correct": false, "rationale": "Compliance reports." }
+      ],
+      "difficulty": 1,
+      "source": "own"
+    },
+    {
+      "id": "t-004",
+      "domain": "d3",
+      "objective": "3.6",
+      "type": "single",
+      "stem": "Which AWS service provides object storage?",
+      "options": [
+        { "text": "Amazon S3", "correct": true, "rationale": "Object storage." },
+        { "text": "Amazon EBS", "correct": false, "rationale": "Block storage for EC2." },
+        { "text": "Amazon EFS", "correct": false, "rationale": "Managed file system." },
+        { "text": "AWS Snowcone", "correct": false, "rationale": "Edge data transfer device." }
+      ],
+      "difficulty": 1,
+      "source": "own"
+    },
+    {
+      "id": "t-005",
+      "domain": "d4",
+      "objective": "4.1",
+      "type": "multi",
+      "stem": "Which TWO are pricing options for Amazon EC2? (Choose two.)",
+      "options": [
+        { "text": "On-Demand Instances", "correct": true, "rationale": "Pay by usage with no commitment." },
+        { "text": "Savings Plans", "correct": true, "rationale": "Commitment-based discount." },
+        { "text": "Prepaid hardware leases", "correct": false, "rationale": "Not an AWS pricing model." },
+        { "text": "Perpetual licensing", "correct": false, "rationale": "Not an EC2 pricing model." },
+        { "text": "Colocation fees", "correct": false, "rationale": "Not an EC2 pricing model." }
+      ],
+      "difficulty": 2,
+      "source": "own"
+    }
+  ]
+}

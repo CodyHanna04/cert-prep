@@ -1,0 +1,44 @@
+{
+  "name": "certprep",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "db:migrate": "node scripts/migrate.mjs",
+    "db:seed-dev": "node scripts/seed-dev.mjs",
+    "user:create": "node scripts/create-user.mjs",
+    "pack:validate": "node scripts/validate-pack-all.mjs",
+    "pack:new": "node scripts/new-pack.mjs"
+  },
+  "dependencies": {
+    "@better-auth/passkey": "^1.7.14",
+    "better-auth": "^1.7.14",
+    "d3-hierarchy": "^3.1.2",
+    "next": "16.4.3",
+    "pg": "8.23.1",
+    "react": "19.3.1",
+    "react-aria-components": "^1.22.1",
+    "react-dom": "19.3.1",
+    "server-only": "^0.0.1",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.3.3",
+    "eslint": "10.14.0",
+    "eslint-config-next": "16.4.3",
+    "postcss": "^8.5.0",
+    "prettier": "3.9.10",
+    "tailwindcss": "4.3.3",
+    "vitest": "5.0.5"
+  }
+}

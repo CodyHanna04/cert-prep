@@ -1,0 +1,70 @@
+# Example nginx server block for study.codycodez.com (docs/09-stack-options.md checklist).
+# Adapt paths and the upstream address to your homelab, then `nginx -t && nginx -s reload`.
+# NOT tested against your nginx: review every line before relying on it.
+
+limit_req_zone $binary_remote_addr zone=certprep_auth:10m rate=10r/m;
+limit_req_zone $binary_remote_addr zone=certprep_join:10m rate=5r/m;
+limit_req_zone $binary_remote_addr zone=certprep_general:10m rate=20r/s;
+
+upstream certprep_web {
+    server 127.0.0.1:3000;   # the web container's published loopback port (WEB_BIND)
+    keepalive 8;
+}
+
+# Anything that is not our hostname gets no answer (stops scanners hitting the bare IP).
+server {
+    listen 443 ssl default_server;
+    listen 80 default_server;
+    ssl_reject_handshake on;
+    return 444;
+}
+
+server {
+    listen 80;
+    server_name study.codycodez.com;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    http2 on;
+    server_name study.codycodez.com;
+
+    ssl_certificate     /etc/letsencrypt/live/study.codycodez.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/study.codycodez.com/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+
+    add_header Strict-Transport-Security "max-age=31536000" always;   # add includeSubDomains/preload only if you mean it
+    server_tokens off;
+
+    # Imports are capped at 2 MB in the app; allow a little headroom for form encoding.
+    client_max_body_size 3m;
+
+    # The admin site is never served here (it lives on the tailnet only). The app also returns 404 for /admin.
+    location ^~ /admin { return 404; }
+
+    # Sign-in and enrollment endpoints: tight limits on top of the app's own database-backed limits.
+    location ^~ /api/auth/ {
+        limit_req zone=certprep_auth burst=20 nodelay;
+        include /etc/nginx/certprep-proxy.conf;
+    }
+    location ^~ /join/ {
+        limit_req zone=certprep_join burst=10 nodelay;
+        include /etc/nginx/certprep-proxy.conf;
+    }
+
+    location / {
+        limit_req zone=certprep_general burst=60 nodelay;
+        include /etc/nginx/certprep-proxy.conf;
+    }
+}
+
+# /etc/nginx/certprep-proxy.conf
+#   proxy_pass http://certprep_web;
+#   proxy_http_version 1.1;
+#   proxy_set_header Connection "";
+#   proxy_set_header Host $host;
+#   # Overwrite, never append: the app's rate limiter trusts this header, so a client must not be able to set it.
+#   proxy_set_header X-Forwarded-For $remote_addr;
+#   proxy_set_header X-Forwarded-Proto https;
+#   proxy_read_timeout 30s;
