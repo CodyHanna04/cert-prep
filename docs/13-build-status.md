@@ -2,6 +2,17 @@
 
 What exists in the repository now, how to run it, what the build settled, and what is still open. Written after the first build pass; the planning docs (01–12) remain the source for intent.
 
+## Revision 2 (after first review)
+
+Changes made from the first round of feedback:
+
+- **Courses replace the dropdown.** `/courses` is a catalog that presents each pack (weighting ring, stats, domain list, author-written blurb) with Start studying / Continue / Resume course. `/` is now a multi-course dashboard (a resume banner for every open session, a progress card per course, activity across courses, recent sessions). `/course` is the per-course overview. Course pages (overview, map, practice, mock, library, history, settings) share a course bar that names the current course and links to Courses. The current course is still a cookie, set by a button on a card rather than a form field that can drift.
+- **The switching bug.** The old dropdown was uncontrolled and React reset it to the previous value after each switch, so choosing the exam it displayed fired no change event and you could not go back. Also: archived exams vanished with no way back, and re-adding one crashed the page. Archiving is now "Pause course" (Settings), paused courses appear on Courses with Resume course, and `enrollInPack` restores the same exam with its progress (tests in `tests/courses.test.js`).
+- **History** has a score line chart (practice and mock markers, 3-session average, target line, mode filter) above the sessions table, which now has Resume and Review actions.
+- **Dashboard activity bug fixed.** Days were grouped in UTC but labelled in local time, hiding evening answers. Days now use `APP_TIMEZONE` (default: the server's own time zone).
+- **Visual pass:** wash and dot backdrop, shadowed cards, display-font titles with an accent rule, domain-weight rings, and new `accent-soft`, `glow` and `shadow` theme tokens.
+- **Library stays in the app:** it is per user (rows carry `user_id` under RLS), so imports and edits never reach another account and the admin site cannot see them.
+
 ## Run it
 
 ```bash
@@ -11,7 +22,7 @@ npm install
 npm run db:migrate               # applies migrations/*.sql as the owner role
 npm run db:seed-dev              # dev user dev@users.invalid / dev-password-123 with CLF-C02 and 5 sample questions
 npm run dev                      # http://localhost:3000 (password form shown only here, on localhost)
-npm test                         # 90 tests against the throwaway certprep_test database
+npm test                         # 99 tests against the throwaway certprep_test database
 npm run lint
 npm run pack:validate
 ```
@@ -23,7 +34,7 @@ First real account (no public sign-up): `npm run user:create -- "Your Name"` pri
 | Ticket | State | Notes |
 |---|---|---|
 | T-001 Scaffold | Done | Next.js 16 App Router, JavaScript, Tailwind v4, Zod, Vitest, ESLint flat config, Prettier |
-| T-002 App shell | Done | Global bar, exam switcher, all sitemap routes, placeholder pages |
+| T-002 App shell | Done | Global bar (Dashboard, Courses), per-course bar, all sitemap routes, placeholder pages |
 | T-003 Postgres + Compose | Done, image build verified separately | `docker-compose.yml`: db, migrate (one-off), web, optional Tailscale-fronted admin |
 | T-004 Schema | Done | `migrations/0001–0003`; every app table has `user_id`, RLS enabled and forced |
 | T-005 Data layer | Done | `lib/db/*`: `withUser()` is the only entry; lint rule bans `pg` and `with-user.js` imports in app code |
@@ -31,7 +42,7 @@ First real account (no public sign-up): `npm run user:create -- "Your Name"` pri
 | T-007 Auth UI | Done | Sign-in (button + conditional-UI autofill), join link, passkey list/add/rename/remove, devices/sessions |
 | T-008 Isolation suite | Done | `tests/isolation.test.js` (16 tests): cross-read/write/insert/reassign, fail-closed, pooled-connection leak, role separation, schema guard, account-deletion cascade |
 | T-009 Theme system | Partial | Semantic tokens via `@theme inline`, default palette removed, two themes (Ledger, Control room), light/dark by system. Theme is a cookie, not yet stored per user; no lint rule banning raw colors yet |
-| T-010 Exams | Mostly | Add from pack, switch, readiness target and exam date, archive. No "create manually" |
+| T-010 Exams | Mostly | Courses catalog, start/continue/pause/resume, readiness target and exam date. No "create manually" |
 | T-011 Pack loader | Done | Reads `content/*/blueprint.json` |
 | T-014 Dev password login | Done | Flag lives in `.env.development`; guards and tests in `tests/auth.test.js` |
 | T-015 Pack tooling | Done | `npm run pack:validate`, `npm run pack:new -- <code>` |
@@ -43,7 +54,7 @@ First real account (no public sign-up): `npm run user:create -- "Your Name"` pri
 | T-046 Flag and note | Partial | Flag and note in the runner; no bookmark UI |
 | T-061/T-062 Mock exam | Done | Stratified by weight (largest remainder), server-enforced deadline, navigator, review-before-submit, results vs target and pass-mark proxy |
 | T-072–T-075 Today, map, objective detail, what's left | Done | Readiness, bank, activity, what's left, weakest 5, mock trend, treemap (map/list, accuracy/coverage/count, filters) |
-| T-077 History | Done | List and detail (results page) |
+| T-077 History | Done | Score line chart with mode filter, session table with Resume, results page |
 | T-080 Export/import/delete | Done | Id-free JSON; import replaces all-or-nothing; delete requires typing your name |
 | T-084–T-086 Admin site | Done in code, Tailscale part unverified | `APP_MODE=admin`: users, invite links, reset passkeys, sign out everywhere, delete, audit log; `proxy.js` makes the modes mutually exclusive; boot guards in `instrumentation.js` |
 | T-090 Placeholders | Done | Study material and flashcards pages; `objective.study_notes` column |

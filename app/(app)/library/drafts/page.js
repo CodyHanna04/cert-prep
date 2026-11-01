@@ -9,7 +9,7 @@ export const metadata = { title: "Drafts" };
 
 export default async function DraftsPage() {
   const { user, exam: active } = await getAppContext();
-  if (!active) return <EmptyState title="No exam yet" action={<LinkButton href="/settings" variant="primary">Add an exam</LinkButton>} />;
+  if (!active) return <EmptyState title="No course selected" action={<LinkButton href="/courses" variant="primary">Choose a course</LinkButton>} />;
   const { exam, counts } = await withUser(user.id, async (db) => ({ exam: await getExam(db, active.id), counts: await countsByObjective(db, active.id) }));
   const drafts = new Map(counts.filter((c) => c.reviewStatus === "draft").map((c) => [c.objectiveId, c.n]));
   const total = [...drafts.values()].reduce((a, b) => a + b, 0);

@@ -5,29 +5,53 @@ import { revalidatePath } from "next/cache";
 import { readFileSync } from "node:fs";
 import { requireUser } from "@/lib/auth/index.js";
 import { withUser } from "@/lib/db/index.js";
-import { createExamFromPack, getExam, updateExamSettings, archiveExam } from "@/lib/db/exams.js";
+import { enrollInPack, getExam, updateExamSettings, archiveExam } from "@/lib/db/exams.js";
 import { EXAM_COOKIE, THEME_COOKIE, THEMES } from "@/lib/app/context.js";
 import { listPacks, packPath } from "@/lib/content/packs.js";
 
-const cookieOpts = { httpOnly: true, sameSite: "lax", secure: process.env.NODE_ENV === "production", path: "/", maxAge: 60 * 60 * 24 * 365 };
+const cookieOpts = {
+  httpOnly: true,
+  sameSite: "lax",
+  secure: process.env.NODE_ENV === "production",
+  path: "/",
+  maxAge: 60 * 60 * 24 * 365,
+};
 
-export async function setActiveExamAction(formData) {
+/** Where a course button may send you: a course page or one of your sessions. Anything else lands on the overview. */
+const COURSE_PAGES = new Set([
+  "/course",
+  "/map",
+  "/practice",
+  "/mock",
+  "/library",
+  "/history",
+  "/settings",
+]);
+const RESUME_PATH = /^\/(practice|mock)\/[0-9a-f-]{36}$/;
+const courseDestination = (to) =>
+  COURSE_PAGES.has(String(to)) || RESUME_PATH.test(String(to)) ? String(to) : "/course";
+
+/** Makes one of your courses the current one and opens it. The course bar always shows which is current. */
+export async function openCourseAction(formData) {
   const user = await requireUser();
   const examId = String(formData.get("examId") ?? "");
-  // Only exams the signed-in user owns can be activated (RLS hides everything else).
+  // Only exams the signed-in user owns can be opened (RLS hides everything else).
   const exam = await withUser(user.id, (db) => getExam(db, examId));
-  if (exam) (await cookies()).set(EXAM_COOKIE, exam.id, cookieOpts);
-  revalidatePath("/", "layout");
+  if (!exam || exam.archived) redirect("/courses");
+  (await cookies()).set(EXAM_COOKIE, exam.id, cookieOpts);
+  redirect(courseDestination(formData.get("to")));
 }
 
-export async function addExamFromPackAction(formData) {
+/** Start studying a course from the catalog; restores a paused one with its progress. */
+export async function enrollAction(formData) {
   const user = await requireUser();
   const code = String(formData.get("code") ?? "");
-  if (!listPacks().some((p) => p.code === code)) throw new Error("Unknown exam pack.");
+  if (!listPacks().some((p) => p.code === code)) redirect("/courses");
   const pack = JSON.parse(readFileSync(packPath(code), "utf8"));
-  const examId = await withUser(user.id, (db) => createExamFromPack(db, user.id, pack));
+  const examId = await withUser(user.id, (db) => enrollInPack(db, user.id, pack));
   (await cookies()).set(EXAM_COOKIE, examId, cookieOpts);
-  redirect("/map");
+  revalidatePath("/", "layout");
+  redirect("/course");
 }
 
 export async function updateExamSettingsAction(formData) {
@@ -42,15 +66,18 @@ export async function updateExamSettingsAction(formData) {
   revalidatePath("/", "layout");
 }
 
-export async function archiveExamAction(formData) {
+/** Pause a course: it leaves the dashboard but nothing is deleted, and enrolling again brings it back. */
+export async function pauseCourseAction(formData) {
   const user = await requireUser();
-  await withUser(user.id, (db) => archiveExam(db, String(formData.get("examId")), formData.get("archived") !== "false"));
+  await withUser(user.id, (db) => archiveExam(db, String(formData.get("examId")), true));
   revalidatePath("/", "layout");
+  redirect("/courses");
 }
 
 export async function setThemeAction(formData) {
   await requireUser();
   const id = String(formData.get("theme"));
-  if (THEMES.some((t) => t.id === id)) (await cookies()).set(THEME_COOKIE, id, { ...cookieOpts, httpOnly: false });
+  if (THEMES.some((t) => t.id === id))
+    (await cookies()).set(THEME_COOKIE, id, { ...cookieOpts, httpOnly: false });
   revalidatePath("/", "layout");
 }

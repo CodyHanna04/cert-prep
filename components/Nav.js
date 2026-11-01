@@ -3,20 +3,16 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const LINKS = [
-  ["/", "Today"],
-  ["/map", "Map"],
-  ["/practice", "Practice"],
-  ["/mock", "Mock"],
-  ["/library", "Library"],
-  ["/history", "History"],
-  ["/settings", "Settings"],
+  ["/", "Dashboard"],
+  ["/courses", "Courses"],
 ];
 
 export function Nav() {
   const path = usePathname();
-  const active = (href) => (href === "/" ? path === "/" : path === href || path.startsWith(`${href}/`));
+  const active = (href) =>
+    href === "/" ? path === "/" : path === href || path.startsWith(`${href}/`);
   return (
-    <nav aria-label="Main" className="flex flex-wrap gap-1">
+    <nav aria-label="Main" className="flex gap-1">
       {LINKS.map(([href, label]) => (
         <Link
           key={href}

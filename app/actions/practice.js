@@ -19,7 +19,7 @@ const startSchema = z.object({
 
 export async function startPracticeAction(formData) {
   const { user, exam } = await getAppContext();
-  if (!exam) redirect("/settings");
+  if (!exam) redirect("/courses");
   const parsed = startSchema.safeParse({
     target: formData.get("target"),
     count: formData.get("count"),

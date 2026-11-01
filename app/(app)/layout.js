@@ -1,18 +1,27 @@
 import Link from "next/link";
 import { getAppContext } from "@/lib/app/context.js";
 import { Nav } from "@/components/Nav.js";
-import { ExamSwitcher } from "@/components/ExamSwitcher.js";
+import { CourseBar } from "@/components/CourseBar.js";
+import { DomainRing } from "@/components/DomainRing.js";
 
 export default async function AppLayout({ children }) {
-  const { user, exams, exam } = await getAppContext();
+  const { user, exam } = await getAppContext();
   return (
     <>
       <header className="border-b border-line bg-surface">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-4 gap-y-2 px-4 py-3">
-          <Link href="/" className="font-display text-lg font-semibold">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3">
+          <Link
+            href="/"
+            className="flex items-center gap-2.5 font-display text-xl font-semibold tracking-tight"
+          >
+            <DomainRing
+              size={28}
+              thickness={16}
+              label=""
+              segments={[{ weight: 4 }, { weight: 3, opacity: 0.65 }, { weight: 2, opacity: 0.4 }]}
+            />
             CertPrep
           </Link>
-          <ExamSwitcher exams={exams} activeId={exam?.id} />
           <div className="flex-1">
             <Nav />
           </div>
@@ -21,7 +30,8 @@ export default async function AppLayout({ children }) {
           </Link>
         </div>
       </header>
-      <main className="mx-auto max-w-6xl px-4 py-6">{children}</main>
+      <CourseBar course={exam ? { code: exam.code, name: exam.name } : null} />
+      <main className="mx-auto max-w-6xl px-4 py-8">{children}</main>
     </>
   );
 }

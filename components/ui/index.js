@@ -15,10 +15,12 @@ export function LinkButton({ variant = "secondary", className = "", ...props }) 
 
 export function Card({ title, action, children, className = "" }) {
   return (
-    <section className={`rounded-theme border border-line bg-surface p-4 ${className}`}>
+    <section
+      className={`rounded-theme border border-line bg-surface p-5 shadow-card min-w-0 ${className}`}
+    >
       {(title || action) && (
-        <header className="mb-3 flex items-baseline justify-between gap-3">
-          {title && <h2 className="font-display text-lg">{title}</h2>}
+        <header className="mb-3 flex flex-wrap items-baseline justify-between gap-3">
+          {title && <h2 className="font-display text-lg tracking-tight">{title}</h2>}
           {action}
         </header>
       )}
@@ -29,10 +31,10 @@ export function Card({ title, action, children, className = "" }) {
 
 export function PageHeader({ title, subtitle, actions }) {
   return (
-    <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
+    <div className="mb-8 flex flex-wrap items-end justify-between gap-3">
       <div>
-        <h1 className="font-display text-2xl">{title}</h1>
-        {subtitle && <p className="mt-1 text-sm text-muted">{subtitle}</p>}
+        <h1 className="title-rule font-display text-3xl tracking-tight">{title}</h1>
+        {subtitle && <p className="mt-3 text-sm text-muted">{subtitle}</p>}
       </div>
       {actions && <div className="flex gap-2">{actions}</div>}
     </div>
@@ -66,7 +68,11 @@ const TONES = {
 };
 
 export function Badge({ tone = "idle", children }) {
-  return <span className={`inline-block rounded-full px-2 py-0.5 text-xs font-medium ${TONES[tone]}`}>{children}</span>;
+  return (
+    <span className={`inline-block rounded-full px-2 py-0.5 text-xs font-medium ${TONES[tone]}`}>
+      {children}
+    </span>
+  );
 }
 
 export function StatusBadge({ status }) {
@@ -78,7 +84,14 @@ export function Meter({ value, max = 100, label, tone = "accent" }) {
   const pct = Math.max(0, Math.min(100, (value / max) * 100));
   const color = { accent: "bg-accent", ok: "bg-ok", warn: "bg-warn", bad: "bg-bad" }[tone];
   return (
-    <div role="meter" aria-valuenow={Math.round(pct)} aria-valuemin={0} aria-valuemax={100} aria-label={label} className="h-2 w-full overflow-hidden rounded-full bg-idle-soft">
+    <div
+      role="meter"
+      aria-valuenow={Math.round(pct)}
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-label={label}
+      className="h-2 w-full overflow-hidden rounded-full bg-idle-soft"
+    >
       <div className={`h-full ${color}`} style={{ width: `${pct}%` }} />
     </div>
   );

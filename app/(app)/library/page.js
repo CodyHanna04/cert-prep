@@ -13,7 +13,7 @@ const PAGE = 50;
 export default async function LibraryPage({ searchParams }) {
   const sp = await searchParams;
   const { user, exam: active } = await getAppContext();
-  if (!active) return <EmptyState title="No exam yet" action={<LinkButton href="/settings" variant="primary">Add an exam</LinkButton>} />;
+  if (!active) return <EmptyState title="No course selected" action={<LinkButton href="/courses" variant="primary">Choose a course</LinkButton>} />;
 
   const filters = {
     reviewStatus: ["draft", "approved", "rejected"].includes(sp.status) ? sp.status : undefined,

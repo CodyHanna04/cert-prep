@@ -6,7 +6,7 @@ export const metadata = { title: "Import questions" };
 
 export default async function ImportPage() {
   const { exam } = await getAppContext();
-  if (!exam) return <EmptyState title="No exam yet" action={<LinkButton href="/settings" variant="primary">Add an exam</LinkButton>} />;
+  if (!exam) return <EmptyState title="No course selected" action={<LinkButton href="/courses" variant="primary">Choose a course</LinkButton>} />;
   return (
     <>
       <PageHeader title="Import questions" subtitle={`Into ${exam.code}. Files follow the format in docs/04-content-format.md.`} />

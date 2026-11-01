@@ -42,6 +42,16 @@
       "single": "Multiple choice: 1 correct response, 3 distractors (4 options).",
       "multi": "Multiple response: 2 or more correct responses out of 5 or more options; all correct options must be selected for credit."
     },
+    "marketing": {
+      "tagline": "Build, secure, ship and debug applications on AWS.",
+      "level": "Associate",
+      "audience": "Developers who have built or deployed at least one application on AWS and want to prove it.",
+      "highlights": [
+        "Weighted toward building: Development with AWS Services is 30% and Security is 26%.",
+        "Deployment, testing and troubleshooting make up the other 44%, split evenly.",
+        "The longest exam here at 130 minutes: pacing matters as much as recall."
+      ]
+    },
     "domains": [
       {
         "key": "d1",

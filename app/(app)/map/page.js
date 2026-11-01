@@ -36,7 +36,7 @@ export default async function MapPage({ searchParams }) {
   const view = sp.view === "list" ? "list" : "map";
 
   const { user, exam: active } = await getAppContext();
-  if (!active) return <EmptyState title="No exam yet" action={<LinkButton href="/settings" variant="primary">Add an exam</LinkButton>} />;
+  if (!active) return <EmptyState title="No course selected" action={<LinkButton href="/courses" variant="primary">Choose a course</LinkButton>} />;
   const { exam, progress } = await withUser(user.id, (db) => getExamProgress(db, active.id));
   const { objectiveById } = indexExam(exam);
   const rows = new Map(progress.objectives.map((o) => [o.objectiveId, o]));

@@ -2,218 +2,284 @@ import Link from "next/link";
 import { getAppContext } from "@/lib/app/context.js";
 import { withUser } from "@/lib/db/index.js";
 import { getExamProgress } from "@/lib/db/progress.js";
-import { countsByObjective } from "@/lib/db/questions.js";
-import { activityByDay, getOpenSession, listSessions, mockHistory } from "@/lib/db/sessions.js";
-import { indexExam, daysUntil, fmtDateTime } from "@/lib/app/view.js";
-import { Badge, Card, EmptyState, LinkButton, Meter, PageHeader, StatusBadge, pct } from "@/components/ui/index.js";
+import { activityByDay, listSessions } from "@/lib/db/sessions.js";
+import { appTimeZone, daysUntil, fmtDateTime, resumeHref } from "@/lib/app/view.js";
+import { openCourseAction } from "@/app/actions/exam.js";
+import { DomainRing } from "@/components/DomainRing.js";
+import {
+  Badge,
+  Button,
+  Card,
+  EmptyState,
+  LinkButton,
+  Meter,
+  PageHeader,
+  STATUS_META,
+  pct,
+} from "@/components/ui/index.js";
 
-export const metadata = { title: "Today" };
+export const metadata = { title: "Dashboard" };
 
-export default async function TodayPage() {
-  const { user, exam: active } = await getAppContext();
-  if (!active) {
+const DAYS = 14;
+
+export default async function DashboardPage() {
+  const { user, exams } = await getAppContext();
+  if (exams.length === 0) {
     return (
-      <EmptyState title="Add your first exam" action={<LinkButton href="/settings" variant="primary">Choose an exam pack</LinkButton>}>
-        An exam pack brings in the vendor's published domains and objectives. Everything on this site is organized around them.
-      </EmptyState>
+      <>
+        <PageHeader title={`Welcome, ${user.name.split(" ")[0]}`} subtitle="Nothing to show yet." />
+        <EmptyState
+          title="Choose your first course"
+          action={
+            <LinkButton href="/courses" variant="primary">
+              Browse courses
+            </LinkButton>
+          }
+        >
+          Each course follows the vendor's published exam blueprint. Once you start one, your
+          progress shows up here.
+        </EmptyState>
+      </>
     );
   }
 
-  const data = await withUser(user.id, async (db) => {
-    const [{ exam, progress }, open, counts, sessions, activity, mocks] = await Promise.all([
-      getExamProgress(db, active.id),
-      getOpenSession(db, active.id),
-      countsByObjective(db, active.id),
-      listSessions(db, active.id, 5),
-      activityByDay(db, active.id, 14),
-      mockHistory(db, active.id),
-    ]);
-    return { exam, progress, open, counts, sessions, activity, mocks };
-  });
-  const { exam, progress, open, counts, sessions, activity, mocks } = data;
-  const { objectiveById, domainById } = indexExam(exam);
-  const r = progress.readiness;
-  const drafts = counts.filter((c) => c.reviewStatus === "draft").reduce((n, c) => n + c.n, 0);
-  const approved = counts.filter((c) => c.reviewStatus === "approved").reduce((n, c) => n + c.n, 0);
-  const noQuestions = progress.objectives.filter((o) => o.status === "no-questions").length;
-  const days = daysUntil(exam.examDate);
+  const tz = appTimeZone();
+  const courses = await withUser(user.id, (db) =>
+    Promise.all(
+      exams.map(async (e) => {
+        const [{ exam, progress }, sessions, activity] = await Promise.all([
+          getExamProgress(db, e.id),
+          listSessions(db, e.id, 6),
+          activityByDay(db, e.id, DAYS, tz),
+        ]);
+        return { exam, progress, sessions, activity };
+      }),
+    ),
+  );
 
-  const startable = progress.whatsLeft.find((o) => o.poolSize > 0);
-  const next = open
-    ? { href: `/practice/${open.id}`, label: "Resume your session" }
-    : startable
-      ? { href: `/practice?scope=objective&id=${startable.objectiveId}`, label: `Practice ${objectiveById.get(startable.objectiveId).code}` }
-      : approved === 0
-        ? { href: "/library/import", label: "Import questions" }
-        : null;
+  const open = courses
+    .map((c) => ({ course: c, session: c.sessions.find((s) => s.status === "in-progress") }))
+    .filter((x) => x.session);
+  const recent = courses
+    .flatMap((c) => c.sessions.map((s) => ({ ...s, code: c.exam.code })))
+    .sort((a, b) => new Date(b.startedAt) - new Date(a.startedAt))
+    .slice(0, 6);
 
-  const left = exam.domains.map((d) => ({
-    domain: d,
-    items: progress.whatsLeft.filter((o) => o.domainId === d.id),
-  }));
-  const weakest = progress.whatsLeft.filter((o) => o.poolSize > 0).slice(0, 5);
-
-  // Activity: fill the last 14 days, including empty ones.
-  const byDay = new Map(activity.map((a) => [a.day, a.n]));
-  const bars = Array.from({ length: 14 }, (_, i) => {
+  // Answers per day across every course, including empty days.
+  const perDay = new Map();
+  for (const c of courses)
+    for (const a of c.activity) perDay.set(a.day, (perDay.get(a.day) ?? 0) + a.n);
+  const bars = Array.from({ length: DAYS }, (_, i) => {
     const d = new Date();
-    d.setDate(d.getDate() - (13 - i));
-    const key = d.toLocaleDateString("en-CA");
-    return { key, n: byDay.get(key) ?? 0 };
+    d.setDate(d.getDate() - (DAYS - 1 - i));
+    const key = d.toLocaleDateString("en-CA", { timeZone: tz });
+    return { key, n: perDay.get(key) ?? 0 };
   });
   const maxBar = Math.max(1, ...bars.map((b) => b.n));
+  const answered = bars.reduce((s, b) => s + b.n, 0);
+  const activeDays = bars.filter((b) => b.n > 0).length;
 
   return (
     <>
       <PageHeader
-        title={exam.name}
-        subtitle={`${exam.code} · readiness target ${exam.readinessTargetPct}%${days != null ? ` · exam in ${days} day${days === 1 ? "" : "s"}` : ""}`}
-        actions={next && <LinkButton href={next.href} variant="primary">{next.label}</LinkButton>}
+        title={`Welcome back, ${user.name.split(" ")[0]}`}
+        subtitle={new Date().toLocaleDateString(undefined, {
+          weekday: "long",
+          month: "long",
+          day: "numeric",
+        })}
+        actions={<LinkButton href="/courses">Browse courses</LinkButton>}
       />
 
-      <div className="grid gap-4 md:grid-cols-3">
-        <Card title="Readiness" className="md:col-span-1">
-          {r.available ? (
-            <>
-              <p className="font-display text-4xl">{pct(r.scorePct)}</p>
-              <p className="mt-1 text-sm">
-                <Badge tone={r.meetsTarget ? "ok" : "warn"}>{r.meetsTarget ? "At or above target" : "Below target"}</Badge>{" "}
-                <span className="text-muted">target {r.targetPct}%</span>
-              </p>
-              <div className="mt-3"><Meter value={r.scorePct} label="Readiness" tone={r.meetsTarget ? "ok" : "warn"} /></div>
-            </>
-          ) : (
-            <>
-              <p className="font-display text-2xl text-muted">Not enough data yet</p>
-              <p className="mt-2 text-sm text-muted">Readiness appears once every domain has at least {r.missing[0]?.needed ?? 10} questions answered:</p>
-              <ul className="mt-2 space-y-1 text-sm">
-                {r.missing.map((m) => (
-                  <li key={m.domainId}>
-                    {domainById.get(m.domainId).name}: {m.sample}/{m.needed}
-                  </li>
-                ))}
-              </ul>
-            </>
-          )}
-        </Card>
+      {open.length > 0 && (
+        <section aria-label="Resume" className="mb-6 grid gap-3">
+          {open.map(({ course, session }) => (
+            <div
+              key={session.id}
+              className="flex flex-wrap items-center justify-between gap-3 rounded-theme border border-accent bg-accent-soft p-4 shadow-card"
+            >
+              <div>
+                <p className="text-xs font-medium uppercase tracking-wider text-muted">
+                  Pick up where you left off
+                </p>
+                <p className="mt-1 font-display text-lg">
+                  {course.exam.code} {session.mode === "mock" ? "mock exam" : "practice"}
+                </p>
+                <p className="text-sm text-muted">
+                  {session.answered} of {session.total} answered · started{" "}
+                  {fmtDateTime(session.startedAt)}
+                </p>
+              </div>
+              <CourseButton examId={course.exam.id} to={resumeHref(session)} variant="primary">
+                Resume
+              </CourseButton>
+            </div>
+          ))}
+        </section>
+      )}
 
-        <Card title="Question bank" className="md:col-span-1">
-          <p className="font-display text-4xl">{approved}</p>
-          <p className="text-sm text-muted">approved questions</p>
-          <ul className="mt-3 space-y-1 text-sm">
-            {drafts > 0 && (
-              <li>
-                <Link className="text-accent underline" href="/library/drafts">{drafts} draft{drafts === 1 ? "" : "s"} to review</Link>
-              </li>
-            )}
-            {noQuestions > 0 && <li className="text-muted">{noQuestions} of {progress.objectives.length} objectives have no questions yet</li>}
-            {mocks.length === 0 && (
-              <li><Link className="text-accent underline" href="/mock">No mock exam taken yet</Link></li>
-            )}
-          </ul>
-        </Card>
+      <h2 className="mb-3 font-display text-xl tracking-tight">Your courses</h2>
+      <div className="grid gap-4 lg:grid-cols-2">
+        {courses.map(({ exam, progress }) => {
+          const r = progress.readiness;
+          const onTarget = progress.objectives.filter((o) => o.status === "on-target").length;
+          const days = daysUntil(exam.examDate);
+          return (
+            <section
+              key={exam.id}
+              className="rounded-theme border border-line bg-surface p-5 shadow-card"
+            >
+              <div className="flex items-start gap-5">
+                <DomainRing
+                  size={112}
+                  thickness={13}
+                  label={`Readiness by domain for ${exam.code}`}
+                  segments={progress.domains.map((d) => ({
+                    weight: d.weightPct,
+                    tone: STATUS_META[d.status]?.tone ?? "idle",
+                    title: `${exam.domains.find((x) => x.id === d.domainId)?.name}: ${STATUS_META[d.status]?.label}`,
+                  }))}
+                >
+                  <span className="font-display text-2xl leading-none">
+                    {r.available ? pct(r.scorePct) : "—"}
+                  </span>
+                  <span className="mt-0.5 text-[0.65rem] uppercase tracking-wider text-muted">
+                    ready
+                  </span>
+                </DomainRing>
+                <div className="min-w-0 flex-1">
+                  <h3 className="font-display text-lg leading-snug tracking-tight">{exam.name}</h3>
+                  <p className="text-sm text-muted">
+                    {exam.code} · target {exam.readinessTargetPct}%
+                  </p>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {r.available ? (
+                      <Badge tone={r.meetsTarget ? "ok" : "warn"}>
+                        {r.meetsTarget ? "At or above target" : "Below target"}
+                      </Badge>
+                    ) : (
+                      <Badge tone="idle">Building a baseline</Badge>
+                    )}
+                    {days != null && (
+                      <Badge tone={days <= 14 ? "warn" : "info"}>
+                        {days < 0
+                          ? "Exam date passed"
+                          : days === 0
+                            ? "Exam today"
+                            : `Exam in ${days} day${days === 1 ? "" : "s"}`}
+                      </Badge>
+                    )}
+                  </div>
+                </div>
+              </div>
 
-        <Card title="Last 14 days" className="md:col-span-1">
-          <div className="flex h-24 items-end gap-1" role="img" aria-label={`Questions answered per day: ${bars.map((b) => b.n).join(", ")}`}>
+              <div className="mt-4">
+                <div className="mb-1 flex justify-between text-xs text-muted">
+                  <span>Objectives on target</span>
+                  <span className="tabular-nums">
+                    {onTarget} / {progress.objectives.length}
+                  </span>
+                </div>
+                <Meter
+                  value={onTarget}
+                  max={progress.objectives.length || 1}
+                  label={`Objectives on target in ${exam.code}`}
+                  tone="ok"
+                />
+              </div>
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                <CourseButton examId={exam.id} to="/course" variant="primary">
+                  Open course
+                </CourseButton>
+                <CourseButton examId={exam.id} to="/practice">
+                  Practice
+                </CourseButton>
+                <CourseButton examId={exam.id} to="/map">
+                  Map
+                </CourseButton>
+              </div>
+            </section>
+          );
+        })}
+      </div>
+
+      <div className="mt-6 grid gap-4 md:grid-cols-3">
+        <Card title={`Last ${DAYS} days`} className="md:col-span-2">
+          <div className="mb-3 flex gap-6 text-sm">
+            <p>
+              <span className="font-display text-2xl">{answered}</span>{" "}
+              <span className="text-muted">questions answered</span>
+            </p>
+            <p>
+              <span className="font-display text-2xl">{activeDays}</span>{" "}
+              <span className="text-muted">active day{activeDays === 1 ? "" : "s"}</span>
+            </p>
+          </div>
+          <div
+            className="flex h-28 items-end gap-1.5"
+            role="img"
+            aria-label={`Questions answered per day: ${bars.map((b) => b.n).join(", ")}`}
+          >
             {bars.map((b) => (
-              <div key={b.key} title={`${b.key}: ${b.n}`} className="flex-1 rounded-sm bg-accent" style={{ height: `${Math.max(4, (b.n / maxBar) * 100)}%`, opacity: b.n ? 1 : 0.2 }} />
+              <div
+                key={b.key}
+                title={`${b.key}: ${b.n}`}
+                className="flex-1 rounded-t-sm bg-accent"
+                style={{ height: `${Math.max(4, (b.n / maxBar) * 100)}%`, opacity: b.n ? 1 : 0.18 }}
+              />
             ))}
           </div>
-          <p className="mt-2 text-sm text-muted">{bars.reduce((s, b) => s + b.n, 0)} questions answered</p>
         </Card>
-      </div>
 
-      <div className="mt-4 grid gap-4 md:grid-cols-3">
-        <Card title="What's left" className="md:col-span-2" action={<Link href="/map" className="text-sm text-accent underline">Open the map</Link>}>
-          {progress.whatsLeft.length === 0 ? (
-            <p className="text-sm text-muted">Every objective is on target. Take a mock exam to confirm.</p>
+        <Card
+          title="Recent sessions"
+          action={
+            <Link href="/history" className="text-sm text-accent underline">
+              History
+            </Link>
+          }
+        >
+          {recent.length === 0 ? (
+            <p className="text-sm text-muted">
+              No sessions yet. Open a course and start practicing.
+            </p>
           ) : (
-            <div className="space-y-5">
-              {left.filter((g) => g.items.length).map(({ domain, items }) => (
-                <div key={domain.id}>
-                  <h3 className="mb-1 text-sm font-medium text-muted">
-                    {domain.name} · {domain.weightPct}%
-                  </h3>
-                  <ul className="divide-y divide-line">
-                    {items.map((o) => {
-                      const ob = objectiveById.get(o.objectiveId);
-                      return (
-                        <li key={o.objectiveId} className="flex flex-wrap items-center gap-x-3 gap-y-1 py-2 text-sm">
-                          <Link href={`/map/${o.objectiveId}`} className="min-w-0 flex-1 hover:underline">
-                            <span className="font-medium">{ob.code}</span> {ob.title}
-                          </Link>
-                          <StatusBadge status={o.status} />
-                          {o.poolSize > 0 && (
-                            <LinkButton href={`/practice?scope=objective&id=${o.objectiveId}`} className="px-2 py-1 text-xs">
-                              Practice
-                            </LinkButton>
-                          )}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
+            <ul className="space-y-2.5 text-sm">
+              {recent.map((s) => (
+                <li key={s.id} className="flex items-baseline justify-between gap-2">
+                  <span>
+                    <span className="font-medium">{s.code}</span>{" "}
+                    <span className="capitalize text-muted">{s.mode}</span>
+                    <span className="block text-xs text-muted">{fmtDateTime(s.startedAt)}</span>
+                  </span>
+                  <span className="tabular-nums">
+                    {s.status === "in-progress" ? (
+                      <span className="text-accent">in progress</span>
+                    ) : s.status === "abandoned" ? (
+                      <span className="text-muted">abandoned</span>
+                    ) : (
+                      `${s.correct}/${s.total}`
+                    )}
+                  </span>
+                </li>
               ))}
-            </div>
+            </ul>
           )}
         </Card>
-
-        <div className="space-y-4">
-          <Card title="Mock exam trend" action={<Link href="/mock" className="text-sm text-accent underline">Mock</Link>}>
-            {mocks.length === 0 ? (
-              <p className="text-sm text-muted">Take a timed mock to see your trend against the {exam.readinessTargetPct}% target.</p>
-            ) : (
-              <>
-                <svg viewBox="0 0 200 70" className="h-20 w-full" role="img" aria-label={`Mock exam scores: ${mocks.map((m) => Math.round(m.pct)).join(", ")} percent`}>
-                  <line x1="0" x2="200" y1={70 - exam.readinessTargetPct * 0.7} y2={70 - exam.readinessTargetPct * 0.7} stroke="var(--c-muted)" strokeDasharray="3 3" strokeWidth="1" />
-                  <polyline fill="none" stroke="var(--c-accent)" strokeWidth="2" points={mocks.map((m, i) => `${mocks.length === 1 ? 100 : 6 + (i * 188) / (mocks.length - 1)},${70 - m.pct * 0.7}`).join(" ")} />
-                  {mocks.map((m, i) => (
-                    <circle key={m.id} cx={mocks.length === 1 ? 100 : 6 + (i * 188) / (mocks.length - 1)} cy={70 - m.pct * 0.7} r="3" fill="var(--c-accent)" />
-                  ))}
-                </svg>
-                <p className="text-xs text-muted">Latest {pct(mocks[mocks.length - 1].pct)}. Dashed line is your {exam.readinessTargetPct}% target.</p>
-              </>
-            )}
-          </Card>
-          <Card title="Weakest objectives">
-            {weakest.length === 0 ? (
-              <p className="text-sm text-muted">Answer some questions to see where to focus.</p>
-            ) : (
-              <ol className="space-y-2 text-sm">
-                {weakest.map((o) => {
-                  const ob = objectiveById.get(o.objectiveId);
-                  return (
-                    <li key={o.objectiveId}>
-                      <Link href={`/map/${o.objectiveId}`} className="hover:underline">
-                        <span className="font-medium">{ob.code}</span> {ob.title}
-                      </Link>
-                      <div className="text-xs text-muted">{o.accuracy == null ? "not started" : `${pct(o.accuracy)} accuracy`}, {o.poolSize} question{o.poolSize === 1 ? "" : "s"}</div>
-                    </li>
-                  );
-                })}
-              </ol>
-            )}
-          </Card>
-          <Card title="Recent sessions" action={<Link href="/history" className="text-sm text-accent underline">All</Link>}>
-            {sessions.length === 0 ? (
-              <p className="text-sm text-muted">No sessions yet.</p>
-            ) : (
-              <ul className="space-y-2 text-sm">
-                {sessions.map((s) => (
-                  <li key={s.id}>
-                    <Link href={s.status === "in-progress" ? `/practice/${s.id}` : `/history/${s.id}`} className="hover:underline">
-                      {fmtDateTime(s.startedAt)}
-                    </Link>{" "}
-                    <span className="text-muted">
-                      {s.mode} · {s.status === "in-progress" ? "in progress" : `${s.correct}/${s.total}`}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </Card>
-        </div>
       </div>
     </>
+  );
+}
+
+function CourseButton({ examId, to, variant = "secondary", children }) {
+  return (
+    <form action={openCourseAction}>
+      <input type="hidden" name="examId" value={examId} />
+      <input type="hidden" name="to" value={to} />
+      <Button type="submit" variant={variant}>
+        {children}
+      </Button>
+    </form>
   );
 }

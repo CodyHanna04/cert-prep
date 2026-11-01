@@ -7,6 +7,8 @@
   --c-text: #0f1b2a;
   --c-muted: #4b5b6e;
   --c-accent: #0b6e99;
+  --c-accent-soft: #d3eaf5;
+  --c-glow: #cfe0f0;
   --c-on-accent: #ffffff;
   --c-focus: #7c3aed;
   --c-ok: #166534;
@@ -21,7 +23,8 @@
   --c-idle-soft: #e2e8f0;
   --f-display: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, monospace;
   --f-body: ui-sans-serif, system-ui, "Segoe UI", sans-serif;
-  --radius: 0.125rem;
+  --radius: 0.25rem;
+  --shadow: 0 1px 0 rgb(15 27 42 / 0.05), 0 10px 28px -14px rgb(15 27 42 / 0.35);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -33,6 +36,9 @@
     --c-text: #d8e1ea;
     --c-muted: #92a2b3;
     --c-accent: #4cc2ff;
+    --c-accent-soft: #11303f;
+    --c-glow: #11283a;
+    --shadow: 0 10px 28px -14px rgb(0 0 0 / 0.8);
     --c-on-accent: #04202e;
     --c-focus: #c4a1ff;
     --c-ok: #6ee7a0;

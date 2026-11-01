@@ -11,7 +11,7 @@ import { stratifiedSample } from "@/lib/domain/sampling.js";
 
 export async function startMockAction() {
   const { user, exam: active } = await getAppContext();
-  if (!active) redirect("/settings");
+  if (!active) redirect("/courses");
 
   const result = await withUser(user.id, async (db) => {
     const exam = await getExam(db, active.id);

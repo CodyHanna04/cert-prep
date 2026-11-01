@@ -36,6 +36,7 @@ services:
       DATABASE_URL_OWNER: postgres://certprep_owner:${OWNER_PASSWORD}@db:5432/certprep
       DATABASE_URL_ADMIN: postgres://admin_app:${ADMIN_PASSWORD}@db:5432/certprep
       APP_ORIGIN: ${APP_ORIGIN:-}
+      APP_TIMEZONE: ${APP_TIMEZONE:-}
     depends_on:
       db: { condition: service_healthy }
     networks: [internal]
@@ -48,6 +49,7 @@ services:
     environment:
       APP_MODE: web
       APP_ORIGIN: ${APP_ORIGIN:-}
+      APP_TIMEZONE: ${APP_TIMEZONE:-}
       PASSKEY_RP_ID: ${PASSKEY_RP_ID:-}
       BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:-}
       DATABASE_URL_APP: postgres://app_user:${APP_PASSWORD}@db:5432/certprep

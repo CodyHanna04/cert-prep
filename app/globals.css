@@ -15,6 +15,7 @@
   --color-text: var(--c-text);
   --color-muted: var(--c-muted);
   --color-accent: var(--c-accent);
+  --color-accent-soft: var(--c-accent-soft);
   --color-on-accent: var(--c-on-accent);
   --color-focus: var(--c-focus);
   --color-ok: var(--c-ok);
@@ -30,12 +31,33 @@
   --font-display: var(--f-display);
   --font-sans: var(--f-body);
   --radius-theme: var(--radius);
+  --shadow-card: var(--shadow);
 }
 
 body {
   background: var(--c-bg);
   color: var(--c-text);
   font-family: var(--f-body);
+}
+
+/* A soft wash from the top corner and a faint dot grid, so pages are not flat paper. */
+.backdrop {
+  background-image:
+    radial-gradient(60rem 28rem at 8% -6rem, var(--c-glow), transparent 70%),
+    radial-gradient(var(--c-line) 1px, transparent 1px);
+  background-size: auto, 22px 22px;
+  background-attachment: fixed, fixed;
+}
+
+/* Display headings carry a short accent rule. */
+.title-rule::after {
+  content: "";
+  display: block;
+  width: 2.5rem;
+  height: 3px;
+  margin-top: 0.5rem;
+  border-radius: 9999px;
+  background: var(--c-accent);
 }
 
 :focus-visible {

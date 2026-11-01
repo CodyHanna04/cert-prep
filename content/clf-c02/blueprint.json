@@ -32,6 +32,16 @@
       "multi": { "minOptions": 5, "minCorrect": 2 },
       "bannedOptionText": ["all of the above", "none of the above"]
     },
+    "marketing": {
+      "tagline": "The broad map of AWS: what the cloud is, how it is secured, and how it is billed.",
+      "level": "Foundational",
+      "audience": "Anyone who works near AWS and needs the vocabulary: new engineers, managers, sales and support staff, career changers.",
+      "highlights": [
+        "Cloud Technology and Services is the biggest domain at 34%, so service recognition pays off most.",
+        "Security and Compliance is 30%: the shared responsibility model comes up everywhere.",
+        "No hands-on experience required, but the questions reward knowing which service fits which job."
+      ]
+    },
     "domains": [
       {
         "key": "d1",

@@ -11,7 +11,7 @@ export default async function RootLayout({ children }) {
   const theme = await getTheme();
   return (
     <html lang="en" data-theme={theme}>
-      <body className="min-h-screen bg-bg font-sans text-text antialiased">{children}</body>
+      <body className="backdrop min-h-screen bg-bg font-sans text-text antialiased">{children}</body>
     </html>
   );
 }
