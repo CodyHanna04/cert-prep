@@ -1,6 +1,6 @@
 # 05 — Backlog
 
-> **Build status (2026-10-31):** most of Slices 1-3 and the admin tickets T-084 to T-086 are built. Per-ticket status is in [13-build-status.md](13-build-status.md). Tickets not built: T-012, T-013, T-027, T-045, T-047, T-053, T-076, T-078, T-079 (dedicated view), T-081 (browser e2e), and the nginx/backup/hardening parts of T-082 and T-083.
+> **Build status (2026-10-31):** most of Slices 1-3 and the admin tickets T-084 to T-086 are built. Per-ticket status is in [13-build-status.md](13-build-status.md). Tickets not built: T-012, T-013, T-045, T-047, T-053, T-076, T-078, T-081 (browser e2e), and the nginx/backup/hardening parts of T-082 and T-083.
 
 Re-baselined 2026-10-31 for a **personal, non-public tool**. Changes from the first draft: dependencies re-checked (no ticket depends on a later slice), merged overlapping tickets, dropped public-product polish, no time estimates. Sizes are relative only: **S** small, **M** medium, **L** large (split if it grows). The stack is decided ([09-stack-options.md](09-stack-options.md)): Next.js + Postgres (row-level security) + Better Auth on the homelab; the auth and isolation design is in [11-auth-and-tenancy.md](11-auth-and-tenancy.md).
 

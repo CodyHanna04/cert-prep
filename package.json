@@ -18,7 +18,10 @@
     "db:seed-dev": "node scripts/seed-dev.mjs",
     "user:create": "node scripts/create-user.mjs",
     "pack:validate": "node scripts/validate-pack-all.mjs",
-    "pack:new": "node scripts/new-pack.mjs"
+    "pack:new": "node scripts/new-pack.mjs",
+    "content:lint": "node scripts/content-lint.mjs",
+    "content:blind": "node scripts/content-verify.mjs blind",
+    "content:check": "node scripts/content-verify.mjs check"
   },
   "dependencies": {
     "@better-auth/passkey": "^1.7.14",

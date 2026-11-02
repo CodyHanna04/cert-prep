@@ -1,0 +1,6 @@
+- **Level:** recognition. Match a need to a service or concept: "which service...", "which is the customer's responsibility...", "which is the most cost-effective purchasing option...". The guide's verbs are identify, recognize, describe, understand, choose. Coding, architecture design, troubleshooting, implementation and load testing are out of scope for this exam, so there is no CLI syntax, no configuration steps and no deep architecture trade-offs.
+- **Formats:** single-answer questions have 4 options and 1 correct answer. Multiple-response questions have 5 or more options, 2 or more correct, and the stem says exactly how many to choose ("Choose TWO."). Roughly 85 to 90 percent single, the rest multiple-response.
+- **Stems:** one problem, with a short scenario of 1 to 3 sentences when it helps.
+- **Distractors:** real in-scope AWS services or concepts. Similar-sounding pairs make good distractors (Shield vs WAF, Inspector vs GuardDuty, Artifact vs Audit Manager).
+- **Stable facts only:** avoid prices, quotas and version numbers. Where the objective needs one (S3 storage classes, support plan tiers), cite the page in `refs`.
+- **Tags:** the relevant services or concepts, e.g. `["iam", "mfa"]`.

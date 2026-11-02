@@ -16,7 +16,7 @@ dist/
 # logs and test output
 *.log
 npm-debug.log*
-coverage/
+/coverage/
 playwright-report/
 test-results/
 
@@ -34,3 +34,6 @@ backups/
 Thumbs.db
 .idea/
 .vscode/
+
+# Working files of the blind verification pass (docs/07)
+content/**/*.blind.json

@@ -30,7 +30,8 @@
     "profile": {
       "single": { "options": 4 },
       "multi": { "minOptions": 5, "minCorrect": 2 },
-      "bannedOptionText": ["all of the above", "none of the above"]
+      "bannedOptionText": ["all of the above", "none of the above"],
+      "outOfScopeTerms": ["GameLift", "Lumberyard", "AWS Elemental", "MediaConnect", "MediaConvert", "MediaLive", "MediaPackage", "MediaStore", "MediaTailor", "Amazon IVS", "RoboMaker"]
     },
     "marketing": {
       "tagline": "The broad map of AWS: what the cloud is, how it is secured, and how it is billed.",

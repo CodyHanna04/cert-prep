@@ -13,6 +13,17 @@ Changes made from the first round of feedback:
 - **Visual pass:** wash and dot backdrop, shadowed cards, display-font titles with an accent rule, domain-weight rings, and new `accent-soft`, `glow` and `shadow` theme tokens.
 - **Library stays in the app:** it is per user (rows carry `user_id` under RLS), so imports and edits never reach another account and the admin site cannot see them.
 
+## Revision 3 (question bank tooling)
+
+- **Lint CLI:** `npm run content:lint [-- paths] [--strict]` checks `content/<pack>/questions/**/*.json` against the pack blueprint: everything the importer checks, plus required stable ids across files, `profile.outOfScopeTerms` (services the guide lists as out of scope; new optional pack field), and doc 07 section 5 batch warnings (answer-position imbalance, longest-option-is-correct tell, absolute words, NOT/EXCEPT stems, `lastVerified` over a year old). Exit 1 on errors.
+- **Blind verification:** `npm run content:blind -- <batch>` writes a copy with no key or rationales; a separate model answers it; `npm run content:check -- <batch> <answers> --write` flags disagreements with `needsAttention`. The tooling is built and tested. Running the check still needs a second session or a person: nothing in the app calls a model.
+- **Prompt kit:** `content/prompts/draft-questions.md` and `verify-blind.md`, a README with the step-by-step flow, and `content/clf-c02/style.md`. DVA-C03 has no style file yet.
+- **Coverage page** (Library, Coverage): approved, draft and target counts per objective with a default target of four exams' worth split by domain weight (then evenly by objective), practice-ready (10 or more approved) and mock-ready (2 exams' worth) indicators, and a Prompt page per objective that fills the drafting prompt with the objective's scope and the questions already in the bank.
+- **Export approved** in Library (T-027).
+- **Pilot batch:** `content/clf-c02/questions/2.1-2026-11-01.json`, 10 draft questions for objective 2.1 (shared responsibility), grounded in three AWS pages named in each question's `refs`. Lint: 0 errors, 0 warnings. Not yet blind-checked, imported or human-reviewed.
+- **Fix:** `.gitignore` and `.dockerignore` listed `coverage`, which also matched the new `library/coverage` route folder (git would have skipped it and Tailwind did not scan it). Both are now anchored to the repo root.
+- Exams already added to a database keep the profile they were created with, so an existing exam row does not get `outOfScopeTerms`; the lint CLI reads the blueprint and always applies it.
+
 ## Run it
 
 ```bash
@@ -49,6 +60,10 @@ First real account (no public sign-up): `npm run user:create -- "Your Name"` pri
 | T-022/T-023 Import | Done | Preview then commit; server re-validates; all-or-nothing; duplicates skipped; optional update by `id`; 2 MB / 2000-question caps |
 | T-025 Question editor | Edit only | Revalidates through the importer, including the exam profile. No "new question" form |
 | T-026 Safe markdown | Done | React-element renderer, https links only, no raw HTML |
+| T-027 Export approved | Done | Library, Export approved: content-format JSON, round-trip tested |
+| T-028 Content lint CLI | Done | `npm run content:lint` (see Revision 3) |
+| T-029 Draft prompt kit | Done | `content/prompts/`: drafting and blind-verification prompts, README, per-pack `style.md` |
+| T-079 Coverage view | Done | Library, Coverage: approved/draft/target per objective, prompt link per objective |
 | T-030/T-031 Review gate and queue | Done | Drafts excluded from pool and stats; blind-answer review; reject needs a reason |
 | T-042–T-044, T-050–T-052 Practice loop | Done | Setup, resumable runner with per-option rationales, results, answer review, retry missed |
 | T-046 Flag and note | Partial | Flag and note in the runner; no bookmark UI |
@@ -61,7 +76,7 @@ First real account (no public sign-up): `npm run user:create -- "Your Name"` pri
 
 ## Not built yet
 
-- T-012 domain/objective editor, T-013 theme lab and design notes, T-027 export approved questions, T-045 confidence chip, T-047 keyboard shortcuts, T-053 mistakes page, T-076 trends, T-078 question history, T-079 dedicated coverage view, "create exam manually", "new question" form.
+- T-012 domain/objective editor, T-013 theme lab and design notes, T-045 confidence chip, T-047 keyboard shortcuts, T-053 mistakes page, T-076 trends, T-078 question history, "create exam manually", "new question" form.
 - T-081 browser end-to-end test (the data-layer golden path is tested; the UI was exercised by hand).
 - T-082 remainder: adapt and install `docker/nginx-study.conf.example` (untested draft), the Namecheap record, certificates, scheduled `pg_dump` and a restore drill. T-083 remainder: CSP with nonces, nginx rate limits, the pre-exposure checklist run-through.
 - Content: no question bank exists beyond the 5-question test fixture. Drafting is the main remaining effort.
