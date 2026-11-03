@@ -1,0 +1,483 @@
+{
+  "formatVersion": 1,
+  "questions": [
+    {
+      "id": "clf-c02-3.8-01",
+      "domain": "d3",
+      "objective": "3.8",
+      "type": "single",
+      "stem": "Which service is a managed message queue that decouples the components of an application?",
+      "options": [
+        {
+          "text": "Amazon Simple Notification Service (Amazon SNS)",
+          "correct": false,
+          "rationale": "SNS pushes messages to subscribers rather than queuing them."
+        },
+        {
+          "text": "Amazon EventBridge",
+          "correct": false,
+          "rationale": "EventBridge routes events to targets using rules."
+        },
+        {
+          "text": "Amazon Simple Queue Service (Amazon SQS)",
+          "correct": true,
+          "rationale": "SQS stores messages until consumers process them, decoupling producers and consumers."
+        },
+        {
+          "text": "Amazon Simple Email Service (Amazon SES)",
+          "correct": false,
+          "rationale": "SES sends email."
+        }
+      ],
+      "explanation": "SQS is pull-based queuing; SNS is push-based publish/subscribe.",
+      "difficulty": 1,
+      "tags": [
+        "application-integration",
+        "sqs"
+      ],
+      "refs": [
+        "https://aws.amazon.com/sqs/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.8-02",
+      "domain": "d3",
+      "objective": "3.8",
+      "type": "single",
+      "stem": "Which service sends a message to many subscribers at once, such as email addresses, SMS numbers and HTTP endpoints, using publish/subscribe?",
+      "options": [
+        {
+          "text": "Amazon Simple Queue Service (Amazon SQS)",
+          "correct": false,
+          "rationale": "SQS queues messages for consumers to pull."
+        },
+        {
+          "text": "Amazon Simple Email Service (Amazon SES)",
+          "correct": false,
+          "rationale": "SES sends email at scale but is not pub/sub fan-out."
+        },
+        {
+          "text": "Amazon Connect",
+          "correct": false,
+          "rationale": "Connect is a contact center service."
+        },
+        {
+          "text": "Amazon Simple Notification Service (Amazon SNS)",
+          "correct": true,
+          "rationale": "SNS is a managed publish/subscribe messaging service."
+        }
+      ],
+      "explanation": "SNS fans out one message to many subscribers.",
+      "difficulty": 1,
+      "tags": [
+        "application-integration",
+        "sns"
+      ],
+      "refs": [
+        "https://aws.amazon.com/sns/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.8-03",
+      "domain": "d3",
+      "objective": "3.8",
+      "type": "single",
+      "stem": "Which serverless service routes events from AWS services, SaaS applications and custom applications to targets based on rules?",
+      "options": [
+        {
+          "text": "Amazon EventBridge",
+          "correct": true,
+          "rationale": "EventBridge is a serverless event bus that routes events using rules."
+        },
+        {
+          "text": "Amazon Simple Queue Service (Amazon SQS)",
+          "correct": false,
+          "rationale": "SQS queues messages but does not route events by rules."
+        },
+        {
+          "text": "Amazon Simple Email Service (Amazon SES)",
+          "correct": false,
+          "rationale": "SES sends email."
+        },
+        {
+          "text": "AWS AppSync",
+          "correct": false,
+          "rationale": "AppSync builds GraphQL APIs."
+        }
+      ],
+      "explanation": "EventBridge helps build event-driven applications.",
+      "difficulty": 2,
+      "tags": [
+        "application-integration",
+        "eventbridge"
+      ],
+      "refs": [
+        "https://aws.amazon.com/eventbridge/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.8-04",
+      "domain": "d3",
+      "objective": "3.8",
+      "type": "single",
+      "stem": "Which service sends marketing and transactional email at scale?",
+      "options": [
+        {
+          "text": "Amazon Connect",
+          "correct": false,
+          "rationale": "Connect runs contact centers."
+        },
+        {
+          "text": "Amazon Simple Email Service (Amazon SES)",
+          "correct": true,
+          "rationale": "SES is a cloud email service for transactional and marketing messages."
+        },
+        {
+          "text": "Amazon Simple Queue Service (Amazon SQS)",
+          "correct": false,
+          "rationale": "SQS is a message queue."
+        },
+        {
+          "text": "Amazon WorkSpaces",
+          "correct": false,
+          "rationale": "WorkSpaces provides virtual desktops."
+        }
+      ],
+      "explanation": "SES is in the business applications category of the exam guide.",
+      "difficulty": 1,
+      "tags": [
+        "business-applications",
+        "ses"
+      ],
+      "refs": [
+        "https://aws.amazon.com/ses/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.8-05",
+      "domain": "d3",
+      "objective": "3.8",
+      "type": "single",
+      "stem": "Which service lets a company set up a cloud-based contact center for customer service?",
+      "options": [
+        {
+          "text": "Amazon Simple Email Service (Amazon SES)",
+          "correct": false,
+          "rationale": "SES sends email."
+        },
+        {
+          "text": "Amazon Lex",
+          "correct": false,
+          "rationale": "Lex builds chatbots, which can be used inside Connect but is not a contact center."
+        },
+        {
+          "text": "Amazon Connect",
+          "correct": true,
+          "rationale": "Connect is an omnichannel cloud contact center."
+        },
+        {
+          "text": "Amazon WorkSpaces",
+          "correct": false,
+          "rationale": "WorkSpaces provides virtual desktops."
+        }
+      ],
+      "explanation": "Amazon Connect is in the business applications category.",
+      "difficulty": 1,
+      "tags": [
+        "business-applications",
+        "connect"
+      ],
+      "refs": [
+        "https://aws.amazon.com/connect/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.8-06",
+      "domain": "d3",
+      "objective": "3.8",
+      "type": "single",
+      "stem": "Which service provides virtual desktops that employees can use from almost any device?",
+      "options": [
+        {
+          "text": "Amazon AppStream 2.0",
+          "correct": false,
+          "rationale": "AppStream 2.0 streams individual applications rather than full desktops."
+        },
+        {
+          "text": "Amazon Connect",
+          "correct": false,
+          "rationale": "Connect is a contact center service."
+        },
+        {
+          "text": "AWS Amplify",
+          "correct": false,
+          "rationale": "Amplify builds web and mobile apps."
+        },
+        {
+          "text": "Amazon WorkSpaces",
+          "correct": true,
+          "rationale": "WorkSpaces provides managed virtual desktops."
+        }
+      ],
+      "explanation": "End-user computing services: Amazon WorkSpaces (desktops) and Amazon AppStream 2.0 (applications).",
+      "difficulty": 2,
+      "tags": [
+        "end-user-computing",
+        "workspaces"
+      ],
+      "refs": [
+        "https://aws.amazon.com/workspaces/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.8-07",
+      "domain": "d3",
+      "objective": "3.8",
+      "type": "single",
+      "stem": "Which service helps front-end web and mobile developers build, deploy and host full-stack applications on AWS?",
+      "options": [
+        {
+          "text": "AWS Amplify",
+          "correct": true,
+          "rationale": "Amplify provides tools and hosting for full-stack web and mobile apps."
+        },
+        {
+          "text": "AWS AppSync",
+          "correct": false,
+          "rationale": "AppSync builds GraphQL APIs, one part of an app's back end."
+        },
+        {
+          "text": "AWS CodeBuild",
+          "correct": false,
+          "rationale": "CodeBuild compiles and tests code."
+        },
+        {
+          "text": "Amazon Connect",
+          "correct": false,
+          "rationale": "Connect is a contact center service."
+        }
+      ],
+      "explanation": "Amplify and AppSync are in the frontend web and mobile category.",
+      "difficulty": 2,
+      "tags": [
+        "frontend",
+        "amplify"
+      ],
+      "refs": [
+        "https://aws.amazon.com/amplify/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.8-08",
+      "domain": "d3",
+      "objective": "3.8",
+      "type": "single",
+      "stem": "Which service connects IoT devices to the AWS Cloud so they can securely interact with cloud applications?",
+      "options": [
+        {
+          "text": "AWS IoT Greengrass",
+          "correct": false,
+          "rationale": "Greengrass runs local compute and messaging on edge devices."
+        },
+        {
+          "text": "AWS IoT Core",
+          "correct": true,
+          "rationale": "IoT Core lets billions of devices connect and send messages to AWS."
+        },
+        {
+          "text": "Amazon Connect",
+          "correct": false,
+          "rationale": "Connect is a contact center."
+        },
+        {
+          "text": "AWS Amplify",
+          "correct": false,
+          "rationale": "Amplify builds web and mobile apps."
+        }
+      ],
+      "explanation": "IoT Core is the cloud connection point; Greengrass extends AWS to the devices themselves.",
+      "difficulty": 2,
+      "tags": [
+        "iot",
+        "iot-core"
+      ],
+      "refs": [
+        "https://aws.amazon.com/iot-core/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.8-09",
+      "domain": "d3",
+      "objective": "3.8",
+      "type": "single",
+      "stem": "Which service automates the build, test and deploy stages of a software release process?",
+      "options": [
+        {
+          "text": "AWS CodeBuild",
+          "correct": false,
+          "rationale": "CodeBuild compiles and tests code as one stage."
+        },
+        {
+          "text": "AWS CodeDeploy",
+          "correct": false,
+          "rationale": "CodeDeploy automates deployments as one stage."
+        },
+        {
+          "text": "AWS CodePipeline",
+          "correct": true,
+          "rationale": "CodePipeline is a continuous delivery service that orchestrates release stages."
+        },
+        {
+          "text": "AWS X-Ray",
+          "correct": false,
+          "rationale": "X-Ray traces requests in running applications."
+        }
+      ],
+      "explanation": "CodePipeline orchestrates; CodeBuild builds; CodeDeploy deploys.",
+      "difficulty": 2,
+      "tags": [
+        "developer-tools",
+        "codepipeline"
+      ],
+      "refs": [
+        "https://aws.amazon.com/codepipeline/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.8-10",
+      "domain": "d3",
+      "objective": "3.8",
+      "type": "single",
+      "stem": "Which service helps developers trace requests through a distributed application to find performance bottlenecks?",
+      "options": [
+        {
+          "text": "AWS CodeDeploy",
+          "correct": false,
+          "rationale": "CodeDeploy automates deployments."
+        },
+        {
+          "text": "AWS CloudShell",
+          "correct": false,
+          "rationale": "CloudShell is a browser-based shell."
+        },
+        {
+          "text": "AWS AppConfig",
+          "correct": false,
+          "rationale": "AppConfig manages application configuration."
+        },
+        {
+          "text": "AWS X-Ray",
+          "correct": true,
+          "rationale": "X-Ray traces requests as they travel through an application."
+        }
+      ],
+      "explanation": "X-Ray shows a map of services and where time is spent.",
+      "difficulty": 2,
+      "tags": [
+        "developer-tools",
+        "x-ray"
+      ],
+      "refs": [
+        "https://aws.amazon.com/xray/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.8-11",
+      "domain": "d3",
+      "objective": "3.8",
+      "type": "multi",
+      "stem": "Which TWO are AWS developer tools? (Choose TWO.)",
+      "options": [
+        {
+          "text": "Amazon Connect",
+          "correct": false,
+          "rationale": "Connect is a business application."
+        },
+        {
+          "text": "Amazon Simple Email Service (Amazon SES)",
+          "correct": false,
+          "rationale": "SES is a business application."
+        },
+        {
+          "text": "AWS CodeDeploy",
+          "correct": true,
+          "rationale": "CodeDeploy automates application deployments."
+        },
+        {
+          "text": "Amazon WorkSpaces",
+          "correct": false,
+          "rationale": "WorkSpaces is end-user computing."
+        },
+        {
+          "text": "AWS CodeBuild",
+          "correct": true,
+          "rationale": "CodeBuild compiles source code and runs tests."
+        }
+      ],
+      "explanation": "Developer tools in scope include AWS CodeBuild, CodeDeploy, CodePipeline, CodeArtifact, CloudShell, AppConfig and X-Ray.",
+      "difficulty": 1,
+      "tags": [
+        "developer-tools"
+      ],
+      "refs": [
+        "https://aws.amazon.com/codebuild/",
+        "https://aws.amazon.com/codedeploy/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    }
+  ]
+}

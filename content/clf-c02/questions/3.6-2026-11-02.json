@@ -1,0 +1,494 @@
+{
+  "formatVersion": 1,
+  "questions": [
+    {
+      "id": "clf-c02-3.6-01",
+      "domain": "d3",
+      "objective": "3.6",
+      "type": "single",
+      "stem": "Which service provides object storage for virtually any amount of data, accessed through web APIs?",
+      "options": [
+        {
+          "text": "Amazon S3",
+          "correct": true,
+          "rationale": "S3 stores objects in buckets and is accessed over HTTPS APIs."
+        },
+        {
+          "text": "Amazon Elastic Block Store (Amazon EBS)",
+          "correct": false,
+          "rationale": "EBS provides block volumes for EC2."
+        },
+        {
+          "text": "Amazon Elastic File System (Amazon EFS)",
+          "correct": false,
+          "rationale": "EFS provides a shared file system."
+        },
+        {
+          "text": "EC2 instance store",
+          "correct": false,
+          "rationale": "Instance store is temporary block storage on the host."
+        }
+      ],
+      "explanation": "Object storage (S3), block storage (EBS, instance store) and file storage (EFS, FSx) are the three storage types.",
+      "difficulty": 1,
+      "tags": [
+        "storage",
+        "s3",
+        "object-storage"
+      ],
+      "refs": [
+        "https://aws.amazon.com/s3/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.6-02",
+      "domain": "d3",
+      "objective": "3.6",
+      "type": "single",
+      "stem": "Which service provides block storage volumes that attach to Amazon EC2 instances and keep their data independently of the instance's life?",
+      "options": [
+        {
+          "text": "EC2 instance store",
+          "correct": false,
+          "rationale": "Instance store data is lost when the instance stops or terminates."
+        },
+        {
+          "text": "Amazon Elastic Block Store (Amazon EBS)",
+          "correct": true,
+          "rationale": "EBS volumes persist independently and can be detached and reattached."
+        },
+        {
+          "text": "Amazon S3",
+          "correct": false,
+          "rationale": "S3 is object storage, not a volume."
+        },
+        {
+          "text": "Amazon S3 Glacier",
+          "correct": false,
+          "rationale": "Glacier is archival object storage."
+        }
+      ],
+      "explanation": "Use EBS for persistent block storage such as boot volumes and databases on EC2.",
+      "difficulty": 1,
+      "tags": [
+        "storage",
+        "ebs",
+        "block-storage"
+      ],
+      "refs": [
+        "https://aws.amazon.com/ebs/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.6-03",
+      "domain": "d3",
+      "objective": "3.6",
+      "type": "single",
+      "stem": "Which statement about Amazon EC2 instance store is correct?",
+      "options": [
+        {
+          "text": "It persists after the instance is terminated",
+          "correct": false,
+          "rationale": "Instance store does not persist after termination."
+        },
+        {
+          "text": "It can be detached and attached to another instance",
+          "correct": false,
+          "rationale": "Instance store cannot be moved between instances."
+        },
+        {
+          "text": "Its data is lost when the instance is stopped or terminated",
+          "correct": true,
+          "rationale": "Instance store is temporary storage physically attached to the host."
+        },
+        {
+          "text": "It is the same thing as an Amazon EBS snapshot",
+          "correct": false,
+          "rationale": "Snapshots are backups of EBS volumes stored by AWS."
+        }
+      ],
+      "explanation": "Instance store suits temporary data such as buffers, caches and scratch data.",
+      "difficulty": 2,
+      "tags": [
+        "storage",
+        "instance-store"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.6-04",
+      "domain": "d3",
+      "objective": "3.6",
+      "type": "single",
+      "stem": "Which service provides a managed file system that many Linux-based Amazon EC2 instances can mount at the same time?",
+      "options": [
+        {
+          "text": "Amazon Elastic Block Store (Amazon EBS)",
+          "correct": false,
+          "rationale": "EBS volumes are block storage, typically attached to one instance."
+        },
+        {
+          "text": "EC2 instance store",
+          "correct": false,
+          "rationale": "Instance store is local to one instance."
+        },
+        {
+          "text": "Amazon S3 Glacier Deep Archive",
+          "correct": false,
+          "rationale": "Deep Archive is for long-term archives."
+        },
+        {
+          "text": "Amazon Elastic File System (Amazon EFS)",
+          "correct": true,
+          "rationale": "EFS is a serverless, elastic NFS file system that many instances can share."
+        }
+      ],
+      "explanation": "EFS grows and shrinks automatically as you add and remove files.",
+      "difficulty": 2,
+      "tags": [
+        "storage",
+        "efs",
+        "file-storage"
+      ],
+      "refs": [
+        "https://aws.amazon.com/efs/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.6-05",
+      "domain": "d3",
+      "objective": "3.6",
+      "type": "single",
+      "stem": "A company needs a fully managed file server that supports the SMB protocol for its Windows applications. Which service should it use?",
+      "options": [
+        {
+          "text": "Amazon FSx for Windows File Server",
+          "correct": true,
+          "rationale": "FSx for Windows File Server provides fully managed Windows file storage over SMB."
+        },
+        {
+          "text": "Amazon Elastic File System (Amazon EFS)",
+          "correct": false,
+          "rationale": "EFS uses NFS and is aimed at Linux workloads."
+        },
+        {
+          "text": "Amazon Elastic Block Store (Amazon EBS)",
+          "correct": false,
+          "rationale": "EBS is block storage, not a managed file server."
+        },
+        {
+          "text": "Amazon S3 Glacier",
+          "correct": false,
+          "rationale": "Glacier is archival storage."
+        }
+      ],
+      "explanation": "Amazon FSx offers managed file systems such as Windows File Server, Lustre, NetApp ONTAP and OpenZFS.",
+      "difficulty": 2,
+      "tags": [
+        "storage",
+        "fsx",
+        "file-storage"
+      ],
+      "refs": [
+        "https://aws.amazon.com/fsx/windows/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.6-06",
+      "domain": "d3",
+      "objective": "3.6",
+      "type": "single",
+      "stem": "Which service gives on-premises applications access to virtually unlimited cloud storage while caching frequently used data locally?",
+      "options": [
+        {
+          "text": "AWS Direct Connect",
+          "correct": false,
+          "rationale": "Direct Connect is a network link, not storage."
+        },
+        {
+          "text": "AWS Storage Gateway",
+          "correct": true,
+          "rationale": "Storage Gateway is a hybrid cloud storage service with local caching."
+        },
+        {
+          "text": "Amazon Elastic File System (Amazon EFS)",
+          "correct": false,
+          "rationale": "EFS is a cloud file system without an on-premises cache appliance."
+        },
+        {
+          "text": "AWS Backup",
+          "correct": false,
+          "rationale": "AWS Backup manages backups."
+        }
+      ],
+      "explanation": "Storage Gateway connects on-premises environments to AWS storage such as S3, with low-latency local access.",
+      "difficulty": 2,
+      "tags": [
+        "storage",
+        "storage-gateway",
+        "hybrid"
+      ],
+      "refs": [
+        "https://aws.amazon.com/storagegateway/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.6-07",
+      "domain": "d3",
+      "objective": "3.6",
+      "type": "single",
+      "stem": "Which Amazon S3 storage class automatically moves objects between access tiers when access patterns change?",
+      "options": [
+        {
+          "text": "S3 Standard",
+          "correct": false,
+          "rationale": "S3 Standard does not move objects between tiers."
+        },
+        {
+          "text": "S3 Glacier Deep Archive",
+          "correct": false,
+          "rationale": "Deep Archive is the lowest-cost archive class; it does not tier automatically."
+        },
+        {
+          "text": "S3 Intelligent-Tiering",
+          "correct": true,
+          "rationale": "Intelligent-Tiering monitors access and moves objects between tiers automatically."
+        },
+        {
+          "text": "S3 One Zone-Infrequent Access",
+          "correct": false,
+          "rationale": "One Zone-IA stores data in a single AZ; it does not move objects."
+        }
+      ],
+      "explanation": "Intelligent-Tiering is a good choice when access patterns are unknown or change over time.",
+      "difficulty": 2,
+      "tags": [
+        "storage",
+        "s3",
+        "storage-classes"
+      ],
+      "refs": [
+        "https://aws.amazon.com/s3/storage-classes/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.6-08",
+      "domain": "d3",
+      "objective": "3.6",
+      "type": "single",
+      "stem": "Which Amazon S3 storage class has the lowest storage cost and is meant for long-term archives that are rarely accessed and can wait hours for retrieval?",
+      "options": [
+        {
+          "text": "S3 Standard",
+          "correct": false,
+          "rationale": "S3 Standard is for frequently accessed data."
+        },
+        {
+          "text": "S3 Intelligent-Tiering",
+          "correct": false,
+          "rationale": "Intelligent-Tiering optimizes cost for changing access patterns."
+        },
+        {
+          "text": "S3 Standard-Infrequent Access",
+          "correct": false,
+          "rationale": "Standard-IA offers millisecond access at a higher storage price than Deep Archive."
+        },
+        {
+          "text": "S3 Glacier Deep Archive",
+          "correct": true,
+          "rationale": "Deep Archive is the lowest-cost class, with retrieval in hours."
+        }
+      ],
+      "explanation": "Classes trade storage price against access speed and retrieval cost.",
+      "difficulty": 2,
+      "tags": [
+        "storage",
+        "s3",
+        "storage-classes",
+        "glacier"
+      ],
+      "refs": [
+        "https://aws.amazon.com/s3/storage-classes/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.6-09",
+      "domain": "d3",
+      "objective": "3.6",
+      "type": "single",
+      "stem": "How can a company automatically move Amazon S3 objects to a lower-cost storage class 90 days after they are created?",
+      "options": [
+        {
+          "text": "Configure an S3 Lifecycle configuration",
+          "correct": true,
+          "rationale": "Lifecycle rules transition or expire objects automatically based on age."
+        },
+        {
+          "text": "Enable S3 Versioning on the bucket",
+          "correct": false,
+          "rationale": "Versioning keeps object versions; it does not change storage classes."
+        },
+        {
+          "text": "Attach an IAM policy to the bucket owner",
+          "correct": false,
+          "rationale": "IAM policies control permissions."
+        },
+        {
+          "text": "Turn on S3 Transfer Acceleration",
+          "correct": false,
+          "rationale": "Transfer Acceleration speeds up uploads over long distances."
+        }
+      ],
+      "explanation": "Lifecycle policies reduce storage cost by moving older data to cheaper classes or deleting it.",
+      "difficulty": 2,
+      "tags": [
+        "storage",
+        "s3",
+        "lifecycle"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.6-10",
+      "domain": "d3",
+      "objective": "3.6",
+      "type": "single",
+      "stem": "Which service centrally manages and automates backups across AWS services such as Amazon EBS, Amazon RDS and Amazon EFS?",
+      "options": [
+        {
+          "text": "AWS Storage Gateway",
+          "correct": false,
+          "rationale": "Storage Gateway provides hybrid access to cloud storage."
+        },
+        {
+          "text": "AWS Backup",
+          "correct": true,
+          "rationale": "AWS Backup centralizes and automates data protection across AWS services."
+        },
+        {
+          "text": "Amazon S3 Transfer Acceleration",
+          "correct": false,
+          "rationale": "Transfer Acceleration speeds up uploads to S3."
+        },
+        {
+          "text": "AWS Config",
+          "correct": false,
+          "rationale": "AWS Config tracks configurations, not backups."
+        }
+      ],
+      "explanation": "AWS Backup uses backup plans to schedule and retain backups in one place.",
+      "difficulty": 1,
+      "tags": [
+        "storage",
+        "backup"
+      ],
+      "refs": [
+        "https://aws.amazon.com/backup/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.6-11",
+      "domain": "d3",
+      "objective": "3.6",
+      "type": "multi",
+      "stem": "A company needs storage for Amazon EC2 instances that keeps its data after the instances stop. Which TWO services meet this need? (Choose TWO.)",
+      "options": [
+        {
+          "text": "EC2 instance store",
+          "correct": false,
+          "rationale": "Instance store data is lost when the instance stops."
+        },
+        {
+          "text": "Amazon MemoryDB",
+          "correct": false,
+          "rationale": "MemoryDB is an in-memory database, not instance storage."
+        },
+        {
+          "text": "Amazon Elastic File System (Amazon EFS)",
+          "correct": true,
+          "rationale": "EFS is persistent shared file storage."
+        },
+        {
+          "text": "Amazon CloudFront",
+          "correct": false,
+          "rationale": "CloudFront is a content delivery network."
+        },
+        {
+          "text": "Amazon Elastic Block Store (Amazon EBS)",
+          "correct": true,
+          "rationale": "EBS volumes persist independently of the instance."
+        }
+      ],
+      "explanation": "EBS and EFS persist; instance store is temporary.",
+      "difficulty": 2,
+      "tags": [
+        "storage",
+        "ebs",
+        "efs"
+      ],
+      "refs": [
+        "https://aws.amazon.com/ebs/",
+        "https://aws.amazon.com/efs/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    }
+  ]
+}

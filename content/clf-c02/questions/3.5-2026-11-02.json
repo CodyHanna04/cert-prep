@@ -1,0 +1,446 @@
+{
+  "formatVersion": 1,
+  "questions": [
+    {
+      "id": "clf-c02-3.5-01",
+      "domain": "d3",
+      "objective": "3.5",
+      "type": "single",
+      "stem": "What is Amazon Virtual Private Cloud (Amazon VPC)?",
+      "options": [
+        {
+          "text": "A managed DNS service for domain names",
+          "correct": false,
+          "rationale": "That describes Amazon Route 53."
+        },
+        {
+          "text": "A content delivery network with edge caching",
+          "correct": false,
+          "rationale": "That describes Amazon CloudFront."
+        },
+        {
+          "text": "A dedicated physical connection into AWS",
+          "correct": false,
+          "rationale": "That describes AWS Direct Connect."
+        },
+        {
+          "text": "A logically isolated virtual network in the AWS Cloud",
+          "correct": true,
+          "rationale": "A VPC is your own isolated network where you launch AWS resources."
+        }
+      ],
+      "explanation": "A VPC contains subnets, route tables and gateways that you control.",
+      "difficulty": 1,
+      "tags": [
+        "networking",
+        "vpc"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.5-02",
+      "domain": "d3",
+      "objective": "3.5",
+      "type": "single",
+      "stem": "What makes a subnet in a VPC a public subnet?",
+      "options": [
+        {
+          "text": "Its route table has a route to an internet gateway",
+          "correct": true,
+          "rationale": "A subnet is public when its traffic can route to an internet gateway."
+        },
+        {
+          "text": "It has a network ACL associated with it",
+          "correct": false,
+          "rationale": "Every subnet has a network ACL, public or private."
+        },
+        {
+          "text": "It is in a different Availability Zone from other subnets",
+          "correct": false,
+          "rationale": "The AZ does not decide whether a subnet is public."
+        },
+        {
+          "text": "It contains instances that use security groups",
+          "correct": false,
+          "rationale": "Security groups are used in public and private subnets."
+        }
+      ],
+      "explanation": "Public subnets route to an internet gateway; private subnets do not, and often reach the internet through a NAT gateway.",
+      "difficulty": 2,
+      "tags": [
+        "networking",
+        "vpc",
+        "subnets"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html",
+        "https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.5-03",
+      "domain": "d3",
+      "objective": "3.5",
+      "type": "single",
+      "stem": "Which VPC component allows communication between resources in a VPC and the internet?",
+      "options": [
+        {
+          "text": "Virtual private gateway",
+          "correct": false,
+          "rationale": "A virtual private gateway is the AWS side of a VPN connection."
+        },
+        {
+          "text": "Internet gateway",
+          "correct": true,
+          "rationale": "An internet gateway enables traffic between the VPC and the internet."
+        },
+        {
+          "text": "Security group",
+          "correct": false,
+          "rationale": "Security groups filter traffic; they do not provide internet connectivity."
+        },
+        {
+          "text": "Network ACL",
+          "correct": false,
+          "rationale": "Network ACLs filter subnet traffic."
+        }
+      ],
+      "explanation": "Internet gateways are horizontally scaled, redundant and highly available VPC components.",
+      "difficulty": 1,
+      "tags": [
+        "networking",
+        "vpc",
+        "internet-gateway"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.5-04",
+      "domain": "d3",
+      "objective": "3.5",
+      "type": "single",
+      "stem": "Instances in a private subnet need to download software updates from the internet but must not accept connections started from the internet. What should be used?",
+      "options": [
+        {
+          "text": "A route to an internet gateway in the private subnet",
+          "correct": false,
+          "rationale": "That would make the subnet public."
+        },
+        {
+          "text": "AWS Direct Connect",
+          "correct": false,
+          "rationale": "Direct Connect links on-premises networks to AWS."
+        },
+        {
+          "text": "A NAT gateway",
+          "correct": true,
+          "rationale": "A NAT gateway lets private instances reach out to the internet while blocking inbound connections."
+        },
+        {
+          "text": "Amazon CloudFront",
+          "correct": false,
+          "rationale": "CloudFront delivers content to users."
+        }
+      ],
+      "explanation": "NAT gateways sit in a public subnet and give outbound-only internet access to private subnets.",
+      "difficulty": 2,
+      "tags": [
+        "networking",
+        "vpc",
+        "nat-gateway"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.5-05",
+      "domain": "d3",
+      "objective": "3.5",
+      "type": "single",
+      "stem": "Which service is a highly available DNS service that can also route users based on health checks?",
+      "options": [
+        {
+          "text": "Amazon CloudFront",
+          "correct": false,
+          "rationale": "CloudFront delivers cached content."
+        },
+        {
+          "text": "Elastic Load Balancing",
+          "correct": false,
+          "rationale": "Load balancers distribute traffic within a Region."
+        },
+        {
+          "text": "AWS Global Accelerator",
+          "correct": false,
+          "rationale": "Global Accelerator routes traffic over the AWS network using static IP addresses."
+        },
+        {
+          "text": "Amazon Route 53",
+          "correct": true,
+          "rationale": "Route 53 is a DNS web service with routing policies and health checks."
+        }
+      ],
+      "explanation": "Route 53 also registers domain names.",
+      "difficulty": 1,
+      "tags": [
+        "networking",
+        "route53",
+        "dns"
+      ],
+      "refs": [
+        "https://aws.amazon.com/route53/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.5-06",
+      "domain": "d3",
+      "objective": "3.5",
+      "type": "single",
+      "stem": "Which service delivers content such as images and videos to users with low latency by caching it at edge locations?",
+      "options": [
+        {
+          "text": "Amazon CloudFront",
+          "correct": true,
+          "rationale": "CloudFront is a content delivery network that caches content at edge locations."
+        },
+        {
+          "text": "Amazon Route 53",
+          "correct": false,
+          "rationale": "Route 53 answers DNS queries."
+        },
+        {
+          "text": "AWS Global Accelerator",
+          "correct": false,
+          "rationale": "Global Accelerator does not cache content."
+        },
+        {
+          "text": "AWS Direct Connect",
+          "correct": false,
+          "rationale": "Direct Connect is a private connection to AWS."
+        }
+      ],
+      "explanation": "CloudFront is the content delivery network; Global Accelerator improves routing without caching.",
+      "difficulty": 1,
+      "tags": [
+        "networking",
+        "cloudfront",
+        "edge"
+      ],
+      "refs": [
+        "https://aws.amazon.com/cloudfront/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.5-07",
+      "domain": "d3",
+      "objective": "3.5",
+      "type": "single",
+      "stem": "Which component is attached to a VPC on the AWS side of an AWS Site-to-Site VPN connection?",
+      "options": [
+        {
+          "text": "Internet gateway",
+          "correct": false,
+          "rationale": "An internet gateway provides internet access."
+        },
+        {
+          "text": "Virtual private gateway",
+          "correct": true,
+          "rationale": "The virtual private gateway is the VPN concentrator on the AWS side."
+        },
+        {
+          "text": "NAT gateway",
+          "correct": false,
+          "rationale": "A NAT gateway provides outbound internet access for private subnets."
+        },
+        {
+          "text": "Customer gateway",
+          "correct": false,
+          "rationale": "The customer gateway represents the device on the on-premises side."
+        }
+      ],
+      "explanation": "A Site-to-Site VPN connects a customer gateway (on premises) to a virtual private gateway or transit gateway (on AWS).",
+      "difficulty": 3,
+      "tags": [
+        "networking",
+        "vpn"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.5-08",
+      "domain": "d3",
+      "objective": "3.5",
+      "type": "single",
+      "stem": "A company wants to block traffic from one IP address range to an entire subnet. What should it use?",
+      "options": [
+        {
+          "text": "A security group deny rule",
+          "correct": false,
+          "rationale": "Security groups support allow rules only."
+        },
+        {
+          "text": "An IAM policy",
+          "correct": false,
+          "rationale": "IAM policies control API permissions, not network traffic."
+        },
+        {
+          "text": "A network ACL deny rule",
+          "correct": true,
+          "rationale": "Network ACLs support deny rules and apply to whole subnets."
+        },
+        {
+          "text": "An Amazon Route 53 record",
+          "correct": false,
+          "rationale": "DNS records do not block traffic."
+        }
+      ],
+      "explanation": "Use network ACLs for subnet-wide allow and deny rules; use security groups for instance-level allow rules.",
+      "difficulty": 2,
+      "tags": [
+        "networking",
+        "nacl"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.5-09",
+      "domain": "d3",
+      "objective": "3.5",
+      "type": "single",
+      "stem": "Which connection to AWS does not travel over the public internet?",
+      "options": [
+        {
+          "text": "AWS Site-to-Site VPN",
+          "correct": false,
+          "rationale": "Site-to-Site VPN uses encrypted tunnels over the internet."
+        },
+        {
+          "text": "AWS Client VPN",
+          "correct": false,
+          "rationale": "Client VPN connects users over the internet."
+        },
+        {
+          "text": "A public HTTPS service endpoint",
+          "correct": false,
+          "rationale": "Public endpoints are reached over the internet."
+        },
+        {
+          "text": "AWS Direct Connect",
+          "correct": true,
+          "rationale": "Direct Connect uses a dedicated private connection."
+        }
+      ],
+      "explanation": "Direct Connect is for private, consistent connectivity; VPN is for quick, encrypted connectivity over the internet.",
+      "difficulty": 2,
+      "tags": [
+        "networking",
+        "direct-connect"
+      ],
+      "refs": [
+        "https://aws.amazon.com/directconnect/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.5-10",
+      "domain": "d3",
+      "objective": "3.5",
+      "type": "multi",
+      "stem": "Which TWO are components of an Amazon VPC? (Choose TWO.)",
+      "options": [
+        {
+          "text": "Amazon S3 buckets",
+          "correct": false,
+          "rationale": "S3 buckets are storage, not VPC components."
+        },
+        {
+          "text": "Route tables",
+          "correct": true,
+          "rationale": "Route tables decide where network traffic is directed."
+        },
+        {
+          "text": "IAM users",
+          "correct": false,
+          "rationale": "IAM users are identities, not network components."
+        },
+        {
+          "text": "Subnets",
+          "correct": true,
+          "rationale": "Subnets divide a VPC's IP address range, each in one Availability Zone."
+        },
+        {
+          "text": "Edge locations",
+          "correct": false,
+          "rationale": "Edge locations are part of the global infrastructure, not a VPC."
+        }
+      ],
+      "explanation": "VPC building blocks include subnets, route tables, internet gateways, NAT gateways, security groups and network ACLs.",
+      "difficulty": 1,
+      "tags": [
+        "networking",
+        "vpc"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    }
+  ]
+}

@@ -1,0 +1,487 @@
+{
+  "formatVersion": 1,
+  "questions": [
+    {
+      "id": "clf-c02-3.7-01",
+      "domain": "d3",
+      "objective": "3.7",
+      "type": "single",
+      "stem": "Which service helps data scientists and developers build, train and deploy machine learning models?",
+      "options": [
+        {
+          "text": "Amazon Lex",
+          "correct": false,
+          "rationale": "Lex builds conversational interfaces."
+        },
+        {
+          "text": "Amazon SageMaker",
+          "correct": true,
+          "rationale": "SageMaker provides tools to build, train and deploy ML models."
+        },
+        {
+          "text": "Amazon Kendra",
+          "correct": false,
+          "rationale": "Kendra is intelligent enterprise search."
+        },
+        {
+          "text": "Amazon QuickSight",
+          "correct": false,
+          "rationale": "QuickSight builds business intelligence dashboards."
+        }
+      ],
+      "explanation": "SageMaker is the service for building your own ML models; other AI services offer ready-made capabilities.",
+      "difficulty": 1,
+      "tags": [
+        "ai-ml",
+        "sagemaker"
+      ],
+      "refs": [
+        "https://aws.amazon.com/sagemaker/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.7-02",
+      "domain": "d3",
+      "objective": "3.7",
+      "type": "single",
+      "stem": "Which service builds conversational interfaces, such as chatbots, that understand voice and text?",
+      "options": [
+        {
+          "text": "Amazon Kendra",
+          "correct": false,
+          "rationale": "Kendra searches documents."
+        },
+        {
+          "text": "Amazon SageMaker",
+          "correct": false,
+          "rationale": "SageMaker is for building custom ML models."
+        },
+        {
+          "text": "Amazon Lex",
+          "correct": true,
+          "rationale": "Lex provides speech recognition and language understanding for chatbots."
+        },
+        {
+          "text": "Amazon Athena",
+          "correct": false,
+          "rationale": "Athena queries data in S3."
+        }
+      ],
+      "explanation": "Lex uses the same deep learning technology that powers Amazon Alexa.",
+      "difficulty": 1,
+      "tags": [
+        "ai-ml",
+        "lex"
+      ],
+      "refs": [
+        "https://aws.amazon.com/lex/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.7-03",
+      "domain": "d3",
+      "objective": "3.7",
+      "type": "single",
+      "stem": "Which service provides intelligent search across a company's documents and content repositories?",
+      "options": [
+        {
+          "text": "Amazon Lex",
+          "correct": false,
+          "rationale": "Lex builds chatbots."
+        },
+        {
+          "text": "Amazon Athena",
+          "correct": false,
+          "rationale": "Athena runs SQL on data in S3, not document search."
+        },
+        {
+          "text": "AWS Glue",
+          "correct": false,
+          "rationale": "Glue prepares data for analytics."
+        },
+        {
+          "text": "Amazon Kendra",
+          "correct": true,
+          "rationale": "Kendra is an intelligent enterprise search service."
+        }
+      ],
+      "explanation": "Kendra uses machine learning to return relevant answers from content in many sources.",
+      "difficulty": 2,
+      "tags": [
+        "ai-ml",
+        "kendra"
+      ],
+      "refs": [
+        "https://aws.amazon.com/kendra/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.7-04",
+      "domain": "d3",
+      "objective": "3.7",
+      "type": "single",
+      "stem": "Which service identifies objects, people and text in images and videos?",
+      "options": [
+        {
+          "text": "Amazon Rekognition",
+          "correct": true,
+          "rationale": "Rekognition offers image and video analysis."
+        },
+        {
+          "text": "Amazon Polly",
+          "correct": false,
+          "rationale": "Polly turns text into lifelike speech."
+        },
+        {
+          "text": "Amazon Transcribe",
+          "correct": false,
+          "rationale": "Transcribe converts speech to text."
+        },
+        {
+          "text": "Amazon Kendra",
+          "correct": false,
+          "rationale": "Kendra is document search."
+        }
+      ],
+      "explanation": "Rekognition adds computer vision to applications without building ML models.",
+      "difficulty": 1,
+      "tags": [
+        "ai-ml",
+        "rekognition"
+      ],
+      "refs": [
+        "https://aws.amazon.com/rekognition/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.7-05",
+      "domain": "d3",
+      "objective": "3.7",
+      "type": "single",
+      "stem": "Which service turns text into lifelike speech?",
+      "options": [
+        {
+          "text": "Amazon Transcribe",
+          "correct": false,
+          "rationale": "Transcribe does the reverse: speech to text."
+        },
+        {
+          "text": "Amazon Polly",
+          "correct": true,
+          "rationale": "Polly is a text-to-speech service."
+        },
+        {
+          "text": "Amazon Rekognition",
+          "correct": false,
+          "rationale": "Rekognition analyzes images and video."
+        },
+        {
+          "text": "Amazon Lex",
+          "correct": false,
+          "rationale": "Lex builds chatbots that understand language."
+        }
+      ],
+      "explanation": "Polly speaks text; Transcribe writes down speech.",
+      "difficulty": 1,
+      "tags": [
+        "ai-ml",
+        "polly"
+      ],
+      "refs": [
+        "https://aws.amazon.com/polly/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.7-06",
+      "domain": "d3",
+      "objective": "3.7",
+      "type": "single",
+      "stem": "A company wants to convert recordings of customer phone calls into text. Which service should it use?",
+      "options": [
+        {
+          "text": "Amazon Polly",
+          "correct": false,
+          "rationale": "Polly converts text into speech."
+        },
+        {
+          "text": "Amazon Rekognition",
+          "correct": false,
+          "rationale": "Rekognition analyzes images and video."
+        },
+        {
+          "text": "Amazon Transcribe",
+          "correct": true,
+          "rationale": "Transcribe uses automatic speech recognition to convert speech to text."
+        },
+        {
+          "text": "Amazon QuickSight",
+          "correct": false,
+          "rationale": "QuickSight builds dashboards."
+        }
+      ],
+      "explanation": "Transcribe is often used for call analytics, captions and meeting notes.",
+      "difficulty": 1,
+      "tags": [
+        "ai-ml",
+        "transcribe"
+      ],
+      "refs": [
+        "https://aws.amazon.com/transcribe/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.7-07",
+      "domain": "d3",
+      "objective": "3.7",
+      "type": "single",
+      "stem": "Which service lets analysts run SQL queries directly on data stored in Amazon S3 without loading it into a database?",
+      "options": [
+        {
+          "text": "Amazon Kinesis",
+          "correct": false,
+          "rationale": "Kinesis processes streaming data."
+        },
+        {
+          "text": "AWS Glue",
+          "correct": false,
+          "rationale": "Glue catalogs and transforms data; Athena can then query it."
+        },
+        {
+          "text": "Amazon QuickSight",
+          "correct": false,
+          "rationale": "QuickSight visualizes data."
+        },
+        {
+          "text": "Amazon Athena",
+          "correct": true,
+          "rationale": "Athena is a serverless, interactive query service for data in S3."
+        }
+      ],
+      "explanation": "With Athena you pay for the data each query scans.",
+      "difficulty": 1,
+      "tags": [
+        "analytics",
+        "athena"
+      ],
+      "refs": [
+        "https://aws.amazon.com/athena/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.7-08",
+      "domain": "d3",
+      "objective": "3.7",
+      "type": "single",
+      "stem": "Which service collects and processes streaming data, such as website clickstreams, in real time?",
+      "options": [
+        {
+          "text": "Amazon Kinesis",
+          "correct": true,
+          "rationale": "Kinesis captures, processes and analyzes real-time streaming data."
+        },
+        {
+          "text": "Amazon Athena",
+          "correct": false,
+          "rationale": "Athena queries data at rest in S3."
+        },
+        {
+          "text": "AWS Glue",
+          "correct": false,
+          "rationale": "Glue runs data preparation and ETL jobs."
+        },
+        {
+          "text": "Amazon QuickSight",
+          "correct": false,
+          "rationale": "QuickSight builds dashboards."
+        }
+      ],
+      "explanation": "Kinesis is for data in motion; Athena is for data at rest in S3.",
+      "difficulty": 1,
+      "tags": [
+        "analytics",
+        "kinesis",
+        "streaming"
+      ],
+      "refs": [
+        "https://aws.amazon.com/kinesis/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.7-09",
+      "domain": "d3",
+      "objective": "3.7",
+      "type": "single",
+      "stem": "Which serverless service discovers, prepares and combines data for analytics, including extract, transform and load (ETL) jobs?",
+      "options": [
+        {
+          "text": "Amazon Kinesis",
+          "correct": false,
+          "rationale": "Kinesis handles streaming data."
+        },
+        {
+          "text": "AWS Glue",
+          "correct": true,
+          "rationale": "Glue is a serverless data integration service with a data catalog and ETL."
+        },
+        {
+          "text": "Amazon Athena",
+          "correct": false,
+          "rationale": "Athena queries data; it does not run ETL pipelines."
+        },
+        {
+          "text": "Amazon Lex",
+          "correct": false,
+          "rationale": "Lex builds chatbots."
+        }
+      ],
+      "explanation": "The Glue Data Catalog is often the metadata store that Athena queries use.",
+      "difficulty": 2,
+      "tags": [
+        "analytics",
+        "glue",
+        "etl"
+      ],
+      "refs": [
+        "https://aws.amazon.com/glue/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.7-10",
+      "domain": "d3",
+      "objective": "3.7",
+      "type": "single",
+      "stem": "Which service creates interactive dashboards and business intelligence visualizations?",
+      "options": [
+        {
+          "text": "Amazon Athena",
+          "correct": false,
+          "rationale": "Athena runs queries but does not build dashboards."
+        },
+        {
+          "text": "AWS Glue",
+          "correct": false,
+          "rationale": "Glue prepares data."
+        },
+        {
+          "text": "Amazon QuickSight",
+          "correct": true,
+          "rationale": "QuickSight is a business intelligence service for dashboards and reports."
+        },
+        {
+          "text": "Amazon SageMaker",
+          "correct": false,
+          "rationale": "SageMaker builds ML models."
+        }
+      ],
+      "explanation": "A common analytics path: Kinesis or Glue bring data in, Athena queries it, QuickSight visualizes it.",
+      "difficulty": 1,
+      "tags": [
+        "analytics",
+        "quicksight"
+      ],
+      "refs": [
+        "https://aws.amazon.com/quicksight/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.7-11",
+      "domain": "d3",
+      "objective": "3.7",
+      "type": "multi",
+      "stem": "Which TWO are analytics services? (Choose TWO.)",
+      "options": [
+        {
+          "text": "Amazon Lex",
+          "correct": false,
+          "rationale": "Lex is an AI service for chatbots."
+        },
+        {
+          "text": "Amazon Rekognition",
+          "correct": false,
+          "rationale": "Rekognition is an AI service for image analysis."
+        },
+        {
+          "text": "Amazon QuickSight",
+          "correct": true,
+          "rationale": "QuickSight provides business intelligence dashboards."
+        },
+        {
+          "text": "Amazon Polly",
+          "correct": false,
+          "rationale": "Polly is an AI service for text to speech."
+        },
+        {
+          "text": "Amazon Athena",
+          "correct": true,
+          "rationale": "Athena queries data in S3 with SQL."
+        }
+      ],
+      "explanation": "Analytics services in scope include Athena, Kinesis, Glue, QuickSight, Redshift and EMR.",
+      "difficulty": 1,
+      "tags": [
+        "analytics",
+        "athena",
+        "quicksight"
+      ],
+      "refs": [
+        "https://aws.amazon.com/athena/",
+        "https://aws.amazon.com/quicksight/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    }
+  ]
+}

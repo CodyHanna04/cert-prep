@@ -246,7 +246,7 @@
           "rationale": "Shield protects against DDoS attacks."
         }
       ],
-      "explanation": "Trusted Advisor inspects your environment and recommends improvements across security, cost, performance, fault tolerance and service limits.",
+      "explanation": "Trusted Advisor inspects your environment and recommends improvements in categories including cost optimization, performance, resilience, security, operational excellence and service limits.",
       "difficulty": 2,
       "tags": [
         "security-resources",
@@ -289,7 +289,7 @@
           "rationale": "Cost Explorer analyzes spending."
         }
       ],
-      "explanation": "AWS security information is found in the Knowledge Center, the AWS Security Center and the AWS Security Blog.",
+      "explanation": "AWS security information is found in the Knowledge Center, the AWS security website (aws.amazon.com/security) and the AWS Security Blog.",
       "difficulty": 1,
       "tags": [
         "security-resources",
@@ -332,7 +332,7 @@
           "rationale": "The AWS Security Blog publishes security guidance, announcements and how-to posts."
         }
       ],
-      "explanation": "The AWS Security Blog is one of the main sources of security information along with the Knowledge Center and the AWS Security Center.",
+      "explanation": "The AWS Security Blog is one of the main sources of security information, along with the Knowledge Center and the AWS security website.",
       "difficulty": 1,
       "tags": [
         "security-resources",

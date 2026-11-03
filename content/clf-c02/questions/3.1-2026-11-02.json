@@ -1,0 +1,443 @@
+{
+  "formatVersion": 1,
+  "questions": [
+    {
+      "id": "clf-c02-3.1-01",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "single",
+      "stem": "Which tool lets users manage AWS services through a web-based user interface?",
+      "options": [
+        {
+          "text": "AWS Command Line Interface (AWS CLI)",
+          "correct": false,
+          "rationale": "The CLI is a command-line tool, not a web interface."
+        },
+        {
+          "text": "AWS SDKs",
+          "correct": false,
+          "rationale": "SDKs are libraries for calling AWS from code."
+        },
+        {
+          "text": "AWS CloudFormation",
+          "correct": false,
+          "rationale": "CloudFormation provisions resources from templates."
+        },
+        {
+          "text": "AWS Management Console",
+          "correct": true,
+          "rationale": "The Management Console is the browser-based interface for AWS."
+        }
+      ],
+      "explanation": "Ways to access AWS: the Management Console (web), the AWS CLI (command line), AWS SDKs (code) and infrastructure as code.",
+      "difficulty": 1,
+      "tags": [
+        "access",
+        "console"
+      ],
+      "refs": [
+        "https://aws.amazon.com/console/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.1-02",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "single",
+      "stem": "Which option lets developers call AWS services directly from application code written in languages such as Python or Java?",
+      "options": [
+        {
+          "text": "AWS SDKs",
+          "correct": true,
+          "rationale": "AWS SDKs provide language-specific libraries for AWS APIs."
+        },
+        {
+          "text": "AWS Management Console",
+          "correct": false,
+          "rationale": "The console is used interactively in a browser."
+        },
+        {
+          "text": "AWS Direct Connect",
+          "correct": false,
+          "rationale": "Direct Connect is a dedicated network connection."
+        },
+        {
+          "text": "AWS Artifact",
+          "correct": false,
+          "rationale": "Artifact provides compliance reports."
+        }
+      ],
+      "explanation": "SDKs wrap the AWS APIs so applications can use AWS services programmatically.",
+      "difficulty": 1,
+      "tags": [
+        "access",
+        "sdk",
+        "api"
+      ],
+      "refs": [
+        "https://aws.amazon.com/developer/tools/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.1-03",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "single",
+      "stem": "A system administrator wants to automate routine AWS tasks with scripts run from a terminal. Which tool fits best?",
+      "options": [
+        {
+          "text": "AWS Management Console",
+          "correct": false,
+          "rationale": "The console is interactive and not suited to scripting."
+        },
+        {
+          "text": "AWS Command Line Interface (AWS CLI)",
+          "correct": true,
+          "rationale": "The AWS CLI controls AWS services from the command line and scripts."
+        },
+        {
+          "text": "Amazon WorkSpaces",
+          "correct": false,
+          "rationale": "WorkSpaces provides virtual desktops."
+        },
+        {
+          "text": "AWS Marketplace",
+          "correct": false,
+          "rationale": "Marketplace is a software catalog."
+        }
+      ],
+      "explanation": "The AWS CLI is a unified tool for managing AWS services from a terminal and automating them through scripts.",
+      "difficulty": 1,
+      "tags": [
+        "access",
+        "cli"
+      ],
+      "refs": [
+        "https://aws.amazon.com/cli/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.1-04",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "single",
+      "stem": "What is infrastructure as code?",
+      "options": [
+        {
+          "text": "Writing application code that runs on virtual servers",
+          "correct": false,
+          "rationale": "That is ordinary application development."
+        },
+        {
+          "text": "Storing application source code in Amazon S3 buckets",
+          "correct": false,
+          "rationale": "Where code is stored does not make it infrastructure as code."
+        },
+        {
+          "text": "Defining infrastructure in templates or code so it can be provisioned repeatably",
+          "correct": true,
+          "rationale": "Infrastructure as code treats infrastructure definitions like software: versioned, reviewed and repeatable."
+        },
+        {
+          "text": "Configuring each resource by hand in the AWS Management Console",
+          "correct": false,
+          "rationale": "Manual configuration is the opposite of infrastructure as code."
+        }
+      ],
+      "explanation": "AWS CloudFormation is AWS's infrastructure as code service.",
+      "difficulty": 1,
+      "tags": [
+        "iac",
+        "cloudformation"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/whitepapers/latest/introduction-devops-aws/infrastructure-as-code.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.1-05",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "single",
+      "stem": "A team must create identical development, test and production environments many times a year. Which approach is most suitable?",
+      "options": [
+        {
+          "text": "Click through the AWS Management Console for each environment",
+          "correct": false,
+          "rationale": "Manual steps are slow and error-prone for repeated work."
+        },
+        {
+          "text": "Copy settings from a spreadsheet by hand each time",
+          "correct": false,
+          "rationale": "Manual copying invites drift between environments."
+        },
+        {
+          "text": "Ask AWS Support to build each environment",
+          "correct": false,
+          "rationale": "AWS Support does not build customer environments."
+        },
+        {
+          "text": "Use infrastructure as code templates, such as AWS CloudFormation",
+          "correct": true,
+          "rationale": "Templates create the same environment every time, which suits repeatable processes."
+        }
+      ],
+      "explanation": "One-time operations can be done by hand; repeatable processes should be automated with infrastructure as code.",
+      "difficulty": 2,
+      "tags": [
+        "iac",
+        "cloudformation",
+        "automation"
+      ],
+      "refs": [
+        "https://aws.amazon.com/cloudformation/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.1-06",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "single",
+      "stem": "A company keeps some workloads in its own data center and connects them to workloads running on AWS. Which deployment model is this?",
+      "options": [
+        {
+          "text": "Hybrid",
+          "correct": true,
+          "rationale": "A hybrid deployment connects on-premises infrastructure with cloud resources."
+        },
+        {
+          "text": "Cloud (all-in)",
+          "correct": false,
+          "rationale": "An all-in cloud deployment runs everything in the cloud."
+        },
+        {
+          "text": "On-premises (private cloud)",
+          "correct": false,
+          "rationale": "On-premises deployments run everything in the company's own data center."
+        },
+        {
+          "text": "Multi-Region",
+          "correct": false,
+          "rationale": "Multi-Region describes where cloud workloads run, not the deployment model."
+        }
+      ],
+      "explanation": "The three deployment models are cloud, hybrid and on-premises (also called private cloud).",
+      "difficulty": 1,
+      "tags": [
+        "deployment-models",
+        "hybrid"
+      ],
+      "refs": [
+        "https://aws.amazon.com/types-of-cloud-computing/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.1-07",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "single",
+      "stem": "A startup runs every one of its applications on AWS and owns no data center. Which deployment model is this?",
+      "options": [
+        {
+          "text": "Hybrid",
+          "correct": false,
+          "rationale": "Hybrid mixes on-premises and cloud."
+        },
+        {
+          "text": "Cloud",
+          "correct": true,
+          "rationale": "A cloud-based deployment runs all parts of the application in the cloud."
+        },
+        {
+          "text": "On-premises",
+          "correct": false,
+          "rationale": "On-premises means running in the company's own data center."
+        },
+        {
+          "text": "Colocation",
+          "correct": false,
+          "rationale": "Colocation is renting space in a third-party data center for your own hardware."
+        }
+      ],
+      "explanation": "Cloud deployments can be built entirely on cloud-native services or migrated from existing infrastructure.",
+      "difficulty": 1,
+      "tags": [
+        "deployment-models"
+      ],
+      "refs": [
+        "https://aws.amazon.com/types-of-cloud-computing/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.1-08",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "single",
+      "stem": "Which option creates an encrypted connection between an on-premises network and an Amazon VPC over the public internet?",
+      "options": [
+        {
+          "text": "AWS Direct Connect",
+          "correct": false,
+          "rationale": "Direct Connect is a dedicated private connection that does not use the public internet."
+        },
+        {
+          "text": "Amazon CloudFront",
+          "correct": false,
+          "rationale": "CloudFront is a content delivery network."
+        },
+        {
+          "text": "AWS Site-to-Site VPN",
+          "correct": true,
+          "rationale": "Site-to-Site VPN creates encrypted IPsec tunnels over the internet."
+        },
+        {
+          "text": "AWS Global Accelerator",
+          "correct": false,
+          "rationale": "Global Accelerator routes user traffic to applications over the AWS network."
+        }
+      ],
+      "explanation": "Connectivity options: the public internet, AWS VPN (encrypted over the internet) and AWS Direct Connect (dedicated private link).",
+      "difficulty": 2,
+      "tags": [
+        "connectivity",
+        "vpn"
+      ],
+      "refs": [
+        "https://aws.amazon.com/vpn/site-to-site-vpn/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.1-09",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "single",
+      "stem": "A company needs a dedicated private network connection from its data center to AWS with consistent network performance. Which service should it use?",
+      "options": [
+        {
+          "text": "AWS Site-to-Site VPN",
+          "correct": false,
+          "rationale": "A VPN runs over the public internet, so performance can vary."
+        },
+        {
+          "text": "Amazon Route 53",
+          "correct": false,
+          "rationale": "Route 53 is a DNS service."
+        },
+        {
+          "text": "Amazon CloudFront",
+          "correct": false,
+          "rationale": "CloudFront delivers content to end users."
+        },
+        {
+          "text": "AWS Direct Connect",
+          "correct": true,
+          "rationale": "Direct Connect provides a dedicated network connection that bypasses the public internet."
+        }
+      ],
+      "explanation": "Direct Connect is chosen for consistent performance, high bandwidth or keeping traffic off the internet.",
+      "difficulty": 2,
+      "tags": [
+        "connectivity",
+        "direct-connect"
+      ],
+      "refs": [
+        "https://aws.amazon.com/directconnect/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.1-10",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "multi",
+      "stem": "Which TWO are ways to access and manage AWS services programmatically? (Choose TWO.)",
+      "options": [
+        {
+          "text": "Amazon WorkSpaces",
+          "correct": false,
+          "rationale": "WorkSpaces provides virtual desktops."
+        },
+        {
+          "text": "AWS SDKs",
+          "correct": true,
+          "rationale": "SDKs call AWS APIs from application code."
+        },
+        {
+          "text": "AWS Marketplace",
+          "correct": false,
+          "rationale": "Marketplace is a software catalog."
+        },
+        {
+          "text": "AWS Command Line Interface (AWS CLI)",
+          "correct": true,
+          "rationale": "The CLI sends API requests from a terminal or script."
+        },
+        {
+          "text": "AWS Artifact",
+          "correct": false,
+          "rationale": "Artifact provides compliance documents."
+        }
+      ],
+      "explanation": "Programmatic access means using AWS APIs, directly or through the CLI and SDKs.",
+      "difficulty": 1,
+      "tags": [
+        "access",
+        "cli",
+        "sdk"
+      ],
+      "refs": [
+        "https://aws.amazon.com/cli/",
+        "https://aws.amazon.com/developer/tools/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    }
+  ]
+}

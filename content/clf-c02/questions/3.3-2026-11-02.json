@@ -1,0 +1,444 @@
+{
+  "formatVersion": 1,
+  "questions": [
+    {
+      "id": "clf-c02-3.3-01",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "single",
+      "stem": "A company runs batch processing jobs that need high-performance processors. Which Amazon EC2 instance type is the best fit?",
+      "options": [
+        {
+          "text": "Storage optimized",
+          "correct": false,
+          "rationale": "Storage optimized instances are for high local storage throughput."
+        },
+        {
+          "text": "Compute optimized",
+          "correct": true,
+          "rationale": "Compute optimized instances suit compute-bound workloads such as batch processing and scientific modeling."
+        },
+        {
+          "text": "Memory optimized",
+          "correct": false,
+          "rationale": "Memory optimized instances are for large in-memory data sets."
+        },
+        {
+          "text": "Accelerated computing",
+          "correct": false,
+          "rationale": "Accelerated computing instances use hardware accelerators such as GPUs."
+        }
+      ],
+      "explanation": "EC2 instance families: general purpose, compute optimized, memory optimized, accelerated computing, storage optimized and HPC optimized.",
+      "difficulty": 1,
+      "tags": [
+        "ec2",
+        "instance-types"
+      ],
+      "refs": [
+        "https://aws.amazon.com/ec2/instance-types/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.3-02",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "single",
+      "stem": "Which Amazon EC2 instance type is designed for workloads that process large data sets in memory, such as in-memory databases?",
+      "options": [
+        {
+          "text": "Compute optimized",
+          "correct": false,
+          "rationale": "Compute optimized instances focus on processor performance."
+        },
+        {
+          "text": "Storage optimized",
+          "correct": false,
+          "rationale": "Storage optimized instances focus on local disk throughput."
+        },
+        {
+          "text": "Memory optimized",
+          "correct": true,
+          "rationale": "Memory optimized instances deliver fast performance for workloads that process large data sets in memory."
+        },
+        {
+          "text": "General purpose",
+          "correct": false,
+          "rationale": "General purpose instances balance compute, memory and networking."
+        }
+      ],
+      "explanation": "Match the instance family to the bottleneck: CPU, memory, storage or accelerators.",
+      "difficulty": 1,
+      "tags": [
+        "ec2",
+        "instance-types"
+      ],
+      "refs": [
+        "https://aws.amazon.com/ec2/instance-types/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.3-03",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "single",
+      "stem": "Which Amazon EC2 instance type is designed for workloads that need high, sequential read and write access to very large data sets on local storage?",
+      "options": [
+        {
+          "text": "Memory optimized",
+          "correct": false,
+          "rationale": "Memory optimized instances focus on RAM."
+        },
+        {
+          "text": "Compute optimized",
+          "correct": false,
+          "rationale": "Compute optimized instances focus on CPU."
+        },
+        {
+          "text": "General purpose",
+          "correct": false,
+          "rationale": "General purpose instances are balanced, not storage-focused."
+        },
+        {
+          "text": "Storage optimized",
+          "correct": true,
+          "rationale": "Storage optimized instances deliver many low-latency random I/O operations per second for local storage."
+        }
+      ],
+      "explanation": "Storage optimized instances suit data warehousing, log processing and distributed file systems.",
+      "difficulty": 2,
+      "tags": [
+        "ec2",
+        "instance-types"
+      ],
+      "refs": [
+        "https://aws.amazon.com/ec2/instance-types/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.3-04",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "single",
+      "stem": "Which service runs code in response to events without provisioning or managing servers, and charges for the compute time used?",
+      "options": [
+        {
+          "text": "AWS Lambda",
+          "correct": true,
+          "rationale": "Lambda runs code on demand, scales automatically and bills for the compute time consumed."
+        },
+        {
+          "text": "Amazon EC2",
+          "correct": false,
+          "rationale": "EC2 requires you to provision and manage instances."
+        },
+        {
+          "text": "Amazon Elastic Kubernetes Service (Amazon EKS)",
+          "correct": false,
+          "rationale": "EKS runs Kubernetes clusters for containers."
+        },
+        {
+          "text": "Amazon Lightsail",
+          "correct": false,
+          "rationale": "Lightsail provides virtual private servers."
+        }
+      ],
+      "explanation": "Lambda is serverless compute: no servers to manage, automatic scaling and pay per use.",
+      "difficulty": 1,
+      "tags": [
+        "serverless",
+        "lambda"
+      ],
+      "refs": [
+        "https://aws.amazon.com/lambda/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.3-05",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "single",
+      "stem": "Which service lets a company run containers without managing the servers or clusters of Amazon EC2 instances underneath?",
+      "options": [
+        {
+          "text": "Amazon EC2 Auto Scaling",
+          "correct": false,
+          "rationale": "Auto Scaling adjusts the number of EC2 instances you still manage."
+        },
+        {
+          "text": "AWS Fargate",
+          "correct": true,
+          "rationale": "Fargate is a serverless compute engine for containers that works with Amazon ECS and Amazon EKS."
+        },
+        {
+          "text": "Amazon Elastic Block Store (Amazon EBS)",
+          "correct": false,
+          "rationale": "EBS provides block storage."
+        },
+        {
+          "text": "Amazon Lightsail",
+          "correct": false,
+          "rationale": "Lightsail provides virtual private servers that you manage."
+        }
+      ],
+      "explanation": "With Fargate you define the container and its resources, and AWS runs the infrastructure.",
+      "difficulty": 2,
+      "tags": [
+        "serverless",
+        "containers",
+        "fargate"
+      ],
+      "refs": [
+        "https://aws.amazon.com/fargate/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.3-06",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "single",
+      "stem": "A company already uses Kubernetes and wants a managed Kubernetes service on AWS. Which service should it choose?",
+      "options": [
+        {
+          "text": "Amazon Elastic Container Service (Amazon ECS)",
+          "correct": false,
+          "rationale": "ECS is AWS's own container orchestrator, not Kubernetes."
+        },
+        {
+          "text": "AWS Lambda",
+          "correct": false,
+          "rationale": "Lambda runs functions, not Kubernetes clusters."
+        },
+        {
+          "text": "Amazon Elastic Kubernetes Service (Amazon EKS)",
+          "correct": true,
+          "rationale": "EKS is the managed Kubernetes service on AWS."
+        },
+        {
+          "text": "Amazon EC2 Auto Scaling",
+          "correct": false,
+          "rationale": "Auto Scaling adjusts instance counts; it is not a Kubernetes service."
+        }
+      ],
+      "explanation": "Containers on AWS: Amazon ECS (AWS orchestration), Amazon EKS (Kubernetes), and AWS Fargate as a serverless engine for both.",
+      "difficulty": 1,
+      "tags": [
+        "containers",
+        "eks"
+      ],
+      "refs": [
+        "https://aws.amazon.com/eks/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.3-07",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "single",
+      "stem": "Which feature automatically adds or removes Amazon EC2 instances as demand changes?",
+      "options": [
+        {
+          "text": "Elastic Load Balancing",
+          "correct": false,
+          "rationale": "Load balancers spread traffic but do not add or remove instances."
+        },
+        {
+          "text": "Amazon CloudFront",
+          "correct": false,
+          "rationale": "CloudFront caches content at edge locations."
+        },
+        {
+          "text": "AWS Config",
+          "correct": false,
+          "rationale": "AWS Config records configuration changes."
+        },
+        {
+          "text": "Amazon EC2 Auto Scaling",
+          "correct": true,
+          "rationale": "Auto Scaling adjusts the number of instances to match demand, which provides elasticity."
+        }
+      ],
+      "explanation": "Auto Scaling and load balancing work together: Auto Scaling sets capacity and the load balancer distributes traffic across it.",
+      "difficulty": 1,
+      "tags": [
+        "ec2",
+        "auto-scaling",
+        "elasticity"
+      ],
+      "refs": [
+        "https://aws.amazon.com/ec2/autoscaling/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.3-08",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "single",
+      "stem": "What is the main purpose of Elastic Load Balancing?",
+      "options": [
+        {
+          "text": "Distributing incoming traffic across multiple targets such as EC2 instances",
+          "correct": true,
+          "rationale": "Load balancers spread requests across healthy targets in one or more Availability Zones."
+        },
+        {
+          "text": "Adding instances when demand rises",
+          "correct": false,
+          "rationale": "That is the job of Auto Scaling."
+        },
+        {
+          "text": "Caching static content at edge locations",
+          "correct": false,
+          "rationale": "That describes Amazon CloudFront."
+        },
+        {
+          "text": "Encrypting data on Amazon EBS volumes",
+          "correct": false,
+          "rationale": "Encryption is a storage feature."
+        }
+      ],
+      "explanation": "Elastic Load Balancing improves availability by sending traffic only to healthy targets.",
+      "difficulty": 1,
+      "tags": [
+        "load-balancing",
+        "elb"
+      ],
+      "refs": [
+        "https://aws.amazon.com/elasticloadbalancing/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.3-09",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "single",
+      "stem": "A company needs full control of the operating system on its application servers. Which compute service should it use?",
+      "options": [
+        {
+          "text": "AWS Lambda",
+          "correct": false,
+          "rationale": "With Lambda, AWS manages the operating system."
+        },
+        {
+          "text": "Amazon EC2",
+          "correct": true,
+          "rationale": "EC2 gives you control of the instance's operating system and software."
+        },
+        {
+          "text": "AWS Fargate",
+          "correct": false,
+          "rationale": "With Fargate, AWS manages the servers that run containers."
+        },
+        {
+          "text": "Amazon Athena",
+          "correct": false,
+          "rationale": "Athena is a query service, not a compute platform."
+        }
+      ],
+      "explanation": "The more control you need over the operating system, the more you lean toward EC2; the less you want to manage, the more you lean toward serverless.",
+      "difficulty": 2,
+      "tags": [
+        "ec2",
+        "compute"
+      ],
+      "refs": [
+        "https://aws.amazon.com/ec2/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.3-10",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "multi",
+      "stem": "Which TWO are serverless compute options on AWS? (Choose TWO.)",
+      "options": [
+        {
+          "text": "Amazon Elastic Block Store (Amazon EBS)",
+          "correct": false,
+          "rationale": "EBS is block storage, not compute."
+        },
+        {
+          "text": "AWS Fargate",
+          "correct": true,
+          "rationale": "Fargate runs containers without servers to manage."
+        },
+        {
+          "text": "Amazon EC2 Dedicated Hosts",
+          "correct": false,
+          "rationale": "Dedicated Hosts are physical servers dedicated to you."
+        },
+        {
+          "text": "AWS Lambda",
+          "correct": true,
+          "rationale": "Lambda runs functions without servers to manage."
+        },
+        {
+          "text": "Amazon EC2 On-Demand Instances",
+          "correct": false,
+          "rationale": "EC2 instances are servers you manage."
+        }
+      ],
+      "explanation": "Serverless means AWS provisions, scales and manages the underlying infrastructure.",
+      "difficulty": 1,
+      "tags": [
+        "serverless",
+        "lambda",
+        "fargate"
+      ],
+      "refs": [
+        "https://aws.amazon.com/lambda/",
+        "https://aws.amazon.com/fargate/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    }
+  ]
+}

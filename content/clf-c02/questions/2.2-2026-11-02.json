@@ -36,7 +36,7 @@
         "artifact"
       ],
       "refs": [
-        "https://aws.amazon.com/artifact/"
+        "https://docs.aws.amazon.com/artifact/latest/ug/what-is-aws-artifact.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "draft",
@@ -49,38 +49,38 @@
       "domain": "d2",
       "objective": "2.2",
       "type": "single",
-      "stem": "A company wants to continuously collect evidence about how its own AWS resources are used, mapped to an industry framework, to prepare for audits. Which service should it use?",
+      "stem": "A company must keep a long-term record of all AWS API activity in its account for security investigations. Where should it have AWS CloudTrail deliver its log files?",
       "options": [
+        {
+          "text": "An Amazon EBS volume attached to one instance",
+          "correct": false,
+          "rationale": "CloudTrail does not write trails to EBS volumes."
+        },
         {
           "text": "AWS Artifact",
           "correct": false,
-          "rationale": "Artifact provides AWS's own compliance reports, not evidence about your usage."
+          "rationale": "Artifact provides AWS compliance reports; it does not store your logs."
         },
         {
-          "text": "AWS CloudTrail",
+          "text": "Amazon Route 53",
           "correct": false,
-          "rationale": "CloudTrail records API activity, which can be evidence, but it does not map evidence to frameworks."
+          "rationale": "Route 53 is a DNS service."
         },
         {
-          "text": "AWS Security Hub",
-          "correct": false,
-          "rationale": "Security Hub aggregates security findings and runs best-practice checks."
-        },
-        {
-          "text": "AWS Audit Manager",
+          "text": "An Amazon S3 bucket",
           "correct": true,
-          "rationale": "Audit Manager automates evidence collection and maps it to frameworks to simplify audit preparation."
+          "rationale": "A CloudTrail trail delivers log files to an S3 bucket for long-term storage and analysis."
         }
       ],
-      "explanation": "AWS Artifact covers AWS's compliance; AWS Audit Manager helps you assess your own compliance.",
+      "explanation": "Security-related logs such as CloudTrail trails are kept in Amazon S3 (and can also be sent to Amazon CloudWatch Logs) so they can be retained and analyzed.",
       "difficulty": 2,
       "tags": [
-        "compliance",
-        "audit-manager"
+        "governance",
+        "cloudtrail",
+        "logging"
       ],
       "refs": [
-        "https://aws.amazon.com/audit-manager/",
-        "https://aws.amazon.com/artifact/"
+        "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/how-cloudtrail-works.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "draft",
@@ -334,7 +334,7 @@
           "rationale": "Audit Manager collects audit evidence."
         }
       ],
-      "explanation": "Shield Standard protects every AWS customer from common network and transport layer DDoS attacks; Shield Advanced adds more protection and support.",
+      "explanation": "AWS Shield Standard is applied automatically to all AWS customers at no extra cost; Shield Advanced adds more protection, visibility and DDoS response support.",
       "difficulty": 1,
       "tags": [
         "security-services",
@@ -342,7 +342,7 @@
         "ddos"
       ],
       "refs": [
-        "https://aws.amazon.com/shield/"
+        "https://docs.aws.amazon.com/waf/latest/developerguide/ddos-overview.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "draft",
@@ -385,7 +385,7 @@
         "security-hub"
       ],
       "refs": [
-        "https://aws.amazon.com/security-hub/"
+        "https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "draft",

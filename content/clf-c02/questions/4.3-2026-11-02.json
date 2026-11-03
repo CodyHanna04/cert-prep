@@ -1,0 +1,485 @@
+{
+  "formatVersion": 1,
+  "questions": [
+    {
+      "id": "clf-c02-4.3-01",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "single",
+      "stem": "Which AWS Support plan is included for every AWS customer at no additional cost?",
+      "options": [
+        {
+          "text": "Developer Support",
+          "correct": false,
+          "rationale": "Developer Support is a paid plan."
+        },
+        {
+          "text": "Business Support",
+          "correct": false,
+          "rationale": "Business Support is a paid plan."
+        },
+        {
+          "text": "Enterprise On-Ramp Support",
+          "correct": false,
+          "rationale": "Enterprise On-Ramp is a paid plan."
+        },
+        {
+          "text": "Basic Support",
+          "correct": true,
+          "rationale": "Basic Support is included for all customers and covers account and billing questions and documentation."
+        }
+      ],
+      "explanation": "Paid plans add technical support and more Trusted Advisor checks.",
+      "difficulty": 1,
+      "tags": [
+        "support",
+        "support-plans"
+      ],
+      "refs": [
+        "https://aws.amazon.com/premiumsupport/plans/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-4.3-02",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "single",
+      "stem": "Which AWS Support plan includes a designated Technical Account Manager (TAM)?",
+      "options": [
+        {
+          "text": "Enterprise Support",
+          "correct": true,
+          "rationale": "Enterprise Support includes a designated TAM."
+        },
+        {
+          "text": "Business Support",
+          "correct": false,
+          "rationale": "Business Support does not include a TAM."
+        },
+        {
+          "text": "Developer Support",
+          "correct": false,
+          "rationale": "Developer Support does not include a TAM."
+        },
+        {
+          "text": "Basic Support",
+          "correct": false,
+          "rationale": "Basic Support does not include technical support."
+        }
+      ],
+      "explanation": "Enterprise On-Ramp provides access to a pool of TAMs; Enterprise provides a designated TAM.",
+      "difficulty": 2,
+      "tags": [
+        "support",
+        "support-plans",
+        "tam"
+      ],
+      "refs": [
+        "https://aws.amazon.com/premiumsupport/plans/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-4.3-03",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "single",
+      "stem": "Which is the lowest-cost AWS Support plan that provides 24/7 phone, email and chat access to Cloud Support Engineers?",
+      "options": [
+        {
+          "text": "Developer Support",
+          "correct": false,
+          "rationale": "Developer Support offers email access during business hours."
+        },
+        {
+          "text": "Business Support",
+          "correct": true,
+          "rationale": "Business Support adds 24/7 access to Cloud Support Engineers by phone, email and chat."
+        },
+        {
+          "text": "Enterprise On-Ramp Support",
+          "correct": false,
+          "rationale": "Enterprise On-Ramp also has 24/7 access but costs more."
+        },
+        {
+          "text": "Basic Support",
+          "correct": false,
+          "rationale": "Basic Support does not include technical support cases."
+        }
+      ],
+      "explanation": "Developer is for experimenting, Business for production workloads, Enterprise On-Ramp and Enterprise for business-critical workloads.",
+      "difficulty": 2,
+      "tags": [
+        "support",
+        "support-plans"
+      ],
+      "refs": [
+        "https://aws.amazon.com/premiumsupport/plans/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-4.3-04",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "single",
+      "stem": "Which service recommends ways to reduce cost, improve performance and close security gaps, based on AWS best practices?",
+      "options": [
+        {
+          "text": "AWS Health Dashboard",
+          "correct": false,
+          "rationale": "The Health Dashboard reports AWS service events."
+        },
+        {
+          "text": "AWS Artifact",
+          "correct": false,
+          "rationale": "Artifact provides compliance reports."
+        },
+        {
+          "text": "AWS Trusted Advisor",
+          "correct": true,
+          "rationale": "Trusted Advisor inspects your account and makes best-practice recommendations."
+        },
+        {
+          "text": "AWS Marketplace",
+          "correct": false,
+          "rationale": "Marketplace is a software catalog."
+        }
+      ],
+      "explanation": "The full set of Trusted Advisor checks comes with Business Support and higher.",
+      "difficulty": 1,
+      "tags": [
+        "support",
+        "trusted-advisor"
+      ],
+      "refs": [
+        "https://aws.amazon.com/premiumsupport/technology/trusted-advisor/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-4.3-05",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "single",
+      "stem": "Where can a customer see AWS events that might affect its own resources, such as scheduled maintenance or a service issue in its Region?",
+      "options": [
+        {
+          "text": "AWS Trusted Advisor",
+          "correct": false,
+          "rationale": "Trusted Advisor gives best-practice recommendations."
+        },
+        {
+          "text": "AWS CloudTrail",
+          "correct": false,
+          "rationale": "CloudTrail records API calls."
+        },
+        {
+          "text": "AWS Cost Explorer",
+          "correct": false,
+          "rationale": "Cost Explorer analyzes spending."
+        },
+        {
+          "text": "AWS Health Dashboard",
+          "correct": true,
+          "rationale": "The Health Dashboard shows service health and events that affect your account."
+        }
+      ],
+      "explanation": "The AWS Health API gives programmatic access to the same events.",
+      "difficulty": 1,
+      "tags": [
+        "support",
+        "health-dashboard"
+      ],
+      "refs": [
+        "https://aws.amazon.com/premiumsupport/technology/aws-health-dashboard/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-4.3-06",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "single",
+      "stem": "Which AWS-managed community lets customers ask technical questions and get answers from the community and AWS experts?",
+      "options": [
+        {
+          "text": "AWS re:Post",
+          "correct": true,
+          "rationale": "re:Post is a community question-and-answer service for AWS."
+        },
+        {
+          "text": "AWS Artifact",
+          "correct": false,
+          "rationale": "Artifact provides compliance reports."
+        },
+        {
+          "text": "AWS Marketplace",
+          "correct": false,
+          "rationale": "Marketplace is a software catalog."
+        },
+        {
+          "text": "AWS Health Dashboard",
+          "correct": false,
+          "rationale": "The Health Dashboard reports service events."
+        }
+      ],
+      "explanation": "The AWS Knowledge Center is part of re:Post.",
+      "difficulty": 1,
+      "tags": [
+        "support",
+        "repost"
+      ],
+      "refs": [
+        "https://repost.aws/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-4.3-07",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "single",
+      "stem": "A company sees that an AWS resource it does not own is sending spam to its users. Whom should it report this to?",
+      "options": [
+        {
+          "text": "AWS Professional Services",
+          "correct": false,
+          "rationale": "Professional Services helps customers with projects."
+        },
+        {
+          "text": "The AWS Trust and Safety team",
+          "correct": true,
+          "rationale": "Trust and Safety handles reports of abuse involving AWS resources."
+        },
+        {
+          "text": "The AWS Partner Network",
+          "correct": false,
+          "rationale": "APN partners do not handle abuse reports."
+        },
+        {
+          "text": "AWS Marketplace sellers",
+          "correct": false,
+          "rationale": "Sellers do not handle abuse of AWS resources."
+        }
+      ],
+      "explanation": "Abuse such as spam, port scanning or malware hosting is reported to AWS Trust and Safety.",
+      "difficulty": 2,
+      "tags": [
+        "support",
+        "trust-and-safety"
+      ],
+      "refs": [
+        "https://repost.aws/knowledge-center/report-aws-abuse"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-4.3-08",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "single",
+      "stem": "Which AWS team of experts helps customers achieve specific business outcomes on AWS, often working alongside AWS Partners?",
+      "options": [
+        {
+          "text": "The AWS Trust and Safety team",
+          "correct": false,
+          "rationale": "Trust and Safety handles abuse reports."
+        },
+        {
+          "text": "AWS re:Post",
+          "correct": false,
+          "rationale": "re:Post is a community Q&A service."
+        },
+        {
+          "text": "AWS Professional Services",
+          "correct": true,
+          "rationale": "Professional Services is a global team of experts that supplements customer teams."
+        },
+        {
+          "text": "AWS Artifact",
+          "correct": false,
+          "rationale": "Artifact provides compliance reports."
+        }
+      ],
+      "explanation": "Other sources of expert help include AWS Solutions Architects and partners in the AWS Partner Network.",
+      "difficulty": 2,
+      "tags": [
+        "support",
+        "professional-services"
+      ],
+      "refs": [
+        "https://aws.amazon.com/professional-services/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-4.3-09",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "single",
+      "stem": "A company wants help from a third-party consulting firm that specializes in AWS migrations. Where should it look?",
+      "options": [
+        {
+          "text": "The AWS Trust and Safety team",
+          "correct": false,
+          "rationale": "Trust and Safety handles abuse reports."
+        },
+        {
+          "text": "AWS Health Dashboard",
+          "correct": false,
+          "rationale": "The Health Dashboard reports service events."
+        },
+        {
+          "text": "AWS Artifact",
+          "correct": false,
+          "rationale": "Artifact provides compliance reports."
+        },
+        {
+          "text": "The AWS Partner Network (APN)",
+          "correct": true,
+          "rationale": "APN includes consulting partners and system integrators with AWS expertise."
+        }
+      ],
+      "explanation": "APN also includes independent software vendors (ISVs) that sell through AWS Marketplace.",
+      "difficulty": 1,
+      "tags": [
+        "support",
+        "apn",
+        "partners"
+      ],
+      "refs": [
+        "https://aws.amazon.com/partners/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-4.3-10",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "single",
+      "stem": "Which resource provides time-tested strategies, guides and patterns from AWS and AWS Partners for migration and modernization projects?",
+      "options": [
+        {
+          "text": "AWS Prescriptive Guidance",
+          "correct": true,
+          "rationale": "Prescriptive Guidance offers strategies, guides and patterns for common projects."
+        },
+        {
+          "text": "AWS Artifact",
+          "correct": false,
+          "rationale": "Artifact provides compliance reports."
+        },
+        {
+          "text": "AWS Health Dashboard",
+          "correct": false,
+          "rationale": "The Health Dashboard reports service events."
+        },
+        {
+          "text": "AWS Marketplace",
+          "correct": false,
+          "rationale": "Marketplace is a software catalog."
+        }
+      ],
+      "explanation": "Technical resources include AWS documentation, whitepapers, blogs, Prescriptive Guidance, the Knowledge Center and re:Post.",
+      "difficulty": 2,
+      "tags": [
+        "support",
+        "prescriptive-guidance"
+      ],
+      "refs": [
+        "https://aws.amazon.com/prescriptive-guidance/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-4.3-11",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "multi",
+      "stem": "Which TWO are categories of AWS Trusted Advisor checks? (Choose TWO.)",
+      "options": [
+        {
+          "text": "Data sovereignty",
+          "correct": false,
+          "rationale": "Data residency is not a Trusted Advisor category."
+        },
+        {
+          "text": "Machine learning",
+          "correct": false,
+          "rationale": "Machine learning is not a Trusted Advisor category."
+        },
+        {
+          "text": "Security",
+          "correct": true,
+          "rationale": "Trusted Advisor checks for issues such as open ports and root MFA."
+        },
+        {
+          "text": "Software licensing",
+          "correct": false,
+          "rationale": "Licensing is not a Trusted Advisor category."
+        },
+        {
+          "text": "Cost optimization",
+          "correct": true,
+          "rationale": "Trusted Advisor finds idle and underused resources."
+        }
+      ],
+      "explanation": "Trusted Advisor categories include cost optimization, performance, security, fault tolerance, service limits and operational excellence.",
+      "difficulty": 2,
+      "tags": [
+        "support",
+        "trusted-advisor"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/awssupport/latest/user/trusted-advisor-check-reference.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    }
+  ]
+}

@@ -1,0 +1,455 @@
+{
+  "formatVersion": 1,
+  "questions": [
+    {
+      "id": "clf-c02-3.4-01",
+      "domain": "d3",
+      "objective": "3.4",
+      "type": "single",
+      "stem": "Which service is a managed relational database service that supports engines such as MySQL, PostgreSQL and Microsoft SQL Server?",
+      "options": [
+        {
+          "text": "Amazon DynamoDB",
+          "correct": false,
+          "rationale": "DynamoDB is a NoSQL key-value and document database."
+        },
+        {
+          "text": "Amazon MemoryDB",
+          "correct": false,
+          "rationale": "MemoryDB is an in-memory database."
+        },
+        {
+          "text": "Amazon RDS",
+          "correct": true,
+          "rationale": "Amazon RDS sets up, operates and scales relational databases with a choice of engines."
+        },
+        {
+          "text": "Amazon S3",
+          "correct": false,
+          "rationale": "S3 is object storage, not a relational database."
+        }
+      ],
+      "explanation": "Relational databases on AWS: Amazon RDS and Amazon Aurora.",
+      "difficulty": 1,
+      "tags": [
+        "databases",
+        "rds",
+        "relational"
+      ],
+      "refs": [
+        "https://aws.amazon.com/rds/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.4-02",
+      "domain": "d3",
+      "objective": "3.4",
+      "type": "single",
+      "stem": "Which relational database is built for the cloud and is compatible with MySQL and PostgreSQL?",
+      "options": [
+        {
+          "text": "Amazon DynamoDB",
+          "correct": false,
+          "rationale": "DynamoDB is NoSQL."
+        },
+        {
+          "text": "Amazon MemoryDB",
+          "correct": false,
+          "rationale": "MemoryDB is an in-memory database."
+        },
+        {
+          "text": "Amazon Neptune",
+          "correct": false,
+          "rationale": "Neptune is a graph database."
+        },
+        {
+          "text": "Amazon Aurora",
+          "correct": true,
+          "rationale": "Aurora is a MySQL- and PostgreSQL-compatible relational database built for the cloud."
+        }
+      ],
+      "explanation": "Aurora is part of Amazon RDS and offers high performance and availability for MySQL and PostgreSQL workloads.",
+      "difficulty": 1,
+      "tags": [
+        "databases",
+        "aurora",
+        "relational"
+      ],
+      "refs": [
+        "https://aws.amazon.com/rds/aurora/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.4-03",
+      "domain": "d3",
+      "objective": "3.4",
+      "type": "single",
+      "stem": "Which service is a serverless NoSQL key-value database that delivers single-digit millisecond performance at any scale?",
+      "options": [
+        {
+          "text": "Amazon DynamoDB",
+          "correct": true,
+          "rationale": "DynamoDB is a serverless NoSQL database with consistent single-digit millisecond performance."
+        },
+        {
+          "text": "Amazon RDS",
+          "correct": false,
+          "rationale": "RDS runs relational databases."
+        },
+        {
+          "text": "Amazon Aurora",
+          "correct": false,
+          "rationale": "Aurora is relational."
+        },
+        {
+          "text": "Amazon Redshift",
+          "correct": false,
+          "rationale": "Redshift is a data warehouse."
+        }
+      ],
+      "explanation": "DynamoDB is the NoSQL database to know for this exam.",
+      "difficulty": 1,
+      "tags": [
+        "databases",
+        "dynamodb",
+        "nosql"
+      ],
+      "refs": [
+        "https://aws.amazon.com/dynamodb/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.4-04",
+      "domain": "d3",
+      "objective": "3.4",
+      "type": "single",
+      "stem": "A company needs an in-memory database for microsecond read latency on data it reads constantly. Which service fits this need?",
+      "options": [
+        {
+          "text": "Amazon S3 Glacier",
+          "correct": false,
+          "rationale": "Glacier is archival storage with retrieval times of minutes to hours."
+        },
+        {
+          "text": "Amazon MemoryDB",
+          "correct": true,
+          "rationale": "MemoryDB is a durable, in-memory database with microsecond read latency."
+        },
+        {
+          "text": "Amazon Elastic Block Store (Amazon EBS)",
+          "correct": false,
+          "rationale": "EBS is block storage for EC2, not a database."
+        },
+        {
+          "text": "Amazon Redshift",
+          "correct": false,
+          "rationale": "Redshift is a data warehouse for analytics."
+        }
+      ],
+      "explanation": "Memory-based databases keep data in RAM for extremely fast access.",
+      "difficulty": 2,
+      "tags": [
+        "databases",
+        "memorydb",
+        "in-memory"
+      ],
+      "refs": [
+        "https://aws.amazon.com/memorydb/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.4-05",
+      "domain": "d3",
+      "objective": "3.4",
+      "type": "single",
+      "stem": "When is running a database on Amazon EC2 a better choice than using Amazon RDS?",
+      "options": [
+        {
+          "text": "When the company wants AWS to handle patching and backups",
+          "correct": false,
+          "rationale": "That is what Amazon RDS provides."
+        },
+        {
+          "text": "When the company wants the least operational effort",
+          "correct": false,
+          "rationale": "A managed service is lower effort."
+        },
+        {
+          "text": "When the company needs full control of the operating system and database settings",
+          "correct": true,
+          "rationale": "Self-managing on EC2 gives full control, at the cost of more operational work."
+        },
+        {
+          "text": "When the company wants AWS-managed automatic Multi-AZ failover",
+          "correct": false,
+          "rationale": "RDS Multi-AZ provides that."
+        }
+      ],
+      "explanation": "Trade-off: EC2-hosted databases give control; managed databases reduce operational effort.",
+      "difficulty": 2,
+      "tags": [
+        "databases",
+        "ec2",
+        "rds",
+        "managed-services"
+      ],
+      "refs": [
+        "https://aws.amazon.com/rds/",
+        "https://aws.amazon.com/ec2/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.4-06",
+      "domain": "d3",
+      "objective": "3.4",
+      "type": "single",
+      "stem": "Which tool converts a database schema from one engine to another, for example from Oracle to Amazon Aurora PostgreSQL, before the data is migrated?",
+      "options": [
+        {
+          "text": "AWS DataSync",
+          "correct": false,
+          "rationale": "DataSync transfers files and objects."
+        },
+        {
+          "text": "AWS Backup",
+          "correct": false,
+          "rationale": "AWS Backup manages backups."
+        },
+        {
+          "text": "Amazon Athena",
+          "correct": false,
+          "rationale": "Athena queries data in S3."
+        },
+        {
+          "text": "AWS Schema Conversion Tool (AWS SCT)",
+          "correct": true,
+          "rationale": "AWS SCT converts schemas and code for heterogeneous migrations."
+        }
+      ],
+      "explanation": "AWS SCT handles the schema conversion and AWS DMS moves the data.",
+      "difficulty": 2,
+      "tags": [
+        "databases",
+        "migration",
+        "sct"
+      ],
+      "refs": [
+        "https://aws.amazon.com/dms/schema-conversion-tool/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.4-07",
+      "domain": "d3",
+      "objective": "3.4",
+      "type": "single",
+      "stem": "Which service is a data warehouse for running complex analytic queries across large amounts of structured data?",
+      "options": [
+        {
+          "text": "Amazon Redshift",
+          "correct": true,
+          "rationale": "Redshift is a fully managed, petabyte-scale data warehouse."
+        },
+        {
+          "text": "Amazon DynamoDB",
+          "correct": false,
+          "rationale": "DynamoDB is for key-value access at scale, not analytic queries."
+        },
+        {
+          "text": "Amazon MemoryDB",
+          "correct": false,
+          "rationale": "MemoryDB is an in-memory database."
+        },
+        {
+          "text": "Amazon Neptune",
+          "correct": false,
+          "rationale": "Neptune is a graph database."
+        }
+      ],
+      "explanation": "Redshift is used for analytics and reporting across large structured data sets.",
+      "difficulty": 2,
+      "tags": [
+        "databases",
+        "redshift",
+        "analytics"
+      ],
+      "refs": [
+        "https://aws.amazon.com/redshift/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.4-08",
+      "domain": "d3",
+      "objective": "3.4",
+      "type": "single",
+      "stem": "Which Amazon RDS feature keeps a standby copy of the database in another Availability Zone and fails over to it automatically?",
+      "options": [
+        {
+          "text": "Read replicas",
+          "correct": false,
+          "rationale": "Read replicas scale reads; failover to them is not automatic in standard RDS."
+        },
+        {
+          "text": "Multi-AZ deployment",
+          "correct": true,
+          "rationale": "Multi-AZ maintains a synchronous standby in another AZ and fails over automatically."
+        },
+        {
+          "text": "Automated backups",
+          "correct": false,
+          "rationale": "Backups support point-in-time recovery, not instant failover."
+        },
+        {
+          "text": "Encryption at rest",
+          "correct": false,
+          "rationale": "Encryption protects data but does not provide availability."
+        }
+      ],
+      "explanation": "Multi-AZ is for high availability; read replicas are for read scaling.",
+      "difficulty": 2,
+      "tags": [
+        "databases",
+        "rds",
+        "multi-az",
+        "high-availability"
+      ],
+      "refs": [
+        "https://aws.amazon.com/rds/features/multi-az/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.4-09",
+      "domain": "d3",
+      "objective": "3.4",
+      "type": "single",
+      "stem": "A company stores user session data as key-value pairs and needs to scale to millions of requests per second. Which type of database fits best?",
+      "options": [
+        {
+          "text": "A relational database such as Amazon RDS for MySQL",
+          "correct": false,
+          "rationale": "Relational databases suit structured data with joins, not key-value lookups at this scale."
+        },
+        {
+          "text": "A data warehouse such as Amazon Redshift",
+          "correct": false,
+          "rationale": "Data warehouses are for analytics, not high-rate transactional lookups."
+        },
+        {
+          "text": "A NoSQL database such as Amazon DynamoDB",
+          "correct": true,
+          "rationale": "Key-value access at very large scale is what DynamoDB is designed for."
+        },
+        {
+          "text": "An archive such as Amazon S3 Glacier Deep Archive",
+          "correct": false,
+          "rationale": "Archives are for rarely accessed data."
+        }
+      ],
+      "explanation": "Choose the database by data model and access pattern: relational, key-value, in-memory, graph or analytics.",
+      "difficulty": 2,
+      "tags": [
+        "databases",
+        "dynamodb",
+        "nosql"
+      ],
+      "refs": [
+        "https://aws.amazon.com/dynamodb/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.4-10",
+      "domain": "d3",
+      "objective": "3.4",
+      "type": "multi",
+      "stem": "A company plans a heterogeneous migration from an on-premises Oracle database to Amazon Aurora PostgreSQL. Which TWO AWS tools are commonly used together for this? (Choose TWO.)",
+      "options": [
+        {
+          "text": "Amazon Athena",
+          "correct": false,
+          "rationale": "Athena queries data in S3."
+        },
+        {
+          "text": "AWS Database Migration Service (AWS DMS)",
+          "correct": true,
+          "rationale": "AWS DMS migrates the data, keeping the source operational."
+        },
+        {
+          "text": "AWS Backup",
+          "correct": false,
+          "rationale": "AWS Backup protects data but does not migrate between engines."
+        },
+        {
+          "text": "AWS Schema Conversion Tool (AWS SCT)",
+          "correct": true,
+          "rationale": "AWS SCT converts the schema from Oracle to PostgreSQL."
+        },
+        {
+          "text": "AWS DataSync",
+          "correct": false,
+          "rationale": "DataSync copies files and objects, not database schemas or data."
+        }
+      ],
+      "explanation": "Heterogeneous migrations (different engines) use AWS SCT for the schema and AWS DMS for the data.",
+      "difficulty": 2,
+      "tags": [
+        "databases",
+        "migration",
+        "dms",
+        "sct"
+      ],
+      "refs": [
+        "https://aws.amazon.com/dms/",
+        "https://aws.amazon.com/dms/schema-conversion-tool/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    }
+  ]
+}

@@ -94,7 +94,7 @@
       "domain": "d2",
       "objective": "2.3",
       "type": "single",
-      "stem": "Which task requires signing in with the AWS account root user credentials?",
+      "stem": "In a standalone AWS account, which task requires signing in with the root user credentials?",
       "options": [
         {
           "text": "Creating an IAM user",
@@ -117,7 +117,7 @@
           "rationale": "An IAM identity with permissions can create buckets."
         }
       ],
-      "explanation": "A short list of tasks requires the root user, such as changing account settings and the root user's email or password, and changing the AWS Support plan.",
+      "explanation": "A short list of tasks requires the root user, for example changing account settings such as the root email address or password, closing the account, and restoring IAM permissions when no administrator is left.",
       "difficulty": 2,
       "tags": [
         "iam",

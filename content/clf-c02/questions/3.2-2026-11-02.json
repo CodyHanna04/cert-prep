@@ -1,0 +1,445 @@
+{
+  "formatVersion": 1,
+  "questions": [
+    {
+      "id": "clf-c02-3.2-01",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "single",
+      "stem": "What is an AWS Availability Zone?",
+      "options": [
+        {
+          "text": "One or more isolated data centers within a Region",
+          "correct": true,
+          "rationale": "Each AZ has independent power, networking and connectivity, and sits in a Region with other AZs."
+        },
+        {
+          "text": "A geographic area that contains several AWS Regions",
+          "correct": false,
+          "rationale": "It is the other way around: a Region contains several AZs."
+        },
+        {
+          "text": "A location that caches content for Amazon CloudFront",
+          "correct": false,
+          "rationale": "That describes an edge location."
+        },
+        {
+          "text": "A single rack of servers inside a data center",
+          "correct": false,
+          "rationale": "An AZ is far larger than a rack."
+        }
+      ],
+      "explanation": "Regions contain multiple, isolated Availability Zones; edge locations are separate sites used for caching and edge services.",
+      "difficulty": 1,
+      "tags": [
+        "global-infrastructure",
+        "availability-zones"
+      ],
+      "refs": [
+        "https://aws.amazon.com/about-aws/global-infrastructure/regions_az/",
+        "https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/availability-zones.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.2-02",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "single",
+      "stem": "Which statement about AWS Regions is correct?",
+      "options": [
+        {
+          "text": "Each Region contains exactly one data center",
+          "correct": false,
+          "rationale": "Regions contain multiple Availability Zones, each with one or more data centers."
+        },
+        {
+          "text": "Each Region is a separate area with multiple Availability Zones",
+          "correct": true,
+          "rationale": "Regions are physical locations around the world, each made up of multiple isolated AZs."
+        },
+        {
+          "text": "Resources are copied to every Region automatically",
+          "correct": false,
+          "rationale": "Data stays in the Region you choose unless you replicate it."
+        },
+        {
+          "text": "Regions and edge locations are the same thing",
+          "correct": false,
+          "rationale": "Edge locations are separate sites used to serve content."
+        }
+      ],
+      "explanation": "Data does not leave a Region unless you move it, which matters for data sovereignty.",
+      "difficulty": 1,
+      "tags": [
+        "global-infrastructure",
+        "regions"
+      ],
+      "refs": [
+        "https://aws.amazon.com/about-aws/global-infrastructure/regions_az/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.2-03",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "single",
+      "stem": "Why should a company deploy its application across multiple Availability Zones?",
+      "options": [
+        {
+          "text": "To reduce network latency for customers located on other continents",
+          "correct": false,
+          "rationale": "Serving distant users is a reason to use more Regions or edge services."
+        },
+        {
+          "text": "To meet laws that require data to stay in one country",
+          "correct": false,
+          "rationale": "Data residency is handled by choosing the Region."
+        },
+        {
+          "text": "So the application stays available if one Availability Zone fails",
+          "correct": true,
+          "rationale": "AZs do not share single points of failure, so a multi-AZ design survives the loss of one."
+        },
+        {
+          "text": "To get a lower hourly price for Amazon EC2",
+          "correct": false,
+          "rationale": "Spreading across AZs does not reduce instance prices."
+        }
+      ],
+      "explanation": "High availability within a Region comes from using more than one Availability Zone.",
+      "difficulty": 1,
+      "tags": [
+        "global-infrastructure",
+        "high-availability"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/availability-zones.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.2-04",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "single",
+      "stem": "A company's application must keep running even if an entire AWS Region becomes unavailable. What should the company do?",
+      "options": [
+        {
+          "text": "Add more instances in the same Availability Zone",
+          "correct": false,
+          "rationale": "Instances in one AZ fail together with that AZ and its Region."
+        },
+        {
+          "text": "Move to a larger instance type",
+          "correct": false,
+          "rationale": "Instance size does not protect against a Regional outage."
+        },
+        {
+          "text": "Enable MFA on the root user",
+          "correct": false,
+          "rationale": "MFA improves account security, not availability."
+        },
+        {
+          "text": "Deploy the workload in a second Region as part of a disaster recovery plan",
+          "correct": true,
+          "rationale": "Multi-Region designs protect against the loss of a whole Region."
+        }
+      ],
+      "explanation": "Reasons to use multiple Regions: disaster recovery and business continuity, low latency for distant users, and data sovereignty.",
+      "difficulty": 2,
+      "tags": [
+        "global-infrastructure",
+        "disaster-recovery",
+        "regions"
+      ],
+      "refs": [
+        "https://aws.amazon.com/about-aws/global-infrastructure/regions_az/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.2-05",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "single",
+      "stem": "A company must keep customer data inside a specific country to comply with local laws. What should it consider when deciding where to deploy?",
+      "options": [
+        {
+          "text": "Choose an AWS Region located in that country",
+          "correct": true,
+          "rationale": "Data stays in the Region where you store it, so the Region's location addresses data residency."
+        },
+        {
+          "text": "Choose the Region with the lowest prices",
+          "correct": false,
+          "rationale": "Price does not satisfy legal residency requirements."
+        },
+        {
+          "text": "Store the data at edge locations",
+          "correct": false,
+          "rationale": "Edge locations cache content; they are not where you keep primary data."
+        },
+        {
+          "text": "Use any Region as long as an IAM password policy is set",
+          "correct": false,
+          "rationale": "Password policies do not control where data is stored."
+        }
+      ],
+      "explanation": "Data sovereignty is one of the main reasons to choose a particular Region.",
+      "difficulty": 1,
+      "tags": [
+        "global-infrastructure",
+        "data-sovereignty",
+        "regions"
+      ],
+      "refs": [
+        "https://aws.amazon.com/about-aws/global-infrastructure/regions_az/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.2-06",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "single",
+      "stem": "What are AWS edge locations primarily used for?",
+      "options": [
+        {
+          "text": "Running Amazon RDS database instances",
+          "correct": false,
+          "rationale": "Databases run in Regions and Availability Zones."
+        },
+        {
+          "text": "Caching content closer to users through services such as Amazon CloudFront",
+          "correct": true,
+          "rationale": "Edge locations serve cached content and run edge services with low latency."
+        },
+        {
+          "text": "Grouping several AWS Regions together",
+          "correct": false,
+          "rationale": "Edge locations do not group Regions."
+        },
+        {
+          "text": "Storing AWS Backup vaults for long-term retention",
+          "correct": false,
+          "rationale": "Backup vaults live in Regions."
+        }
+      ],
+      "explanation": "CloudFront and Route 53 use edge locations to bring content and DNS answers closer to users.",
+      "difficulty": 1,
+      "tags": [
+        "global-infrastructure",
+        "edge-locations",
+        "cloudfront"
+      ],
+      "refs": [
+        "https://aws.amazon.com/cloudfront/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.2-07",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "single",
+      "stem": "Which service improves the availability and performance of applications by routing user traffic over the AWS global network to the nearest healthy endpoint using static IP addresses?",
+      "options": [
+        {
+          "text": "Amazon CloudFront",
+          "correct": false,
+          "rationale": "CloudFront caches content at edge locations; it does not provide static IP addresses for your application."
+        },
+        {
+          "text": "Elastic Load Balancing",
+          "correct": false,
+          "rationale": "Elastic Load Balancing distributes traffic to targets within a Region rather than routing users across the AWS global network."
+        },
+        {
+          "text": "AWS Global Accelerator",
+          "correct": true,
+          "rationale": "Global Accelerator provides static anycast IP addresses and routes traffic over the AWS network."
+        },
+        {
+          "text": "AWS Direct Connect",
+          "correct": false,
+          "rationale": "Direct Connect links an on-premises network to AWS."
+        }
+      ],
+      "explanation": "CloudFront speeds up content delivery with caching; Global Accelerator speeds up and stabilizes TCP and UDP traffic to applications.",
+      "difficulty": 3,
+      "tags": [
+        "global-infrastructure",
+        "global-accelerator"
+      ],
+      "refs": [
+        "https://aws.amazon.com/global-accelerator/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.2-08",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "single",
+      "stem": "A company wants to run latency-sensitive applications, such as real-time video rendering, close to users in a large city that is far from the nearest AWS Region. Which option should it consider?",
+      "options": [
+        {
+          "text": "AWS Wavelength Zones",
+          "correct": false,
+          "rationale": "Wavelength is for applications on 5G mobile networks, inside telecommunications providers' networks."
+        },
+        {
+          "text": "An Availability Zone in a distant Region",
+          "correct": false,
+          "rationale": "A distant Region does not provide low latency to that city."
+        },
+        {
+          "text": "Edge locations alone",
+          "correct": false,
+          "rationale": "Edge locations cache content but do not run general application compute."
+        },
+        {
+          "text": "AWS Local Zones",
+          "correct": true,
+          "rationale": "Local Zones place compute, storage and other services close to large population centers for single-digit millisecond latency."
+        }
+      ],
+      "explanation": "Local Zones extend a Region to a metro area. Wavelength Zones extend AWS into 5G networks.",
+      "difficulty": 3,
+      "tags": [
+        "global-infrastructure",
+        "local-zones"
+      ],
+      "refs": [
+        "https://aws.amazon.com/about-aws/global-infrastructure/localzones/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.2-09",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "single",
+      "stem": "Which option embeds AWS compute and storage inside telecommunications providers' 5G networks for ultra-low-latency mobile applications?",
+      "options": [
+        {
+          "text": "AWS Wavelength Zones",
+          "correct": true,
+          "rationale": "Wavelength Zones put AWS infrastructure at the edge of 5G networks."
+        },
+        {
+          "text": "AWS Local Zones",
+          "correct": false,
+          "rationale": "Local Zones serve metro areas but are not inside carrier 5G networks."
+        },
+        {
+          "text": "Availability Zones",
+          "correct": false,
+          "rationale": "AZs are part of a Region, not inside carrier networks."
+        },
+        {
+          "text": "Edge locations",
+          "correct": false,
+          "rationale": "Edge locations cache content for services such as CloudFront."
+        }
+      ],
+      "explanation": "Wavelength lets mobile application traffic reach AWS compute without leaving the carrier network.",
+      "difficulty": 2,
+      "tags": [
+        "global-infrastructure",
+        "wavelength"
+      ],
+      "refs": [
+        "https://aws.amazon.com/wavelength/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.2-10",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "multi",
+      "stem": "Which TWO statements about Availability Zones are correct? (Choose TWO.)",
+      "options": [
+        {
+          "text": "They are the same as edge locations",
+          "correct": false,
+          "rationale": "Edge locations are separate sites for caching and edge services."
+        },
+        {
+          "text": "They are connected by low-latency, high-bandwidth networking",
+          "correct": true,
+          "rationale": "Fast links between AZs make synchronous replication practical."
+        },
+        {
+          "text": "Each Availability Zone is in a different country",
+          "correct": false,
+          "rationale": "AZs in a Region are in the same geographic area."
+        },
+        {
+          "text": "They are physically separated from each other within a Region",
+          "correct": true,
+          "rationale": "Separation means a local event such as a fire or flood does not affect other AZs."
+        },
+        {
+          "text": "They share a single power source to reduce costs",
+          "correct": false,
+          "rationale": "Each AZ has independent, redundant power."
+        }
+      ],
+      "explanation": "Availability Zones do not share single points of failure, which is why multi-AZ designs are highly available.",
+      "difficulty": 2,
+      "tags": [
+        "global-infrastructure",
+        "availability-zones"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/availability-zones.html",
+        "https://aws.amazon.com/about-aws/global-infrastructure/regions_az/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    }
+  ]
+}
