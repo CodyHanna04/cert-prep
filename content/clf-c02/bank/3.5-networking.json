@@ -39,7 +39,7 @@
         "https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -84,7 +84,7 @@
         "https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -128,7 +128,7 @@
         "https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -172,7 +172,7 @@
         "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -216,7 +216,7 @@
         "https://aws.amazon.com/route53/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -257,10 +257,10 @@
         "edge"
       ],
       "refs": [
-        "https://aws.amazon.com/cloudfront/"
+        "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -303,7 +303,7 @@
         "https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -346,7 +346,7 @@
         "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -389,7 +389,7 @@
         "https://aws.amazon.com/directconnect/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -437,7 +437,7 @@
         "https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"

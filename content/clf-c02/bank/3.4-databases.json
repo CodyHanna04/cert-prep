@@ -40,7 +40,7 @@
         "https://aws.amazon.com/rds/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -84,7 +84,7 @@
         "https://aws.amazon.com/rds/aurora/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -128,7 +128,7 @@
         "https://aws.amazon.com/dynamodb/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -169,10 +169,10 @@
         "in-memory"
       ],
       "refs": [
-        "https://aws.amazon.com/memorydb/"
+        "https://docs.aws.amazon.com/memorydb/latest/devguide/what-is-memorydb.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -218,7 +218,7 @@
         "https://aws.amazon.com/ec2/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -259,10 +259,10 @@
         "sct"
       ],
       "refs": [
-        "https://aws.amazon.com/dms/schema-conversion-tool/"
+        "https://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_Welcome.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -306,7 +306,7 @@
         "https://aws.amazon.com/redshift/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -351,7 +351,7 @@
         "https://aws.amazon.com/rds/features/multi-az/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -395,7 +395,7 @@
         "https://aws.amazon.com/dynamodb/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -443,10 +443,10 @@
       ],
       "refs": [
         "https://aws.amazon.com/dms/",
-        "https://aws.amazon.com/dms/schema-conversion-tool/"
+        "https://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_Welcome.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"

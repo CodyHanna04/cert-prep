@@ -40,7 +40,7 @@
         "https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/availability-zones.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -83,7 +83,7 @@
         "https://aws.amazon.com/about-aws/global-infrastructure/regions_az/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -126,7 +126,7 @@
         "https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/availability-zones.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -170,7 +170,7 @@
         "https://aws.amazon.com/about-aws/global-infrastructure/regions_az/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -214,7 +214,7 @@
         "https://aws.amazon.com/about-aws/global-infrastructure/regions_az/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -255,10 +255,10 @@
         "cloudfront"
       ],
       "refs": [
-        "https://aws.amazon.com/cloudfront/"
+        "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -298,10 +298,10 @@
         "global-accelerator"
       ],
       "refs": [
-        "https://aws.amazon.com/global-accelerator/"
+        "https://docs.aws.amazon.com/global-accelerator/latest/dg/what-is-global-accelerator.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -344,7 +344,7 @@
         "https://aws.amazon.com/about-aws/global-infrastructure/localzones/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -387,7 +387,7 @@
         "https://aws.amazon.com/wavelength/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -436,7 +436,7 @@
         "https://aws.amazon.com/about-aws/global-infrastructure/regions_az/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"

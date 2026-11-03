@@ -39,7 +39,7 @@
         "https://aws.amazon.com/sqs/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -82,7 +82,7 @@
         "https://aws.amazon.com/sns/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -125,7 +125,7 @@
         "https://aws.amazon.com/eventbridge/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -168,7 +168,7 @@
         "https://aws.amazon.com/ses/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -211,7 +211,7 @@
         "https://aws.amazon.com/connect/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -224,9 +224,9 @@
       "stem": "Which service provides virtual desktops that employees can use from almost any device?",
       "options": [
         {
-          "text": "Amazon AppStream 2.0",
+          "text": "Amazon WorkSpaces Applications",
           "correct": false,
-          "rationale": "AppStream 2.0 streams individual applications rather than full desktops."
+          "rationale": "WorkSpaces Applications (formerly AppStream 2.0) streams individual applications rather than full desktops."
         },
         {
           "text": "Amazon Connect",
@@ -244,7 +244,7 @@
           "rationale": "WorkSpaces provides managed virtual desktops."
         }
       ],
-      "explanation": "End-user computing services: Amazon WorkSpaces (desktops) and Amazon AppStream 2.0 (applications).",
+      "explanation": "End-user computing services: Amazon WorkSpaces for desktops, and Amazon WorkSpaces Applications for applications (formerly AppStream 2.0, the name the exam guide uses).",
       "difficulty": 2,
       "tags": [
         "end-user-computing",
@@ -254,7 +254,7 @@
         "https://aws.amazon.com/workspaces/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -297,7 +297,7 @@
         "https://aws.amazon.com/amplify/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -340,7 +340,7 @@
         "https://aws.amazon.com/iot-core/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -383,7 +383,7 @@
         "https://aws.amazon.com/codepipeline/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -423,10 +423,10 @@
         "x-ray"
       ],
       "refs": [
-        "https://aws.amazon.com/xray/"
+        "https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -474,7 +474,7 @@
         "https://aws.amazon.com/codedeploy/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"

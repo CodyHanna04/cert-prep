@@ -9,19 +9,19 @@
       "stem": "Which AWS Support plan is included for every AWS customer at no additional cost?",
       "options": [
         {
-          "text": "Developer Support",
+          "text": "Business Support+",
           "correct": false,
-          "rationale": "Developer Support is a paid plan."
+          "rationale": "Business Support+ is a paid plan."
         },
         {
-          "text": "Business Support",
+          "text": "Enterprise Support",
           "correct": false,
-          "rationale": "Business Support is a paid plan."
+          "rationale": "Enterprise Support is a paid plan."
         },
         {
-          "text": "Enterprise On-Ramp Support",
+          "text": "Unified Operations",
           "correct": false,
-          "rationale": "Enterprise On-Ramp is a paid plan."
+          "rationale": "Unified Operations is a paid plan."
         },
         {
           "text": "Basic Support",
@@ -29,17 +29,18 @@
           "rationale": "Basic Support is included for all customers and covers account and billing questions and documentation."
         }
       ],
-      "explanation": "Paid plans add technical support and more Trusted Advisor checks.",
+      "explanation": "Paid plans add technical support cases and the full set of Trusted Advisor checks. The current plans are Basic, Business Support+, Enterprise Support and Unified Operations. The CLF-C02 exam guide still lists the older Developer, Business and Enterprise On-Ramp plans, which end on January 1, 2027.",
       "difficulty": 1,
       "tags": [
         "support",
         "support-plans"
       ],
       "refs": [
+        "https://docs.aws.amazon.com/awssupport/latest/user/aws-support-plans.html",
         "https://aws.amazon.com/premiumsupport/plans/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -57,9 +58,9 @@
           "rationale": "Enterprise Support includes a designated TAM."
         },
         {
-          "text": "Business Support",
+          "text": "Business Support+",
           "correct": false,
-          "rationale": "Business Support does not include a TAM."
+          "rationale": "Business Support+ does not include a TAM."
         },
         {
           "text": "Developer Support",
@@ -72,7 +73,7 @@
           "rationale": "Basic Support does not include technical support."
         }
       ],
-      "explanation": "Enterprise On-Ramp provides access to a pool of TAMs; Enterprise provides a designated TAM.",
+      "explanation": "Enterprise Support includes a designated TAM, and so does the higher Unified Operations plan. The retiring Enterprise On-Ramp plan offered a pool of TAMs.",
       "difficulty": 2,
       "tags": [
         "support",
@@ -80,10 +81,10 @@
         "tam"
       ],
       "refs": [
-        "https://aws.amazon.com/premiumsupport/plans/"
+        "https://docs.aws.amazon.com/awssupport/latest/user/aws-support-plans.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -93,22 +94,22 @@
       "domain": "d4",
       "objective": "4.3",
       "type": "single",
-      "stem": "Which is the lowest-cost AWS Support plan that provides 24/7 phone, email and chat access to Cloud Support Engineers?",
+      "stem": "Which AWS Support plan offers a response time of 15 minutes for production-critical (business-critical) issues?",
       "options": [
+        {
+          "text": "Business Support+",
+          "correct": false,
+          "rationale": "Business Support+ lists a slower response for business-critical cases."
+        },
+        {
+          "text": "Enterprise Support",
+          "correct": true,
+          "rationale": "Enterprise Support lists a response of up to 15 minutes for production-critical cases."
+        },
         {
           "text": "Developer Support",
           "correct": false,
-          "rationale": "Developer Support offers email access during business hours."
-        },
-        {
-          "text": "Business Support",
-          "correct": true,
-          "rationale": "Business Support adds 24/7 access to Cloud Support Engineers by phone, email and chat."
-        },
-        {
-          "text": "Enterprise On-Ramp Support",
-          "correct": false,
-          "rationale": "Enterprise On-Ramp also has 24/7 access but costs more."
+          "rationale": "Developer Support is for business-hours guidance, not critical production issues."
         },
         {
           "text": "Basic Support",
@@ -116,17 +117,17 @@
           "rationale": "Basic Support does not include technical support cases."
         }
       ],
-      "explanation": "Developer is for experimenting, Business for production workloads, Enterprise On-Ramp and Enterprise for business-critical workloads.",
+      "explanation": "Faster critical-case response and a designated TAM distinguish Enterprise Support from lower plans.",
       "difficulty": 2,
       "tags": [
         "support",
         "support-plans"
       ],
       "refs": [
-        "https://aws.amazon.com/premiumsupport/plans/"
+        "https://docs.aws.amazon.com/awssupport/latest/user/aws-support-plans.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -159,7 +160,7 @@
           "rationale": "Marketplace is a software catalog."
         }
       ],
-      "explanation": "The full set of Trusted Advisor checks comes with Business Support and higher.",
+      "explanation": "Basic Support includes the core checks; Business Support+ (previously Business Support) and higher include the full set and the Trusted Advisor API.",
       "difficulty": 1,
       "tags": [
         "support",
@@ -169,7 +170,7 @@
         "https://aws.amazon.com/premiumsupport/technology/trusted-advisor/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -212,7 +213,7 @@
         "https://aws.amazon.com/premiumsupport/technology/aws-health-dashboard/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -255,7 +256,7 @@
         "https://repost.aws/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -298,7 +299,7 @@
         "https://repost.aws/knowledge-center/report-aws-abuse"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -341,7 +342,7 @@
         "https://aws.amazon.com/professional-services/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -385,7 +386,7 @@
         "https://aws.amazon.com/partners/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -428,7 +429,7 @@
         "https://aws.amazon.com/prescriptive-guidance/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -466,7 +467,7 @@
           "rationale": "Trusted Advisor finds idle and underused resources."
         }
       ],
-      "explanation": "Trusted Advisor categories include cost optimization, performance, security, fault tolerance, service limits and operational excellence.",
+      "explanation": "Trusted Advisor categories include cost optimization, performance, resilience (fault tolerance), security, operational excellence and service limits.",
       "difficulty": 2,
       "tags": [
         "support",
@@ -476,7 +477,7 @@
         "https://docs.aws.amazon.com/awssupport/latest/user/trusted-advisor-check-reference.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"

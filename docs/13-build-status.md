@@ -42,6 +42,20 @@ Changes made from the first round of feedback:
 - **CI:** `.github/workflows/ci.yml` runs lint, `pack:validate`, `content:lint` and the tests against Postgres 17 on every push.
 - 139 tests pass (12 files).
 
+## Revision 5 (question bank, 2026-11-02)
+
+- **184 new CLF-C02 questions**, 10 or more for each of the 18 objectives that had none, so the bank is now 194 (19 multiple-response). They were drafted in a compact form and expanded to the content format with the correct option's position rotated. Lint gives 0 errors and 0 warnings.
+- **Checked before publishing:**
+  - **Blind answers:** a separate agent answered all 184 without the key and agreed on every one. Its file had one letter mistyped for a question where its written reasoning chose the keyed option.
+  - **Source checks:** four agents, one per domain, fetched every cited AWS page. No key was wrong. They found stale pages (marketing pages that changed or redirected, and whitepapers that are now empty shells), so refs moved to the docs pages that state the fact.
+  - **Outdated facts found and fixed:**
+    - AWS Audit Manager closed to new customers on 2026-04-30, so its question was replaced.
+    - Two Well-Architected principle names changed ("Maintain traceability", and "Safely automate where possible" for operational excellence).
+    - Amazon SageMaker is now "SageMaker AI" and AppStream 2.0 is now "WorkSpaces Applications". The explanations name both, since the exam guide uses the old names.
+    - Amazon Kendra is closed to new customers. It is kept because the guide lists it.
+    - **Support plans were restructured:** Basic, Business Support+, Enterprise Support and Unified Operations. Developer, Business and Enterprise On-Ramp end on 2027-01-01. Support questions now have answers that are correct under both the current plans and the guide's names. The "lowest-cost plan with 24/7 access" question was replaced, because its answer differs between the two.
+- `scripts/deploy.sh` no longer deletes the tracked `docker-compose.override.yml`. Every command names `docker-compose.yml` explicitly, so the override was never loaded anyway.
+
 ## Run it
 
 ```bash
@@ -102,7 +116,7 @@ First real account (no public sign-up): `npm run user:create -- "Your Name"` pri
 - T-012 domain/objective editor, T-013 theme lab and design notes, T-076 trends, "create exam manually", "new question" form, pack-reload diff (part of T-011).
 - T-081 browser end-to-end test (the data-layer golden path is tested; the UI was exercised by hand).
 - T-082 remainder: adapt and install `docker/nginx-study.conf.example` (untested draft), the Namecheap record, certificates, scheduled `pg_dump` and a restore drill. T-083 remainder: CSP with nonces, nginx rate limits, the pre-exposure checklist run-through.
-- Content: the shared bank has 10 approved questions (objective 2.1). Drafting the rest is the main remaining effort.
+- Content: the CLF-C02 shared bank has 194 approved questions; every objective is practice-ready (10 or more) and mocks no longer repeat. The coverage target is 260 (four exams' worth). DVA-C03 has no questions yet.
 
 ## Findings that changed the plan
 

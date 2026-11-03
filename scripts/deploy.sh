@@ -10,7 +10,6 @@ compose() { docker compose -f docker-compose.yml "$@"; }
 if [ "${1:-}" != "--no-pull" ]; then
   git pull --ff-only
 fi
-rm -f docker-compose.override.yml   # dev only: it publishes Postgres
 
 compose --profile tools build   # the migrate image sits behind the "tools" profile
 compose up -d db

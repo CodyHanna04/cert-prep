@@ -14,7 +14,7 @@
           "rationale": "Lex builds conversational interfaces."
         },
         {
-          "text": "Amazon SageMaker",
+          "text": "Amazon SageMaker AI",
           "correct": true,
           "rationale": "SageMaker provides tools to build, train and deploy ML models."
         },
@@ -29,17 +29,17 @@
           "rationale": "QuickSight builds business intelligence dashboards."
         }
       ],
-      "explanation": "SageMaker is the service for building your own ML models; other AI services offer ready-made capabilities.",
+      "explanation": "SageMaker AI (called Amazon SageMaker in the exam guide; renamed in December 2024) is for building your own ML models; other AI services offer ready-made capabilities.",
       "difficulty": 1,
       "tags": [
         "ai-ml",
         "sagemaker"
       ],
       "refs": [
-        "https://aws.amazon.com/sagemaker/"
+        "https://docs.aws.amazon.com/sagemaker/latest/dg/whatis.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -57,7 +57,7 @@
           "rationale": "Kendra searches documents."
         },
         {
-          "text": "Amazon SageMaker",
+          "text": "Amazon SageMaker AI",
           "correct": false,
           "rationale": "SageMaker is for building custom ML models."
         },
@@ -82,7 +82,7 @@
         "https://aws.amazon.com/lex/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -115,7 +115,7 @@
           "rationale": "Kendra is an intelligent enterprise search service."
         }
       ],
-      "explanation": "Kendra uses machine learning to return relevant answers from content in many sources.",
+      "explanation": "Kendra uses machine learning to return relevant answers from content in many sources. AWS has since closed Kendra to new customers, but the CLF-C02 exam guide still lists it.",
       "difficulty": 2,
       "tags": [
         "ai-ml",
@@ -125,7 +125,7 @@
         "https://aws.amazon.com/kendra/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -168,7 +168,7 @@
         "https://aws.amazon.com/rekognition/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -211,7 +211,7 @@
         "https://aws.amazon.com/polly/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -254,7 +254,7 @@
         "https://aws.amazon.com/transcribe/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -297,7 +297,7 @@
         "https://aws.amazon.com/athena/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -341,7 +341,7 @@
         "https://aws.amazon.com/kinesis/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -385,7 +385,7 @@
         "https://aws.amazon.com/glue/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -413,7 +413,7 @@
           "rationale": "QuickSight is a business intelligence service for dashboards and reports."
         },
         {
-          "text": "Amazon SageMaker",
+          "text": "Amazon SageMaker AI",
           "correct": false,
           "rationale": "SageMaker builds ML models."
         }
@@ -428,7 +428,7 @@
         "https://aws.amazon.com/quicksight/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -478,7 +478,7 @@
         "https://aws.amazon.com/quicksight/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"

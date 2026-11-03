@@ -36,10 +36,10 @@
         "variable-cost"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/whitepapers/latest/how-aws-pricing-works/how-aws-pricing-works.html"
+        "https://docs.aws.amazon.com/whitepapers/latest/how-aws-pricing-works/key-principles.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -79,10 +79,11 @@
         "tco"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/whitepapers/latest/how-aws-pricing-works/how-aws-pricing-works.html"
+        "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/six-advantages-of-cloud-computing.html",
+        "https://docs.aws.amazon.com/whitepapers/latest/how-aws-pricing-works/key-principles.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -125,7 +126,7 @@
         "https://aws.amazon.com/windows/resources/licensing/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -168,7 +169,7 @@
         "https://aws.amazon.com/windows/resources/licensing/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -208,10 +209,10 @@
         "rightsizing"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/whitepapers/latest/cost-optimization-right-sizing/cost-optimization-right-sizing.html"
+        "https://docs.aws.amazon.com/compute-optimizer/latest/ug/what-is-compute-optimizer.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -252,10 +253,10 @@
         "cloudformation"
       ],
       "refs": [
-        "https://aws.amazon.com/cloudformation/"
+        "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -299,7 +300,7 @@
         "https://aws.amazon.com/rds/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -343,7 +344,7 @@
         "https://aws.amazon.com/ecs/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -384,10 +385,11 @@
         "automation"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/whitepapers/latest/cost-optimization-right-sizing/cost-optimization-right-sizing.html"
+        "https://docs.aws.amazon.com/solutions/latest/instance-scheduler-on-aws/solution-overview.html",
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/cost-dp.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -436,7 +438,7 @@
         "https://aws.amazon.com/ecs/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"

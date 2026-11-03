@@ -40,7 +40,7 @@
         "https://aws.amazon.com/ec2/pricing/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -84,7 +84,7 @@
         "https://aws.amazon.com/ec2/spot/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -128,7 +128,7 @@
         "https://aws.amazon.com/ec2/pricing/reserved-instances/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -168,10 +168,10 @@
         "savings-plans"
       ],
       "refs": [
-        "https://aws.amazon.com/savingsplans/"
+        "https://docs.aws.amazon.com/savingsplans/latest/userguide/plan-types.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -215,7 +215,7 @@
         "https://aws.amazon.com/ec2/dedicated-hosts/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -258,7 +258,7 @@
         "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -302,7 +302,7 @@
         "https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ri-turn-off.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -342,10 +342,10 @@
         "data-transfer"
       ],
       "refs": [
-        "https://aws.amazon.com/ec2/pricing/on-demand/"
+        "https://aws.amazon.com/blogs/architecture/overview-of-data-transfer-costs-for-common-architectures/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -385,10 +385,10 @@
         "data-transfer"
       ],
       "refs": [
-        "https://aws.amazon.com/ec2/pricing/on-demand/"
+        "https://aws.amazon.com/blogs/architecture/overview-of-data-transfer-costs-for-common-architectures/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -437,7 +437,7 @@
         "https://aws.amazon.com/s3/pricing/"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"

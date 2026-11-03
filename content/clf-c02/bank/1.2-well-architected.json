@@ -36,10 +36,10 @@
         "operational-excellence"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html"
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/operational-excellence.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -79,10 +79,10 @@
         "reliability"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html"
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/reliability.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -122,10 +122,11 @@
         "security"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html"
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/security.html",
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/sec-design.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -165,10 +166,10 @@
         "performance-efficiency"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html"
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/performance-efficiency.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -208,10 +209,10 @@
         "cost-optimization"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html"
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/cost-optimization.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -251,10 +252,10 @@
         "sustainability"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html"
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/sustainability.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -264,7 +265,7 @@
       "domain": "d1",
       "objective": "1.2",
       "type": "single",
-      "stem": "A team performs operations as code and makes frequent, small, reversible changes. Which pillar's design principles is the team following?",
+      "stem": "A team safely automates its operations and makes frequent, small, reversible changes. Which pillar's design principles is the team following?",
       "options": [
         {
           "text": "Security",
@@ -279,7 +280,7 @@
         {
           "text": "Operational excellence",
           "correct": true,
-          "rationale": "Performing operations as code and making frequent, small, reversible changes are operational excellence design principles."
+          "rationale": "Safely automating where possible and making frequent, small, reversible changes are operational excellence design principles."
         },
         {
           "text": "Cost optimization",
@@ -287,17 +288,17 @@
           "rationale": "Cost optimization principles include adopting a consumption model."
         }
       ],
-      "explanation": "Operational excellence design principles include performing operations as code, making frequent small reversible changes, and learning from operational failures.",
+      "explanation": "Operational excellence design principles include safely automating where possible, making frequent, small, reversible changes, and learning from all operational events and metrics.",
       "difficulty": 2,
       "tags": [
         "well-architected",
         "operational-excellence"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html"
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/oe-design-principles.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -330,17 +331,17 @@
           "rationale": "Monitoring for failures and recovering automatically is a reliability design principle."
         }
       ],
-      "explanation": "Reliability design principles include automatically recovering from failure, testing recovery procedures, scaling horizontally and stopping guessing capacity.",
+      "explanation": "Reliability design principles include automatically recovering from failure, testing recovery procedures, scaling horizontally, stopping guessing capacity and managing change through automation.",
       "difficulty": 2,
       "tags": [
         "well-architected",
         "reliability"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html"
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/rel-dp.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -382,7 +383,7 @@
         "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
@@ -400,9 +401,9 @@
           "rationale": "This is a performance efficiency design principle."
         },
         {
-          "text": "Enable traceability",
+          "text": "Maintain traceability",
           "correct": true,
-          "rationale": "Monitoring, alerting and auditing actions in real time is a security design principle."
+          "rationale": "Monitoring, alerting and auditing actions and changes in real time is a security design principle."
         },
         {
           "text": "Measure overall efficiency",
@@ -420,17 +421,17 @@
           "rationale": "This is a reliability design principle."
         }
       ],
-      "explanation": "Security design principles include a strong identity foundation, traceability, security at all layers, automating security best practices and protecting data in transit and at rest.",
+      "explanation": "Security design principles include implementing a strong identity foundation, maintaining traceability, applying security at all layers, automating security best practices and protecting data in transit and at rest.",
       "difficulty": 2,
       "tags": [
         "well-architected",
         "security"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html"
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/sec-design.html"
       ],
       "source": "ai-draft",
-      "reviewStatus": "draft",
+      "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
