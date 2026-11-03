@@ -4,6 +4,7 @@ const TABS = [
   ["/library", "Questions"],
   ["/library/import", "Import"],
   ["/library/drafts", "Drafts"],
+  ["/library/mistakes", "Mistakes & flagged"],
   ["/library/coverage", "Coverage"],
   ["/library/study", "Study material"],
   ["/library/flashcards", "Flashcards"],

@@ -1,4 +1,4 @@
-# 13 — Build status (2026-10-31)
+# 13 — Build status (updated 2026-11-02)
 
 What exists in the repository now, how to run it, what the build settled, and what is still open. Written after the first build pass; the planning docs (01–12) remain the source for intent.
 
@@ -24,6 +24,24 @@ Changes made from the first round of feedback:
 - **Fix:** `.gitignore` and `.dockerignore` listed `coverage`, which also matched the new `library/coverage` route folder (git would have skipped it and Tailwind did not scan it). Both are now anchored to the repo root.
 - Exams already added to a database keep the profile they were created with, so an existing exam row does not get `outOfScopeTerms`; the lint CLI reads the blueprint and always applies it.
 
+## Revision 4 (shared bank, homelab, study screens) — 2026-11-02
+
+- **Shared baseline bank.** Approved questions in `content/<pack>/bank/*.json` are copied into every learner's own exam (still per-user rows under RLS, so isolation is unchanged). Each exam records the bank version it last synced (`exam.bank_version`, a hash of the files); `getAppContext` re-syncs when a deploy changes the bank. Matching is by question `id`, or by identical content for a copy the learner imported earlier. Bank rows (`question.from_bank`) are approved and read-only in the app; questions dropped from the bank are rejected with "Retired from the shared question bank", so answer history stays. A learner's own imports never leave their account. `content:lint` now also checks `bank/` and rejects anything there that is not approved. Tests: `tests/bank.test.js`.
+- **First bank content:** the 10-question pilot for objective 2.1 (`content/clf-c02/bank/2.1-shared-responsibility.json`). Blind check: 10 of 10 matched the key. Every claim was checked against the three AWS pages in `refs`. Three edits were made in review: #08 no longer says "abstracted" in the right option (it hinted at the answer), #10's correct-option rationale now explains why, and #07's IAM rationale cites the RDS page.
+- **Homelab production is running** on Proxmox CT 104 (Debian 13, 2 cores, 4 GB, 40 GB on Ceph RBD) at `192.168.86.227`. It has key-only SSH (`deploy` user), unattended upgrades, Docker 29 and Compose v5. The `web` container is published only on `192.168.86.227:3000`, and Postgres is not published. `.env` was generated on the box (mode 600). `scripts/deploy.sh` pulls, builds (including the `tools` profile, so migrations ship), migrates, restarts and checks `/sign-in`. Migrations 0001–0005 are applied. nginx, DNS, certificates and the first account are still to do.
+- **Study screens:**
+  - **Keyboard shortcuts** in practice and mock (T-047): 1–9, Enter, ← →, F, B, N, `?`.
+  - **Bookmarks** (T-046).
+  - **Confidence chip** (T-045): guess, unsure or sure, stored on `response.confidence`, with a setting on the Account page.
+  - **Time** is counted only while the tab is visible; mock answers now record it too.
+  - **Session results:** a Time card (average, median, slowest, total) and answer-review filters (all, incorrect, flagged, unanswered, slow, guessed).
+  - **Library → Mistakes & flagged** (T-053): last missed, correct guesses, flagged and bookmarked, with an objective filter and Practice buttons.
+  - **Question history** (T-078): an attempts table on each question page.
+  - **Library filters** for type, origin (shared bank or mine) and flagged (T-024).
+- **Theme saved with the account** (T-009): `app.user_pref` (theme, show_confidence) under RLS. The cookie remains a cache, and a new device falls back to the saved theme.
+- **CI:** `.github/workflows/ci.yml` runs lint, `pack:validate`, `content:lint` and the tests against Postgres 17 on every push.
+- 139 tests pass (12 files).
+
 ## Run it
 
 ```bash
@@ -33,7 +51,7 @@ npm install
 npm run db:migrate               # applies migrations/*.sql as the owner role
 npm run db:seed-dev              # dev user dev@users.invalid / dev-password-123 with CLF-C02 and 5 sample questions
 npm run dev                      # http://localhost:3000 (password form shown only here, on localhost)
-npm test                         # 99 tests against the throwaway certprep_test database
+npm test                         # 139 tests against the throwaway certprep_test database
 npm run lint
 npm run pack:validate
 ```
@@ -52,13 +70,14 @@ First real account (no public sign-up): `npm run user:create -- "Your Name"` pri
 | T-006 Authentication | Done | Better Auth + `@better-auth/passkey` in plain JavaScript; see "Findings" |
 | T-007 Auth UI | Done | Sign-in (button + conditional-UI autofill), join link, passkey list/add/rename/remove, devices/sessions |
 | T-008 Isolation suite | Done | `tests/isolation.test.js` (16 tests): cross-read/write/insert/reassign, fail-closed, pooled-connection leak, role separation, schema guard, account-deletion cascade |
-| T-009 Theme system | Partial | Semantic tokens via `@theme inline`, default palette removed, two themes (Ledger, Control room), light/dark by system. Theme is a cookie, not yet stored per user; no lint rule banning raw colors yet |
+| T-009 Theme system | Mostly | Semantic tokens via `@theme inline`, default palette removed, two themes (Ledger, Control room), light/dark by system. Theme stored per user (`user_pref`), cookie as cache. No lint rule banning raw colors yet |
 | T-010 Exams | Mostly | Courses catalog, start/continue/pause/resume, readiness target and exam date. No "create manually" |
 | T-011 Pack loader | Done | Reads `content/*/blueprint.json` |
 | T-014 Dev password login | Done | Flag lives in `.env.development`; guards and tests in `tests/auth.test.js` |
 | T-015 Pack tooling | Done | `npm run pack:validate`, `npm run pack:new -- <code>` |
 | T-022/T-023 Import | Done | Preview then commit; server re-validates; all-or-nothing; duplicates skipped; optional update by `id`; 2 MB / 2000-question caps |
-| T-025 Question editor | Edit only | Revalidates through the importer, including the exam profile. No "new question" form |
+| T-024 Question list & filters | Done | Search, status, objective, type, origin (shared bank / mine), flagged |
+| T-025 Question editor | Edit only | Revalidates through the importer, including the exam profile. Shared-bank questions are read-only. No "new question" form |
 | T-026 Safe markdown | Done | React-element renderer, https links only, no raw HTML |
 | T-027 Export approved | Done | Library, Export approved: content-format JSON, round-trip tested |
 | T-028 Content lint CLI | Done | `npm run content:lint` (see Revision 3) |
@@ -66,7 +85,11 @@ First real account (no public sign-up): `npm run user:create -- "Your Name"` pri
 | T-079 Coverage view | Done | Library, Coverage: approved/draft/target per objective, prompt link per objective |
 | T-030/T-031 Review gate and queue | Done | Drafts excluded from pool and stats; blind-answer review; reject needs a reason |
 | T-042–T-044, T-050–T-052 Practice loop | Done | Setup, resumable runner with per-option rationales, results, answer review, retry missed |
-| T-046 Flag and note | Partial | Flag and note in the runner; no bookmark UI |
+| T-045 Confidence chip | Done | Guess / unsure / sure before checking; Account setting to hide; shown in review |
+| T-046 Flag, bookmark and note | Done | F / B / N in the runner; lists on Mistakes & flagged |
+| T-047 Keyboard shortcuts | Done | Practice and mock runners, `?` cheat-sheet |
+| T-053 Mistakes & flagged | Done | Library tab: last missed, correct guesses, flagged, bookmarked |
+| T-078 Question history | Done | Attempts table on the question page |
 | T-061/T-062 Mock exam | Done | Stratified by weight (largest remainder), server-enforced deadline, navigator, review-before-submit, results vs target and pass-mark proxy |
 | T-072–T-075 Today, map, objective detail, what's left | Done | Readiness, bank, activity, what's left, weakest 5, mock trend, treemap (map/list, accuracy/coverage/count, filters) |
 | T-077 History | Done | Score line chart with mode filter, session table with Resume, results page |
@@ -76,10 +99,10 @@ First real account (no public sign-up): `npm run user:create -- "Your Name"` pri
 
 ## Not built yet
 
-- T-012 domain/objective editor, T-013 theme lab and design notes, T-045 confidence chip, T-047 keyboard shortcuts, T-053 mistakes page, T-076 trends, T-078 question history, "create exam manually", "new question" form.
+- T-012 domain/objective editor, T-013 theme lab and design notes, T-076 trends, "create exam manually", "new question" form, pack-reload diff (part of T-011).
 - T-081 browser end-to-end test (the data-layer golden path is tested; the UI was exercised by hand).
 - T-082 remainder: adapt and install `docker/nginx-study.conf.example` (untested draft), the Namecheap record, certificates, scheduled `pg_dump` and a restore drill. T-083 remainder: CSP with nonces, nginx rate limits, the pre-exposure checklist run-through.
-- Content: no question bank exists beyond the 5-question test fixture. Drafting is the main remaining effort.
+- Content: the shared bank has 10 approved questions (objective 2.1). Drafting the rest is the main remaining effort.
 
 ## Findings that changed the plan
 

@@ -3,6 +3,7 @@ import { getAppContext } from "@/lib/app/context.js";
 import { withUser } from "@/lib/db/index.js";
 import { getQuestionsByIds } from "@/lib/db/questions.js";
 import { getResponses, getSession } from "@/lib/db/sessions.js";
+import { getPrefs } from "@/lib/db/prefs.js";
 import { buildFeedback, isUuid, publicQuestion } from "@/lib/app/feedback.js";
 import { PracticeRunner } from "./PracticeRunner.js";
 
@@ -16,12 +17,14 @@ export default async function SessionPage({ params }) {
   const data = await withUser(user.id, async (db) => {
     const session = await getSession(db, sessionId);
     if (!session) return null;
-    const [questions, responses, marks] = await Promise.all([
+    const [questions, responses, marks, prefs] = await Promise.all([
       getQuestionsByIds(db, session.questionIds),
       getResponses(db, sessionId),
-      db.query("SELECT question_id FROM question_mark WHERE kind = 'flag' AND question_id = ANY($1::uuid[])", [session.questionIds]),
+      db.query("SELECT question_id, kind FROM question_mark WHERE question_id = ANY($1::uuid[])", [session.questionIds]),
+      getPrefs(db),
     ]);
-    return { session, questions, responses, flagged: new Set(marks.rows.map((r) => r.question_id)) };
+    const marked = (kind) => new Set(marks.rows.filter((r) => r.kind === kind).map((r) => r.question_id));
+    return { session, questions, responses, prefs, flagged: marked("flag"), bookmarked: marked("bookmark") };
   });
   if (!data) notFound();
   if (data.session.status !== "in-progress") redirect(`/history/${sessionId}`);
@@ -38,8 +41,9 @@ export default async function SessionPage({ params }) {
   return (
     <PracticeRunner
       sessionId={sessionId}
-      questions={ordered.map((q) => ({ ...publicQuestion(q), flagged: data.flagged.has(q.id) }))}
+      questions={ordered.map((q) => ({ ...publicQuestion(q), flagged: data.flagged.has(q.id), bookmarked: data.bookmarked.has(q.id) }))}
       answered={answered}
+      showConfidence={data.prefs.showConfidence}
     />
   );
 }

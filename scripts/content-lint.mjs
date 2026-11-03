@@ -1,5 +1,6 @@
 // Checks question files before they are imported: `npm run content:lint [-- paths...] [--strict]`.
-// With no paths it checks content/*/questions/**/*.json against each pack's blueprint. Exits 1 on errors
+// With no paths it checks content/*/questions/**/*.json (drafts) and content/*/bank/**/*.json (the shared,
+// approved bank) against each pack's blueprint. Exits 1 on errors
 // (and, with --strict, on warnings too).
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join, relative, resolve, sep } from "node:path";
@@ -25,9 +26,14 @@ function collectFiles() {
   if (targets.length > 0)
     return targets.flatMap((t) => (statSync(t).isDirectory() ? walk(t) : [resolve(t)]));
   return readdirSync(ROOT, { withFileTypes: true })
-    .filter((d) => d.isDirectory() && existsSync(join(ROOT, d.name, "questions")))
-    .flatMap((d) => walk(join(ROOT, d.name, "questions")));
+    .filter((d) => d.isDirectory())
+    .flatMap((d) => ["questions", "bank"].map((sub) => join(ROOT, d.name, sub)))
+    .filter((dir) => existsSync(dir))
+    .flatMap(walk);
 }
+
+/** content/<pack>/bank/... */
+const inBank = (file) => relative(ROOT, file).split(sep)[1] === "bank";
 
 /** content/<pack>/questions/... -> content/<pack> */
 function packDirOf(file) {
@@ -39,7 +45,7 @@ function packDirOf(file) {
 
 const files = collectFiles();
 if (files.length === 0) {
-  console.log("No question files found (looked for content/*/questions/**/*.json).");
+  console.log("No question files found (looked for content/*/questions/ and content/*/bank/).");
   process.exit(0);
 }
 
@@ -117,6 +123,9 @@ for (const [dir, packFiles] of byPack) {
         `id: "${item.raw.id}" is already used in ${shown(seenIds.get(item.raw.id))}`,
       );
     else seenIds.set(item.raw.id, item.file);
+    // Everyone gets the bank as approved questions, so only reviewed ones belong there.
+    if (inBank(item.file) && item.raw?.reviewStatus !== "approved")
+      report(item, "ERROR", 'bank: reviewStatus must be "approved" (move drafts to questions/)');
   });
 
   // Batch checks run per file: a file is one drafting batch.

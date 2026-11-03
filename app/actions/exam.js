@@ -6,6 +6,7 @@ import { readFileSync } from "node:fs";
 import { requireUser } from "@/lib/auth/index.js";
 import { withUser } from "@/lib/db/index.js";
 import { enrollInPack, getExam, updateExamSettings, archiveExam } from "@/lib/db/exams.js";
+import { setPrefs } from "@/lib/db/prefs.js";
 import { EXAM_COOKIE, THEME_COOKIE, THEMES } from "@/lib/app/context.js";
 import { listPacks, packPath } from "@/lib/content/packs.js";
 
@@ -75,9 +76,17 @@ export async function pauseCourseAction(formData) {
 }
 
 export async function setThemeAction(formData) {
-  await requireUser();
+  const user = await requireUser();
   const id = String(formData.get("theme"));
-  if (THEMES.some((t) => t.id === id))
+  if (THEMES.some((t) => t.id === id)) {
+    await withUser(user.id, (db) => setPrefs(db, user.id, { theme: id }));
     (await cookies()).set(THEME_COOKIE, id, { ...cookieOpts, httpOnly: false });
+  }
+  revalidatePath("/", "layout");
+}
+
+export async function setStudyPrefsAction(formData) {
+  const user = await requireUser();
+  await withUser(user.id, (db) => setPrefs(db, user.id, { showConfidence: formData.get("showConfidence") === "on" }));
   revalidatePath("/", "layout");
 }

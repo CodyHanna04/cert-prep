@@ -138,6 +138,7 @@ describe("cross-user access", () => {
          VALUES ($1,$2,$3,'[]',true)`,
         [alice, s, q],
       );
+      await db.query(`INSERT INTO user_pref (user_id, theme) VALUES ($1, 'ledger')`, [alice]);
     });
 
     const { rows: tables } = await t.owner.query(

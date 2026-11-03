@@ -46,6 +46,7 @@ const answerSchema = z.object({
   questionId: z.uuid(),
   selected: z.array(z.string().max(8)).max(8),
   timeMs: z.number().int().min(0).max(3_600_000).nullable().optional(),
+  confidence: z.enum(["guess", "unsure", "sure"]).nullable().optional(),
 });
 
 /** Scores an answer and returns the feedback to show. */
@@ -53,7 +54,7 @@ export async function submitAnswerAction(input) {
   const user = await requireUser();
   const a = answerSchema.parse(input);
   return withUser(user.id, async (db) => {
-    const { isCorrect, accepted } = await recordResponse(db, user.id, a.sessionId, a.questionId, a.selected, a.timeMs ?? null);
+    const { isCorrect, accepted } = await recordResponse(db, user.id, a.sessionId, a.questionId, a.selected, a.timeMs ?? null, a.confidence ?? null);
     // Show feedback for what was actually recorded (the first answer sticks in practice).
     const responses = await getResponses(db, a.sessionId);
     const stored = responses.find((r) => r.questionId === a.questionId);
@@ -102,6 +103,12 @@ export async function toggleFlagAction(questionId) {
   const user = await requireUser();
   const id = z.uuid().parse(questionId);
   return withUser(user.id, (db) => toggleMark(db, user.id, id, "flag"));
+}
+
+export async function toggleBookmarkAction(questionId) {
+  const user = await requireUser();
+  const id = z.uuid().parse(questionId);
+  return withUser(user.id, (db) => toggleMark(db, user.id, id, "bookmark"));
 }
 
 export async function saveNoteAction(questionId, body) {

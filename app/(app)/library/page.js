@@ -39,6 +39,9 @@ export default async function LibraryPage({ searchParams }) {
     domainId: isUuid(sp.domain) ? sp.domain : undefined,
     objectiveId: isUuid(sp.objective) ? sp.objective : undefined,
     search: typeof sp.q === "string" && sp.q.trim() ? sp.q.trim().slice(0, 100) : undefined,
+    type: ["single", "multi", "tf"].includes(sp.type) ? sp.type : undefined,
+    origin: ["bank", "mine"].includes(sp.origin) ? sp.origin : undefined,
+    flagged: sp.flagged === "1",
   };
   const page = Math.max(0, Number.parseInt(sp.page ?? "0", 10) || 0);
   const { exam, questions } = await withUser(user.id, async (db) => ({
@@ -70,7 +73,7 @@ export default async function LibraryPage({ searchParams }) {
           </>
         }
       />
-      <form className="mb-4 grid gap-2 md:grid-cols-5" method="get">
+      <form className="mb-4 grid gap-2 md:grid-cols-4" method="get">
         <Input
           name="q"
           defaultValue={sp.q ?? ""}
@@ -94,6 +97,21 @@ export default async function LibraryPage({ searchParams }) {
               </option>
             ))}
         </Select>
+        <Select name="type" defaultValue={sp.type ?? ""} aria-label="Type">
+          <option value="">Any type</option>
+          <option value="single">Single answer</option>
+          <option value="multi">Multiple answer</option>
+          <option value="tf">True / false</option>
+        </Select>
+        <Select name="origin" defaultValue={sp.origin ?? ""} aria-label="Origin">
+          <option value="">Shared bank and mine</option>
+          <option value="bank">Shared bank only</option>
+          <option value="mine">My imports only</option>
+        </Select>
+        <label className="flex items-center gap-2 text-sm">
+          <input type="checkbox" name="flagged" value="1" defaultChecked={sp.flagged === "1"} />
+          Flagged only
+        </label>
         <Button type="submit">Filter</Button>
       </form>
 
@@ -117,6 +135,7 @@ export default async function LibraryPage({ searchParams }) {
                   {q.stem.length > 140 ? `${q.stem.slice(0, 140)}…` : q.stem}
                 </Link>
                 <span className="text-xs text-muted">{ob?.code}</span>
+                {q.fromBank && <Badge tone="info">bank</Badge>}
                 <Badge tone="idle">{q.type}</Badge>
                 <Badge
                   tone={

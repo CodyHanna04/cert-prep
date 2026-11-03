@@ -1,0 +1,40 @@
+# Lint, pack and content checks, and the full test suite (including the two-user isolation tests)
+# against a real Postgres, on every push and pull request.
+name: CI
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_PASSWORD: dev-postgres-superuser
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 3s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Create roles and databases (same script the db container runs)
+        env:
+          PGHOST: 127.0.0.1
+          PGPASSWORD: dev-postgres-superuser
+          POSTGRES_USER: postgres
+          OWNER_PASSWORD: dev-owner
+          APP_PASSWORD: dev-app
+          AUTH_PASSWORD: dev-auth
+          ADMIN_PASSWORD: dev-admin
+        run: sh docker/initdb/01-roles.sh
+      - run: cp .env.example .env
+      - run: npm run lint
+      - run: npm run pack:validate
+      - run: npm run content:lint
+      - run: npm test

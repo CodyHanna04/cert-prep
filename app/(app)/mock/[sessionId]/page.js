@@ -32,7 +32,8 @@ export default async function MockSessionPage({ params }) {
   const byId = new Map(data.questions.map((q) => [q.id, q]));
   const ordered = data.session.questionIds.map((id) => byId.get(id)).filter(Boolean);
   const saved = Object.fromEntries(data.responses.map((r) => [r.questionId, r.selectedOptionIds]));
+  const savedTime = Object.fromEntries(data.responses.filter((r) => r.timeMs != null).map((r) => [r.questionId, r.timeMs]));
   const endsAt = new Date(data.session.startedAt).getTime() + data.session.timeLimitSec * 1000;
 
-  return <MockRunner sessionId={sessionId} questions={ordered.map(publicQuestion)} saved={saved} endsAt={endsAt} />;
+  return <MockRunner sessionId={sessionId} questions={ordered.map(publicQuestion)} saved={saved} savedTime={savedTime} endsAt={endsAt} />;
 }

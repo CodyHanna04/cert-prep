@@ -45,6 +45,8 @@ const saveSchema = z.object({
   sessionId: z.uuid(),
   questionId: z.uuid(),
   selected: z.array(z.string().max(8)).max(8),
+  // Time spent on this question so far (visible tab only), for the time stats on the results page.
+  timeMs: z.number().int().min(0).max(86_400_000).nullable().optional(),
 });
 
 /** Stores (or clears) the current choice for one mock question. No feedback is returned. */
@@ -54,7 +56,7 @@ export async function saveMockAnswerAction(input) {
   try {
     await withUser(user.id, async (db) => {
       if (a.selected.length === 0) await clearResponse(db, a.sessionId, a.questionId);
-      else await recordResponse(db, user.id, a.sessionId, a.questionId, a.selected, null);
+      else await recordResponse(db, user.id, a.sessionId, a.questionId, a.selected, a.timeMs ?? null);
     });
     return { ok: true };
   } catch (e) {

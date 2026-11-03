@@ -5,14 +5,18 @@ import { saveMockAnswerAction } from "@/app/actions/mock.js";
 import { finishSessionAction } from "@/app/actions/practice.js";
 import { Button } from "@/components/ui/index.js";
 import { Markdown } from "@/components/ui/Markdown.js";
+import { optionKeys, ShortcutHelp, useShortcuts, useVisibleTime } from "@/components/SessionKeys.js";
 
 const fmt = (s) => {
   const m = Math.floor(s / 60);
   return `${String(m).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
 };
 
-export function MockRunner({ sessionId, questions, saved, endsAt }) {
+export function MockRunner({ sessionId, questions, saved, savedTime = {}, endsAt }) {
   const [index, setIndex] = useState(0);
+  // Visible time per question, accumulated across visits (shown as time stats on the results page).
+  const spent = useRef(savedTime);
+  const timer = useVisibleTime(savedTime[questions[0]?.id] ?? 0);
   const [answers, setAnswers] = useState(saved);
   const [flags, setFlags] = useState(() => new Set());
   const [reviewing, setReviewing] = useState(false);
@@ -38,13 +42,19 @@ export function MockRunner({ sessionId, questions, saved, endsAt }) {
 
   const q = questions[index];
   const multi = q.type === "multi";
+
+  const goTo = (i) => {
+    spent.current = { ...spent.current, [q.id]: timer.elapsed() };
+    timer.restart(spent.current[questions[i].id] ?? 0);
+    setIndex(i);
+  };
   const sel = answers[q.id] ?? [];
   const answeredCount = questions.filter((x) => (answers[x.id] ?? []).length > 0).length;
 
   async function choose(next) {
     setAnswers((a) => ({ ...a, [q.id]: next }));
     setError(null);
-    const res = await saveMockAnswerAction({ sessionId, questionId: q.id, selected: next });
+    const res = await saveMockAnswerAction({ sessionId, questionId: q.id, selected: next, timeMs: timer.elapsed() });
     if (!res.ok) setError(res.error?.includes("Time is up") ? "Time is up." : "Could not save that answer. Check your connection.");
   }
 
@@ -55,6 +65,20 @@ export function MockRunner({ sessionId, questions, saved, endsAt }) {
       else n.add(q.id);
       return n;
     });
+
+  const isLast = index === questions.length - 1;
+  const pick = (i) => {
+    const id = q.options[i]?.id;
+    if (!id || reviewing) return;
+    choose(multi ? (sel.includes(id) ? sel.filter((x) => x !== id) : [...sel, id]) : [id]);
+  };
+  useShortcuts({
+    ...optionKeys(q.options.length, pick),
+    Enter: () => !reviewing && (isLast ? setReviewing(true) : goTo(index + 1)),
+    ArrowRight: () => !reviewing && !isLast && goTo(index + 1),
+    ArrowLeft: () => !reviewing && index > 0 && goTo(index - 1),
+    f: () => !reviewing && toggleFlag(),
+  });
 
   const urgent = left <= 300;
   const Group = multi ? CheckboxGroup : RadioGroup;
@@ -84,7 +108,7 @@ export function MockRunner({ sessionId, questions, saved, endsAt }) {
               return (
                 <li key={x.id}>
                   <button
-                    onClick={() => { setIndex(i); setReviewing(false); }}
+                    onClick={() => { goTo(i); setReviewing(false); }}
                     className={`relative w-full rounded-theme border py-2 text-sm ${done ? "border-accent bg-accent text-on-accent" : "border-line bg-surface"}`}
                     aria-label={`Question ${i + 1}, ${done ? "answered" : "unanswered"}${flags.has(x.id) ? ", flagged" : ""}`}
                   >
@@ -121,15 +145,24 @@ export function MockRunner({ sessionId, questions, saved, endsAt }) {
         </Group>
         {error && <p role="alert" className="mt-3 text-sm text-bad">{error}</p>}
         <div className="mt-5 flex flex-wrap items-center gap-2">
-          <Button variant="secondary" onPress={() => setIndex(index - 1)} isDisabled={index === 0}>Previous</Button>
-          <Button variant="primary" onPress={() => (index === questions.length - 1 ? setReviewing(true) : setIndex(index + 1))}>
-            {index === questions.length - 1 ? "Review" : "Next"}
+          <Button variant="secondary" onPress={() => goTo(index - 1)} isDisabled={index === 0}>Previous</Button>
+          <Button variant="primary" onPress={() => (isLast ? setReviewing(true) : goTo(index + 1))}>
+            {isLast ? "Review" : "Next"}
           </Button>
           <span className="flex-1" />
           {sel.length > 0 && <Button variant="ghost" onPress={() => choose([])}>Clear answer</Button>}
           <Button variant="ghost" onPress={toggleFlag} aria-pressed={flags.has(q.id)}>{flags.has(q.id) ? "Flagged for review" : "Flag for review"}</Button>
         </div>
       </div>
+      <ShortcutHelp
+        keys={[
+          ["1-9", "Choose an option (toggles on multi-answer questions)"],
+          ["Enter / →", "Next question (Review on the last one)"],
+          ["←", "Previous question"],
+          ["F", "Flag for review"],
+          ["?", "Show or hide this list"],
+        ]}
+      />
     </div>
   );
 }

@@ -110,6 +110,7 @@ export async function updateQuestionAction(input) {
     await withUser(user.id, async (db) => {
       const existing = await getQuestion(db, e.id);
       if (!existing) throw new Error("Question not found.");
+      if (existing.fromBank) throw new Error("This question comes from the shared bank and can't be edited here.");
       const exam = await getExam(db, existing.examId);
       const domain = exam.domains.find((d) => d.id === existing.domainId);
       const objective = domain.objectives.find((o) => o.id === existing.objectiveId);

@@ -62,7 +62,14 @@ Left out on purpose: manual exam creation and the domain/objective editor (packs
 
 ## 5. What I need from you
 
-See the end of the chat reply that came with this doc; the answers get recorded here once given.
+Answered 2026-11-02:
+
+- **Bank:** option A. Approved questions in git are a baseline for every user; a user's own uploads stay theirs. Built (doc 13, revision 4).
+- **Review:** Claude reviews and approves batches after checking the sources and running a blind check with a separate agent.
+- **Hosting:** Proxmox. CT 104 at `192.168.86.227` runs the app. nginx runs in a different LXC on the same host, and you'll configure it. The LAN and firewall are already set up on your side. No backups for now. Time zone: Eastern (`America/New_York`).
+- **Code:** GitHub `CodyHanna04/cert-prep` (public), cloned to `/srv/certprep` on the LXC.
+- **Access:** Claude has SSH to the LXC only (`deploy` user, a dedicated key, temporary sudo) and must ask before touching the Proxmox host.
+- **Tailscale:** you sign in to the sidecar from the login link it prints.
 
 ## Order
 

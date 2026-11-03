@@ -1,5 +1,7 @@
 # 15 — Homelab production setup (Proxmox LXC, Debian 13)
 
+**As built (2026-11-02):** CT 104 `CertPrep`, `192.168.86.227`, Debian 13, 2 cores, 4 GB RAM, 512 MB swap, 40 GB disk. Sections 2–4 are done: SSH is key-only (`deploy` user), Docker is installed, the app runs from `/srv/certprep`, and the admin site is at `https://certprep-admin.tailbacb1d.ts.net`. Not done yet: nginx (section 5, on your nginx LXC), DNS, the first account, and the section 8 checks that need another LAN machine. Backups (section 6) are skipped for now.
+
 Step-by-step setup for `study.codycodez.com` on the homelab. Assumes **Proxmox VE** and an **existing nginx host** that already terminates HTTPS for the homelab (decisions D46, D48). Placeholders in angle brackets: fill them in as you go.
 
 | Placeholder | Meaning |
@@ -257,7 +259,7 @@ The last command prints a single-use enrollment link. Open it **after** nginx is
 
 ### 4.4 Admin site over Tailscale
 
-In the Tailscale admin console first: enable **MagicDNS** and **HTTPS certificates**; create an auth key (single use, pre-approved). Then:
+In the Tailscale admin console first: enable **MagicDNS** and **HTTPS certificates**; create an auth key (single use, pre-approved) and put it in `TS_AUTHKEY`. **The key is required:** without it the sidecar prints a login link but gives up after 60 seconds and restarts with a new link, so a browser sign-in rarely completes in time (found 2026-11-02). After the first start the node's identity lives in the `ts-state` volume, so you can blank `TS_AUTHKEY` again. Then:
 
 ```bash
 docker compose -f docker-compose.yml --profile admin up -d
@@ -375,6 +377,6 @@ Run these and record the results in doc 13 (they map to the [doc 11 §6](11-auth
 
 ## 9. Routine
 
-- **Deploy an update:** get the new code, then `docker compose -f docker-compose.yml build && docker compose -f docker-compose.yml run --rm migrate && docker compose -f docker-compose.yml up -d web admin`. A `scripts/deploy.sh` that does this plus a health check is planned (doc 14, track 2).
+- **Deploy an update:** `cd /srv/certprep && sh scripts/deploy.sh` (pulls `main`, builds the app and the migrate image, applies migrations, restarts web and admin, checks `/sign-in`). Build with `--profile tools`, or the migrate image keeps old migrations: `docker compose build` alone skips it.
 - **Monthly:** `docker compose -f docker-compose.yml pull db ts-admin`, rebuild the app (picks up the Node base image's security fixes), `docker image prune -f`. OS updates install themselves.
 - **Postgres major upgrades** (17 → 18) need a dump and restore; don't just change the image tag.

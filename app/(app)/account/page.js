@@ -1,5 +1,7 @@
 import { getAppContext, getTheme, THEMES } from "@/lib/app/context.js";
-import { setThemeAction } from "@/app/actions/exam.js";
+import { setStudyPrefsAction, setThemeAction } from "@/app/actions/exam.js";
+import { withUser } from "@/lib/db/index.js";
+import { getPrefs } from "@/lib/db/prefs.js";
 import { Button, Card, PageHeader } from "@/components/ui/index.js";
 import { AccountSecurity } from "./AccountSecurity.js";
 import { DataCard } from "./DataCard.js";
@@ -10,6 +12,7 @@ export default async function AccountPage({ searchParams }) {
   const sp = await searchParams;
   const { user } = await getAppContext();
   const theme = await getTheme();
+  const prefs = await withUser(user.id, getPrefs);
 
   return (
     <>
@@ -27,7 +30,19 @@ export default async function AccountPage({ searchParams }) {
             ))}
             <div><Button type="submit">Use this theme</Button></div>
           </form>
-          <p className="mt-2 text-xs text-muted">Light or dark follows your device setting.</p>
+          <p className="mt-2 text-xs text-muted">Light or dark follows your device setting. Saved with your account.</p>
+        </Card>
+        <Card title="Practice">
+          <form action={setStudyPrefsAction} className="grid gap-3 text-sm">
+            <label className="flex items-start gap-3">
+              <input type="checkbox" name="showConfidence" defaultChecked={prefs.showConfidence} className="mt-1" />
+              <span>
+                <span className="font-medium">Ask how sure I am before checking an answer</span>
+                <span className="block text-muted">Guess, unsure or sure. Shown again in the answer review, so lucky guesses stand out.</span>
+              </span>
+            </label>
+            <div><Button type="submit">Save</Button></div>
+          </form>
         </Card>
       </div>
     </>
