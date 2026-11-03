@@ -1,0 +1,445 @@
+{
+  "formatVersion": 1,
+  "questions": [
+    {
+      "id": "clf-c02-1.4-01",
+      "domain": "d1",
+      "objective": "1.4",
+      "type": "single",
+      "stem": "Which is an example of a variable cost for a company that runs its workloads on AWS?",
+      "options": [
+        {
+          "text": "Buying servers for a company-owned data center",
+          "correct": false,
+          "rationale": "Purchased hardware is a fixed, up-front cost."
+        },
+        {
+          "text": "Signing a multi-year lease for a data center building",
+          "correct": false,
+          "rationale": "A building lease is a fixed cost."
+        },
+        {
+          "text": "Paying for Amazon EC2 instances for the hours they run",
+          "correct": true,
+          "rationale": "On-Demand compute is billed for the time it runs, so the cost varies with use."
+        },
+        {
+          "text": "Purchasing network switches before they are needed",
+          "correct": false,
+          "rationale": "Up-front equipment purchases are fixed costs."
+        }
+      ],
+      "explanation": "In the cloud, costs move from fixed up-front investments to variable charges based on usage.",
+      "difficulty": 1,
+      "tags": [
+        "cloud-economics",
+        "variable-cost"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/whitepapers/latest/how-aws-pricing-works/how-aws-pricing-works.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.4-02",
+      "domain": "d1",
+      "objective": "1.4",
+      "type": "single",
+      "stem": "Which cost of running workloads on premises does a company stop paying for directly after moving those workloads to AWS?",
+      "options": [
+        {
+          "text": "Data transfer out to the internet",
+          "correct": false,
+          "rationale": "Data transfer out is still charged on AWS."
+        },
+        {
+          "text": "Licenses for software it brings to AWS",
+          "correct": false,
+          "rationale": "Bring Your Own License software still needs licenses."
+        },
+        {
+          "text": "Staff time to design its own applications",
+          "correct": false,
+          "rationale": "Application design remains the company's work."
+        },
+        {
+          "text": "Power and cooling for its own data center",
+          "correct": true,
+          "rationale": "AWS runs the facilities, so the company no longer pays for its own power and cooling."
+        }
+      ],
+      "explanation": "On-premises cost components include hardware, facilities, power, cooling and the staff to operate them. On AWS these are part of the service price.",
+      "difficulty": 1,
+      "tags": [
+        "cloud-economics",
+        "tco"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/whitepapers/latest/how-aws-pricing-works/how-aws-pricing-works.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.4-03",
+      "domain": "d1",
+      "objective": "1.4",
+      "type": "single",
+      "stem": "A company has existing software licenses that it wants to use on Amazon EC2. What is this licensing approach called?",
+      "options": [
+        {
+          "text": "Bring Your Own License (BYOL)",
+          "correct": true,
+          "rationale": "BYOL lets you use eligible licenses you already own on AWS."
+        },
+        {
+          "text": "License included",
+          "correct": false,
+          "rationale": "License included means the license cost is part of the AWS price."
+        },
+        {
+          "text": "Reserved licensing",
+          "correct": false,
+          "rationale": "This is not an AWS licensing model."
+        },
+        {
+          "text": "Spot licensing",
+          "correct": false,
+          "rationale": "Spot refers to Spot Instances, a compute purchasing option, not licensing."
+        }
+      ],
+      "explanation": "The two licensing strategies to know are BYOL (use your own eligible licenses) and license included (pay for the license through AWS).",
+      "difficulty": 1,
+      "tags": [
+        "cloud-economics",
+        "licensing"
+      ],
+      "refs": [
+        "https://aws.amazon.com/windows/resources/licensing/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.4-04",
+      "domain": "d1",
+      "objective": "1.4",
+      "type": "single",
+      "stem": "Which statement describes a license-included Amazon EC2 instance?",
+      "options": [
+        {
+          "text": "The customer must buy the license from the vendor separately",
+          "correct": false,
+          "rationale": "That describes Bring Your Own License."
+        },
+        {
+          "text": "The software license cost is part of the instance price",
+          "correct": true,
+          "rationale": "With license included, AWS bills the license as part of the instance usage."
+        },
+        {
+          "text": "The software can be used without any license at all",
+          "correct": false,
+          "rationale": "The license still exists; it is paid through AWS."
+        },
+        {
+          "text": "The license requires the instance to run on a Dedicated Host",
+          "correct": false,
+          "rationale": "License-included instances run on shared tenancy too."
+        }
+      ],
+      "explanation": "License included is convenient when you have no existing licenses; BYOL can lower costs when you already own eligible licenses.",
+      "difficulty": 2,
+      "tags": [
+        "cloud-economics",
+        "licensing"
+      ],
+      "refs": [
+        "https://aws.amazon.com/windows/resources/licensing/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.4-05",
+      "domain": "d1",
+      "objective": "1.4",
+      "type": "single",
+      "stem": "What does rightsizing mean in the AWS Cloud?",
+      "options": [
+        {
+          "text": "Running every workload on the largest available instance type to be safe",
+          "correct": false,
+          "rationale": "Oversizing wastes money; rightsizing does the opposite."
+        },
+        {
+          "text": "Buying Reserved Instances for every workload",
+          "correct": false,
+          "rationale": "Reserved Instances are a pricing choice; rightsizing is about resource size."
+        },
+        {
+          "text": "Matching instance types and sizes to workload needs at the lowest cost",
+          "correct": true,
+          "rationale": "Rightsizing selects the cheapest resource that still meets performance and capacity requirements."
+        },
+        {
+          "text": "Deleting all unused AWS accounts each month",
+          "correct": false,
+          "rationale": "Account cleanup is not what rightsizing means."
+        }
+      ],
+      "explanation": "Rightsizing is an ongoing process of matching resources to actual usage, and it is one of the main ways to lower AWS costs.",
+      "difficulty": 1,
+      "tags": [
+        "cloud-economics",
+        "rightsizing"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/whitepapers/latest/cost-optimization-right-sizing/cost-optimization-right-sizing.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.4-06",
+      "domain": "d1",
+      "objective": "1.4",
+      "type": "single",
+      "stem": "How does AWS CloudFormation help a company reduce operational costs?",
+      "options": [
+        {
+          "text": "It lowers the hourly price of every Amazon EC2 instance it launches",
+          "correct": false,
+          "rationale": "CloudFormation does not change resource prices."
+        },
+        {
+          "text": "It removes the need to monitor any resources",
+          "correct": false,
+          "rationale": "Monitoring is still needed; that is Amazon CloudWatch's job."
+        },
+        {
+          "text": "It provides free storage for all backups",
+          "correct": false,
+          "rationale": "CloudFormation is not a backup or storage service."
+        },
+        {
+          "text": "It automates provisioning from reusable templates",
+          "correct": true,
+          "rationale": "Infrastructure as code creates the same environment repeatedly without manual steps."
+        }
+      ],
+      "explanation": "Automation such as CloudFormation reduces the time and errors of manual provisioning, which lowers operating cost.",
+      "difficulty": 2,
+      "tags": [
+        "cloud-economics",
+        "automation",
+        "cloudformation"
+      ],
+      "refs": [
+        "https://aws.amazon.com/cloudformation/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.4-07",
+      "domain": "d1",
+      "objective": "1.4",
+      "type": "single",
+      "stem": "How can a managed database service such as Amazon RDS lower total cost of ownership compared with running the same database on Amazon EC2?",
+      "options": [
+        {
+          "text": "AWS performs routine tasks such as patching and backups",
+          "correct": true,
+          "rationale": "Managed services take routine administration off the customer's team."
+        },
+        {
+          "text": "Managed database services have no usage charges",
+          "correct": false,
+          "rationale": "Managed services are billed; savings come from less operational work."
+        },
+        {
+          "text": "It removes the need to pay for database storage and backup storage",
+          "correct": false,
+          "rationale": "Storage is still charged."
+        },
+        {
+          "text": "It lets customers skip controlling access to their data",
+          "correct": false,
+          "rationale": "Access control stays the customer's responsibility."
+        }
+      ],
+      "explanation": "Managed services such as Amazon RDS, Amazon ECS, Amazon EKS and Amazon DynamoDB reduce the undifferentiated work a team must do.",
+      "difficulty": 2,
+      "tags": [
+        "cloud-economics",
+        "managed-services",
+        "rds"
+      ],
+      "refs": [
+        "https://aws.amazon.com/rds/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.4-08",
+      "domain": "d1",
+      "objective": "1.4",
+      "type": "single",
+      "stem": "Which AWS service is a fully managed container orchestration service, so a company does not install and operate its own orchestration software?",
+      "options": [
+        {
+          "text": "Amazon Elastic Block Store (Amazon EBS)",
+          "correct": false,
+          "rationale": "Amazon EBS provides block storage volumes."
+        },
+        {
+          "text": "Amazon Elastic Container Service (Amazon ECS)",
+          "correct": true,
+          "rationale": "Amazon ECS is a fully managed container orchestration service."
+        },
+        {
+          "text": "Amazon Route 53",
+          "correct": false,
+          "rationale": "Route 53 is a DNS service."
+        },
+        {
+          "text": "AWS Config",
+          "correct": false,
+          "rationale": "AWS Config records and evaluates resource configurations."
+        }
+      ],
+      "explanation": "Managed services like Amazon ECS remove the cost of running your own control plane software.",
+      "difficulty": 1,
+      "tags": [
+        "cloud-economics",
+        "managed-services",
+        "ecs"
+      ],
+      "refs": [
+        "https://aws.amazon.com/ecs/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.4-09",
+      "domain": "d1",
+      "objective": "1.4",
+      "type": "single",
+      "stem": "A company's internal application is used only during business hours. How can the company lower its AWS costs for this workload?",
+      "options": [
+        {
+          "text": "Buy extra on-premises servers as a standby",
+          "correct": false,
+          "rationale": "Extra hardware adds fixed cost."
+        },
+        {
+          "text": "Run the largest instances around the clock",
+          "correct": false,
+          "rationale": "Oversized, always-on resources raise cost."
+        },
+        {
+          "text": "Stop or scale in resources outside business hours",
+          "correct": true,
+          "rationale": "Turning off idle capacity means you stop paying for it."
+        },
+        {
+          "text": "Deploy additional copies of the workload in more AWS Regions",
+          "correct": false,
+          "rationale": "More copies add cost without reducing idle time."
+        }
+      ],
+      "explanation": "Paying only for what you use means scheduling resources to match usage is a direct saving.",
+      "difficulty": 1,
+      "tags": [
+        "cloud-economics",
+        "rightsizing",
+        "automation"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/whitepapers/latest/cost-optimization-right-sizing/cost-optimization-right-sizing.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.4-10",
+      "domain": "d1",
+      "objective": "1.4",
+      "type": "multi",
+      "stem": "Which TWO are benefits of using AWS managed services instead of self-managed software on Amazon EC2? (Choose TWO.)",
+      "options": [
+        {
+          "text": "Full administrator access to the underlying host operating system",
+          "correct": false,
+          "rationale": "Managed services do not give access to the host operating system."
+        },
+        {
+          "text": "Built-in options for scaling and high availability",
+          "correct": true,
+          "rationale": "Managed services offer features such as Multi-AZ deployments and automatic scaling."
+        },
+        {
+          "text": "No charges for using the service",
+          "correct": false,
+          "rationale": "Managed services are billed."
+        },
+        {
+          "text": "Less time spent on routine maintenance such as patching",
+          "correct": true,
+          "rationale": "AWS performs routine administration for managed services."
+        },
+        {
+          "text": "No responsibility for controlling access to data",
+          "correct": false,
+          "rationale": "Access control remains with the customer."
+        }
+      ],
+      "explanation": "Managed services shift operational work to AWS while the customer keeps control of data and access.",
+      "difficulty": 2,
+      "tags": [
+        "cloud-economics",
+        "managed-services"
+      ],
+      "refs": [
+        "https://aws.amazon.com/rds/",
+        "https://aws.amazon.com/ecs/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    }
+  ]
+}

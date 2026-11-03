@@ -1,0 +1,444 @@
+{
+  "formatVersion": 1,
+  "questions": [
+    {
+      "id": "clf-c02-2.4-01",
+      "domain": "d2",
+      "objective": "2.4",
+      "type": "single",
+      "stem": "What does a security group do in an Amazon VPC?",
+      "options": [
+        {
+          "text": "Acts as a virtual firewall controlling traffic to and from instances",
+          "correct": true,
+          "rationale": "Security groups control inbound and outbound traffic for the resources they are attached to."
+        },
+        {
+          "text": "Encrypts data stored on Amazon EBS volumes",
+          "correct": false,
+          "rationale": "Encryption at rest is a storage feature, not a security group function."
+        },
+        {
+          "text": "Gives a set of IAM users the same permissions",
+          "correct": false,
+          "rationale": "That is an IAM group."
+        },
+        {
+          "text": "Scans instances for malware and vulnerabilities",
+          "correct": false,
+          "rationale": "Vulnerability scanning is done by Amazon Inspector."
+        }
+      ],
+      "explanation": "Security groups work at the instance (network interface) level; network ACLs work at the subnet level.",
+      "difficulty": 1,
+      "tags": [
+        "network-security",
+        "security-groups"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.4-02",
+      "domain": "d2",
+      "objective": "2.4",
+      "type": "single",
+      "stem": "Which statement about security groups and network ACLs is correct?",
+      "options": [
+        {
+          "text": "Security groups are stateless; network ACLs are stateful",
+          "correct": false,
+          "rationale": "This reverses the two."
+        },
+        {
+          "text": "Security groups are stateful; network ACLs are stateless",
+          "correct": true,
+          "rationale": "Return traffic is automatically allowed by a security group, but a network ACL evaluates each direction separately."
+        },
+        {
+          "text": "Both are applied at the subnet level",
+          "correct": false,
+          "rationale": "Security groups apply to instances; network ACLs apply to subnets."
+        },
+        {
+          "text": "Network ACLs cannot contain deny rules",
+          "correct": false,
+          "rationale": "Network ACLs support both allow and deny rules."
+        }
+      ],
+      "explanation": "Security groups support allow rules only and are stateful. Network ACLs support allow and deny rules and are stateless.",
+      "difficulty": 2,
+      "tags": [
+        "network-security",
+        "security-groups",
+        "nacl"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html",
+        "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.4-03",
+      "domain": "d2",
+      "objective": "2.4",
+      "type": "single",
+      "stem": "At which level does a network ACL control traffic in an Amazon VPC?",
+      "options": [
+        {
+          "text": "Individual instance",
+          "correct": false,
+          "rationale": "Instance-level control is done with security groups."
+        },
+        {
+          "text": "AWS Region",
+          "correct": false,
+          "rationale": "Network ACLs belong to a VPC and apply to subnets, not whole Regions."
+        },
+        {
+          "text": "Subnet",
+          "correct": true,
+          "rationale": "A network ACL allows or denies traffic in and out of a subnet."
+        },
+        {
+          "text": "AWS account",
+          "correct": false,
+          "rationale": "Network ACLs are not account-wide controls."
+        }
+      ],
+      "explanation": "Network ACLs are an optional layer of security at the subnet level, in addition to security groups.",
+      "difficulty": 1,
+      "tags": [
+        "network-security",
+        "nacl"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.4-04",
+      "domain": "d2",
+      "objective": "2.4",
+      "type": "single",
+      "stem": "Which service protects web applications from common exploits such as SQL injection and cross-site scripting?",
+      "options": [
+        {
+          "text": "AWS Shield",
+          "correct": false,
+          "rationale": "Shield focuses on DDoS protection."
+        },
+        {
+          "text": "Amazon GuardDuty",
+          "correct": false,
+          "rationale": "GuardDuty detects threats from account and network activity."
+        },
+        {
+          "text": "Amazon Inspector",
+          "correct": false,
+          "rationale": "Inspector scans workloads for vulnerabilities."
+        },
+        {
+          "text": "AWS WAF",
+          "correct": true,
+          "rationale": "AWS WAF is a web application firewall that filters HTTP and HTTPS requests based on rules."
+        }
+      ],
+      "explanation": "AWS WAF protects at the application layer with rules for common attack patterns; Shield protects against DDoS.",
+      "difficulty": 1,
+      "tags": [
+        "network-security",
+        "waf"
+      ],
+      "refs": [
+        "https://aws.amazon.com/waf/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.4-05",
+      "domain": "d2",
+      "objective": "2.4",
+      "type": "single",
+      "stem": "Where can a company find and buy third-party security software, such as firewalls and endpoint protection, that runs on AWS?",
+      "options": [
+        {
+          "text": "AWS Marketplace",
+          "correct": true,
+          "rationale": "AWS Marketplace is a catalog of third-party software, including security products."
+        },
+        {
+          "text": "AWS Artifact",
+          "correct": false,
+          "rationale": "Artifact provides compliance reports."
+        },
+        {
+          "text": "AWS Security Hub",
+          "correct": false,
+          "rationale": "Security Hub aggregates findings; it is not a software store."
+        },
+        {
+          "text": "AWS Trusted Advisor",
+          "correct": false,
+          "rationale": "Trusted Advisor checks your account against best practices."
+        }
+      ],
+      "explanation": "AWS Marketplace offers third-party security solutions from AWS Partners that integrate with AWS services.",
+      "difficulty": 1,
+      "tags": [
+        "security-resources",
+        "marketplace"
+      ],
+      "refs": [
+        "https://aws.amazon.com/marketplace"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.4-06",
+      "domain": "d2",
+      "objective": "2.4",
+      "type": "single",
+      "stem": "Which service can check an AWS account for security issues such as security groups with unrestricted ports or a root user without MFA?",
+      "options": [
+        {
+          "text": "AWS Artifact",
+          "correct": false,
+          "rationale": "Artifact provides compliance reports."
+        },
+        {
+          "text": "AWS Trusted Advisor",
+          "correct": true,
+          "rationale": "Trusted Advisor includes security checks such as open ports and root account MFA."
+        },
+        {
+          "text": "Amazon Inspector",
+          "correct": false,
+          "rationale": "Inspector scans workloads for software vulnerabilities, not account settings like root MFA."
+        },
+        {
+          "text": "AWS Shield",
+          "correct": false,
+          "rationale": "Shield protects against DDoS attacks."
+        }
+      ],
+      "explanation": "Trusted Advisor inspects your environment and recommends improvements across security, cost, performance, fault tolerance and service limits.",
+      "difficulty": 2,
+      "tags": [
+        "security-resources",
+        "trusted-advisor"
+      ],
+      "refs": [
+        "https://aws.amazon.com/premiumsupport/technology/trusted-advisor/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.4-07",
+      "domain": "d2",
+      "objective": "2.4",
+      "type": "single",
+      "stem": "Where can a customer find articles answering common AWS questions, written by AWS Support engineers?",
+      "options": [
+        {
+          "text": "AWS Artifact",
+          "correct": false,
+          "rationale": "Artifact provides compliance reports."
+        },
+        {
+          "text": "AWS Marketplace",
+          "correct": false,
+          "rationale": "Marketplace is a software catalog."
+        },
+        {
+          "text": "AWS Knowledge Center",
+          "correct": true,
+          "rationale": "The Knowledge Center, part of AWS re:Post, answers frequently asked questions from AWS customers."
+        },
+        {
+          "text": "AWS Cost Explorer",
+          "correct": false,
+          "rationale": "Cost Explorer analyzes spending."
+        }
+      ],
+      "explanation": "AWS security information is found in the Knowledge Center, the AWS Security Center and the AWS Security Blog.",
+      "difficulty": 1,
+      "tags": [
+        "security-resources",
+        "knowledge-center"
+      ],
+      "refs": [
+        "https://repost.aws/knowledge-center"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.4-08",
+      "domain": "d2",
+      "objective": "2.4",
+      "type": "single",
+      "stem": "Where would a customer read posts by AWS security experts about new security features and best practices?",
+      "options": [
+        {
+          "text": "AWS Artifact",
+          "correct": false,
+          "rationale": "Artifact provides compliance reports and agreements."
+        },
+        {
+          "text": "AWS Cost Explorer",
+          "correct": false,
+          "rationale": "Cost Explorer analyzes spending."
+        },
+        {
+          "text": "AWS Config",
+          "correct": false,
+          "rationale": "AWS Config records resource configurations."
+        },
+        {
+          "text": "AWS Security Blog",
+          "correct": true,
+          "rationale": "The AWS Security Blog publishes security guidance, announcements and how-to posts."
+        }
+      ],
+      "explanation": "The AWS Security Blog is one of the main sources of security information along with the Knowledge Center and the AWS Security Center.",
+      "difficulty": 1,
+      "tags": [
+        "security-resources",
+        "security-blog"
+      ],
+      "refs": [
+        "https://aws.amazon.com/blogs/security/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.4-09",
+      "domain": "d2",
+      "objective": "2.4",
+      "type": "single",
+      "stem": "By default, which traffic does a newly created security group allow?",
+      "options": [
+        {
+          "text": "All outbound traffic, and no inbound traffic",
+          "correct": true,
+          "rationale": "A new security group has no inbound rules and an outbound rule that allows all traffic."
+        },
+        {
+          "text": "All inbound and all outbound traffic",
+          "correct": false,
+          "rationale": "Inbound traffic is denied until you add rules."
+        },
+        {
+          "text": "No inbound and no outbound traffic",
+          "correct": false,
+          "rationale": "Outbound traffic is allowed by default."
+        },
+        {
+          "text": "Inbound web traffic on port 80 alone",
+          "correct": false,
+          "rationale": "No inbound rules exist by default."
+        }
+      ],
+      "explanation": "Security groups deny inbound traffic unless a rule allows it, which is why you add rules for the ports your application needs.",
+      "difficulty": 2,
+      "tags": [
+        "network-security",
+        "security-groups"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.4-10",
+      "domain": "d2",
+      "objective": "2.4",
+      "type": "multi",
+      "stem": "Which TWO can be used to control network traffic in an Amazon VPC? (Choose TWO.)",
+      "options": [
+        {
+          "text": "AWS Cost Explorer",
+          "correct": false,
+          "rationale": "Cost Explorer analyzes spending."
+        },
+        {
+          "text": "Network ACLs",
+          "correct": true,
+          "rationale": "Network ACLs filter traffic for subnets."
+        },
+        {
+          "text": "AWS Artifact",
+          "correct": false,
+          "rationale": "Artifact provides compliance reports."
+        },
+        {
+          "text": "Security groups",
+          "correct": true,
+          "rationale": "Security groups filter traffic for instances and other resources."
+        },
+        {
+          "text": "IAM password policies",
+          "correct": false,
+          "rationale": "Password policies apply to IAM user sign-in, not network traffic."
+        }
+      ],
+      "explanation": "Security groups and network ACLs are the two VPC traffic controls; using both adds defense in depth.",
+      "difficulty": 1,
+      "tags": [
+        "network-security",
+        "security-groups",
+        "nacl"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html",
+        "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    }
+  ]
+}

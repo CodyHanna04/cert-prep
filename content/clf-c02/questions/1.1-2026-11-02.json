@@ -1,0 +1,440 @@
+{
+  "formatVersion": 1,
+  "questions": [
+    {
+      "id": "clf-c02-1.1-01",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "A company wants to stop buying servers based on forecasts of next year's demand. Which advantage of cloud computing addresses this?",
+      "options": [
+        {
+          "text": "Benefit from massive economies of scale",
+          "correct": false,
+          "rationale": "Economies of scale lower prices; they do not remove the need to forecast capacity."
+        },
+        {
+          "text": "Go global in minutes",
+          "correct": false,
+          "rationale": "Global deployment is about reaching users in more Regions, not about capacity planning."
+        },
+        {
+          "text": "Stop spending money running data centers",
+          "correct": false,
+          "rationale": "This is about operating facilities, not about sizing capacity."
+        },
+        {
+          "text": "Stop guessing capacity",
+          "correct": true,
+          "rationale": "You use the capacity you need now and scale up or down in minutes, instead of buying hardware for a forecast."
+        }
+      ],
+      "explanation": "Stop guessing capacity is one of the six advantages of cloud computing: access as much or as little capacity as you need and scale in minutes.",
+      "difficulty": 1,
+      "tags": [
+        "cloud-benefits",
+        "capacity"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/six-advantages-of-cloud-computing.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.1-02",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "A company wants to deploy its application in several geographic Regions with a few clicks so users worldwide get lower latency. Which advantage of cloud computing is this?",
+      "options": [
+        {
+          "text": "Go global in minutes",
+          "correct": true,
+          "rationale": "AWS lets you deploy in multiple Regions around the world quickly, giving users lower latency at low cost."
+        },
+        {
+          "text": "Stop guessing capacity",
+          "correct": false,
+          "rationale": "Capacity planning is a different advantage."
+        },
+        {
+          "text": "Trade fixed expense for variable expense",
+          "correct": false,
+          "rationale": "This advantage is about how you pay, not where you deploy."
+        },
+        {
+          "text": "Benefit from massive economies of scale",
+          "correct": false,
+          "rationale": "This advantage explains lower prices, not global reach."
+        }
+      ],
+      "explanation": "Go global in minutes: deploy in multiple Regions with a few clicks to provide lower latency and a better experience for customers.",
+      "difficulty": 1,
+      "tags": [
+        "cloud-benefits",
+        "global-reach"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/six-advantages-of-cloud-computing.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.1-03",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "Why can AWS offer lower pay-as-you-go prices than most companies could achieve running their own data centers?",
+      "options": [
+        {
+          "text": "AWS requires every customer to sign a multi-year contract",
+          "correct": false,
+          "rationale": "Most AWS services are pay-as-you-go with no long-term contract required."
+        },
+        {
+          "text": "Usage from many customers is aggregated, creating economies of scale",
+          "correct": true,
+          "rationale": "Aggregated usage across a very large customer base lets AWS achieve higher economies of scale and pass savings on."
+        },
+        {
+          "text": "Customers share physical servers without any isolation",
+          "correct": false,
+          "rationale": "AWS isolates customers; low prices do not come from removing isolation."
+        },
+        {
+          "text": "AWS bills for stored data but does not bill for compute",
+          "correct": false,
+          "rationale": "Compute is billed; pricing is not limited to storage."
+        }
+      ],
+      "explanation": "Because usage from hundreds of thousands of customers is aggregated in the cloud, AWS achieves higher economies of scale, which translates into lower pay-as-you-go prices.",
+      "difficulty": 1,
+      "tags": [
+        "cloud-benefits",
+        "economies-of-scale"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/six-advantages-of-cloud-computing.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.1-04",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "Which term describes acquiring resources when demand rises and releasing them when demand falls, so capacity follows the workload?",
+      "options": [
+        {
+          "text": "Durability",
+          "correct": false,
+          "rationale": "Durability is about not losing stored data."
+        },
+        {
+          "text": "High availability",
+          "correct": false,
+          "rationale": "High availability is about staying up when components fail."
+        },
+        {
+          "text": "Elasticity",
+          "correct": true,
+          "rationale": "Elasticity is the ability to scale resources up and down automatically with demand."
+        },
+        {
+          "text": "Data sovereignty",
+          "correct": false,
+          "rationale": "Data sovereignty is about where data is stored and which laws apply."
+        }
+      ],
+      "explanation": "Elasticity lets a workload use only the capacity it needs at any moment, which avoids paying for idle resources.",
+      "difficulty": 1,
+      "tags": [
+        "cloud-benefits",
+        "elasticity"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/six-advantages-of-cloud-computing.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.1-05",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "A company runs its application in multiple Availability Zones so the application keeps working if one data center has a problem. Which benefit does this provide?",
+      "options": [
+        {
+          "text": "Elasticity",
+          "correct": false,
+          "rationale": "Elasticity is about scaling with demand, not about surviving failures."
+        },
+        {
+          "text": "Economies of scale",
+          "correct": false,
+          "rationale": "Economies of scale are about lower costs."
+        },
+        {
+          "text": "Agility",
+          "correct": false,
+          "rationale": "Agility is about how quickly you can experiment and deliver."
+        },
+        {
+          "text": "High availability",
+          "correct": true,
+          "rationale": "Spreading the workload across Availability Zones removes single points of failure."
+        }
+      ],
+      "explanation": "Availability Zones are isolated from each other, so running in more than one keeps the application available when a single location fails.",
+      "difficulty": 1,
+      "tags": [
+        "cloud-benefits",
+        "high-availability",
+        "availability-zones"
+      ],
+      "refs": [
+        "https://aws.amazon.com/about-aws/global-infrastructure/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.1-06",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "Developers can now launch a new test environment in minutes instead of waiting weeks for hardware. Which cloud benefit does this describe?",
+      "options": [
+        {
+          "text": "Increased speed and agility",
+          "correct": true,
+          "rationale": "Resources are a click away, so the time to make them available drops from weeks to minutes."
+        },
+        {
+          "text": "Economies of scale",
+          "correct": false,
+          "rationale": "Economies of scale are about price, not delivery speed."
+        },
+        {
+          "text": "High availability",
+          "correct": false,
+          "rationale": "High availability is about resilience to failure."
+        },
+        {
+          "text": "Stop guessing capacity",
+          "correct": false,
+          "rationale": "This advantage is about capacity planning rather than how fast teams can experiment."
+        }
+      ],
+      "explanation": "Increased speed and agility: new IT resources are only a click away, which lowers the cost and time of experimentation.",
+      "difficulty": 1,
+      "tags": [
+        "cloud-benefits",
+        "agility"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/six-advantages-of-cloud-computing.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.1-07",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "A startup wants to pay only for the computing it consumes rather than investing heavily in servers before it knows how it will use them. Which advantage applies?",
+      "options": [
+        {
+          "text": "Go global in minutes",
+          "correct": false,
+          "rationale": "Global reach is a different advantage."
+        },
+        {
+          "text": "Trade fixed expense for variable expense",
+          "correct": true,
+          "rationale": "Instead of up-front data center investment, you pay only when you consume resources, and only for how much."
+        },
+        {
+          "text": "Increase speed and agility",
+          "correct": false,
+          "rationale": "Agility is about how fast resources are available, not how they are paid for."
+        },
+        {
+          "text": "Benefit from massive economies of scale",
+          "correct": false,
+          "rationale": "Economies of scale explain lower prices, not the shift from up-front to usage-based spending."
+        }
+      ],
+      "explanation": "Trading fixed (capital) expense for variable expense means paying only for the resources you consume instead of investing in data centers and servers up front.",
+      "difficulty": 1,
+      "tags": [
+        "cloud-benefits",
+        "variable-expense"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/six-advantages-of-cloud-computing.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.1-08",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "Which advantage of cloud computing lets a company focus on its customers instead of racking, stacking and powering servers?",
+      "options": [
+        {
+          "text": "Benefit from massive economies of scale",
+          "correct": false,
+          "rationale": "Economies of scale lower prices; this question is about where staff spend their effort."
+        },
+        {
+          "text": "Go global in minutes",
+          "correct": false,
+          "rationale": "Global reach is about deploying in more Regions."
+        },
+        {
+          "text": "Stop spending money running and maintaining data centers",
+          "correct": true,
+          "rationale": "AWS handles the heavy lifting of facilities and hardware, so the company can focus on its own projects."
+        },
+        {
+          "text": "Stop guessing capacity",
+          "correct": false,
+          "rationale": "This advantage is about capacity planning."
+        }
+      ],
+      "explanation": "Stop spending money running and maintaining data centers: focus on projects that differentiate the business, not on infrastructure.",
+      "difficulty": 1,
+      "tags": [
+        "cloud-benefits"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/six-advantages-of-cloud-computing.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.1-09",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "How does the AWS global infrastructure help a company serve users on several continents with low latency?",
+      "options": [
+        {
+          "text": "All AWS traffic is routed through one central Region",
+          "correct": false,
+          "rationale": "AWS Regions operate independently; traffic is not funneled through a single Region."
+        },
+        {
+          "text": "AWS upgrades the home internet connection of every user",
+          "correct": false,
+          "rationale": "AWS does not control end users' internet connections."
+        },
+        {
+          "text": "Edge locations run the company's databases by default",
+          "correct": false,
+          "rationale": "Edge locations cache content; they do not host your databases by default."
+        },
+        {
+          "text": "It can deploy resources in Regions located close to those users",
+          "correct": true,
+          "rationale": "Regions around the world let you place workloads near your users."
+        }
+      ],
+      "explanation": "Choosing Regions close to users reduces network distance, and therefore latency, for those users.",
+      "difficulty": 1,
+      "tags": [
+        "cloud-benefits",
+        "global-infrastructure",
+        "regions"
+      ],
+      "refs": [
+        "https://aws.amazon.com/about-aws/global-infrastructure/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.1-10",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "multi",
+      "stem": "Which TWO are benefits of moving workloads to the AWS Cloud? (Choose TWO.)",
+      "options": [
+        {
+          "text": "Physical access to AWS data centers for customer audits",
+          "correct": false,
+          "rationale": "Customers do not get physical access; AWS provides audit reports through AWS Artifact instead."
+        },
+        {
+          "text": "The ability to scale resources up or down quickly",
+          "correct": true,
+          "rationale": "Capacity can follow demand in minutes."
+        },
+        {
+          "text": "Unlimited free compute for the first year",
+          "correct": false,
+          "rationale": "The AWS Free Tier is limited; compute is not unlimited or free."
+        },
+        {
+          "text": "Pay-as-you-go pricing for the resources used",
+          "correct": true,
+          "rationale": "You pay for what you use, with no large up-front investment."
+        },
+        {
+          "text": "No security responsibilities for the customer",
+          "correct": false,
+          "rationale": "Customers keep security responsibilities under the shared responsibility model."
+        }
+      ],
+      "explanation": "Variable, usage-based pricing and elastic capacity are core cloud benefits. Security remains shared between AWS and the customer.",
+      "difficulty": 1,
+      "tags": [
+        "cloud-benefits"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/six-advantages-of-cloud-computing.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    }
+  ]
+}

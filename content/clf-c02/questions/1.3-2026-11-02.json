@@ -1,0 +1,438 @@
+{
+  "formatVersion": 1,
+  "questions": [
+    {
+      "id": "clf-c02-1.3-01",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "Which AWS framework helps organizations plan their cloud adoption, organizing guidance into perspectives such as Business, People and Governance?",
+      "options": [
+        {
+          "text": "AWS Well-Architected Framework",
+          "correct": false,
+          "rationale": "Well-Architected reviews workload design against six pillars, not adoption perspectives."
+        },
+        {
+          "text": "AWS Cloud Adoption Framework (AWS CAF)",
+          "correct": true,
+          "rationale": "AWS CAF groups its capabilities into six perspectives: Business, People, Governance, Platform, Security and Operations."
+        },
+        {
+          "text": "AWS shared responsibility model",
+          "correct": false,
+          "rationale": "The shared responsibility model divides security duties between AWS and the customer."
+        },
+        {
+          "text": "AWS Trusted Advisor",
+          "correct": false,
+          "rationale": "Trusted Advisor checks your account against best practices."
+        }
+      ],
+      "explanation": "AWS CAF uses AWS experience and best practices to help organizations digitally transform and accelerate business outcomes through the cloud.",
+      "difficulty": 1,
+      "tags": [
+        "caf",
+        "migration"
+      ],
+      "refs": [
+        "https://aws.amazon.com/cloud-adoption-framework/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.3-02",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "Which is a business outcome that AWS CAF identifies as a benefit of cloud transformation?",
+      "options": [
+        {
+          "text": "Higher up-front capital spending",
+          "correct": false,
+          "rationale": "Cloud adoption generally reduces up-front capital spending."
+        },
+        {
+          "text": "Longer software release cycles",
+          "correct": false,
+          "rationale": "Cloud adoption aims to speed up delivery, not slow it."
+        },
+        {
+          "text": "Reduced business risk",
+          "correct": true,
+          "rationale": "AWS CAF lists reduced business risk, improved ESG performance, increased revenue and increased operational efficiency."
+        },
+        {
+          "text": "More on-premises hardware to manage",
+          "correct": false,
+          "rationale": "Moving to the cloud reduces the hardware you manage."
+        }
+      ],
+      "explanation": "AWS CAF describes four business outcomes: reduced business risk, improved environmental, social and governance (ESG) performance, increased revenue and increased operational efficiency.",
+      "difficulty": 2,
+      "tags": [
+        "caf"
+      ],
+      "refs": [
+        "https://aws.amazon.com/cloud-adoption-framework/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.3-03",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "Which AWS CAF perspective focuses on culture, organizational structure, leadership and workforce skills?",
+      "options": [
+        {
+          "text": "Platform",
+          "correct": false,
+          "rationale": "Platform focuses on building the enterprise-grade cloud platform."
+        },
+        {
+          "text": "Security",
+          "correct": false,
+          "rationale": "Security focuses on confidentiality, integrity and availability of data and workloads."
+        },
+        {
+          "text": "Operations",
+          "correct": false,
+          "rationale": "Operations focuses on delivering cloud services at the level the business needs."
+        },
+        {
+          "text": "People",
+          "correct": true,
+          "rationale": "The People perspective bridges technology and business, helping evolve culture and skills."
+        }
+      ],
+      "explanation": "The six AWS CAF perspectives are Business, People, Governance, Platform, Security and Operations.",
+      "difficulty": 2,
+      "tags": [
+        "caf"
+      ],
+      "refs": [
+        "https://aws.amazon.com/cloud-adoption-framework/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.3-04",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "Which AWS CAF perspective helps make sure cloud services are delivered at a level that meets the needs of the business, covering areas such as monitoring and incident management?",
+      "options": [
+        {
+          "text": "Operations",
+          "correct": true,
+          "rationale": "The Operations perspective covers observability, event and incident management, and other operational capabilities."
+        },
+        {
+          "text": "Governance",
+          "correct": false,
+          "rationale": "Governance focuses on orchestrating initiatives, managing risk and controlling spending."
+        },
+        {
+          "text": "People",
+          "correct": false,
+          "rationale": "People focuses on culture and skills."
+        },
+        {
+          "text": "Business",
+          "correct": false,
+          "rationale": "Business focuses on making sure cloud investments accelerate business outcomes."
+        }
+      ],
+      "explanation": "The Operations perspective helps ensure cloud services are delivered at a level that meets the needs of the business.",
+      "difficulty": 2,
+      "tags": [
+        "caf"
+      ],
+      "refs": [
+        "https://aws.amazon.com/cloud-adoption-framework/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.3-05",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "A company moves an application from its data center to Amazon EC2 without changing the application's code. Which migration strategy is this?",
+      "options": [
+        {
+          "text": "Refactor",
+          "correct": false,
+          "rationale": "Refactoring changes the application's architecture to use cloud-native features."
+        },
+        {
+          "text": "Rehost",
+          "correct": true,
+          "rationale": "Rehosting, also called lift and shift, moves an application to the cloud without changes."
+        },
+        {
+          "text": "Repurchase",
+          "correct": false,
+          "rationale": "Repurchasing replaces the application with a different product, often SaaS."
+        },
+        {
+          "text": "Retire",
+          "correct": false,
+          "rationale": "Retiring decommissions an application that is no longer needed."
+        }
+      ],
+      "explanation": "The migration strategies are often called the 7 Rs: retire, retain, rehost, relocate, repurchase, replatform and refactor.",
+      "difficulty": 1,
+      "tags": [
+        "migration",
+        "7rs"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/prescriptive-guidance/latest/large-migration-guide/migration-strategies.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.3-06",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "A company replaces its self-managed customer relationship management software with a software as a service (SaaS) product during its migration. Which migration strategy is this?",
+      "options": [
+        {
+          "text": "Rehost",
+          "correct": false,
+          "rationale": "Rehosting moves the same application without changes."
+        },
+        {
+          "text": "Relocate",
+          "correct": false,
+          "rationale": "Relocating moves infrastructure, such as VMware workloads, to the cloud without new hardware or application changes."
+        },
+        {
+          "text": "Repurchase",
+          "correct": true,
+          "rationale": "Repurchasing, also called drop and shop, moves to a different product, typically SaaS."
+        },
+        {
+          "text": "Retain",
+          "correct": false,
+          "rationale": "Retaining keeps the application where it is for now."
+        }
+      ],
+      "explanation": "Repurchase replaces an existing application with a different one, often a SaaS offering.",
+      "difficulty": 2,
+      "tags": [
+        "migration",
+        "7rs"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/prescriptive-guidance/latest/large-migration-guide/migration-strategies.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.3-07",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "During migration, a company moves its self-managed database to Amazon RDS but leaves the application's core architecture unchanged. Which migration strategy is this?",
+      "options": [
+        {
+          "text": "Rehost",
+          "correct": false,
+          "rationale": "Rehosting makes no changes at all."
+        },
+        {
+          "text": "Refactor",
+          "correct": false,
+          "rationale": "Refactoring re-architects the application."
+        },
+        {
+          "text": "Retire",
+          "correct": false,
+          "rationale": "Retiring switches the application off."
+        },
+        {
+          "text": "Replatform",
+          "correct": true,
+          "rationale": "Replatforming makes a few cloud optimizations, such as moving to a managed database, without changing the core architecture."
+        }
+      ],
+      "explanation": "Replatform, sometimes called lift, tinker and shift, gains some cloud benefits without re-architecting.",
+      "difficulty": 2,
+      "tags": [
+        "migration",
+        "7rs",
+        "rds"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/prescriptive-guidance/latest/large-migration-guide/migration-strategies.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.3-08",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "Which migration strategy involves re-architecting an application to use cloud-native features, for example rebuilding it with serverless services?",
+      "options": [
+        {
+          "text": "Refactor",
+          "correct": true,
+          "rationale": "Refactoring (re-architecting) changes how the application is built to take full advantage of cloud-native features."
+        },
+        {
+          "text": "Rehost",
+          "correct": false,
+          "rationale": "Rehosting moves the application as is."
+        },
+        {
+          "text": "Retain",
+          "correct": false,
+          "rationale": "Retaining keeps the application in its current environment."
+        },
+        {
+          "text": "Repurchase",
+          "correct": false,
+          "rationale": "Repurchasing replaces the application with another product."
+        }
+      ],
+      "explanation": "Refactoring is usually driven by a strong business need for scale, performance or new features that the current architecture cannot provide.",
+      "difficulty": 2,
+      "tags": [
+        "migration",
+        "7rs"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/prescriptive-guidance/latest/large-migration-guide/migration-strategies.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.3-09",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "A company wants to migrate an on-premises database to AWS while the source database stays fully operational during the migration. Which service should it use?",
+      "options": [
+        {
+          "text": "AWS DataSync",
+          "correct": false,
+          "rationale": "DataSync transfers files and objects, not live database migrations."
+        },
+        {
+          "text": "AWS Database Migration Service (AWS DMS)",
+          "correct": true,
+          "rationale": "AWS DMS migrates databases to AWS while the source remains operational, minimizing downtime."
+        },
+        {
+          "text": "AWS Backup",
+          "correct": false,
+          "rationale": "AWS Backup centralizes backups; it is not a migration tool."
+        },
+        {
+          "text": "Amazon Athena",
+          "correct": false,
+          "rationale": "Athena queries data in Amazon S3."
+        }
+      ],
+      "explanation": "AWS DMS supports homogeneous and heterogeneous migrations and can keep replicating changes until you cut over.",
+      "difficulty": 2,
+      "tags": [
+        "migration",
+        "dms"
+      ],
+      "refs": [
+        "https://aws.amazon.com/dms/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.3-10",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "multi",
+      "stem": "Which TWO are migration strategies among the AWS 7 Rs? (Choose TWO.)",
+      "options": [
+        {
+          "text": "Reboot",
+          "correct": false,
+          "rationale": "Rebooting is not a migration strategy."
+        },
+        {
+          "text": "Relocate",
+          "correct": true,
+          "rationale": "Relocate moves infrastructure to the cloud without buying new hardware or changing applications."
+        },
+        {
+          "text": "Resell",
+          "correct": false,
+          "rationale": "Reselling is not a migration strategy."
+        },
+        {
+          "text": "Retain",
+          "correct": true,
+          "rationale": "Retain keeps an application in its current environment for now."
+        },
+        {
+          "text": "Rebuild hardware",
+          "correct": false,
+          "rationale": "Rebuilding hardware is not one of the migration strategies."
+        }
+      ],
+      "explanation": "The 7 Rs are retire, retain, rehost, relocate, repurchase, replatform and refactor.",
+      "difficulty": 2,
+      "tags": [
+        "migration",
+        "7rs"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/prescriptive-guidance/latest/large-migration-guide/migration-strategies.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    }
+  ]
+}

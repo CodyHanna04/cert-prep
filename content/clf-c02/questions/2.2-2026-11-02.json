@@ -1,0 +1,446 @@
+{
+  "formatVersion": 1,
+  "questions": [
+    {
+      "id": "clf-c02-2.2-01",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "Where can a company download AWS compliance reports, such as SOC and ISO reports, to share with its auditors?",
+      "options": [
+        {
+          "text": "AWS Audit Manager",
+          "correct": false,
+          "rationale": "Audit Manager collects evidence about your own AWS usage; it does not host AWS's reports."
+        },
+        {
+          "text": "AWS Config",
+          "correct": false,
+          "rationale": "AWS Config tracks resource configuration changes."
+        },
+        {
+          "text": "AWS Artifact",
+          "correct": true,
+          "rationale": "AWS Artifact provides on-demand access to AWS security and compliance reports and agreements."
+        },
+        {
+          "text": "Amazon Inspector",
+          "correct": false,
+          "rationale": "Inspector scans workloads for software vulnerabilities."
+        }
+      ],
+      "explanation": "AWS Artifact is the self-service portal for AWS compliance reports (for example SOC and ISO certifications) and agreements.",
+      "difficulty": 1,
+      "tags": [
+        "compliance",
+        "artifact"
+      ],
+      "refs": [
+        "https://aws.amazon.com/artifact/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.2-02",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "A company wants to continuously collect evidence about how its own AWS resources are used, mapped to an industry framework, to prepare for audits. Which service should it use?",
+      "options": [
+        {
+          "text": "AWS Artifact",
+          "correct": false,
+          "rationale": "Artifact provides AWS's own compliance reports, not evidence about your usage."
+        },
+        {
+          "text": "AWS CloudTrail",
+          "correct": false,
+          "rationale": "CloudTrail records API activity, which can be evidence, but it does not map evidence to frameworks."
+        },
+        {
+          "text": "AWS Security Hub",
+          "correct": false,
+          "rationale": "Security Hub aggregates security findings and runs best-practice checks."
+        },
+        {
+          "text": "AWS Audit Manager",
+          "correct": true,
+          "rationale": "Audit Manager automates evidence collection and maps it to frameworks to simplify audit preparation."
+        }
+      ],
+      "explanation": "AWS Artifact covers AWS's compliance; AWS Audit Manager helps you assess your own compliance.",
+      "difficulty": 2,
+      "tags": [
+        "compliance",
+        "audit-manager"
+      ],
+      "refs": [
+        "https://aws.amazon.com/audit-manager/",
+        "https://aws.amazon.com/artifact/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.2-03",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "Which service records the API calls made in an AWS account, including who made each call and when?",
+      "options": [
+        {
+          "text": "AWS CloudTrail",
+          "correct": true,
+          "rationale": "CloudTrail logs user activity and API usage across the account for auditing."
+        },
+        {
+          "text": "Amazon CloudWatch",
+          "correct": false,
+          "rationale": "CloudWatch collects metrics and logs for monitoring, not an audit trail of API calls."
+        },
+        {
+          "text": "AWS Config",
+          "correct": false,
+          "rationale": "AWS Config records resource configuration state and changes."
+        },
+        {
+          "text": "Amazon GuardDuty",
+          "correct": false,
+          "rationale": "GuardDuty analyzes activity to detect threats; it is not the record of API calls."
+        }
+      ],
+      "explanation": "CloudTrail answers who did what, when and from where, which makes it central for auditing and security investigations.",
+      "difficulty": 1,
+      "tags": [
+        "governance",
+        "cloudtrail",
+        "logging"
+      ],
+      "refs": [
+        "https://aws.amazon.com/cloudtrail/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.2-04",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "Which service records configuration changes to AWS resources and evaluates them against rules a company defines?",
+      "options": [
+        {
+          "text": "AWS CloudTrail",
+          "correct": false,
+          "rationale": "CloudTrail records API calls rather than evaluating resource configurations against rules."
+        },
+        {
+          "text": "AWS Config",
+          "correct": true,
+          "rationale": "AWS Config tracks resource configurations over time and evaluates them against Config rules."
+        },
+        {
+          "text": "Amazon CloudWatch",
+          "correct": false,
+          "rationale": "CloudWatch monitors metrics and logs."
+        },
+        {
+          "text": "AWS Trusted Advisor",
+          "correct": false,
+          "rationale": "Trusted Advisor checks against AWS best practices, not custom configuration rules."
+        }
+      ],
+      "explanation": "AWS Config is used for auditing and compliance of resource configurations, for example detecting an S3 bucket that became public.",
+      "difficulty": 2,
+      "tags": [
+        "governance",
+        "config",
+        "auditing"
+      ],
+      "refs": [
+        "https://aws.amazon.com/config/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.2-05",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "Which service collects metrics and logs from AWS resources and can trigger an alarm when a metric crosses a threshold?",
+      "options": [
+        {
+          "text": "AWS CloudTrail",
+          "correct": false,
+          "rationale": "CloudTrail records API activity for auditing."
+        },
+        {
+          "text": "AWS Config",
+          "correct": false,
+          "rationale": "AWS Config records configuration changes."
+        },
+        {
+          "text": "Amazon CloudWatch",
+          "correct": true,
+          "rationale": "CloudWatch monitors resources and applications with metrics, logs and alarms."
+        },
+        {
+          "text": "AWS Artifact",
+          "correct": false,
+          "rationale": "Artifact provides compliance reports."
+        }
+      ],
+      "explanation": "CloudWatch is the monitoring service; CloudTrail is the auditing service. They are often confused.",
+      "difficulty": 1,
+      "tags": [
+        "governance",
+        "cloudwatch",
+        "monitoring"
+      ],
+      "refs": [
+        "https://aws.amazon.com/cloudwatch/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.2-06",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "Which service uses threat intelligence and machine learning to detect malicious activity in an AWS account, such as unusual API calls?",
+      "options": [
+        {
+          "text": "Amazon Inspector",
+          "correct": false,
+          "rationale": "Inspector scans for software vulnerabilities and network exposure."
+        },
+        {
+          "text": "AWS Shield",
+          "correct": false,
+          "rationale": "Shield protects against DDoS attacks."
+        },
+        {
+          "text": "AWS WAF",
+          "correct": false,
+          "rationale": "AWS WAF filters web requests to applications."
+        },
+        {
+          "text": "Amazon GuardDuty",
+          "correct": true,
+          "rationale": "GuardDuty continuously monitors accounts and workloads for malicious activity."
+        }
+      ],
+      "explanation": "GuardDuty is threat detection. Inspector is vulnerability management. Shield and WAF are protection services.",
+      "difficulty": 2,
+      "tags": [
+        "security-services",
+        "guardduty"
+      ],
+      "refs": [
+        "https://aws.amazon.com/guardduty/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.2-07",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "Which service automatically scans Amazon EC2 instances and container images for software vulnerabilities?",
+      "options": [
+        {
+          "text": "Amazon Inspector",
+          "correct": true,
+          "rationale": "Inspector discovers workloads and scans them for known vulnerabilities and unintended network exposure."
+        },
+        {
+          "text": "Amazon GuardDuty",
+          "correct": false,
+          "rationale": "GuardDuty detects threats from activity, not software vulnerabilities in instances."
+        },
+        {
+          "text": "AWS Shield",
+          "correct": false,
+          "rationale": "Shield protects against DDoS attacks."
+        },
+        {
+          "text": "AWS Artifact",
+          "correct": false,
+          "rationale": "Artifact provides compliance reports."
+        }
+      ],
+      "explanation": "Amazon Inspector is an automated vulnerability management service for EC2 instances, container images and Lambda functions.",
+      "difficulty": 2,
+      "tags": [
+        "security-services",
+        "inspector"
+      ],
+      "refs": [
+        "https://aws.amazon.com/inspector/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.2-08",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "Which service helps protect applications on AWS against distributed denial of service (DDoS) attacks?",
+      "options": [
+        {
+          "text": "Amazon Inspector",
+          "correct": false,
+          "rationale": "Inspector scans for vulnerabilities."
+        },
+        {
+          "text": "AWS Shield",
+          "correct": true,
+          "rationale": "AWS Shield is a managed DDoS protection service; Shield Standard is included at no extra cost."
+        },
+        {
+          "text": "AWS Config",
+          "correct": false,
+          "rationale": "AWS Config records configuration changes."
+        },
+        {
+          "text": "AWS Audit Manager",
+          "correct": false,
+          "rationale": "Audit Manager collects audit evidence."
+        }
+      ],
+      "explanation": "Shield Standard protects every AWS customer from common network and transport layer DDoS attacks; Shield Advanced adds more protection and support.",
+      "difficulty": 1,
+      "tags": [
+        "security-services",
+        "shield",
+        "ddos"
+      ],
+      "refs": [
+        "https://aws.amazon.com/shield/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.2-09",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "Which service gives a central view of security findings from services such as Amazon GuardDuty and Amazon Inspector and checks accounts against security best practices?",
+      "options": [
+        {
+          "text": "AWS Artifact",
+          "correct": false,
+          "rationale": "Artifact provides compliance reports."
+        },
+        {
+          "text": "Amazon CloudWatch",
+          "correct": false,
+          "rationale": "CloudWatch monitors metrics and logs."
+        },
+        {
+          "text": "AWS Security Hub",
+          "correct": true,
+          "rationale": "Security Hub aggregates findings across services and accounts and runs automated best-practice checks."
+        },
+        {
+          "text": "AWS Organizations",
+          "correct": false,
+          "rationale": "Organizations manages multiple accounts centrally."
+        }
+      ],
+      "explanation": "Security Hub is the place to see and prioritize security findings across your AWS environment.",
+      "difficulty": 2,
+      "tags": [
+        "security-services",
+        "security-hub"
+      ],
+      "refs": [
+        "https://aws.amazon.com/security-hub/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.2-10",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "multi",
+      "stem": "Which TWO statements about encryption on AWS are correct? (Choose TWO.)",
+      "options": [
+        {
+          "text": "Encrypting data removes the need for access controls",
+          "correct": false,
+          "rationale": "Encryption complements access control; it does not replace it."
+        },
+        {
+          "text": "TLS protects data in transit between clients and AWS service endpoints",
+          "correct": true,
+          "rationale": "Encryption in transit commonly uses TLS."
+        },
+        {
+          "text": "Customers cannot create or manage their own encryption keys",
+          "correct": false,
+          "rationale": "AWS KMS lets customers create and control keys."
+        },
+        {
+          "text": "Data can be encrypted at rest, for example in Amazon S3 or Amazon EBS",
+          "correct": true,
+          "rationale": "Storage services support encryption at rest, often with keys from AWS KMS."
+        },
+        {
+          "text": "Amazon EBS volumes cannot be encrypted at rest",
+          "correct": false,
+          "rationale": "EBS supports encryption at rest."
+        }
+      ],
+      "explanation": "Know both forms: encryption at rest (stored data) and encryption in transit (data moving over the network). AWS KMS manages keys.",
+      "difficulty": 2,
+      "tags": [
+        "encryption",
+        "kms"
+      ],
+      "refs": [
+        "https://aws.amazon.com/kms/",
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingEncryption.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    }
+  ]
+}

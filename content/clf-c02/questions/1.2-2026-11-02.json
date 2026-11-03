@@ -1,0 +1,439 @@
+{
+  "formatVersion": 1,
+  "questions": [
+    {
+      "id": "clf-c02-1.2-01",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "Which pillar of the AWS Well-Architected Framework focuses on running and monitoring systems and continually improving processes and procedures?",
+      "options": [
+        {
+          "text": "Operational excellence",
+          "correct": true,
+          "rationale": "Operational excellence covers running and monitoring systems and improving processes over time."
+        },
+        {
+          "text": "Reliability",
+          "correct": false,
+          "rationale": "Reliability is about a workload performing its function correctly and recovering from failure."
+        },
+        {
+          "text": "Performance efficiency",
+          "correct": false,
+          "rationale": "Performance efficiency is about using resources efficiently as demand changes."
+        },
+        {
+          "text": "Sustainability",
+          "correct": false,
+          "rationale": "Sustainability is about reducing environmental impact."
+        }
+      ],
+      "explanation": "The six pillars are operational excellence, security, reliability, performance efficiency, cost optimization and sustainability. Operations and continuous improvement belong to operational excellence.",
+      "difficulty": 1,
+      "tags": [
+        "well-architected",
+        "operational-excellence"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.2-02",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "Which Well-Architected pillar focuses on a workload performing its intended function correctly and consistently, and recovering quickly from failure?",
+      "options": [
+        {
+          "text": "Operational excellence",
+          "correct": false,
+          "rationale": "Operational excellence is about running and improving operations."
+        },
+        {
+          "text": "Reliability",
+          "correct": true,
+          "rationale": "Reliability is about the ability of a workload to perform its intended function and recover from failures."
+        },
+        {
+          "text": "Security",
+          "correct": false,
+          "rationale": "Security is about protecting data, systems and assets."
+        },
+        {
+          "text": "Cost optimization",
+          "correct": false,
+          "rationale": "Cost optimization is about avoiding unnecessary cost."
+        }
+      ],
+      "explanation": "Reliability includes distributed system design, recovery planning and adapting to changing requirements.",
+      "difficulty": 1,
+      "tags": [
+        "well-architected",
+        "reliability"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.2-03",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "Which Well-Architected pillar covers protecting data, systems and assets, including identity management and traceability?",
+      "options": [
+        {
+          "text": "Reliability",
+          "correct": false,
+          "rationale": "Reliability is about recovering from failure, not protecting assets."
+        },
+        {
+          "text": "Operational excellence",
+          "correct": false,
+          "rationale": "Operational excellence is about running and improving systems."
+        },
+        {
+          "text": "Security",
+          "correct": true,
+          "rationale": "The security pillar covers confidentiality and integrity of data, managing user permissions, and detecting security events."
+        },
+        {
+          "text": "Performance efficiency",
+          "correct": false,
+          "rationale": "Performance efficiency is about using resources efficiently."
+        }
+      ],
+      "explanation": "The security pillar focuses on protecting information and systems, including identity, detection and data protection.",
+      "difficulty": 1,
+      "tags": [
+        "well-architected",
+        "security"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.2-04",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "Selecting the right resource types and sizes and keeping them efficient as demand changes and technologies evolve is the focus of which pillar?",
+      "options": [
+        {
+          "text": "Cost optimization",
+          "correct": false,
+          "rationale": "Cost optimization focuses on avoiding unnecessary costs."
+        },
+        {
+          "text": "Reliability",
+          "correct": false,
+          "rationale": "Reliability is about performing correctly and recovering from failure."
+        },
+        {
+          "text": "Sustainability",
+          "correct": false,
+          "rationale": "Sustainability is about minimizing environmental impact."
+        },
+        {
+          "text": "Performance efficiency",
+          "correct": true,
+          "rationale": "Performance efficiency is about using computing resources efficiently to meet requirements as demand changes."
+        }
+      ],
+      "explanation": "Performance efficiency includes choosing appropriate resource types and sizes and monitoring performance as requirements evolve.",
+      "difficulty": 2,
+      "tags": [
+        "well-architected",
+        "performance-efficiency"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.2-05",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "Which Well-Architected pillar focuses on avoiding unnecessary costs and delivering business value at the lowest price point?",
+      "options": [
+        {
+          "text": "Cost optimization",
+          "correct": true,
+          "rationale": "Cost optimization is about running systems to deliver business value at the lowest price point."
+        },
+        {
+          "text": "Performance efficiency",
+          "correct": false,
+          "rationale": "Performance efficiency is about efficient use of resources, not primarily cost."
+        },
+        {
+          "text": "Operational excellence",
+          "correct": false,
+          "rationale": "Operational excellence is about operations and improvement."
+        },
+        {
+          "text": "Sustainability",
+          "correct": false,
+          "rationale": "Sustainability is about environmental impact."
+        }
+      ],
+      "explanation": "Cost optimization covers understanding spending, selecting the right pricing models and scaling to meet needs without overspending.",
+      "difficulty": 1,
+      "tags": [
+        "well-architected",
+        "cost-optimization"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.2-06",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "Which Well-Architected pillar focuses on minimizing the environmental impact of running cloud workloads?",
+      "options": [
+        {
+          "text": "Cost optimization",
+          "correct": false,
+          "rationale": "Cost optimization is about spending, although it often aligns with sustainability."
+        },
+        {
+          "text": "Sustainability",
+          "correct": true,
+          "rationale": "Sustainability focuses on reducing energy consumption and increasing efficiency across a workload."
+        },
+        {
+          "text": "Performance efficiency",
+          "correct": false,
+          "rationale": "Performance efficiency is about meeting performance needs efficiently."
+        },
+        {
+          "text": "Operational excellence",
+          "correct": false,
+          "rationale": "Operational excellence is about running and improving operations."
+        }
+      ],
+      "explanation": "Sustainability is the sixth pillar, added to cover the environmental impact of cloud workloads.",
+      "difficulty": 1,
+      "tags": [
+        "well-architected",
+        "sustainability"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.2-07",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "A team performs operations as code and makes frequent, small, reversible changes. Which pillar's design principles is the team following?",
+      "options": [
+        {
+          "text": "Security",
+          "correct": false,
+          "rationale": "Security principles include a strong identity foundation and traceability."
+        },
+        {
+          "text": "Reliability",
+          "correct": false,
+          "rationale": "Reliability principles include automatic recovery and horizontal scaling."
+        },
+        {
+          "text": "Operational excellence",
+          "correct": true,
+          "rationale": "Performing operations as code and making frequent, small, reversible changes are operational excellence design principles."
+        },
+        {
+          "text": "Cost optimization",
+          "correct": false,
+          "rationale": "Cost optimization principles include adopting a consumption model."
+        }
+      ],
+      "explanation": "Operational excellence design principles include performing operations as code, making frequent small reversible changes, and learning from operational failures.",
+      "difficulty": 2,
+      "tags": [
+        "well-architected",
+        "operational-excellence"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.2-08",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "Which design principle belongs to the reliability pillar of the Well-Architected Framework?",
+      "options": [
+        {
+          "text": "Apply security at all layers",
+          "correct": false,
+          "rationale": "This is a security design principle."
+        },
+        {
+          "text": "Adopt a consumption model",
+          "correct": false,
+          "rationale": "This is a cost optimization design principle."
+        },
+        {
+          "text": "Experiment more often",
+          "correct": false,
+          "rationale": "This is a performance efficiency design principle."
+        },
+        {
+          "text": "Automatically recover from failure",
+          "correct": true,
+          "rationale": "Monitoring for failures and recovering automatically is a reliability design principle."
+        }
+      ],
+      "explanation": "Reliability design principles include automatically recovering from failure, testing recovery procedures, scaling horizontally and stopping guessing capacity.",
+      "difficulty": 2,
+      "tags": [
+        "well-architected",
+        "reliability"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.2-09",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "How many pillars does the AWS Well-Architected Framework have?",
+      "options": [
+        {
+          "text": "Six",
+          "correct": true,
+          "rationale": "Operational excellence, security, reliability, performance efficiency, cost optimization and sustainability."
+        },
+        {
+          "text": "Four",
+          "correct": false,
+          "rationale": "There are more than four pillars."
+        },
+        {
+          "text": "Five",
+          "correct": false,
+          "rationale": "There were five before sustainability was added."
+        },
+        {
+          "text": "Seven",
+          "correct": false,
+          "rationale": "There are six pillars, not seven."
+        }
+      ],
+      "explanation": "The framework has six pillars; sustainability was the most recent addition.",
+      "difficulty": 1,
+      "tags": [
+        "well-architected"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.2-10",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "multi",
+      "stem": "Which TWO are design principles of the security pillar? (Choose TWO.)",
+      "options": [
+        {
+          "text": "Use serverless architectures",
+          "correct": false,
+          "rationale": "This is a performance efficiency design principle."
+        },
+        {
+          "text": "Enable traceability",
+          "correct": true,
+          "rationale": "Monitoring, alerting and auditing actions in real time is a security design principle."
+        },
+        {
+          "text": "Measure overall efficiency",
+          "correct": false,
+          "rationale": "This is a cost optimization design principle."
+        },
+        {
+          "text": "Implement a strong identity foundation",
+          "correct": true,
+          "rationale": "Least privilege and centralized identity management are part of the security pillar."
+        },
+        {
+          "text": "Stop guessing capacity",
+          "correct": false,
+          "rationale": "This is a reliability design principle."
+        }
+      ],
+      "explanation": "Security design principles include a strong identity foundation, traceability, security at all layers, automating security best practices and protecting data in transit and at rest.",
+      "difficulty": 2,
+      "tags": [
+        "well-architected",
+        "security"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "draft",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    }
+  ]
+}
