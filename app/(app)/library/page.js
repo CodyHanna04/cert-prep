@@ -14,6 +14,7 @@ import {
   LinkButton,
   PageHeader,
   Select,
+  CheckChip,
 } from "@/components/ui/index.js";
 
 export const metadata = { title: "Library" };
@@ -108,10 +109,7 @@ export default async function LibraryPage({ searchParams }) {
           <option value="bank">Shared bank only</option>
           <option value="mine">My imports only</option>
         </Select>
-        <label className="flex items-center gap-2 text-sm">
-          <input type="checkbox" name="flagged" value="1" defaultChecked={sp.flagged === "1"} />
-          Flagged only
-        </label>
+        <CheckChip name="flagged" defaultChecked={sp.flagged === "1"}>Flagged only</CheckChip>
         <Button type="submit">Filter</Button>
       </form>
 

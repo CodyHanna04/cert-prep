@@ -442,6 +442,228 @@
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.4-11",
+      "domain": "d1",
+      "objective": "1.4",
+      "type": "single",
+      "stem": "Moving workloads from a company data center to AWS typically shifts spending from what to what?",
+      "options": [
+        {
+          "text": "From operating expenditure to capital expenditure",
+          "correct": false,
+          "rationale": "This reverses the shift."
+        },
+        {
+          "text": "From variable costs to fixed costs",
+          "correct": false,
+          "rationale": "The cloud turns fixed costs into variable ones."
+        },
+        {
+          "text": "From capital expenditure to operating expenditure",
+          "correct": true,
+          "rationale": "Up-front hardware purchases are replaced by ongoing pay-as-you-go charges."
+        },
+        {
+          "text": "From software licensing to hardware purchases",
+          "correct": false,
+          "rationale": "Cloud adoption reduces hardware purchases."
+        }
+      ],
+      "explanation": "Trading fixed (capital) expense for variable (operating) expense is a core economic benefit.",
+      "difficulty": 1,
+      "tags": [
+        "cloud-economics",
+        "capex-opex"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/whitepapers/latest/how-aws-pricing-works/key-principles.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.4-12",
+      "domain": "d1",
+      "objective": "1.4",
+      "type": "single",
+      "stem": "Which service helps a company manage its software licenses from vendors such as Microsoft and Oracle across AWS and on premises?",
+      "options": [
+        {
+          "text": "AWS Artifact",
+          "correct": false,
+          "rationale": "Artifact provides compliance reports and agreements."
+        },
+        {
+          "text": "AWS Cost Explorer",
+          "correct": false,
+          "rationale": "Cost Explorer analyzes spending."
+        },
+        {
+          "text": "AWS Config",
+          "correct": false,
+          "rationale": "AWS Config records resource configurations."
+        },
+        {
+          "text": "AWS License Manager",
+          "correct": true,
+          "rationale": "License Manager tracks license usage and enforces licensing rules."
+        }
+      ],
+      "explanation": "License Manager helps with Bring Your Own License compliance.",
+      "difficulty": 2,
+      "tags": [
+        "cloud-economics",
+        "licensing",
+        "license-manager"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/license-manager/latest/userguide/license-manager.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.4-13",
+      "domain": "d1",
+      "objective": "1.4",
+      "type": "single",
+      "stem": "Which service analyzes utilization and recommends better-sized Amazon EC2 instances to reduce cost?",
+      "options": [
+        {
+          "text": "AWS Compute Optimizer",
+          "correct": true,
+          "rationale": "Compute Optimizer uses utilization data to recommend optimal resource sizes."
+        },
+        {
+          "text": "AWS Pricing Calculator",
+          "correct": false,
+          "rationale": "Pricing Calculator estimates costs before you build."
+        },
+        {
+          "text": "AWS Budgets",
+          "correct": false,
+          "rationale": "Budgets alerts on spending thresholds."
+        },
+        {
+          "text": "AWS Artifact",
+          "correct": false,
+          "rationale": "Artifact provides compliance reports."
+        }
+      ],
+      "explanation": "Compute Optimizer supports rightsizing, one of the most effective cost practices.",
+      "difficulty": 2,
+      "tags": [
+        "cloud-economics",
+        "rightsizing",
+        "compute-optimizer"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/compute-optimizer/latest/ug/what-is-compute-optimizer.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.4-14",
+      "domain": "d1",
+      "objective": "1.4",
+      "type": "single",
+      "stem": "Which is a fixed cost for a company running its own data center?",
+      "options": [
+        {
+          "text": "Paying per GB-month for Amazon S3 storage",
+          "correct": false,
+          "rationale": "S3 storage is a variable, usage-based cost."
+        },
+        {
+          "text": "Buying servers sized for peak demand",
+          "correct": true,
+          "rationale": "Hardware bought up front costs the same whether it is used or idle."
+        },
+        {
+          "text": "Per-second billing for Amazon EC2 instances",
+          "correct": false,
+          "rationale": "Per-second billing is variable."
+        },
+        {
+          "text": "Per-request charges for AWS Lambda",
+          "correct": false,
+          "rationale": "Lambda requests are a variable cost."
+        }
+      ],
+      "explanation": "On premises, capacity for peak demand is paid for even when it sits idle.",
+      "difficulty": 1,
+      "tags": [
+        "cloud-economics",
+        "fixed-cost"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/whitepapers/latest/how-aws-pricing-works/key-principles.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.4-15",
+      "domain": "d1",
+      "objective": "1.4",
+      "type": "multi",
+      "stem": "Which TWO costs belong in a total cost of ownership comparison between an on-premises data center and AWS? (Choose TWO.)",
+      "options": [
+        {
+          "text": "The price of the AWS Management Console",
+          "correct": false,
+          "rationale": "The console has no separate charge."
+        },
+        {
+          "text": "Server hardware and data center facilities",
+          "correct": true,
+          "rationale": "Hardware and facilities are major on-premises costs."
+        },
+        {
+          "text": "AWS certification exam fees",
+          "correct": false,
+          "rationale": "Exam fees are unrelated to infrastructure costs."
+        },
+        {
+          "text": "AWS Marketplace listing fees for sellers",
+          "correct": false,
+          "rationale": "Seller fees are unrelated to a customer's TCO."
+        },
+        {
+          "text": "Staff time spent operating the infrastructure",
+          "correct": true,
+          "rationale": "Operations labor is part of total cost of ownership."
+        }
+      ],
+      "explanation": "A fair comparison includes hardware, facilities, power, cooling, networking, licensing and the people who run it all.",
+      "difficulty": 2,
+      "tags": [
+        "cloud-economics",
+        "tco"
+      ],
+      "refs": [
+        "https://aws.amazon.com/what-is/cloud-vs-on-premises/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
     }
   ]
 }

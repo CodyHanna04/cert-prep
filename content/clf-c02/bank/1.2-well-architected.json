@@ -435,6 +435,268 @@
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.2-11",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "A team uses managed services so it can use technologies such as NoSQL databases and machine learning without building deep in-house expertise. Which performance efficiency design principle is this?",
+      "options": [
+        {
+          "text": "Democratize advanced technologies",
+          "correct": true,
+          "rationale": "Consuming advanced technologies as services lets teams use them without becoming experts."
+        },
+        {
+          "text": "Stop guessing capacity",
+          "correct": false,
+          "rationale": "This is a reliability design principle."
+        },
+        {
+          "text": "Implement a strong identity foundation",
+          "correct": false,
+          "rationale": "This is a security design principle."
+        },
+        {
+          "text": "Adopt a consumption model",
+          "correct": false,
+          "rationale": "This is a cost optimization design principle."
+        }
+      ],
+      "explanation": "Performance efficiency design principles include democratizing advanced technologies, going global in minutes, using serverless architectures, experimenting more often and considering mechanical sympathy.",
+      "difficulty": 2,
+      "tags": [
+        "well-architected",
+        "performance-efficiency"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/perf-dp.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.2-12",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "Paying only for the computing resources you use, and increasing or decreasing usage with business requirements, is which cost optimization design principle?",
+      "options": [
+        {
+          "text": "Automatically recover from failure",
+          "correct": false,
+          "rationale": "This is a reliability design principle."
+        },
+        {
+          "text": "Adopt a consumption model",
+          "correct": true,
+          "rationale": "Pay for what you consume and scale with need instead of forecasting."
+        },
+        {
+          "text": "Apply security at all layers",
+          "correct": false,
+          "rationale": "This is a security design principle."
+        },
+        {
+          "text": "Experiment more often",
+          "correct": false,
+          "rationale": "This is a performance efficiency design principle."
+        }
+      ],
+      "explanation": "Cost optimization design principles include adopting a consumption model, measuring overall efficiency and analyzing and attributing expenditure.",
+      "difficulty": 2,
+      "tags": [
+        "well-architected",
+        "cost-optimization"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/cost-dp.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.2-13",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "Which is a design principle of the sustainability pillar of the Well-Architected Framework?",
+      "options": [
+        {
+          "text": "Implement a strong identity foundation",
+          "correct": false,
+          "rationale": "This is a security design principle."
+        },
+        {
+          "text": "Test recovery procedures",
+          "correct": false,
+          "rationale": "This is a reliability design principle."
+        },
+        {
+          "text": "Maximize utilization",
+          "correct": true,
+          "rationale": "Right-sizing and running resources at high utilization reduces energy use per unit of work."
+        },
+        {
+          "text": "Make frequent, small, reversible changes",
+          "correct": false,
+          "rationale": "This is an operational excellence design principle."
+        }
+      ],
+      "explanation": "Sustainability design principles include understanding your impact, maximizing utilization, using managed services and reducing downstream impact.",
+      "difficulty": 2,
+      "tags": [
+        "well-architected",
+        "sustainability"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/sustainability-pillar/design-principles-for-sustainability-in-the-cloud.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.2-14",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "Which AWS service lets a company review its workloads against the Well-Architected Framework and track improvements over time?",
+      "options": [
+        {
+          "text": "AWS Trusted Advisor",
+          "correct": false,
+          "rationale": "Trusted Advisor runs automated account checks; it is not a framework review of your workload."
+        },
+        {
+          "text": "AWS Config",
+          "correct": false,
+          "rationale": "AWS Config records resource configuration changes."
+        },
+        {
+          "text": "AWS Artifact",
+          "correct": false,
+          "rationale": "Artifact provides compliance reports."
+        },
+        {
+          "text": "AWS Well-Architected Tool",
+          "correct": true,
+          "rationale": "The Well-Architected Tool reviews workloads against the framework's best practices and records improvement plans."
+        }
+      ],
+      "explanation": "The Well-Architected Tool is the console service for framework reviews.",
+      "difficulty": 2,
+      "tags": [
+        "well-architected",
+        "well-architected-tool"
+      ],
+      "refs": [
+        "https://aws.amazon.com/well-architected-tool/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.2-15",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "Replacing one large resource with several smaller ones, so that a single failure has less impact, follows which reliability design principle?",
+      "options": [
+        {
+          "text": "Scale horizontally to increase aggregate workload availability",
+          "correct": true,
+          "rationale": "Spreading requests across many smaller resources removes a single point of failure."
+        },
+        {
+          "text": "Stop guessing capacity",
+          "correct": false,
+          "rationale": "This principle is about monitoring demand and adjusting capacity."
+        },
+        {
+          "text": "Manage change through automation",
+          "correct": false,
+          "rationale": "This principle is about automating infrastructure changes."
+        },
+        {
+          "text": "Measure overall efficiency",
+          "correct": false,
+          "rationale": "This is a cost optimization principle."
+        }
+      ],
+      "explanation": "Reliability design principles include scaling horizontally, automatically recovering from failure and testing recovery procedures.",
+      "difficulty": 2,
+      "tags": [
+        "well-architected",
+        "reliability"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/rel-dp.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.2-16",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "multi",
+      "stem": "Which TWO are pillars of the AWS Well-Architected Framework? (Choose TWO.)",
+      "options": [
+        {
+          "text": "Cost optimization",
+          "correct": true,
+          "rationale": "Cost optimization is one of the six pillars."
+        },
+        {
+          "text": "Scalability",
+          "correct": false,
+          "rationale": "Scalability is a property workloads aim for, not a pillar."
+        },
+        {
+          "text": "Sustainability",
+          "correct": true,
+          "rationale": "Sustainability is the sixth pillar."
+        },
+        {
+          "text": "Elasticity",
+          "correct": false,
+          "rationale": "Elasticity is a cloud characteristic, not a pillar."
+        },
+        {
+          "text": "Agility",
+          "correct": false,
+          "rationale": "Agility is a benefit of the cloud, not a pillar."
+        }
+      ],
+      "explanation": "The pillars are operational excellence, security, reliability, performance efficiency, cost optimization and sustainability.",
+      "difficulty": 1,
+      "tags": [
+        "well-architected"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
     }
   ]
 }

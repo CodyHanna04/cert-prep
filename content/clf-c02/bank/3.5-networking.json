@@ -441,6 +441,92 @@
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.5-11",
+      "domain": "d3",
+      "objective": "3.5",
+      "type": "single",
+      "stem": "Which service lets developers create, publish, secure and monitor APIs at any scale?",
+      "options": [
+        {
+          "text": "Amazon Route 53",
+          "correct": false,
+          "rationale": "Route 53 is DNS."
+        },
+        {
+          "text": "Amazon CloudFront",
+          "correct": false,
+          "rationale": "CloudFront delivers cached content."
+        },
+        {
+          "text": "AWS Direct Connect",
+          "correct": false,
+          "rationale": "Direct Connect is a private network connection."
+        },
+        {
+          "text": "Amazon API Gateway",
+          "correct": true,
+          "rationale": "API Gateway is a managed service for building and running APIs."
+        }
+      ],
+      "explanation": "API Gateway often fronts AWS Lambda functions in serverless applications.",
+      "difficulty": 1,
+      "tags": [
+        "networking",
+        "api-gateway"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.5-12",
+      "domain": "d3",
+      "objective": "3.5",
+      "type": "single",
+      "stem": "Which Amazon Route 53 routing policy sends each user to the Region that gives them the lowest network latency?",
+      "options": [
+        {
+          "text": "Latency-based routing",
+          "correct": true,
+          "rationale": "Latency routing answers with the Region that has the lowest latency for the user."
+        },
+        {
+          "text": "Simple routing",
+          "correct": false,
+          "rationale": "Simple routing returns the same answer for every query."
+        },
+        {
+          "text": "Weighted routing",
+          "correct": false,
+          "rationale": "Weighted routing splits traffic by proportions you set."
+        },
+        {
+          "text": "Geolocation routing",
+          "correct": false,
+          "rationale": "Geolocation routes by the user's location, not by measured latency."
+        }
+      ],
+      "explanation": "Route 53 routing policies include simple, weighted, latency, failover, geolocation and more.",
+      "difficulty": 3,
+      "tags": [
+        "networking",
+        "route53"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
     }
   ]
 }

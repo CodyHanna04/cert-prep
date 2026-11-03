@@ -478,6 +478,179 @@
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.8-12",
+      "domain": "d3",
+      "objective": "3.8",
+      "type": "single",
+      "stem": "Which AWS offering operates a company's AWS infrastructure on its behalf, including patching, monitoring and incident response?",
+      "options": [
+        {
+          "text": "AWS Marketplace",
+          "correct": false,
+          "rationale": "Marketplace is a software catalog."
+        },
+        {
+          "text": "AWS Artifact",
+          "correct": false,
+          "rationale": "Artifact provides compliance reports."
+        },
+        {
+          "text": "AWS Managed Services (AMS)",
+          "correct": true,
+          "rationale": "AMS provides ongoing operation of AWS infrastructure for enterprises."
+        },
+        {
+          "text": "Basic Support",
+          "correct": false,
+          "rationale": "Basic Support covers account and billing questions."
+        }
+      ],
+      "explanation": "AMS operates your AWS infrastructure for you, including patching, monitoring and incident management, and is listed under customer engagement in the exam guide. The AMS Advanced model stopped accepting new customers on June 30, 2026 (support ends June 30, 2027); AMS Accelerate is the continuing model.",
+      "difficulty": 2,
+      "tags": [
+        "customer-engagement",
+        "ams"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/managedservices/latest/userguide/what-is-ams.html",
+        "https://docs.aws.amazon.com/managedservices/latest/userguide/SunsetPlan.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.8-13",
+      "domain": "d3",
+      "objective": "3.8",
+      "type": "single",
+      "stem": "Which program gives eligible startups AWS credits, tools and resources to help them build on AWS?",
+      "options": [
+        {
+          "text": "AWS Marketplace",
+          "correct": false,
+          "rationale": "Marketplace sells third-party software."
+        },
+        {
+          "text": "AWS Partner Network",
+          "correct": false,
+          "rationale": "The Partner Network is for companies that build or deliver AWS-based solutions."
+        },
+        {
+          "text": "AWS Artifact",
+          "correct": false,
+          "rationale": "Artifact provides compliance reports."
+        },
+        {
+          "text": "AWS Activate",
+          "correct": true,
+          "rationale": "AWS Activate offers credits and support for startups."
+        }
+      ],
+      "explanation": "AWS Activate is in the customer engagement category of the exam guide.",
+      "difficulty": 1,
+      "tags": [
+        "customer-engagement",
+        "activate"
+      ],
+      "refs": [
+        "https://aws.amazon.com/startups/credits"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.8-14",
+      "domain": "d3",
+      "objective": "3.8",
+      "type": "single",
+      "stem": "Which service lets teams change application configuration and feature flags safely without redeploying code?",
+      "options": [
+        {
+          "text": "AWS AppConfig",
+          "correct": true,
+          "rationale": "AppConfig deploys configuration changes gradually and can roll them back."
+        },
+        {
+          "text": "AWS CloudFormation",
+          "correct": false,
+          "rationale": "CloudFormation provisions infrastructure."
+        },
+        {
+          "text": "AWS CodeDeploy",
+          "correct": false,
+          "rationale": "CodeDeploy deploys application code."
+        },
+        {
+          "text": "AWS X-Ray",
+          "correct": false,
+          "rationale": "X-Ray traces requests."
+        }
+      ],
+      "explanation": "AppConfig separates configuration changes from code deployments.",
+      "difficulty": 2,
+      "tags": [
+        "developer-tools",
+        "appconfig"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/appconfig/latest/userguide/what-is-appconfig.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.8-15",
+      "domain": "d3",
+      "objective": "3.8",
+      "type": "single",
+      "stem": "Which service is a managed repository for software packages such as npm, Maven and PyPI packages?",
+      "options": [
+        {
+          "text": "AWS CodeBuild",
+          "correct": false,
+          "rationale": "CodeBuild compiles and tests code."
+        },
+        {
+          "text": "AWS CodeArtifact",
+          "correct": true,
+          "rationale": "CodeArtifact stores and shares software packages for builds."
+        },
+        {
+          "text": "AWS CodeDeploy",
+          "correct": false,
+          "rationale": "CodeDeploy automates deployments."
+        },
+        {
+          "text": "AWS AppConfig",
+          "correct": false,
+          "rationale": "AppConfig manages application configuration."
+        }
+      ],
+      "explanation": "CodeArtifact works with common package managers and build tools.",
+      "difficulty": 2,
+      "tags": [
+        "developer-tools",
+        "codeartifact"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/codeartifact/latest/ug/welcome.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
     }
   ]
 }

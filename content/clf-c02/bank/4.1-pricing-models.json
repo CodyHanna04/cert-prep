@@ -441,6 +441,92 @@
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-4.1-11",
+      "domain": "d4",
+      "objective": "4.1",
+      "type": "single",
+      "stem": "Which type of Reserved Instance can be exchanged for one with a different instance family during its term?",
+      "options": [
+        {
+          "text": "Standard Reserved Instances",
+          "correct": false,
+          "rationale": "Standard RIs offer a larger discount but cannot change instance family through exchange."
+        },
+        {
+          "text": "Convertible Reserved Instances",
+          "correct": true,
+          "rationale": "Convertible RIs can be exchanged for other Convertible RIs with different attributes."
+        },
+        {
+          "text": "Spot Instances",
+          "correct": false,
+          "rationale": "Spot Instances are not reservations."
+        },
+        {
+          "text": "Dedicated Hosts",
+          "correct": false,
+          "rationale": "Dedicated Hosts are physical servers, not a Reserved Instance type."
+        }
+      ],
+      "explanation": "Standard RIs trade flexibility for a bigger discount; Convertible RIs trade some discount for flexibility.",
+      "difficulty": 3,
+      "tags": [
+        "pricing",
+        "reserved-instances"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/reserved-instances-types.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-4.1-12",
+      "domain": "d4",
+      "objective": "4.1",
+      "type": "single",
+      "stem": "Which Amazon EC2 option runs instances on hardware dedicated to a single customer, without giving visibility into sockets and cores?",
+      "options": [
+        {
+          "text": "Dedicated Hosts",
+          "correct": false,
+          "rationale": "Dedicated Hosts add visibility into sockets and cores."
+        },
+        {
+          "text": "Spot Instances",
+          "correct": false,
+          "rationale": "Spot Instances use spare capacity on shared hardware."
+        },
+        {
+          "text": "Dedicated Instances",
+          "correct": true,
+          "rationale": "Dedicated Instances run on single-tenant hardware but without host-level visibility or control."
+        },
+        {
+          "text": "On-Demand Capacity Reservations",
+          "correct": false,
+          "rationale": "Capacity Reservations reserve capacity; they do not imply dedicated hardware."
+        }
+      ],
+      "explanation": "Choose Dedicated Hosts when licensing needs socket or core visibility; Dedicated Instances when only single tenancy is required.",
+      "difficulty": 3,
+      "tags": [
+        "pricing",
+        "dedicated-instances"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
     }
   ]
 }

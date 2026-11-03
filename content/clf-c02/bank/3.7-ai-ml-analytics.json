@@ -482,6 +482,135 @@
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.7-12",
+      "domain": "d3",
+      "objective": "3.7",
+      "type": "single",
+      "stem": "Which service uses natural language processing to find sentiment, key phrases and entities in text?",
+      "options": [
+        {
+          "text": "Amazon Polly",
+          "correct": false,
+          "rationale": "Polly turns text into speech."
+        },
+        {
+          "text": "Amazon Comprehend",
+          "correct": true,
+          "rationale": "Comprehend extracts insights such as sentiment and entities from text."
+        },
+        {
+          "text": "Amazon Rekognition",
+          "correct": false,
+          "rationale": "Rekognition analyzes images and video."
+        },
+        {
+          "text": "Amazon Textract",
+          "correct": false,
+          "rationale": "Textract extracts text from documents."
+        }
+      ],
+      "explanation": "Comprehend is used for tasks such as analyzing customer reviews.",
+      "difficulty": 1,
+      "tags": [
+        "ai-ml",
+        "comprehend"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/comprehend/latest/dg/what-is.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.7-13",
+      "domain": "d3",
+      "objective": "3.7",
+      "type": "single",
+      "stem": "Which service extracts printed text, handwriting and data such as tables and forms from scanned documents?",
+      "options": [
+        {
+          "text": "Amazon Comprehend",
+          "correct": false,
+          "rationale": "Comprehend analyzes the meaning of text."
+        },
+        {
+          "text": "Amazon Translate",
+          "correct": false,
+          "rationale": "Translate converts text between languages."
+        },
+        {
+          "text": "Amazon Textract",
+          "correct": true,
+          "rationale": "Textract goes beyond simple OCR to pull structured data from documents."
+        },
+        {
+          "text": "Amazon Transcribe",
+          "correct": false,
+          "rationale": "Transcribe converts speech to text."
+        }
+      ],
+      "explanation": "Textract is often combined with Comprehend to process documents end to end.",
+      "difficulty": 2,
+      "tags": [
+        "ai-ml",
+        "textract"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/textract/latest/dg/what-is.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.7-14",
+      "domain": "d3",
+      "objective": "3.7",
+      "type": "single",
+      "stem": "Which service translates text from one language to another?",
+      "options": [
+        {
+          "text": "Amazon Transcribe",
+          "correct": false,
+          "rationale": "Transcribe converts speech to text."
+        },
+        {
+          "text": "Amazon Polly",
+          "correct": false,
+          "rationale": "Polly turns text into speech."
+        },
+        {
+          "text": "Amazon Lex",
+          "correct": false,
+          "rationale": "Lex builds chatbots."
+        },
+        {
+          "text": "Amazon Translate",
+          "correct": true,
+          "rationale": "Translate is a neural machine translation service."
+        }
+      ],
+      "explanation": "Translate is used to localize content and support multilingual users.",
+      "difficulty": 1,
+      "tags": [
+        "ai-ml",
+        "translate"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/translate/latest/dg/what-is.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
     }
   ]
 }

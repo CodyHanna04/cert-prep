@@ -441,6 +441,403 @@
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.3-11",
+      "domain": "d2",
+      "objective": "2.3",
+      "type": "single",
+      "stem": "What does multi-factor authentication (MFA) add to signing in to AWS?",
+      "options": [
+        {
+          "text": "Encryption for the data stored in the account",
+          "correct": false,
+          "rationale": "Encryption protects data, not sign-in."
+        },
+        {
+          "text": "A longer minimum length for the password",
+          "correct": false,
+          "rationale": "Password length is set by a password policy."
+        },
+        {
+          "text": "An allowlist of IP addresses that are permitted to sign in",
+          "correct": false,
+          "rationale": "That is a network control, not MFA."
+        },
+        {
+          "text": "A second factor, like a device code, besides the password",
+          "correct": true,
+          "rationale": "MFA requires something you have as well as something you know."
+        }
+      ],
+      "explanation": "AWS recommends MFA for the root user and for IAM users.",
+      "difficulty": 1,
+      "tags": [
+        "iam",
+        "mfa"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.3-12",
+      "domain": "d2",
+      "objective": "2.3",
+      "type": "single",
+      "stem": "A company wants a reusable permissions policy that it writes and controls itself and can attach to many IAM identities. Which type of policy is this?",
+      "options": [
+        {
+          "text": "Customer managed policy",
+          "correct": true,
+          "rationale": "Customer managed policies are standalone policies you create and maintain."
+        },
+        {
+          "text": "AWS managed policy",
+          "correct": false,
+          "rationale": "AWS managed policies are created and maintained by AWS."
+        },
+        {
+          "text": "Inline policy",
+          "correct": false,
+          "rationale": "Inline policies are embedded in one identity and are not reusable."
+        },
+        {
+          "text": "Security group",
+          "correct": false,
+          "rationale": "Security groups control network traffic."
+        }
+      ],
+      "explanation": "Use AWS managed policies to start quickly and customer managed policies for least privilege tailored to you.",
+      "difficulty": 2,
+      "tags": [
+        "iam",
+        "policies"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.3-13",
+      "domain": "d2",
+      "objective": "2.3",
+      "type": "single",
+      "stem": "Employees already have accounts in the company's corporate directory. How can they access AWS without separate IAM users?",
+      "options": [
+        {
+          "text": "Create one IAM user and share its password with every employee",
+          "correct": false,
+          "rationale": "Shared credentials break accountability."
+        },
+        {
+          "text": "Use identity federation with the corporate identity provider",
+          "correct": true,
+          "rationale": "Federation lets existing identities assume roles in AWS, for example through IAM Identity Center."
+        },
+        {
+          "text": "Give employees the root user password",
+          "correct": false,
+          "rationale": "Root credentials must never be shared."
+        },
+        {
+          "text": "Email each employee a set of access keys",
+          "correct": false,
+          "rationale": "Emailing long-term keys is insecure."
+        }
+      ],
+      "explanation": "Federated identities receive temporary credentials instead of long-term IAM user credentials.",
+      "difficulty": 2,
+      "tags": [
+        "iam",
+        "federation"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.3-14",
+      "domain": "d2",
+      "objective": "2.3",
+      "type": "single",
+      "stem": "What should a company do with the root user right after creating a new AWS account?",
+      "options": [
+        {
+          "text": "Create root user access keys to use in automation scripts",
+          "correct": false,
+          "rationale": "AWS recommends against root user access keys."
+        },
+        {
+          "text": "Share the root credentials with the team",
+          "correct": false,
+          "rationale": "Root credentials should not be shared."
+        },
+        {
+          "text": "Enable MFA and create an admin user for daily work",
+          "correct": true,
+          "rationale": "Protect the root user and stop using it for everyday tasks."
+        },
+        {
+          "text": "Turn off AWS CloudTrail to reduce costs",
+          "correct": false,
+          "rationale": "CloudTrail records activity and should stay on."
+        }
+      ],
+      "explanation": "Root user best practices: strong password, MFA, no access keys, and use only for tasks that require it.",
+      "difficulty": 1,
+      "tags": [
+        "iam",
+        "root-user",
+        "mfa"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/root-user-best-practices.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.3-15",
+      "domain": "d2",
+      "objective": "2.3",
+      "type": "single",
+      "stem": "How should an application on an Amazon EC2 instance get permission to read objects from an S3 bucket?",
+      "options": [
+        {
+          "text": "Store an IAM user's access keys in a configuration file",
+          "correct": false,
+          "rationale": "Long-term keys on instances can leak."
+        },
+        {
+          "text": "Use the root user credentials",
+          "correct": false,
+          "rationale": "Root credentials should never be used by applications."
+        },
+        {
+          "text": "Add a security group rule for Amazon S3",
+          "correct": false,
+          "rationale": "Security groups control network traffic, not S3 permissions."
+        },
+        {
+          "text": "Attach an IAM role to the instance",
+          "correct": true,
+          "rationale": "An instance profile gives the application temporary credentials that rotate automatically."
+        }
+      ],
+      "explanation": "Roles are the recommended way to give AWS permissions to workloads.",
+      "difficulty": 2,
+      "tags": [
+        "iam",
+        "roles",
+        "ec2"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.3-16",
+      "domain": "d2",
+      "objective": "2.3",
+      "type": "single",
+      "stem": "Besides AWS Secrets Manager, which service can store configuration data and encrypted values (SecureString) as named parameters?",
+      "options": [
+        {
+          "text": "AWS Systems Manager Parameter Store",
+          "correct": true,
+          "rationale": "Parameter Store keeps configuration data and can encrypt values with AWS KMS as SecureString parameters."
+        },
+        {
+          "text": "AWS Artifact",
+          "correct": false,
+          "rationale": "Artifact provides compliance reports."
+        },
+        {
+          "text": "Amazon CloudWatch",
+          "correct": false,
+          "rationale": "CloudWatch monitors metrics and logs."
+        },
+        {
+          "text": "AWS Config",
+          "correct": false,
+          "rationale": "AWS Config records resource configurations."
+        }
+      ],
+      "explanation": "Secrets Manager is purpose-built for secrets and adds built-in rotation; Parameter Store is a simpler, central store for configuration data, with optional KMS-encrypted SecureString values.",
+      "difficulty": 2,
+      "tags": [
+        "iam",
+        "credentials",
+        "systems-manager"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.3-17",
+      "domain": "d2",
+      "objective": "2.3",
+      "type": "single",
+      "stem": "Which IAM feature shows when services were last accessed by an identity, helping remove unused permissions?",
+      "options": [
+        {
+          "text": "AWS Artifact reports",
+          "correct": false,
+          "rationale": "Artifact provides compliance reports."
+        },
+        {
+          "text": "Last accessed information (access advisor)",
+          "correct": true,
+          "rationale": "Last accessed data shows which permissions are actually used, supporting least privilege."
+        },
+        {
+          "text": "Amazon Inspector findings for EC2 instances",
+          "correct": false,
+          "rationale": "Inspector reports vulnerabilities."
+        },
+        {
+          "text": "AWS Shield metrics",
+          "correct": false,
+          "rationale": "Shield metrics are about DDoS events."
+        }
+      ],
+      "explanation": "Access reports such as last accessed information help refine permissions over time.",
+      "difficulty": 3,
+      "tags": [
+        "iam",
+        "least-privilege",
+        "access-reports"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_last-accessed.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.3-18",
+      "domain": "d2",
+      "objective": "2.3",
+      "type": "single",
+      "stem": "Which IAM report lists every user in the account and the status of their passwords, access keys and MFA devices?",
+      "options": [
+        {
+          "text": "An AWS Artifact report",
+          "correct": false,
+          "rationale": "Artifact reports cover AWS compliance."
+        },
+        {
+          "text": "The AWS Cost and Usage Report",
+          "correct": false,
+          "rationale": "That report details costs."
+        },
+        {
+          "text": "The IAM credential report",
+          "correct": true,
+          "rationale": "The credential report is a downloadable list of users and the status of their credentials."
+        },
+        {
+          "text": "The AWS Health Dashboard",
+          "correct": false,
+          "rationale": "The Health Dashboard shows service events."
+        }
+      ],
+      "explanation": "The credential report helps audit credential hygiene, such as old keys and missing MFA.",
+      "difficulty": 2,
+      "tags": [
+        "iam",
+        "access-reports",
+        "credential-report"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.3-19",
+      "domain": "d2",
+      "objective": "2.3",
+      "type": "multi",
+      "stem": "Which TWO actions help secure the AWS account root user? (Choose TWO.)",
+      "options": [
+        {
+          "text": "Use it for daily administrative work",
+          "correct": false,
+          "rationale": "Daily work should use IAM identities."
+        },
+        {
+          "text": "Enable multi-factor authentication",
+          "correct": true,
+          "rationale": "MFA protects the root user even if its password is exposed."
+        },
+        {
+          "text": "Share its password with every administrator",
+          "correct": false,
+          "rationale": "Root credentials should never be shared."
+        },
+        {
+          "text": "Remove the account password policy",
+          "correct": false,
+          "rationale": "Password policies apply to IAM users and help security."
+        },
+        {
+          "text": "Do not create access keys for the root user",
+          "correct": true,
+          "rationale": "Root access keys give full, long-term programmatic access."
+        }
+      ],
+      "explanation": "Keep the root user for the few tasks that require it.",
+      "difficulty": 1,
+      "tags": [
+        "iam",
+        "root-user"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/root-user-best-practices.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
     }
   ]
 }

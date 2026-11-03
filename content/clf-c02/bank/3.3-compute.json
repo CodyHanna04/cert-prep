@@ -439,6 +439,136 @@
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.3-11",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "single",
+      "stem": "Which service offers simple virtual private servers with bundled storage and networking at a predictable monthly price, suited to simple websites?",
+      "options": [
+        {
+          "text": "Amazon EC2 Dedicated Hosts",
+          "correct": false,
+          "rationale": "Dedicated Hosts are physical servers for licensing or compliance."
+        },
+        {
+          "text": "Amazon Lightsail",
+          "correct": true,
+          "rationale": "Lightsail bundles compute, storage and networking into simple monthly plans."
+        },
+        {
+          "text": "AWS Batch",
+          "correct": false,
+          "rationale": "Batch runs batch computing jobs."
+        },
+        {
+          "text": "Amazon Elastic Kubernetes Service (Amazon EKS)",
+          "correct": false,
+          "rationale": "EKS runs Kubernetes clusters."
+        }
+      ],
+      "explanation": "Lightsail is the easiest way to start with a virtual server on AWS.",
+      "difficulty": 1,
+      "tags": [
+        "compute",
+        "lightsail"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lightsail/latest/userguide/what-is-amazon-lightsail.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.3-12",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "single",
+      "stem": "Which service plans, schedules and runs batch computing workloads on Amazon EC2 and AWS Fargate?",
+      "options": [
+        {
+          "text": "AWS Lambda",
+          "correct": false,
+          "rationale": "Lambda runs short event-driven functions."
+        },
+        {
+          "text": "AWS Elastic Beanstalk",
+          "correct": false,
+          "rationale": "Elastic Beanstalk runs web applications."
+        },
+        {
+          "text": "AWS Batch",
+          "correct": true,
+          "rationale": "AWS Batch manages job queues and provisions compute for batch workloads."
+        },
+        {
+          "text": "Amazon Lightsail",
+          "correct": false,
+          "rationale": "Lightsail provides simple virtual servers."
+        }
+      ],
+      "explanation": "AWS Batch removes the need to install and manage batch scheduling software.",
+      "difficulty": 2,
+      "tags": [
+        "compute",
+        "batch"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/batch/latest/userguide/what-is-batch.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.3-13",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "single",
+      "stem": "Which service runs AWS infrastructure and services on premises, in a company's own data center?",
+      "options": [
+        {
+          "text": "AWS Local Zones",
+          "correct": false,
+          "rationale": "Local Zones are AWS-run sites near large cities."
+        },
+        {
+          "text": "AWS Wavelength Zones",
+          "correct": false,
+          "rationale": "Wavelength Zones are inside telecom 5G networks."
+        },
+        {
+          "text": "AWS Direct Connect",
+          "correct": false,
+          "rationale": "Direct Connect is a network link, not compute on premises."
+        },
+        {
+          "text": "AWS Outposts",
+          "correct": true,
+          "rationale": "Outposts brings AWS hardware and services into your facility."
+        }
+      ],
+      "explanation": "Outposts supports hybrid workloads that need low latency to on-premises systems or local data processing.",
+      "difficulty": 2,
+      "tags": [
+        "compute",
+        "outposts",
+        "hybrid"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/outposts/latest/userguide/what-is-outposts.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
     }
   ]
 }

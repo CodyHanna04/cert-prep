@@ -2,6 +2,7 @@ import { getAppContext } from "@/lib/app/context.js";
 import { withUser } from "@/lib/db/index.js";
 import { listExams, listPausedExams } from "@/lib/db/exams.js";
 import { listPacks } from "@/lib/content/packs.js";
+import { readPackBank } from "@/lib/content/bank.js";
 import { enrollAction, openCourseAction } from "@/app/actions/exam.js";
 import { DomainRing } from "@/components/DomainRing.js";
 import { Badge, Button, PageHeader } from "@/components/ui/index.js";
@@ -67,10 +68,11 @@ export default async function CoursesPage() {
             <div className="flex flex-1 flex-col gap-4 p-5">
               {p.marketing && <p className="text-sm text-muted">{p.marketing.audience}</p>}
 
-              <dl className="grid grid-cols-3 gap-3 text-center">
-                <Stat label="questions" value={p.questionCount ?? "—"} />
+              <dl className="grid grid-cols-2 gap-3 text-center sm:grid-cols-4">
+                <Stat label="on the exam" value={p.questionCount ?? "—"} />
                 <Stat label="minutes" value={p.timeLimitMin ?? "—"} />
                 <Stat label="objectives" value={p.objectives} />
+                <Stat label="practice questions" value={readPackBank(p.code).questions.length || "Soon"} />
               </dl>
 
               <div>

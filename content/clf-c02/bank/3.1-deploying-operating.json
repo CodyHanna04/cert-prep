@@ -438,6 +438,136 @@
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.1-11",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "single",
+      "stem": "Which task is a repeatable process that benefits from automation, rather than a one-time operation?",
+      "options": [
+        {
+          "text": "Changing the root user's email address once",
+          "correct": false,
+          "rationale": "A one-off account change does not need automation."
+        },
+        {
+          "text": "Reviewing one month's bill a single time",
+          "correct": false,
+          "rationale": "A one-time review is not a repeatable process."
+        },
+        {
+          "text": "Closing an AWS account that is no longer used",
+          "correct": false,
+          "rationale": "Closing an account is a one-time action."
+        },
+        {
+          "text": "Creating the same VPC layout for every new project",
+          "correct": true,
+          "rationale": "A layout built again and again should come from a template, such as AWS CloudFormation."
+        }
+      ],
+      "explanation": "Automate repeatable processes with infrastructure as code; one-time operations can be done by hand.",
+      "difficulty": 2,
+      "tags": [
+        "iac",
+        "automation"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.1-12",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "single",
+      "stem": "Which service lets developers upload application code while it handles deployment, capacity provisioning, load balancing and scaling?",
+      "options": [
+        {
+          "text": "AWS Elastic Beanstalk",
+          "correct": true,
+          "rationale": "Elastic Beanstalk deploys and manages web applications from uploaded code."
+        },
+        {
+          "text": "AWS CloudFormation",
+          "correct": false,
+          "rationale": "CloudFormation provisions resources from templates but does not manage application deployments for you."
+        },
+        {
+          "text": "Amazon EC2",
+          "correct": false,
+          "rationale": "EC2 provides instances that you configure yourself."
+        },
+        {
+          "text": "Amazon Elastic Block Store (Amazon EBS)",
+          "correct": false,
+          "rationale": "EBS is block storage."
+        }
+      ],
+      "explanation": "Elastic Beanstalk is a platform-as-a-service style way to run web applications on AWS.",
+      "difficulty": 2,
+      "tags": [
+        "deployment",
+        "elastic-beanstalk"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/Welcome.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.1-13",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "single",
+      "stem": "Which service provides a browser-based shell, already authenticated with the console user's credentials, for running AWS CLI commands?",
+      "options": [
+        {
+          "text": "Amazon WorkSpaces",
+          "correct": false,
+          "rationale": "WorkSpaces provides virtual desktops."
+        },
+        {
+          "text": "AWS CloudShell",
+          "correct": true,
+          "rationale": "CloudShell is a browser-based shell with the AWS CLI preinstalled and your credentials available."
+        },
+        {
+          "text": "AWS Config",
+          "correct": false,
+          "rationale": "AWS Config records resource configurations."
+        },
+        {
+          "text": "Amazon WorkSpaces Applications",
+          "correct": false,
+          "rationale": "WorkSpaces Applications streams desktop applications."
+        }
+      ],
+      "explanation": "CloudShell is a quick way to use the CLI without installing anything.",
+      "difficulty": 2,
+      "tags": [
+        "access",
+        "cloudshell",
+        "cli"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/cloudshell/latest/userguide/welcome.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
     }
   ]
 }

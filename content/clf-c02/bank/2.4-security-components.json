@@ -439,6 +439,404 @@
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.4-11",
+      "domain": "d2",
+      "objective": "2.4",
+      "type": "single",
+      "stem": "Which managed service provides network traffic filtering and intrusion prevention for an entire Amazon VPC?",
+      "options": [
+        {
+          "text": "AWS Network Firewall",
+          "correct": true,
+          "rationale": "Network Firewall is a managed, stateful network firewall and intrusion prevention service for VPCs."
+        },
+        {
+          "text": "AWS WAF",
+          "correct": false,
+          "rationale": "AWS WAF filters web requests to applications, not all VPC traffic."
+        },
+        {
+          "text": "Security groups",
+          "correct": false,
+          "rationale": "Security groups filter traffic for individual resources."
+        },
+        {
+          "text": "AWS Shield",
+          "correct": false,
+          "rationale": "Shield protects against DDoS attacks."
+        }
+      ],
+      "explanation": "Network protection layers: security groups (resource), network ACLs (subnet), Network Firewall (VPC), WAF (web application).",
+      "difficulty": 2,
+      "tags": [
+        "network-security",
+        "network-firewall"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/network-firewall/latest/developerguide/what-is-aws-network-firewall.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.4-12",
+      "domain": "d2",
+      "objective": "2.4",
+      "type": "single",
+      "stem": "AWS WAF can protect a website when it is deployed with which service?",
+      "options": [
+        {
+          "text": "Amazon Elastic Block Store (Amazon EBS)",
+          "correct": false,
+          "rationale": "EBS is block storage."
+        },
+        {
+          "text": "Amazon CloudFront",
+          "correct": true,
+          "rationale": "AWS WAF integrates with CloudFront, Application Load Balancer, API Gateway and other services."
+        },
+        {
+          "text": "Amazon S3 Glacier",
+          "correct": false,
+          "rationale": "Glacier is archival storage."
+        },
+        {
+          "text": "AWS Backup",
+          "correct": false,
+          "rationale": "AWS Backup manages backups."
+        }
+      ],
+      "explanation": "AWS WAF inspects HTTP and HTTPS requests at the services that front your application.",
+      "difficulty": 2,
+      "tags": [
+        "network-security",
+        "waf",
+        "cloudfront"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.4-13",
+      "domain": "d2",
+      "objective": "2.4",
+      "type": "single",
+      "stem": "Which kinds of rules can a security group contain?",
+      "options": [
+        {
+          "text": "Deny rules, with no allow rules",
+          "correct": false,
+          "rationale": "Security groups do not support deny rules."
+        },
+        {
+          "text": "Both allow and deny rules",
+          "correct": false,
+          "rationale": "That describes network ACLs."
+        },
+        {
+          "text": "Allow rules, with no deny rules",
+          "correct": true,
+          "rationale": "Security groups support allow rules; traffic not allowed is denied."
+        },
+        {
+          "text": "Rules based on IAM user names",
+          "correct": false,
+          "rationale": "Security groups filter by protocol, port and source, not by IAM user."
+        }
+      ],
+      "explanation": "Use network ACLs when you need explicit deny rules.",
+      "difficulty": 2,
+      "tags": [
+        "network-security",
+        "security-groups"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/vpc/latest/userguide/security-group-rules.html",
+        "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.4-14",
+      "domain": "d2",
+      "objective": "2.4",
+      "type": "single",
+      "stem": "How are the rules in a network ACL evaluated?",
+      "options": [
+        {
+          "text": "All rules are evaluated together before a decision",
+          "correct": false,
+          "rationale": "That is how security groups evaluate rules."
+        },
+        {
+          "text": "Starting with the highest numbered rule",
+          "correct": false,
+          "rationale": "Evaluation starts from the lowest number."
+        },
+        {
+          "text": "In the order the rules were created",
+          "correct": false,
+          "rationale": "Rule numbers, not creation time, set the order."
+        },
+        {
+          "text": "In number order, starting with the lowest numbered rule",
+          "correct": true,
+          "rationale": "The first rule that matches decides whether traffic is allowed or denied."
+        }
+      ],
+      "explanation": "Leave gaps between rule numbers so you can insert rules later.",
+      "difficulty": 3,
+      "tags": [
+        "network-security",
+        "nacl"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.4-15",
+      "domain": "d2",
+      "objective": "2.4",
+      "type": "single",
+      "stem": "Which offering adds 24/7 access to the AWS Shield Response Team and protection against DDoS-related scaling charges?",
+      "options": [
+        {
+          "text": "AWS Shield Advanced",
+          "correct": true,
+          "rationale": "Shield Advanced adds expert response support and cost protection for DDoS-related scaling."
+        },
+        {
+          "text": "AWS Shield Standard",
+          "correct": false,
+          "rationale": "Shield Standard is automatic, basic protection without these extras."
+        },
+        {
+          "text": "AWS WAF",
+          "correct": false,
+          "rationale": "AWS WAF filters web requests."
+        },
+        {
+          "text": "Amazon GuardDuty",
+          "correct": false,
+          "rationale": "GuardDuty detects threats."
+        }
+      ],
+      "explanation": "Shield Standard is included for everyone; Shield Advanced is a paid upgrade.",
+      "difficulty": 2,
+      "tags": [
+        "network-security",
+        "shield"
+      ],
+      "refs": [
+        "https://aws.amazon.com/shield/features/",
+        "https://docs.aws.amazon.com/waf/latest/developerguide/ddos-srt-support.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.4-16",
+      "domain": "d2",
+      "objective": "2.4",
+      "type": "single",
+      "stem": "Where can a customer find AWS security bulletins about newly discovered vulnerabilities and how they affect AWS services?",
+      "options": [
+        {
+          "text": "In AWS Artifact",
+          "correct": false,
+          "rationale": "Artifact provides compliance reports and agreements."
+        },
+        {
+          "text": "On the AWS security bulletins page of the AWS security website",
+          "correct": true,
+          "rationale": "AWS publishes security bulletins for vulnerabilities that affect its services."
+        },
+        {
+          "text": "In AWS Cost Explorer",
+          "correct": false,
+          "rationale": "Cost Explorer analyzes spending."
+        },
+        {
+          "text": "In the AWS Pricing Calculator",
+          "correct": false,
+          "rationale": "Pricing Calculator estimates costs."
+        }
+      ],
+      "explanation": "Security information sources include the AWS security website, the Security Blog and the Knowledge Center.",
+      "difficulty": 2,
+      "tags": [
+        "security-resources",
+        "security-bulletins"
+      ],
+      "refs": [
+        "https://aws.amazon.com/security/security-bulletins/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.4-17",
+      "domain": "d2",
+      "objective": "2.4",
+      "type": "single",
+      "stem": "A company uses security groups and network ACLs together for the same workload. Which security principle does this follow?",
+      "options": [
+        {
+          "text": "Elasticity",
+          "correct": false,
+          "rationale": "Elasticity is about scaling capacity."
+        },
+        {
+          "text": "Economies of scale",
+          "correct": false,
+          "rationale": "Economies of scale are about pricing."
+        },
+        {
+          "text": "Defense in depth (security at all layers)",
+          "correct": true,
+          "rationale": "Several independent layers of control mean one mistake does not expose the workload."
+        },
+        {
+          "text": "Data sovereignty",
+          "correct": false,
+          "rationale": "Data sovereignty is about where data lives."
+        }
+      ],
+      "explanation": "Applying security at all layers is a Well-Architected security design principle.",
+      "difficulty": 1,
+      "tags": [
+        "network-security",
+        "defense-in-depth"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/sec-design.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.4-18",
+      "domain": "d2",
+      "objective": "2.4",
+      "type": "single",
+      "stem": "Which VPC feature captures information about IP traffic going to and from network interfaces, which is useful for security analysis?",
+      "options": [
+        {
+          "text": "AWS CloudTrail",
+          "correct": false,
+          "rationale": "CloudTrail records API calls, not network traffic."
+        },
+        {
+          "text": "AWS Config",
+          "correct": false,
+          "rationale": "AWS Config records configuration changes."
+        },
+        {
+          "text": "AWS Artifact",
+          "correct": false,
+          "rationale": "Artifact provides compliance reports."
+        },
+        {
+          "text": "VPC Flow Logs",
+          "correct": true,
+          "rationale": "Flow logs record accepted and rejected traffic metadata for network interfaces."
+        }
+      ],
+      "explanation": "Flow logs can be published to CloudWatch Logs or Amazon S3.",
+      "difficulty": 2,
+      "tags": [
+        "network-security",
+        "flow-logs",
+        "logging"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.4-19",
+      "domain": "d2",
+      "objective": "2.4",
+      "type": "multi",
+      "stem": "Which TWO filter network or web traffic on AWS? (Choose TWO.)",
+      "options": [
+        {
+          "text": "Amazon Macie",
+          "correct": false,
+          "rationale": "Macie discovers sensitive data in S3."
+        },
+        {
+          "text": "AWS WAF",
+          "correct": true,
+          "rationale": "AWS WAF filters web requests."
+        },
+        {
+          "text": "AWS Artifact",
+          "correct": false,
+          "rationale": "Artifact provides compliance reports."
+        },
+        {
+          "text": "AWS Budgets",
+          "correct": false,
+          "rationale": "Budgets tracks spending."
+        },
+        {
+          "text": "Network ACLs",
+          "correct": true,
+          "rationale": "Network ACLs filter subnet traffic."
+        }
+      ],
+      "explanation": "Traffic filters: security groups, network ACLs, AWS Network Firewall and AWS WAF.",
+      "difficulty": 1,
+      "tags": [
+        "network-security",
+        "waf",
+        "nacl"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html",
+        "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
     }
   ]
 }

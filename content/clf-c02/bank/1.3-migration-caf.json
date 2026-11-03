@@ -433,6 +433,222 @@
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.3-11",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "Which service automates lift-and-shift (rehost) migrations of physical, virtual or cloud servers to AWS?",
+      "options": [
+        {
+          "text": "AWS Database Migration Service (AWS DMS)",
+          "correct": false,
+          "rationale": "AWS DMS migrates databases, not whole servers."
+        },
+        {
+          "text": "AWS Application Migration Service (now AWS Transform MGN)",
+          "correct": true,
+          "rationale": "Application Migration Service replicates source servers and launches them on AWS with minimal changes."
+        },
+        {
+          "text": "AWS Schema Conversion Tool (AWS SCT)",
+          "correct": false,
+          "rationale": "AWS SCT converts database schemas."
+        },
+        {
+          "text": "AWS Config",
+          "correct": false,
+          "rationale": "AWS Config records resource configurations."
+        }
+      ],
+      "explanation": "AWS Application Migration Service, now called AWS Transform MGN, is the recommended service for rehosting physical, virtual and cloud servers on AWS.",
+      "difficulty": 2,
+      "tags": [
+        "migration",
+        "mgn",
+        "rehost"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/mgn/latest/ug/what-is-application-migration-service.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.3-12",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "Which service collects information about on-premises servers, their configuration and their usage to help plan a migration?",
+      "options": [
+        {
+          "text": "AWS CloudTrail",
+          "correct": false,
+          "rationale": "CloudTrail records API activity in AWS accounts."
+        },
+        {
+          "text": "Amazon Inspector",
+          "correct": false,
+          "rationale": "Inspector scans AWS workloads for vulnerabilities."
+        },
+        {
+          "text": "AWS Application Discovery Service",
+          "correct": true,
+          "rationale": "Application Discovery Service gathers data about on-premises servers and their dependencies."
+        },
+        {
+          "text": "AWS Config",
+          "correct": false,
+          "rationale": "AWS Config records AWS resource configurations, not on-premises servers."
+        }
+      ],
+      "explanation": "Discovery data helps you size targets and decide which migration strategy fits each application. AWS Application Discovery Service is no longer open to new customers (AWS points to AWS Transform instead), but the CLF-C02 exam guide still lists it.",
+      "difficulty": 2,
+      "tags": [
+        "migration",
+        "discovery"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/application-discovery/latest/userguide/what-is-appdiscovery.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.3-13",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "A company wants partners to keep uploading files with SFTP, but store the files in Amazon S3. Which service supports this?",
+      "options": [
+        {
+          "text": "Amazon CloudFront",
+          "correct": false,
+          "rationale": "CloudFront delivers content to users."
+        },
+        {
+          "text": "AWS Direct Connect",
+          "correct": false,
+          "rationale": "Direct Connect is a private network connection."
+        },
+        {
+          "text": "Amazon Route 53",
+          "correct": false,
+          "rationale": "Route 53 is a DNS service."
+        },
+        {
+          "text": "AWS Transfer Family",
+          "correct": true,
+          "rationale": "Transfer Family provides managed SFTP, FTPS and FTP endpoints backed by Amazon S3 or Amazon EFS."
+        }
+      ],
+      "explanation": "Transfer Family is part of the migration and transfer category in the exam guide.",
+      "difficulty": 2,
+      "tags": [
+        "migration",
+        "transfer-family"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/transfer/latest/userguide/what-is-aws-transfer-family.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.3-14",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "During migration planning, a company finds an application that nobody uses any more. Which migration strategy applies?",
+      "options": [
+        {
+          "text": "Retire",
+          "correct": true,
+          "rationale": "Retiring decommissions applications that are no longer needed, which reduces cost and risk."
+        },
+        {
+          "text": "Rehost",
+          "correct": false,
+          "rationale": "Rehosting moves the application as is."
+        },
+        {
+          "text": "Replatform",
+          "correct": false,
+          "rationale": "Replatforming moves it with some optimizations."
+        },
+        {
+          "text": "Refactor",
+          "correct": false,
+          "rationale": "Refactoring re-architects it."
+        }
+      ],
+      "explanation": "Discovery often finds applications that can simply be switched off instead of migrated.",
+      "difficulty": 1,
+      "tags": [
+        "migration",
+        "7rs"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/prescriptive-guidance/latest/large-migration-guide/migration-strategies.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.3-15",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "Which AWS CAF perspective focuses on building an enterprise-grade, scalable cloud platform and modernizing existing workloads?",
+      "options": [
+        {
+          "text": "People",
+          "correct": false,
+          "rationale": "People covers culture and skills."
+        },
+        {
+          "text": "Platform",
+          "correct": true,
+          "rationale": "The Platform perspective covers platform architecture, engineering and modernization."
+        },
+        {
+          "text": "Governance",
+          "correct": false,
+          "rationale": "Governance covers risk, portfolio and cost management."
+        },
+        {
+          "text": "Business",
+          "correct": false,
+          "rationale": "Business covers aligning cloud investments with business outcomes."
+        }
+      ],
+      "explanation": "Business, People and Governance are business-focused perspectives; Platform, Security and Operations are technical.",
+      "difficulty": 2,
+      "tags": [
+        "caf"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/whitepapers/latest/overview-aws-cloud-adoption-framework/platform-perspective.html",
+        "https://aws.amazon.com/cloud-adoption-framework/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
     }
   ]
 }

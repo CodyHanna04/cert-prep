@@ -2,7 +2,7 @@
 import { useState, useTransition } from "react";
 import Link from "next/link";
 import { commitImportAction, previewImportAction } from "@/app/actions/library.js";
-import { Badge, Button, Card } from "@/components/ui/index.js";
+import { Badge, Button, Card, checkClass, fileInputClass } from "@/components/ui/index.js";
 
 export function ImportForm() {
   const [text, setText] = useState("");
@@ -49,7 +49,7 @@ export function ImportForm() {
       <Card title="1. Choose a file">
         <label className="block text-sm">
           <span className="sr-only">JSON file</span>
-          <input type="file" accept=".json,application/json" onChange={onFile} className="block w-full text-sm" />
+          <input type="file" accept=".json,application/json" onChange={onFile} className={fileInputClass} />
         </label>
         {fileName && <p className="mt-2 text-sm text-muted">{fileName}</p>}
       </Card>
@@ -78,7 +78,7 @@ export function ImportForm() {
             </ul>
           )}
           <label className="mb-4 flex items-center gap-2 text-sm">
-            <input type="checkbox" checked={updateMatching} onChange={(e) => setUpdateMatching(e.target.checked)} />
+            <input type="checkbox" checked={updateMatching} onChange={(e) => setUpdateMatching(e.target.checked)} className={checkClass} />
             Update existing questions that have the same <code>id</code> but changed content
           </label>
           <div className="flex flex-wrap gap-2">

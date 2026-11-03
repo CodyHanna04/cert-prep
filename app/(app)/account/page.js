@@ -2,7 +2,7 @@ import { getAppContext, getTheme, THEMES } from "@/lib/app/context.js";
 import { setStudyPrefsAction, setThemeAction } from "@/app/actions/exam.js";
 import { withUser } from "@/lib/db/index.js";
 import { getPrefs } from "@/lib/db/prefs.js";
-import { Button, Card, PageHeader } from "@/components/ui/index.js";
+import { Button, Card, checkClass, optionCardClass, PageHeader } from "@/components/ui/index.js";
 import { AccountSecurity } from "./AccountSecurity.js";
 import { DataCard } from "./DataCard.js";
 
@@ -23,8 +23,8 @@ export default async function AccountPage({ searchParams }) {
         <Card title="Appearance">
           <form action={setThemeAction} className="grid gap-2">
             {THEMES.map((t) => (
-              <label key={t.id} className="flex cursor-pointer items-start gap-3 rounded-theme border border-line p-3 text-sm">
-                <input type="radio" name="theme" value={t.id} defaultChecked={t.id === theme} className="mt-1" />
+              <label key={t.id} className={optionCardClass}>
+                <input type="radio" name="theme" value={t.id} defaultChecked={t.id === theme} className={`mt-0.5 ${checkClass}`} />
                 <span><span className="font-medium">{t.name}</span> <span className="text-muted">{t.note}</span></span>
               </label>
             ))}
@@ -34,8 +34,8 @@ export default async function AccountPage({ searchParams }) {
         </Card>
         <Card title="Practice">
           <form action={setStudyPrefsAction} className="grid gap-3 text-sm">
-            <label className="flex items-start gap-3">
-              <input type="checkbox" name="showConfidence" defaultChecked={prefs.showConfidence} className="mt-1" />
+            <label className={optionCardClass}>
+              <input type="checkbox" name="showConfidence" defaultChecked={prefs.showConfidence} className={`mt-0.5 ${checkClass}`} />
               <span>
                 <span className="font-medium">Ask how sure I am before checking an answer</span>
                 <span className="block text-muted">Guess, unsure or sure. Shown again in the answer review, so lucky guesses stand out.</span>

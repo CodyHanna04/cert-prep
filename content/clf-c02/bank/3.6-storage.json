@@ -489,6 +489,94 @@
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.6-12",
+      "domain": "d3",
+      "objective": "3.6",
+      "type": "single",
+      "stem": "Where are Amazon EBS snapshots stored?",
+      "options": [
+        {
+          "text": "In Amazon S3, managed by AWS",
+          "correct": true,
+          "rationale": "Snapshots are incremental backups that AWS stores in Amazon S3."
+        },
+        {
+          "text": "On the instance store of the instance",
+          "correct": false,
+          "rationale": "Instance store is temporary local storage."
+        },
+        {
+          "text": "On the same EBS volume they were taken from",
+          "correct": false,
+          "rationale": "Snapshots are stored separately from the volume."
+        },
+        {
+          "text": "In a bucket you create and manage yourself",
+          "correct": false,
+          "rationale": "Snapshots are not stored in your own S3 buckets."
+        }
+      ],
+      "explanation": "Snapshots can be used to create new volumes, copy data across Regions and back up volumes.",
+      "difficulty": 2,
+      "tags": [
+        "storage",
+        "ebs",
+        "snapshots"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/ebs/latest/userguide/ebs-snapshots.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.6-13",
+      "domain": "d3",
+      "objective": "3.6",
+      "type": "single",
+      "stem": "Which service continuously replicates on-premises or cloud servers to AWS so they can be recovered quickly after a disaster?",
+      "options": [
+        {
+          "text": "AWS Storage Gateway",
+          "correct": false,
+          "rationale": "Storage Gateway provides hybrid access to cloud storage."
+        },
+        {
+          "text": "AWS Elastic Disaster Recovery",
+          "correct": true,
+          "rationale": "Elastic Disaster Recovery replicates servers and launches recovery instances on AWS when needed."
+        },
+        {
+          "text": "Amazon CloudFront",
+          "correct": false,
+          "rationale": "CloudFront delivers content."
+        },
+        {
+          "text": "Amazon Elastic File System (Amazon EFS)",
+          "correct": false,
+          "rationale": "EFS is a shared file system."
+        }
+      ],
+      "explanation": "Elastic Disaster Recovery reduces recovery time and the cost of idle standby infrastructure.",
+      "difficulty": 2,
+      "tags": [
+        "storage",
+        "disaster-recovery",
+        "drs"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/drs/latest/userguide/what-is-drs.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
     }
   ]
 }

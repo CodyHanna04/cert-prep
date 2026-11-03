@@ -56,6 +56,24 @@ Changes made from the first round of feedback:
     - **Support plans were restructured:** Basic, Business Support+, Enterprise Support and Unified Operations. Developer, Business and Enterprise On-Ramp end on 2027-01-01. Support questions now have answers that are correct under both the current plans and the guide's names. The "lowest-cost plan with 24/7 access" question was replaced, because its answer differs between the two.
 - `scripts/deploy.sh` no longer deletes the tracked `docker-compose.override.yml`. Every command names `docker-compose.yml` explicitly, so the override was never loaded anyway.
 
+## Revision 6 (audit and second content batch, 2026-11-02)
+
+- **Site audit:** findings and backlog are in [16-site-audit.md](16-site-audit.md). Fixed in this pass:
+  - Form controls lost their border when a page passed a `className` (the Library search box). Controls now merge classes and have focus rings.
+  - "Flagged only" is now a `CheckChip`.
+  - Library tabs show the current tab.
+  - The file pickers, account radios and checkboxes are styled.
+  - Practice setup shows question counts per scope and disables empty scopes.
+  - Course cards show the shared bank's size next to the exam's length.
+  - There is a themed 404 page.
+- **81 more CLF-C02 questions**, bringing the bank to 275. Most went to domain 2, plus extras across domain 3. The blind check agreed on 81 of 81. The source checks found no wrong keys, but did find:
+  - **Renamed:** AWS Application Migration Service is now AWS Transform MGN.
+  - **Closed to new customers:** AWS Application Discovery Service, and the AMS Advanced model (AMS Accelerate continues).
+  - **Changed guidance:** Parameter Store's docs now steer secrets to Secrets Manager.
+  - **Weak citations:** several, now replaced with docs pages.
+
+  Explanations name both old and new names wherever the exam guide still uses the old one.
+
 ## Run it
 
 ```bash
@@ -116,7 +134,7 @@ First real account (no public sign-up): `npm run user:create -- "Your Name"` pri
 - T-012 domain/objective editor, T-013 theme lab and design notes, T-076 trends, "create exam manually", "new question" form, pack-reload diff (part of T-011).
 - T-081 browser end-to-end test (the data-layer golden path is tested; the UI was exercised by hand).
 - T-082 remainder: adapt and install `docker/nginx-study.conf.example` (untested draft), the Namecheap record, certificates, scheduled `pg_dump` and a restore drill. T-083 remainder: CSP with nonces, nginx rate limits, the pre-exposure checklist run-through.
-- Content: the CLF-C02 shared bank has 194 approved questions; every objective is practice-ready (10 or more) and mocks no longer repeat. The coverage target is 260 (four exams' worth). DVA-C03 has no questions yet.
+- Content: the CLF-C02 shared bank has 275 approved questions (26 multiple-response), above the 260 coverage target; every objective is practice-ready. DVA-C03 has no questions yet.
 
 ## Findings that changed the plan
 

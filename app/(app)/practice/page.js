@@ -1,8 +1,8 @@
 import { getAppContext } from "@/lib/app/context.js";
 import { withUser } from "@/lib/db/index.js";
 import { getExam } from "@/lib/db/exams.js";
-import { getPool } from "@/lib/db/questions.js";
-import { getOpenSession } from "@/lib/db/sessions.js";
+import { flaggedIds, getPool } from "@/lib/db/questions.js";
+import { getOpenSession, questionHistory } from "@/lib/db/sessions.js";
 import { isUuid } from "@/lib/app/feedback.js";
 import { abandonSessionAction, startPracticeAction } from "@/app/actions/practice.js";
 import { Button, Card, EmptyState, Field, Input, LinkButton, PageHeader, Select } from "@/components/ui/index.js";
@@ -21,11 +21,24 @@ export default async function PracticePage({ searchParams }) {
   const { user, exam: active } = await getAppContext();
   if (!active) return <EmptyState title="No course selected" action={<LinkButton href="/courses" variant="primary">Choose a course</LinkButton>} />;
 
-  const { exam, open, pool } = await withUser(user.id, async (db) => ({
+  const { exam, open, pool, history, flagged } = await withUser(user.id, async (db) => ({
     exam: await getExam(db, active.id),
     open: await getOpenSession(db, active.id),
     pool: await getPool(db, active.id),
+    history: await questionHistory(db, active.id),
+    flagged: await flaggedIds(db, active.id),
   }));
+  // How many approved questions each scope holds, shown in the picker so an empty scope is visible up front.
+  const count = (test) => pool.filter(test).length;
+  const n = {
+    exam: pool.length,
+    flagged: count((q) => flagged.has(q.id)),
+    missed: count((q) => history.get(q.id)?.lastResult === false),
+    unseen: count((q) => !history.has(q.id)),
+  };
+  const inDomain = (id) => count((q) => q.domainId === id);
+  const inObjective = (id) => count((q) => q.objectiveId === id);
+  const label = (text, k) => `${text} (${k})`;
   const target = ["exam", "flagged", "missed", "unseen"].includes(sp.scope)
     ? sp.scope
     : ["domain", "objective"].includes(sp.scope) && isUuid(sp.id)
@@ -57,17 +70,19 @@ export default async function PracticePage({ searchParams }) {
       ) : (
         <Card title="Start a session">
           <form action={startPracticeAction} className="grid max-w-xl gap-4">
-            <Field label="What to practice">
+            <Field label="What to practice" hint="Numbers are approved questions available in each scope.">
               <Select name="target" defaultValue={target}>
-                <option value="exam">Whole exam</option>
-                <option value="flagged">Flagged questions</option>
-                <option value="missed">Questions I last missed</option>
-                <option value="unseen">Questions I haven't seen</option>
+                <option value="exam">{label("Whole exam", n.exam)}</option>
+                <option value="flagged" disabled={n.flagged === 0}>{label("Flagged questions", n.flagged)}</option>
+                <option value="missed" disabled={n.missed === 0}>{label("Questions I last missed", n.missed)}</option>
+                <option value="unseen" disabled={n.unseen === 0}>{label("Questions I haven't seen", n.unseen)}</option>
                 {exam.domains.map((d) => (
-                  <optgroup key={d.id} label={`${d.name} (${d.weightPct}%)`}>
-                    <option value={`domain:${d.id}`}>Whole domain: {d.name}</option>
+                  <optgroup key={d.id} label={`${d.name} (${d.weightPct}% of the exam)`}>
+                    <option value={`domain:${d.id}`}>{label(`Whole domain: ${d.name}`, inDomain(d.id))}</option>
                     {d.objectives.map((o) => (
-                      <option key={o.id} value={`objective:${o.id}`}>{o.code} {o.title}</option>
+                      <option key={o.id} value={`objective:${o.id}`} disabled={inObjective(o.id) === 0}>
+                        {label(`${o.code} ${o.title}`, inObjective(o.id))}
+                      </option>
                     ))}
                   </optgroup>
                 ))}

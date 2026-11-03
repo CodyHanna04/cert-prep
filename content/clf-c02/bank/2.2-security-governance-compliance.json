@@ -441,6 +441,443 @@
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.2-11",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "A security team needs to find out which IAM user deleted an Amazon S3 bucket yesterday. Which service should it check?",
+      "options": [
+        {
+          "text": "Amazon CloudWatch",
+          "correct": false,
+          "rationale": "CloudWatch monitors metrics and logs, not who made API calls."
+        },
+        {
+          "text": "Amazon Inspector",
+          "correct": false,
+          "rationale": "Inspector scans for vulnerabilities."
+        },
+        {
+          "text": "AWS CloudTrail",
+          "correct": true,
+          "rationale": "CloudTrail records API calls, including who made them and when."
+        },
+        {
+          "text": "AWS Shield",
+          "correct": false,
+          "rationale": "Shield protects against DDoS attacks."
+        }
+      ],
+      "explanation": "CloudTrail event history covers recent management events; a trail keeps them longer in S3.",
+      "difficulty": 1,
+      "tags": [
+        "governance",
+        "cloudtrail"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.2-12",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "An auditor wants to see how the configuration of a security group has changed over the past six months. Which service records this configuration history?",
+      "options": [
+        {
+          "text": "Amazon CloudWatch",
+          "correct": false,
+          "rationale": "CloudWatch tracks metrics, not resource configuration history."
+        },
+        {
+          "text": "Amazon Inspector",
+          "correct": false,
+          "rationale": "Inspector scans for vulnerabilities."
+        },
+        {
+          "text": "AWS Shield",
+          "correct": false,
+          "rationale": "Shield protects against DDoS attacks."
+        },
+        {
+          "text": "AWS Config",
+          "correct": true,
+          "rationale": "AWS Config records configuration items over time, giving a history of each resource."
+        }
+      ],
+      "explanation": "AWS Config shows what a resource looked like at a point in time and how it changed.",
+      "difficulty": 2,
+      "tags": [
+        "governance",
+        "config"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.2-13",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "Which service uses machine learning to discover and protect sensitive data, such as personally identifiable information, in Amazon S3?",
+      "options": [
+        {
+          "text": "Amazon Macie",
+          "correct": true,
+          "rationale": "Macie discovers sensitive data in S3 and reports on bucket security."
+        },
+        {
+          "text": "Amazon GuardDuty",
+          "correct": false,
+          "rationale": "GuardDuty detects threats from activity."
+        },
+        {
+          "text": "Amazon Inspector",
+          "correct": false,
+          "rationale": "Inspector scans workloads for vulnerabilities."
+        },
+        {
+          "text": "Amazon Detective",
+          "correct": false,
+          "rationale": "Detective helps investigate security findings."
+        }
+      ],
+      "explanation": "Macie is the data security service for S3.",
+      "difficulty": 2,
+      "tags": [
+        "security-services",
+        "macie"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/macie/latest/user/what-is-macie.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.2-14",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "Which service helps analysts investigate the root cause of security findings by linking related activity over time?",
+      "options": [
+        {
+          "text": "Amazon Macie",
+          "correct": false,
+          "rationale": "Macie finds sensitive data in S3."
+        },
+        {
+          "text": "Amazon Detective",
+          "correct": true,
+          "rationale": "Detective builds a linked view of activity to speed up investigations."
+        },
+        {
+          "text": "AWS Config",
+          "correct": false,
+          "rationale": "AWS Config records configuration changes."
+        },
+        {
+          "text": "AWS Certificate Manager",
+          "correct": false,
+          "rationale": "Certificate Manager provisions TLS certificates."
+        }
+      ],
+      "explanation": "GuardDuty detects; Detective investigates.",
+      "difficulty": 3,
+      "tags": [
+        "security-services",
+        "detective"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/detective/latest/userguide/what-is-detective.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.2-15",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "Which service creates and controls the encryption keys used to encrypt data across many AWS services?",
+      "options": [
+        {
+          "text": "AWS Secrets Manager",
+          "correct": false,
+          "rationale": "Secrets Manager stores secrets such as passwords."
+        },
+        {
+          "text": "AWS Certificate Manager",
+          "correct": false,
+          "rationale": "Certificate Manager manages TLS certificates."
+        },
+        {
+          "text": "AWS Key Management Service (AWS KMS)",
+          "correct": true,
+          "rationale": "AWS KMS creates and manages keys and integrates with most AWS services."
+        },
+        {
+          "text": "AWS Identity and Access Management (IAM)",
+          "correct": false,
+          "rationale": "IAM manages identities and permissions."
+        }
+      ],
+      "explanation": "KMS keys protect data at rest in services such as S3, EBS and RDS.",
+      "difficulty": 1,
+      "tags": [
+        "encryption",
+        "kms"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/kms/latest/developerguide/overview.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.2-16",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "A company must keep its encryption keys in dedicated, single-tenant hardware security modules under its exclusive control. Which service meets this need?",
+      "options": [
+        {
+          "text": "AWS Key Management Service (AWS KMS)",
+          "correct": false,
+          "rationale": "KMS is a managed, multi-tenant key service rather than dedicated HSMs you control."
+        },
+        {
+          "text": "AWS Secrets Manager",
+          "correct": false,
+          "rationale": "Secrets Manager stores secrets, not HSM-held keys."
+        },
+        {
+          "text": "AWS Certificate Manager",
+          "correct": false,
+          "rationale": "Certificate Manager manages certificates."
+        },
+        {
+          "text": "AWS CloudHSM",
+          "correct": true,
+          "rationale": "CloudHSM provides dedicated hardware security modules in the AWS Cloud."
+        }
+      ],
+      "explanation": "Choose CloudHSM when compliance requires dedicated HSMs; choose KMS for managed key control.",
+      "difficulty": 3,
+      "tags": [
+        "encryption",
+        "cloudhsm"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/cloudhsm/latest/userguide/introduction.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.2-17",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "Which service provisions and manages SSL/TLS certificates used to encrypt data in transit?",
+      "options": [
+        {
+          "text": "AWS Certificate Manager",
+          "correct": true,
+          "rationale": "ACM provisions, manages and renews public and private certificates."
+        },
+        {
+          "text": "AWS Key Management Service (AWS KMS)",
+          "correct": false,
+          "rationale": "KMS manages encryption keys, not certificates."
+        },
+        {
+          "text": "AWS Secrets Manager",
+          "correct": false,
+          "rationale": "Secrets Manager stores credentials."
+        },
+        {
+          "text": "AWS Shield",
+          "correct": false,
+          "rationale": "Shield protects against DDoS attacks."
+        }
+      ],
+      "explanation": "ACM certificates are used with services such as Elastic Load Balancing and CloudFront.",
+      "difficulty": 2,
+      "tags": [
+        "encryption",
+        "acm",
+        "in-transit"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.2-18",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "A company must run a workload that needs to meet a specific compliance program. What should it check before choosing services?",
+      "options": [
+        {
+          "text": "Nothing, because every AWS service meets every program",
+          "correct": false,
+          "rationale": "Compliance scope varies by service."
+        },
+        {
+          "text": "That each service it plans to use is in scope for that program",
+          "correct": true,
+          "rationale": "AWS lists which services are in scope for each compliance program."
+        },
+        {
+          "text": "That AWS will certify the company's own application",
+          "correct": false,
+          "rationale": "AWS certifies its infrastructure, not customer applications."
+        },
+        {
+          "text": "That AWS Shield Advanced is turned on",
+          "correct": false,
+          "rationale": "DDoS protection does not establish compliance scope."
+        }
+      ],
+      "explanation": "Compliance requirements vary among AWS services; check the services-in-scope list.",
+      "difficulty": 2,
+      "tags": [
+        "compliance"
+      ],
+      "refs": [
+        "https://aws.amazon.com/compliance/services-in-scope/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.2-19",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "Which service centrally configures and manages firewall rules, such as AWS WAF rules, across the accounts in an organization?",
+      "options": [
+        {
+          "text": "AWS Network Firewall",
+          "correct": false,
+          "rationale": "Network Firewall filters traffic for a VPC; Firewall Manager can deploy it centrally."
+        },
+        {
+          "text": "AWS Security Hub",
+          "correct": false,
+          "rationale": "Security Hub aggregates findings."
+        },
+        {
+          "text": "AWS Firewall Manager",
+          "correct": true,
+          "rationale": "Firewall Manager applies firewall rules across accounts in AWS Organizations."
+        },
+        {
+          "text": "AWS Shield",
+          "correct": false,
+          "rationale": "Shield protects against DDoS attacks."
+        }
+      ],
+      "explanation": "Firewall Manager is for central management; WAF, Shield and Network Firewall do the protecting.",
+      "difficulty": 3,
+      "tags": [
+        "security-services",
+        "firewall-manager"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/waf/latest/developerguide/fms-chapter.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-2.2-20",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "multi",
+      "stem": "Which TWO services help a company audit activity and configuration changes in its AWS account? (Choose TWO.)",
+      "options": [
+        {
+          "text": "AWS Amplify",
+          "correct": false,
+          "rationale": "Amplify builds web and mobile apps."
+        },
+        {
+          "text": "AWS Config",
+          "correct": true,
+          "rationale": "AWS Config records configuration changes."
+        },
+        {
+          "text": "Amazon Lightsail",
+          "correct": false,
+          "rationale": "Lightsail provides virtual private servers."
+        },
+        {
+          "text": "AWS CloudTrail",
+          "correct": true,
+          "rationale": "CloudTrail records API activity."
+        },
+        {
+          "text": "Amazon Polly",
+          "correct": false,
+          "rationale": "Polly converts text to speech."
+        }
+      ],
+      "explanation": "CloudTrail answers who did what; Config answers what changed and whether it complies.",
+      "difficulty": 1,
+      "tags": [
+        "governance",
+        "cloudtrail",
+        "config"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html",
+        "https://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
     }
   ]
 }

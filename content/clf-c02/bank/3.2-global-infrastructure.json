@@ -440,6 +440,50 @@
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.2-11",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "single",
+      "stem": "A company wants a copy of its Amazon S3 data in a Region on another continent for disaster recovery. Which statement is correct?",
+      "options": [
+        {
+          "text": "The company must set up replication, for example with S3 Cross-Region Replication",
+          "correct": true,
+          "rationale": "Data stays in its Region until you choose to copy it elsewhere."
+        },
+        {
+          "text": "AWS copies all data to every Region automatically",
+          "correct": false,
+          "rationale": "AWS does not move your data between Regions."
+        },
+        {
+          "text": "All Regions share one storage system",
+          "correct": false,
+          "rationale": "Regions are isolated from each other."
+        },
+        {
+          "text": "Edge locations keep backups of S3 buckets",
+          "correct": false,
+          "rationale": "Edge locations cache content; they are not backup storage."
+        }
+      ],
+      "explanation": "Region isolation supports data sovereignty; replication is an explicit choice.",
+      "difficulty": 2,
+      "tags": [
+        "global-infrastructure",
+        "regions",
+        "disaster-recovery"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
     }
   ]
 }

@@ -1,7 +1,7 @@
 "use client";
 import { useState, useTransition } from "react";
 import { importDataAction, deleteAccountAction } from "@/app/actions/account.js";
-import { Button, Card, Field, Input, LinkButton } from "@/components/ui/index.js";
+import { Button, buttonClass, Card, checkClass, Field, fileInputClass, Input, LinkButton } from "@/components/ui/index.js";
 
 export function DataCard({ userName, error }) {
   const [text, setText] = useState("");
@@ -26,14 +26,14 @@ export function DataCard({ userName, error }) {
     <>
       <Card title="Your data">
         <p className="text-sm text-muted">Everything you own on this site (exams, questions, notes, flags, sessions and answers) as one plain JSON file. Nothing is locked in.</p>
-        <div className="mt-3"><a className="inline-flex rounded-theme border border-line bg-surface px-4 py-2 text-sm hover:bg-raised" href="/account/export" download>Download my data</a></div>
+        <div className="mt-3"><a className={buttonClass("secondary")} href="/account/export" download>Download my data</a></div>
 
         <div className="mt-6 border-t border-line pt-4">
           <h3 className="font-medium">Restore from a file</h3>
           <p className="mt-1 text-sm text-muted">This replaces everything you currently have.</p>
-          <input type="file" accept=".json,application/json" onChange={onFile} className="mt-2 block text-sm" aria-label="Export file" />
+          <input type="file" accept=".json,application/json" onChange={onFile} className={`mt-2 ${fileInputClass}`} aria-label="Export file" />
           <label className="mt-3 flex items-center gap-2 text-sm">
-            <input type="checkbox" checked={confirmed} onChange={(e) => setConfirmed(e.target.checked)} />
+            <input type="checkbox" checked={confirmed} onChange={(e) => setConfirmed(e.target.checked)} className={checkClass} />
             I understand my current data will be replaced.
           </label>
           <div className="mt-3"><Button onPress={runImport} isDisabled={pending || !text || !confirmed}>Replace my data</Button></div>

@@ -107,9 +107,47 @@ export function Field({ label, hint, children }) {
   );
 }
 
-const CONTROL = "w-full rounded-theme border border-line bg-surface px-3 py-2 text-sm text-text";
-export const Input = (props) => <input className={CONTROL} {...props} />;
-export const Select = (props) => <select className={CONTROL} {...props} />;
-export const Textarea = (props) => <textarea className={CONTROL} {...props} />;
+// A className passed in adds to these (layout such as grid spans); it never replaces the border or focus ring.
+const CONTROL =
+  "w-full rounded-theme border border-line bg-surface px-3 py-2 text-sm text-text placeholder:text-muted hover:border-muted focus-visible:border-accent focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-focus";
+export const Input = ({ className = "", ...props }) => <input className={`${CONTROL} ${className}`} {...props} />;
+export const Select = ({ className = "", ...props }) => <select className={`${CONTROL} ${className}`} {...props} />;
+export const Textarea = ({ className = "", ...props }) => <textarea className={`${CONTROL} ${className}`} {...props} />;
+
+/** Native checkboxes and radios in the theme's accent color, with a visible focus ring. */
+export const checkClass =
+  "size-4 shrink-0 cursor-pointer accent-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus";
+
+/** Native file picker with its button styled like a secondary button. */
+export const fileInputClass =
+  "block w-full text-sm text-muted file:mr-3 file:cursor-pointer file:rounded-theme file:border file:border-line file:bg-surface file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-text hover:file:border-muted";
+
+/** A label that wraps a radio or checkbox and highlights when its input is checked (option cards). */
+export const optionCardClass =
+  "flex cursor-pointer items-start gap-3 rounded-theme border border-line p-3 text-sm transition-colors hover:border-muted has-checked:border-accent has-checked:bg-accent-soft has-focus-visible:outline-2 has-focus-visible:outline-focus";
+
+/**
+ * A checkbox styled as a toggle chip, for filter forms. It is a real <input type="checkbox">, so it submits with
+ * plain GET forms and works with the keyboard; the box, checkmark and chip colors follow the checked state.
+ */
+export function CheckChip({ name, value = "1", defaultChecked, children }) {
+  return (
+    <label className="inline-flex cursor-pointer select-none items-center gap-2 rounded-theme border border-line bg-surface px-3 py-2 text-sm text-muted transition-colors hover:border-muted hover:text-text has-checked:border-accent has-checked:bg-accent-soft has-checked:text-text has-focus-visible:outline-2 has-focus-visible:outline-offset-1 has-focus-visible:outline-focus">
+      <span className="relative inline-flex size-4 shrink-0">
+        <input
+          type="checkbox"
+          name={name}
+          value={value}
+          defaultChecked={defaultChecked}
+          className="peer size-4 appearance-none rounded border border-muted bg-surface transition-colors checked:border-accent checked:bg-accent focus-visible:outline-none"
+        />
+        <svg aria-hidden viewBox="0 0 16 16" className="pointer-events-none absolute inset-0 m-auto size-3 text-on-accent opacity-0 transition-opacity peer-checked:opacity-100">
+          <path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </span>
+      {children}
+    </label>
+  );
+}
 
 export const pct = (n, digits = 0) => (n == null ? "—" : `${n.toFixed(digits)}%`);

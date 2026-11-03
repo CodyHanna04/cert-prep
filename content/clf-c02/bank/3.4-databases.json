@@ -450,6 +450,50 @@
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.4-11",
+      "domain": "d3",
+      "objective": "3.4",
+      "type": "single",
+      "stem": "Which database service is built for highly connected data, such as social networks and recommendation engines?",
+      "options": [
+        {
+          "text": "Amazon Redshift",
+          "correct": false,
+          "rationale": "Redshift is a data warehouse."
+        },
+        {
+          "text": "Amazon Aurora",
+          "correct": false,
+          "rationale": "Aurora is a relational database."
+        },
+        {
+          "text": "Amazon Neptune",
+          "correct": true,
+          "rationale": "Neptune is a managed graph database."
+        },
+        {
+          "text": "Amazon DynamoDB",
+          "correct": false,
+          "rationale": "DynamoDB is a key-value and document database."
+        }
+      ],
+      "explanation": "Graph databases store relationships between items efficiently.",
+      "difficulty": 2,
+      "tags": [
+        "databases",
+        "neptune",
+        "graph"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/neptune/latest/userguide/intro.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-02"
     }
   ]
 }
