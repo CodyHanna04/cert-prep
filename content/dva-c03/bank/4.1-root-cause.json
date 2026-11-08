@@ -1,0 +1,450 @@
+{
+  "formatVersion": 1,
+  "questions": [
+    {
+      "id": "dva-c03-4.1-01",
+      "domain": "d4",
+      "objective": "4.1",
+      "type": "single",
+      "stem": "An API Gateway REST API with a Lambda proxy integration returns 502 Bad Gateway. The function's logs show it finished without errors and returned an object with a message field. What is the most likely cause?",
+      "options": [
+        {
+          "text": "The API is not deployed to a stage",
+          "correct": false,
+          "rationale": "An undeployed change would not reach the function at all."
+        },
+        {
+          "text": "The response lacks the statusCode and string body that the proxy expects",
+          "correct": true,
+          "rationale": "API Gateway returns 502 when a proxy integration's response is not in the expected format."
+        },
+        {
+          "text": "The function's timeout is longer than the API's integration timeout",
+          "correct": false,
+          "rationale": "The function finished normally, so its timeout setting is not the problem."
+        },
+        {
+          "text": "The function's execution role does not allow it to write to CloudWatch Logs",
+          "correct": false,
+          "rationale": "The logs were written, and log permissions do not affect the response."
+        }
+      ],
+      "explanation": "Proxy responses must include statusCode and a body string, plus optional headers.",
+      "difficulty": 2,
+      "tags": [
+        "api-gateway",
+        "lambda",
+        "502"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-4.1-02",
+      "domain": "d4",
+      "objective": "4.1",
+      "type": "single",
+      "stem": "A Lambda function logs an AccessDenied error when it calls PutObject on an Amazon S3 bucket in the same account. The bucket has no policy that denies access. What should the developer do?",
+      "options": [
+        {
+          "text": "Add s3:PutObject for the bucket to the developer's own IAM user policy",
+          "correct": false,
+          "rationale": "The function does not use the developer's permissions."
+        },
+        {
+          "text": "Make the bucket public",
+          "correct": false,
+          "rationale": "Public access is unnecessary and unsafe."
+        },
+        {
+          "text": "Add s3:PutObject for the bucket to the function's execution role",
+          "correct": true,
+          "rationale": "The function acts with its execution role, which must allow the call."
+        },
+        {
+          "text": "Increase the function's timeout",
+          "correct": false,
+          "rationale": "A permissions error is not a timing problem."
+        }
+      ],
+      "explanation": "When a function gets AccessDenied, check its execution role first.",
+      "difficulty": 1,
+      "tags": [
+        "lambda",
+        "iam",
+        "access-denied"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/lambda-intro-execution-role.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-4.1-03",
+      "domain": "d4",
+      "objective": "4.1",
+      "type": "single",
+      "stem": "The ApproximateAgeOfOldestMessage metric for an Amazon SQS queue keeps rising, while the number of messages sent stays steady. What does this most likely indicate?",
+      "options": [
+        {
+          "text": "Producers are sending duplicate messages",
+          "correct": false,
+          "rationale": "Duplicates would raise send counts, not just message age."
+        },
+        {
+          "text": "The queue's message retention period is set too long",
+          "correct": false,
+          "rationale": "Retention controls when unprocessed messages are deleted, not why they wait."
+        },
+        {
+          "text": "Long polling is turned on",
+          "correct": false,
+          "rationale": "Long polling reduces empty receives and does not slow processing."
+        },
+        {
+          "text": "Consumers are not processing messages fast enough",
+          "correct": true,
+          "rationale": "Messages wait longer and longer because the consumers fall behind."
+        }
+      ],
+      "explanation": "A growing oldest-message age means the backlog is not being drained; add consumers or fix slow processing.",
+      "difficulty": 2,
+      "tags": [
+        "sqs",
+        "cloudwatch",
+        "metrics"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-available-cloudwatch-metrics.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-4.1-04",
+      "domain": "d4",
+      "objective": "4.1",
+      "type": "single",
+      "stem": "During a traffic peak, a Lambda function's Throttles metric spikes and callers receive TooManyRequestsException errors. The function has reserved concurrency set. What is the most likely cause?",
+      "options": [
+        {
+          "text": "Reserved concurrency is lower than the peak concurrent requests",
+          "correct": true,
+          "rationale": "Requests above the function's concurrency limit are throttled."
+        },
+        {
+          "text": "The function's memory is too high",
+          "correct": false,
+          "rationale": "Memory affects speed and cost, not throttling."
+        },
+        {
+          "text": "The function's timeout is shorter than its average run time at peak",
+          "correct": false,
+          "rationale": "Short timeouts cause timeouts, not throttles."
+        },
+        {
+          "text": "The function has too many environment variables",
+          "correct": false,
+          "rationale": "Environment variables do not limit concurrency."
+        }
+      ],
+      "explanation": "Throttles mean the function hit a concurrency limit: its reserved concurrency or the account's limit.",
+      "difficulty": 2,
+      "tags": [
+        "lambda",
+        "throttling",
+        "concurrency"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/troubleshooting-invocation.html",
+        "https://docs.aws.amazon.com/lambda/latest/dg/lambda-concurrency.html",
+        "https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-4.1-05",
+      "domain": "d4",
+      "objective": "4.1",
+      "type": "single",
+      "stem": "A request passes through API Gateway, two Lambda functions and DynamoDB, and is slow end to end. Which tool shows how much time each part of the request takes?",
+      "options": [
+        {
+          "text": "AWS CloudTrail event history",
+          "correct": false,
+          "rationale": "CloudTrail records API calls for auditing, without latency breakdowns."
+        },
+        {
+          "text": "AWS X-Ray traces and the trace map",
+          "correct": true,
+          "rationale": "Traces break a request into segments for each service, with their durations."
+        },
+        {
+          "text": "Amazon CloudWatch Logs metric filters on each function",
+          "correct": false,
+          "rationale": "Metric filters count matching log events; they do not show the time spent in each service."
+        },
+        {
+          "text": "Amazon CloudWatch Logs retention settings",
+          "correct": false,
+          "rationale": "Retention settings control how long logs are kept."
+        }
+      ],
+      "explanation": "Distributed tracing shows where time is spent across services.",
+      "difficulty": 1,
+      "tags": [
+        "xray",
+        "tracing"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-4.1-06",
+      "domain": "d4",
+      "objective": "4.1",
+      "type": "single",
+      "stem": "A developer must find every error log line for one request ID across the log groups of three Lambda functions from the last hour. What is the quickest way?",
+      "options": [
+        {
+          "text": "Download every log stream and search them locally",
+          "correct": false,
+          "rationale": "This is slow and manual."
+        },
+        {
+          "text": "Create a metric filter on each log group that matches the request ID",
+          "correct": false,
+          "rationale": "Metric filters count future events; they do not search past logs."
+        },
+        {
+          "text": "Run a CloudWatch Logs Insights query on the three log groups",
+          "correct": true,
+          "rationale": "Logs Insights queries several log groups at once with filters and aggregations."
+        },
+        {
+          "text": "Search AWS CloudTrail event history",
+          "correct": false,
+          "rationale": "CloudTrail does not contain application log lines."
+        }
+      ],
+      "explanation": "Logs Insights is the tool for ad hoc queries over CloudWatch Logs.",
+      "difficulty": 2,
+      "tags": [
+        "cloudwatch-logs",
+        "logs-insights"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-4.1-07",
+      "domain": "d4",
+      "objective": "4.1",
+      "type": "single",
+      "stem": "A CloudFormation stack creation fails and rolls back. The developer needs the reason the deployment failed. Where should the developer look first?",
+      "options": [
+        {
+          "text": "The most recent event in the stack's events list, with its status reason",
+          "correct": false,
+          "rationale": "The final events describe the rollback, not the original cause."
+        },
+        {
+          "text": "The stack's Resources tab",
+          "correct": false,
+          "rationale": "It lists each resource's current status but not the order in which failures happened."
+        },
+        {
+          "text": "The stack's Outputs tab",
+          "correct": false,
+          "rationale": "Outputs are empty when creation fails."
+        },
+        {
+          "text": "The first CREATE_FAILED event in the stack's events, with its reason",
+          "correct": true,
+          "rationale": "The first failure usually causes the rest of the rollback."
+        }
+      ],
+      "explanation": "Read stack events in time order and start from the first failure.",
+      "difficulty": 2,
+      "tags": [
+        "cloudformation",
+        "deployment-failure"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-4.1-08",
+      "domain": "d4",
+      "objective": "4.1",
+      "type": "multi",
+      "stem": "An AWS CodeDeploy deployment to Amazon EC2 instances fails because the instances never report back to CodeDeploy. Which issues could cause this? (Select TWO.)",
+      "options": [
+        {
+          "text": "The Application Load Balancer idle timeout is too short",
+          "correct": false,
+          "rationale": "Idle timeout affects client connections, not the agent."
+        },
+        {
+          "text": "The ECR repository has a lifecycle policy",
+          "correct": false,
+          "rationale": "EC2 deployments with CodeDeploy do not depend on ECR lifecycle policies."
+        },
+        {
+          "text": "The instances have no IAM instance profile, so the agent has no credentials to call CodeDeploy",
+          "correct": true,
+          "rationale": "The agent polls CodeDeploy with the instance profile's credentials, so without one it never picks up the deployment."
+        },
+        {
+          "text": "The Lambda function alias points to an old version",
+          "correct": false,
+          "rationale": "Lambda aliases are not part of an EC2 deployment."
+        },
+        {
+          "text": "The CodeDeploy agent is not installed or not running on the instances",
+          "correct": true,
+          "rationale": "The agent carries out the deployment and reports status."
+        }
+      ],
+      "explanation": "When instances never respond, check that the agent is running and that the instance has a profile it can use to reach CodeDeploy.",
+      "difficulty": 3,
+      "tags": [
+        "codedeploy",
+        "ec2",
+        "troubleshooting"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/codedeploy/latest/userguide/troubleshooting-deployments.html",
+        "https://docs.aws.amazon.com/codedeploy/latest/userguide/codedeploy-agent.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-4.1-09",
+      "domain": "d4",
+      "objective": "4.1",
+      "type": "single",
+      "stem": "A Lambda function processes messages from an Amazon SQS queue, and some messages are processed twice. Processing sometimes takes longer than the queue's visibility timeout. What should the developer change?",
+      "options": [
+        {
+          "text": "Set the visibility timeout longer than the function's timeout",
+          "correct": true,
+          "rationale": "Messages stay hidden while the function is still working, so they are not delivered again."
+        },
+        {
+          "text": "Lower the function's memory",
+          "correct": false,
+          "rationale": "Less memory would make processing slower."
+        },
+        {
+          "text": "Shorten the queue's message retention period to one hour",
+          "correct": false,
+          "rationale": "Retention controls deletion of unprocessed messages, not redelivery."
+        },
+        {
+          "text": "Turn off long polling on the queue so the function receives fewer messages",
+          "correct": false,
+          "rationale": "Polling style does not affect redelivery during processing."
+        }
+      ],
+      "explanation": "If the visibility timeout expires before processing ends, the message becomes visible and is received again.",
+      "difficulty": 2,
+      "tags": [
+        "sqs",
+        "visibility-timeout",
+        "lambda"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html",
+        "https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-4.1-10",
+      "domain": "d4",
+      "objective": "4.1",
+      "type": "single",
+      "stem": "An application's calls to an AWS API started failing with AccessDenied after a teammate changed some permissions. The developer needs to see which IAM principal made the failing calls and which actions were denied. Where should the developer look?",
+      "options": [
+        {
+          "text": "Amazon CloudWatch metrics for the application's API error counts",
+          "correct": false,
+          "rationale": "Metrics show counts, not who made a call or why it failed."
+        },
+        {
+          "text": "AWS CloudTrail events, filtered on the AccessDenied error code",
+          "correct": true,
+          "rationale": "CloudTrail records each API call with the identity, the action and any error."
+        },
+        {
+          "text": "AWS X-Ray sampling rules",
+          "correct": false,
+          "rationale": "Sampling rules decide which requests are traced."
+        },
+        {
+          "text": "The application's ECR image scan results",
+          "correct": false,
+          "rationale": "Image scans find vulnerabilities in images."
+        }
+      ],
+      "explanation": "CloudTrail answers who called which API, when, and with what result.",
+      "difficulty": 2,
+      "tags": [
+        "cloudtrail",
+        "access-denied"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    }
+  ]
+}

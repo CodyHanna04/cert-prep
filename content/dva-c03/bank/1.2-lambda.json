@@ -1,0 +1,450 @@
+{
+  "formatVersion": 1,
+  "questions": [
+    {
+      "id": "dva-c03-1.2-01",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "multi",
+      "stem": "A Lambda function must query an Amazon RDS database in private subnets of a VPC. Which steps are required? (Select TWO.)",
+      "options": [
+        {
+          "text": "Configure the function with the VPC's private subnets and a security group that the database allows",
+          "correct": true,
+          "rationale": "The function then gets network interfaces in the VPC and can reach the database."
+        },
+        {
+          "text": "Add a NAT gateway so the function can reach the database",
+          "correct": false,
+          "rationale": "A NAT gateway is for outbound internet access; the database is already inside the VPC."
+        },
+        {
+          "text": "Attach an internet gateway to the private subnets",
+          "correct": false,
+          "rationale": "Internet gateways do not help traffic that stays inside the VPC."
+        },
+        {
+          "text": "Give the execution role permissions to manage network interfaces, such as the AWSLambdaVPCAccessExecutionRole policy",
+          "correct": true,
+          "rationale": "Lambda needs these permissions to create the interfaces it uses in the VPC."
+        },
+        {
+          "text": "Make the database publicly accessible",
+          "correct": false,
+          "rationale": "Exposing the database is unnecessary and weakens security."
+        }
+      ],
+      "explanation": "VPC access needs subnets, security groups and an execution role that can manage network interfaces.",
+      "difficulty": 3,
+      "tags": [
+        "lambda",
+        "vpc",
+        "rds"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-1.2-02",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "A Lambda function connected to private subnets in a VPC must also call a public third-party API. The calls time out. What should the developer do?",
+      "options": [
+        {
+          "text": "Route outbound traffic from the private subnets through a NAT gateway",
+          "correct": true,
+          "rationale": "Lambda's network interfaces have no public IP, so internet access from the VPC goes through NAT."
+        },
+        {
+          "text": "Move the function to a public subnet with a route to an internet gateway",
+          "correct": false,
+          "rationale": "A function in a public subnet still gets no public IP, so it cannot reach the internet that way."
+        },
+        {
+          "text": "Increase the function's timeout",
+          "correct": false,
+          "rationale": "More time does not create a network path to the internet."
+        },
+        {
+          "text": "Add the API's domain to the function's environment variables",
+          "correct": false,
+          "rationale": "Environment variables do not change network routing."
+        }
+      ],
+      "explanation": "A VPC-connected function reaches the internet through a NAT gateway (or NAT instance) in a public subnet.",
+      "difficulty": 3,
+      "tags": [
+        "lambda",
+        "vpc",
+        "nat-gateway"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc-internet.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-1.2-03",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "The same Lambda function code is deployed to development and production. Each environment uses a different DynamoDB table name. How should the function get the table name?",
+      "options": [
+        {
+          "text": "Hardcode both names and choose one with an if statement",
+          "correct": false,
+          "rationale": "Hardcoding ties configuration to code and needs a code change for new environments."
+        },
+        {
+          "text": "Read it from an environment variable set for each environment",
+          "correct": true,
+          "rationale": "Environment variables change configuration without changing code."
+        },
+        {
+          "text": "Create a separate layer for each environment that contains the name",
+          "correct": false,
+          "rationale": "Layers package shared code and libraries; they are a clumsy way to hold settings."
+        },
+        {
+          "text": "Pass the name in the handler setting",
+          "correct": false,
+          "rationale": "The handler setting names the function's entry point, not configuration values."
+        }
+      ],
+      "explanation": "Environment variables keep environment-specific settings out of the deployment package.",
+      "difficulty": 1,
+      "tags": [
+        "lambda",
+        "environment-variables"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-1.2-04",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "A Lambda function that processes uploaded files fails with the message \"Task timed out\" on larger files. What should the developer change first?",
+      "options": [
+        {
+          "text": "Increase the function's reserved concurrency",
+          "correct": false,
+          "rationale": "Concurrency controls how many copies run at once, not how long each may run."
+        },
+        {
+          "text": "Turn on provisioned concurrency",
+          "correct": false,
+          "rationale": "Provisioned concurrency reduces cold starts; it does not extend the time limit."
+        },
+        {
+          "text": "Increase the function's timeout setting",
+          "correct": true,
+          "rationale": "The function is stopped when it reaches its configured timeout, so larger files need more time."
+        },
+        {
+          "text": "Add a layer with the file-processing library",
+          "correct": false,
+          "rationale": "Moving code into a layer does not change how long the function may run."
+        }
+      ],
+      "explanation": "Timeout is a per-function setting; set it to cover the longest expected run.",
+      "difficulty": 1,
+      "tags": [
+        "lambda",
+        "timeout"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/configuration-timeout.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-1.2-05",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "A CPU-intensive Lambda function takes too long to finish. Which change is most likely to make it run faster?",
+      "options": [
+        {
+          "text": "Increase the function's timeout",
+          "correct": false,
+          "rationale": "A longer timeout lets the function run longer but does not make it faster."
+        },
+        {
+          "text": "Increase the function's ephemeral storage",
+          "correct": false,
+          "rationale": "More /tmp space helps with large files, not CPU-bound work."
+        },
+        {
+          "text": "Set reserved concurrency on the function",
+          "correct": false,
+          "rationale": "Reserved concurrency limits or guarantees instances; it does not speed up one invocation."
+        },
+        {
+          "text": "Increase the function's memory setting",
+          "correct": true,
+          "rationale": "Lambda allocates CPU in proportion to memory, so more memory also means more CPU."
+        }
+      ],
+      "explanation": "Memory is the single knob for Lambda compute power.",
+      "difficulty": 2,
+      "tags": [
+        "lambda",
+        "memory",
+        "performance"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-1.2-06",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "multi",
+      "stem": "A Lambda function is invoked asynchronously. Events that still fail after Lambda's retries must be kept in an Amazon SQS queue for later reprocessing. Which configurations will meet this requirement? (Select TWO.)",
+      "options": [
+        {
+          "text": "A dead-letter queue on the function that points to the queue",
+          "correct": true,
+          "rationale": "A function DLQ receives asynchronous events that fail all retry attempts."
+        },
+        {
+          "text": "An event source mapping that reads from the queue",
+          "correct": false,
+          "rationale": "An event source mapping makes the function consume the queue, not write failures to it."
+        },
+        {
+          "text": "An on-failure destination that points to the queue",
+          "correct": true,
+          "rationale": "Destinations send failed asynchronous events, with details about the failure, to the target."
+        },
+        {
+          "text": "An on-success destination that points to the queue",
+          "correct": false,
+          "rationale": "On-success destinations receive successful invocations, not failures."
+        },
+        {
+          "text": "Reserved concurrency set to zero",
+          "correct": false,
+          "rationale": "Zero reserved concurrency throttles every invocation."
+        }
+      ],
+      "explanation": "For asynchronous invocations, use an on-failure destination (more detail) or a dead-letter queue to keep failed events.",
+      "difficulty": 3,
+      "tags": [
+        "lambda",
+        "destinations",
+        "dlq"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-1.2-07",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "A Lambda function processes messages from an Amazon SQS queue in batches. When one message in a batch fails, the whole batch is retried, and messages that succeeded are processed again. How can the developer retry only the failed messages?",
+      "options": [
+        {
+          "text": "Turn on partial batch responses and return the IDs of the failed messages",
+          "correct": true,
+          "rationale": "With ReportBatchItemFailures, only the listed messages return to the queue."
+        },
+        {
+          "text": "Increase the queue's visibility timeout so failed batches are retried later",
+          "correct": false,
+          "rationale": "A longer visibility timeout delays retries but still retries the whole batch."
+        },
+        {
+          "text": "Switch to an Amazon SQS FIFO queue",
+          "correct": false,
+          "rationale": "FIFO adds ordering; it does not change how a failed batch is retried."
+        },
+        {
+          "text": "Increase the function's memory",
+          "correct": false,
+          "rationale": "More memory does not change which messages are retried."
+        }
+      ],
+      "explanation": "Partial batch responses stop successful messages from being processed again.",
+      "difficulty": 3,
+      "tags": [
+        "lambda",
+        "sqs",
+        "event-source-mapping"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/services-sqs-errorhandling.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-1.2-08",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "Twenty Lambda functions use the same data-access library. The team wants to package the library once instead of including it in every function's deployment package. What should the developer use?",
+      "options": [
+        {
+          "text": "A Lambda extension",
+          "correct": false,
+          "rationale": "Extensions run alongside the function for tasks such as monitoring; they are not for sharing libraries."
+        },
+        {
+          "text": "A Lambda layer that contains the library",
+          "correct": true,
+          "rationale": "Functions reference the layer, so the code is packaged once; a new library version becomes a new layer version that each function then references."
+        },
+        {
+          "text": "An environment variable that holds the library code",
+          "correct": false,
+          "rationale": "Environment variables hold small settings, not code."
+        },
+        {
+          "text": "A larger ephemeral storage setting",
+          "correct": false,
+          "rationale": "Storage size has nothing to do with sharing code between functions."
+        }
+      ],
+      "explanation": "Layers share libraries, custom runtimes and other dependencies across functions.",
+      "difficulty": 1,
+      "tags": [
+        "lambda",
+        "layers"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/chapter-layers.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-1.2-09",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "During traffic spikes, a Lambda function opens so many database connections that the database rejects new ones. The developer wants to cap how many copies of the function can run at the same time. What should the developer configure?",
+      "options": [
+        {
+          "text": "Provisioned concurrency for the function",
+          "correct": false,
+          "rationale": "Provisioned concurrency keeps instances warm; it does not cap concurrency."
+        },
+        {
+          "text": "A longer timeout for the function",
+          "correct": false,
+          "rationale": "Longer runs would hold connections longer and make the problem worse."
+        },
+        {
+          "text": "Reserved concurrency for the function",
+          "correct": true,
+          "rationale": "Reserved concurrency sets the maximum number of concurrent instances of the function."
+        },
+        {
+          "text": "More memory for the function",
+          "correct": false,
+          "rationale": "Memory changes speed, not how many instances run."
+        }
+      ],
+      "explanation": "Reserved concurrency both guarantees and limits a function's concurrency.",
+      "difficulty": 2,
+      "tags": [
+        "lambda",
+        "concurrency"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-1.2-10",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "A Lambda function must process every item that is added or changed in a DynamoDB table, shortly after the change. What should the developer set up?",
+      "options": [
+        {
+          "text": "Create an Amazon S3 event notification for the table",
+          "correct": false,
+          "rationale": "S3 event notifications apply to S3 buckets, not DynamoDB tables."
+        },
+        {
+          "text": "Schedule a function to scan the whole table every minute and compare it with the last scan",
+          "correct": false,
+          "rationale": "Repeated scans are costly and can miss or duplicate changes."
+        },
+        {
+          "text": "Send AWS CloudTrail data events for the table to the function",
+          "correct": false,
+          "rationale": "CloudTrail records API activity for auditing; it is not a change-processing feed."
+        },
+        {
+          "text": "Enable DynamoDB Streams on the table and create an event source mapping for the function",
+          "correct": true,
+          "rationale": "Lambda polls the stream and invokes the function with batches of change records."
+        }
+      ],
+      "explanation": "DynamoDB Streams plus an event source mapping is the standard way to react to item changes.",
+      "difficulty": 2,
+      "tags": [
+        "lambda",
+        "dynamodb-streams"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    }
+  ]
+}

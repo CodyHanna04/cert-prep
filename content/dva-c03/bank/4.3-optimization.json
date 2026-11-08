@@ -1,0 +1,449 @@
+{
+  "formatVersion": 1,
+  "questions": [
+    {
+      "id": "dva-c03-4.3-01",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "single",
+      "stem": "A latency-sensitive API backed by Lambda has slow responses after idle periods because of cold starts. What should the developer configure?",
+      "options": [
+        {
+          "text": "Reserved concurrency set to the expected peak request rate",
+          "correct": false,
+          "rationale": "Reserved concurrency limits and guarantees capacity but does not pre-initialize it."
+        },
+        {
+          "text": "A longer timeout",
+          "correct": false,
+          "rationale": "Timeout does not affect start-up time."
+        },
+        {
+          "text": "A dead-letter queue",
+          "correct": false,
+          "rationale": "DLQs hold failed asynchronous events."
+        },
+        {
+          "text": "Provisioned concurrency on the function's alias",
+          "correct": true,
+          "rationale": "Pre-initialized execution environments respond without cold-start delay."
+        }
+      ],
+      "explanation": "Provisioned concurrency keeps a set number of environments initialized and ready.",
+      "difficulty": 2,
+      "tags": [
+        "lambda",
+        "provisioned-concurrency",
+        "cold-start"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/provisioned-concurrency.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-4.3-02",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "single",
+      "stem": "Many concurrent Lambda functions open their own connections to an Amazon RDS database and exhaust its connection limit. What should the developer add?",
+      "options": [
+        {
+          "text": "Amazon RDS Proxy between the functions and the database",
+          "correct": true,
+          "rationale": "RDS Proxy pools and shares database connections."
+        },
+        {
+          "text": "A larger Lambda memory setting",
+          "correct": false,
+          "rationale": "More memory does not reduce connections."
+        },
+        {
+          "text": "An Amazon SQS queue between the functions and the database",
+          "correct": false,
+          "rationale": "A queue does not pool connections; whatever consumes it still connects to the database."
+        },
+        {
+          "text": "A CloudFront distribution in front of the database",
+          "correct": false,
+          "rationale": "CloudFront caches HTTP content, not database connections."
+        }
+      ],
+      "explanation": "Connection pooling protects databases from bursts of short-lived clients.",
+      "difficulty": 2,
+      "tags": [
+        "rds-proxy",
+        "connection-pooling",
+        "lambda"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-4.3-03",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "single",
+      "stem": "A Lambda function creates a new SDK client and database connection inside its handler on every invocation. How can the developer reduce latency for warm invocations?",
+      "options": [
+        {
+          "text": "Close the connection at the end of every invocation",
+          "correct": false,
+          "rationale": "Closing it forces a new connection on the next invocation, which is the slow part."
+        },
+        {
+          "text": "Create the client and connection outside the handler",
+          "correct": true,
+          "rationale": "Code outside the handler runs once per execution environment, and later invocations reuse it."
+        },
+        {
+          "text": "Increase the function's timeout so the connection has time to open",
+          "correct": false,
+          "rationale": "Timeout does not make invocations faster."
+        },
+        {
+          "text": "Move the client code into an environment variable",
+          "correct": false,
+          "rationale": "Environment variables hold settings, not objects."
+        }
+      ],
+      "explanation": "Initialize expensive resources once per environment, outside the handler.",
+      "difficulty": 2,
+      "tags": [
+        "lambda",
+        "performance",
+        "initialization"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/best-practices.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-4.3-04",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "single",
+      "stem": "A Lambda function mostly waits on an external API. Its reports show that it uses a small fraction of its configured memory, and its duration does not change when memory is increased. How can the developer lower cost?",
+      "options": [
+        {
+          "text": "Increase the memory setting so that each invocation finishes faster",
+          "correct": false,
+          "rationale": "Duration does not drop for I/O-bound work, so cost rises."
+        },
+        {
+          "text": "Add provisioned concurrency",
+          "correct": false,
+          "rationale": "Provisioned concurrency adds cost to reduce cold starts."
+        },
+        {
+          "text": "Lower the memory setting and check that duration stays the same",
+          "correct": true,
+          "rationale": "Lambda charges by memory and duration, so lower memory with the same duration costs less."
+        },
+        {
+          "text": "Move the function into a VPC",
+          "correct": false,
+          "rationale": "VPC access does not reduce compute cost."
+        }
+      ],
+      "explanation": "Right-size memory from measured usage and duration; CPU-bound and I/O-bound functions behave differently.",
+      "difficulty": 2,
+      "tags": [
+        "lambda",
+        "memory",
+        "cost"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-4.3-05",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "single",
+      "stem": "Several services subscribe to one Amazon SNS topic, but each needs only some message types. Each subscriber currently receives every message and discards most of them in code. What should the developer do?",
+      "options": [
+        {
+          "text": "Create a separate SQS FIFO queue for every message",
+          "correct": false,
+          "rationale": "This adds work without filtering anything."
+        },
+        {
+          "text": "Increase the subscribers' Lambda memory",
+          "correct": false,
+          "rationale": "Faster discarding still processes unwanted messages."
+        },
+        {
+          "text": "Turn on SNS message archiving",
+          "correct": false,
+          "rationale": "Archiving keeps messages for replay; it does not filter deliveries."
+        },
+        {
+          "text": "Add a filter policy to each subscription",
+          "correct": true,
+          "rationale": "SNS delivers only the messages that match each subscription's filter."
+        }
+      ],
+      "explanation": "Subscription filter policies cut unneeded deliveries and processing.",
+      "difficulty": 2,
+      "tags": [
+        "sns",
+        "filter-policy",
+        "fan-out"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/sns/latest/dg/sns-message-filtering.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-4.3-06",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "multi",
+      "stem": "Consumers poll an Amazon SQS queue constantly, and most receive calls return no messages, which increases cost. Which changes will reduce the number of API calls? (Select TWO.)",
+      "options": [
+        {
+          "text": "Use batch actions to send, receive and delete several messages per call",
+          "correct": true,
+          "rationale": "Batching processes up to ten messages per request."
+        },
+        {
+          "text": "Switch to a FIFO queue",
+          "correct": false,
+          "rationale": "FIFO adds ordering and exactly-once processing, not fewer empty receives."
+        },
+        {
+          "text": "Turn on long polling by setting a receive wait time",
+          "correct": true,
+          "rationale": "Long polling waits for messages to arrive instead of returning empty responses."
+        },
+        {
+          "text": "Poll more often with short polling",
+          "correct": false,
+          "rationale": "More frequent short polls make more empty calls."
+        },
+        {
+          "text": "Increase the visibility timeout",
+          "correct": false,
+          "rationale": "Visibility timeout affects redelivery, not empty receives."
+        }
+      ],
+      "explanation": "Long polling and batching are the main ways to reduce SQS request costs.",
+      "difficulty": 2,
+      "tags": [
+        "sqs",
+        "long-polling",
+        "batching"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-short-and-long-polling.html",
+        "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-batch-api-actions.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-4.3-07",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "single",
+      "stem": "A REST API in Amazon API Gateway returns the same product catalog for several minutes at a time, and the backend is under heavy load from repeated GET requests. What should the developer do?",
+      "options": [
+        {
+          "text": "Enable API caching on the stage with a suitable TTL",
+          "correct": true,
+          "rationale": "API Gateway serves cached responses and calls the backend less often."
+        },
+        {
+          "text": "Increase the stage's throttling limits for GET requests",
+          "correct": false,
+          "rationale": "Higher limits let even more requests reach the backend."
+        },
+        {
+          "text": "Switch to a Lambda proxy integration",
+          "correct": false,
+          "rationale": "The integration type does not reduce repeated calls."
+        },
+        {
+          "text": "Add a request validator",
+          "correct": false,
+          "rationale": "Validation rejects bad requests; it does not cache good ones."
+        }
+      ],
+      "explanation": "Stage caching serves repeated GET responses from API Gateway's cache, cutting calls to the backend.",
+      "difficulty": 2,
+      "tags": [
+        "api-gateway",
+        "caching"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-4.3-08",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "single",
+      "stem": "Static images in an Amazon S3 bucket load slowly for users far from the bucket's Region. The bucket must stay private. What should the developer do?",
+      "options": [
+        {
+          "text": "Make the bucket public and give users the direct S3 URL for each image file",
+          "correct": false,
+          "rationale": "This removes privacy and does not cache content near users."
+        },
+        {
+          "text": "Serve them through Amazon CloudFront with origin access control (OAC)",
+          "correct": true,
+          "rationale": "Edge caching cuts latency, and OAC lets only CloudFront read the bucket."
+        },
+        {
+          "text": "Turn on S3 Versioning",
+          "correct": false,
+          "rationale": "Versioning keeps object versions; it does not speed delivery."
+        },
+        {
+          "text": "Move the images to the S3 Standard-IA storage class",
+          "correct": false,
+          "rationale": "Storage classes change cost and retrieval terms, not distance to users."
+        }
+      ],
+      "explanation": "CloudFront caches content at edge locations; OAC keeps the origin bucket private.",
+      "difficulty": 2,
+      "tags": [
+        "cloudfront",
+        "caching",
+        "s3"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-4.3-09",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "single",
+      "stem": "An application runs as several Amazon ECS services. The developer needs to find which service is running out of CPU and memory. Which feature should the developer use?",
+      "options": [
+        {
+          "text": "AWS CloudTrail",
+          "correct": false,
+          "rationale": "CloudTrail records API calls, not resource usage."
+        },
+        {
+          "text": "Amazon ECR image scanning",
+          "correct": false,
+          "rationale": "Scanning checks images for vulnerabilities."
+        },
+        {
+          "text": "CloudWatch Container Insights",
+          "correct": true,
+          "rationale": "Container Insights collects CPU, memory and other metrics for clusters, services and tasks."
+        },
+        {
+          "text": "AWS CodeDeploy deployment logs",
+          "correct": false,
+          "rationale": "Deployment logs describe deployments, not runtime usage."
+        }
+      ],
+      "explanation": "Container Insights shows resource bottlenecks for containerized workloads.",
+      "difficulty": 2,
+      "tags": [
+        "container-insights",
+        "ecs",
+        "performance"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContainerInsights.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-4.3-10",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "single",
+      "stem": "A web application on an EC2 Auto Scaling group is slow during busy hours and over-provisioned at night. The developer wants the group to keep average CPU near 50 percent automatically. Which scaling policy fits?",
+      "options": [
+        {
+          "text": "A scheduled action that adds instances during business hours",
+          "correct": false,
+          "rationale": "Schedules do not react to unexpected load."
+        },
+        {
+          "text": "A fixed desired capacity set to the daily peak",
+          "correct": false,
+          "rationale": "This wastes capacity at night."
+        },
+        {
+          "text": "Manual scaling by an operator",
+          "correct": false,
+          "rationale": "Manual changes are slow and error-prone."
+        },
+        {
+          "text": "A target tracking scaling policy on average CPU utilization",
+          "correct": true,
+          "rationale": "Target tracking adds and removes instances to hold the metric near the target."
+        }
+      ],
+      "explanation": "Target tracking is the simplest way to scale on a utilization metric.",
+      "difficulty": 1,
+      "tags": [
+        "ec2-auto-scaling",
+        "target-tracking"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    }
+  ]
+}

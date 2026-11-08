@@ -1,0 +1,493 @@
+{
+  "formatVersion": 1,
+  "questions": [
+    {
+      "id": "dva-c03-3.3-01",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "single",
+      "stem": "A Lambda function's dependencies, including machine learning libraries, are larger than the .zip deployment package size limit. How should the developer package the function?",
+      "options": [
+        {
+          "text": "As several .zip files uploaded together",
+          "correct": false,
+          "rationale": "A function has one deployment package."
+        },
+        {
+          "text": "As a container image stored in Amazon ECR",
+          "correct": true,
+          "rationale": "Container images allow much larger function packages than .zip archives."
+        },
+        {
+          "text": "With the libraries listed in environment variables",
+          "correct": false,
+          "rationale": "Environment variables cannot hold libraries."
+        },
+        {
+          "text": "With a longer function timeout",
+          "correct": false,
+          "rationale": "Timeout does not change the package size limit."
+        }
+      ],
+      "explanation": "Use container images for large dependencies; use .zip and layers for smaller packages.",
+      "difficulty": 2,
+      "tags": [
+        "lambda",
+        "container-image",
+        "packaging"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/images-create.html",
+        "https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-3.3-02",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "single",
+      "stem": "An Amazon ECS service uses rolling deployments. When a new revision's tasks keep failing health checks, the team wants the deployment to stop and return to the last working revision automatically. What should the developer enable?",
+      "options": [
+        {
+          "text": "A Fargate Spot capacity provider for the service's tasks",
+          "correct": false,
+          "rationale": "Spot capacity changes pricing, not deployment behavior."
+        },
+        {
+          "text": "A larger task memory size",
+          "correct": false,
+          "rationale": "More memory does not detect failed deployments."
+        },
+        {
+          "text": "The deployment circuit breaker with rollback",
+          "correct": true,
+          "rationale": "The circuit breaker detects a failing deployment and rolls back to the last completed one."
+        },
+        {
+          "text": "ECR tag immutability",
+          "correct": false,
+          "rationale": "Immutable tags protect images, not running deployments."
+        }
+      ],
+      "explanation": "ECS rolling deployments can roll back automatically with the deployment circuit breaker.",
+      "difficulty": 2,
+      "tags": [
+        "ecs",
+        "rolling-update",
+        "rollback"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-circuit-breaker.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-3.3-03",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "single",
+      "stem": "A team wants to run containers on Amazon ECS without provisioning, patching or scaling any EC2 instances. Which launch type should the developer specify in the service?",
+      "options": [
+        {
+          "text": "The EC2 launch type",
+          "correct": false,
+          "rationale": "The EC2 launch type runs tasks on instances the team manages."
+        },
+        {
+          "text": "An Auto Scaling group of Spot Instances",
+          "correct": false,
+          "rationale": "The team would still manage those instances."
+        },
+        {
+          "text": "AWS Elastic Beanstalk",
+          "correct": false,
+          "rationale": "Beanstalk is an application platform, not an ECS launch type."
+        },
+        {
+          "text": "AWS Fargate",
+          "correct": true,
+          "rationale": "Fargate runs tasks on serverless compute that AWS manages."
+        }
+      ],
+      "explanation": "Fargate removes server management for ECS and EKS workloads.",
+      "difficulty": 1,
+      "tags": [
+        "fargate",
+        "ecs"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-3.3-04",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "single",
+      "stem": "A team deploys a Lambda function with AWS SAM. New versions should receive 10 percent of traffic first, then all traffic a few minutes later, and roll back automatically if a CloudWatch alarm fires. What should the developer configure?",
+      "options": [
+        {
+          "text": "A canary deployment preference with the alarm listed",
+          "correct": true,
+          "rationale": "SAM's DeploymentPreference creates a CodeDeploy canary deployment that shifts traffic in two steps and watches alarms."
+        },
+        {
+          "text": "An all-at-once deployment preference with the alarm listed",
+          "correct": false,
+          "rationale": "All traffic moves at once, so there is no small first step."
+        },
+        {
+          "text": "Two Lambda layers, one for each version",
+          "correct": false,
+          "rationale": "Layers share code; they do not shift traffic."
+        },
+        {
+          "text": "Reserved concurrency of 10 percent on the new version",
+          "correct": false,
+          "rationale": "Concurrency limits do not route traffic between versions."
+        }
+      ],
+      "explanation": "Canary moves traffic in two increments, linear in equal steps, and all-at-once immediately.",
+      "difficulty": 3,
+      "tags": [
+        "codedeploy",
+        "canary",
+        "sam",
+        "lambda"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/automating-updates-to-serverless-apps.html",
+        "https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-3.3-05",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "single",
+      "stem": "A team wants to release a new version of an application alongside the current one, then move traffic over and be able to switch back immediately if problems appear. Which deployment strategy fits?",
+      "options": [
+        {
+          "text": "In-place rolling",
+          "correct": false,
+          "rationale": "Instances are updated in batches, so going back means redeploying."
+        },
+        {
+          "text": "Blue/green",
+          "correct": true,
+          "rationale": "The old environment stays in place, so traffic can be switched back quickly."
+        },
+        {
+          "text": "All at once",
+          "correct": false,
+          "rationale": "Every target is updated together with no previous environment to return to."
+        },
+        {
+          "text": "Recreate",
+          "correct": false,
+          "rationale": "The old version is removed before the new one starts."
+        }
+      ],
+      "explanation": "Blue/green keeps two environments, which makes rollback a traffic switch.",
+      "difficulty": 2,
+      "tags": [
+        "blue-green",
+        "deployment-strategies"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/codedeploy/latest/userguide/welcome.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-3.3-06",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "multi",
+      "stem": "A team uses AWS CodePipeline. Each push to the main branch should start the pipeline, and a team lead must sign off before the production stage runs. Which steps will meet these requirements? (Select TWO.)",
+      "options": [
+        {
+          "text": "Add a manual approval action before the production stage",
+          "correct": true,
+          "rationale": "The pipeline pauses until someone approves or rejects."
+        },
+        {
+          "text": "Add CloudFormation drift detection to the build stage",
+          "correct": false,
+          "rationale": "Drift detection compares stacks to templates; it is not an approval."
+        },
+        {
+          "text": "Use a source action connected to the repository that starts the pipeline on each push",
+          "correct": true,
+          "rationale": "A connection-based source action detects pushes and starts the pipeline."
+        },
+        {
+          "text": "Schedule the pipeline to run every night with Amazon EventBridge Scheduler",
+          "correct": false,
+          "rationale": "A nightly run does not start the pipeline on each push."
+        },
+        {
+          "text": "Give the team lead permission to edit the buildspec file",
+          "correct": false,
+          "rationale": "Editing the build does not create an approval gate."
+        }
+      ],
+      "explanation": "CodePipeline orchestrates stages; approvals add a human gate between them.",
+      "difficulty": 2,
+      "tags": [
+        "codepipeline",
+        "manual-approval"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/codepipeline/latest/userguide/connections.html",
+        "https://docs.aws.amazon.com/codepipeline/latest/userguide/approvals.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-3.3-07",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "single",
+      "stem": "A CloudFormation stack update must roll back automatically if an application error alarm goes into ALARM state during the update or shortly after. What should the developer configure?",
+      "options": [
+        {
+          "text": "Termination protection on the stack",
+          "correct": false,
+          "rationale": "Termination protection prevents stack deletion."
+        },
+        {
+          "text": "A DeletionPolicy of Retain on each resource",
+          "correct": false,
+          "rationale": "Retain keeps resources when they are deleted; it does not watch alarms."
+        },
+        {
+          "text": "Rollback triggers on the stack that monitor the alarm",
+          "correct": true,
+          "rationale": "CloudFormation watches the alarms during the update and a monitoring period, and rolls back if one fires."
+        },
+        {
+          "text": "Drift detection that runs automatically after each update",
+          "correct": false,
+          "rationale": "Drift detection reports manual changes; it does not roll back."
+        }
+      ],
+      "explanation": "Rollback triggers connect CloudWatch alarms to CloudFormation updates.",
+      "difficulty": 3,
+      "tags": [
+        "cloudformation",
+        "rollback"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-rollback-triggers.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-3.3-08",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "single",
+      "stem": "Before updating a production CloudFormation stack, a developer wants to see which resources will be added, changed or replaced. What should the developer create?",
+      "options": [
+        {
+          "text": "A stack set",
+          "correct": false,
+          "rationale": "Stack sets deploy stacks across accounts and Regions."
+        },
+        {
+          "text": "A drift detection report",
+          "correct": false,
+          "rationale": "Drift shows differences from the current template, not from a proposed update."
+        },
+        {
+          "text": "A nested stack",
+          "correct": false,
+          "rationale": "Nested stacks organize templates; they do not preview updates."
+        },
+        {
+          "text": "A change set",
+          "correct": true,
+          "rationale": "A change set previews the changes an update will make before you run it."
+        }
+      ],
+      "explanation": "Change sets show the effect of an update, including replacements, before it happens.",
+      "difficulty": 1,
+      "tags": [
+        "cloudformation",
+        "change-sets"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-3.3-09",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "single",
+      "stem": "A network stack creates a VPC. A separate application stack must use that VPC's ID without hardcoding it. How should the developer share the value?",
+      "options": [
+        {
+          "text": "Export it as an output of the network stack and use Fn::ImportValue",
+          "correct": true,
+          "rationale": "Exports share values between stacks in the same account and Region."
+        },
+        {
+          "text": "Copy the ID into the application template by hand",
+          "correct": false,
+          "rationale": "Hardcoded IDs break when the network stack changes."
+        },
+        {
+          "text": "Reference the network stack's VPC from the application stack with Fn::GetAtt",
+          "correct": false,
+          "rationale": "GetAtt reads attributes of resources in the same template."
+        },
+        {
+          "text": "Pass the ID through a Lambda environment variable",
+          "correct": false,
+          "rationale": "Environment variables configure functions, not templates."
+        }
+      ],
+      "explanation": "Outputs with Export and Fn::ImportValue create cross-stack references.",
+      "difficulty": 2,
+      "tags": [
+        "cloudformation",
+        "cross-stack",
+        "outputs"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/walkthrough-crossstackref.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-3.3-10",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "single",
+      "stem": "A team wants to mark the exact commit that was released to production as version 2.3.0, so it can be found and redeployed later. What should the developer create?",
+      "options": [
+        {
+          "text": "A new branch for each file in the release",
+          "correct": false,
+          "rationale": "Branches track lines of work, not a single released commit."
+        },
+        {
+          "text": "A Git tag on that commit",
+          "correct": true,
+          "rationale": "Tags label specific commits, such as release versions."
+        },
+        {
+          "text": "A Lambda alias named 2.3.0",
+          "correct": false,
+          "rationale": "Aliases point to function versions, not source commits."
+        },
+        {
+          "text": "A pull request titled 2.3.0",
+          "correct": false,
+          "rationale": "Pull requests propose changes; they do not label a commit."
+        }
+      ],
+      "explanation": "Use tags for releases and branches for ongoing lines of development.",
+      "difficulty": 1,
+      "tags": [
+        "source-control",
+        "git",
+        "tags"
+      ],
+      "refs": [
+        "https://git-scm.com/book/en/v2/Git-Basics-Tagging"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-3.3-11",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "single",
+      "stem": "A team wants to run the Kiro agent inside its CI/CD pipeline, without an interactive sign-in, to check each deployment after it finishes. How can the pipeline run Kiro?",
+      "options": [
+        {
+          "text": "Install the Kiro IDE on the build server and open it for each run",
+          "correct": false,
+          "rationale": "The IDE needs an interactive user."
+        },
+        {
+          "text": "Add a Kiro steering file to the buildspec",
+          "correct": false,
+          "rationale": "Steering files guide the agent; they do not run it."
+        },
+        {
+          "text": "Use the Kiro CLI in headless mode with API key authentication",
+          "correct": true,
+          "rationale": "Headless mode lets the CLI run in automation without an interactive session."
+        },
+        {
+          "text": "Store a Kiro spec in Amazon ECR",
+          "correct": false,
+          "rationale": "ECR stores container images, not Kiro specs."
+        }
+      ],
+      "explanation": "The Kiro CLI supports headless use in pipelines for tasks such as post-deployment checks.",
+      "difficulty": 3,
+      "tags": [
+        "kiro",
+        "ci-cd",
+        "ai-tools"
+      ],
+      "refs": [
+        "https://kiro.dev/docs/cli/headless/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    }
+  ]
+}

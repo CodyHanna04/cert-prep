@@ -20,6 +20,15 @@ What the vendor says this objective covers:
 - Do not recall, imitate or reconstruct any real exam question, and do not use exam-dump or brain-dump material.
 - Avoid facts that change often (prices, quotas, version numbers) unless the objective needs them. Where it does, cite the page.
 
+## Fit to the exam (as important as being correct)
+
+- **The exam guide decides names, plans and scope.** Use the service names the guide uses, even if AWS has renamed a service since. If a fact changed after the guide was published, leave it out of the question rather than update it. The current docs confirm that a fact is correct; they do not change what the exam asks.
+- **Match the guide's verbs and the depth of the vendor's official sample questions.** Test the decision a candidate at this level makes, not trivia: no quotas, prices, rule-evaluation order or exact principle wording unless the objective names them.
+- **Every service in the question is on the in-scope list,** distractors included.
+- **Explanations teach the decision.** No rename dates, retirement dates or "closed to new customers" notes.
+
+See `docs/17-question-quality-review.md` for why these rules exist.
+
 ## Style
 
 {{STYLE}}

@@ -1,0 +1,447 @@
+{
+  "formatVersion": 1,
+  "questions": [
+    {
+      "id": "dva-c03-3.1-01",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "single",
+      "stem": "A Python Lambda function depends on a library with compiled native code. The developer packaged the dependencies on a macOS laptop, and the function fails to import the library in Lambda. What should the developer do?",
+      "options": [
+        {
+          "text": "Increase the function's memory",
+          "correct": false,
+          "rationale": "Memory does not fix a binary built for the wrong platform."
+        },
+        {
+          "text": "Move the macOS-built dependencies into a Lambda layer and attach it to the function",
+          "correct": false,
+          "rationale": "A layer built the same way has the same incompatible binaries."
+        },
+        {
+          "text": "Add the library's name to an environment variable",
+          "correct": false,
+          "rationale": "Environment variables do not install or load libraries."
+        },
+        {
+          "text": "Build the package in a Lambda-compatible container with sam build --use-container",
+          "correct": true,
+          "rationale": "Native code must be compiled for the Lambda execution environment's operating system and architecture."
+        }
+      ],
+      "explanation": "Dependencies with native code must match Lambda's Linux runtime; building in a container is the simplest way.",
+      "difficulty": 3,
+      "tags": [
+        "lambda",
+        "dependencies",
+        "sam"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-3.1-02",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "single",
+      "stem": "An Amazon ECR repository fills up with old, untagged images left over from builds. The team wants them removed automatically. What should the developer configure?",
+      "options": [
+        {
+          "text": "An ECR lifecycle policy that expires untagged images",
+          "correct": true,
+          "rationale": "Lifecycle policies clean up images by age, count or tag status."
+        },
+        {
+          "text": "An S3 Lifecycle rule on the bucket that stores the repository's images",
+          "correct": false,
+          "rationale": "ECR manages image storage itself; S3 Lifecycle rules do not apply to repositories."
+        },
+        {
+          "text": "Tag immutability on the repository",
+          "correct": false,
+          "rationale": "Immutability stops tags being overwritten; it does not delete images."
+        },
+        {
+          "text": "Image scanning on push",
+          "correct": false,
+          "rationale": "Scanning finds vulnerabilities; it does not remove images."
+        }
+      ],
+      "explanation": "Use ECR lifecycle policies to keep repositories tidy and reduce storage costs.",
+      "difficulty": 1,
+      "tags": [
+        "ecr",
+        "lifecycle-policy"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-3.1-03",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "multi",
+      "stem": "Deployments must always run the exact container image that passed testing, and nobody should be able to replace an image under an existing tag. Which actions will meet these requirements? (Select TWO.)",
+      "options": [
+        {
+          "text": "Turn off image scanning",
+          "correct": false,
+          "rationale": "Scanning does not change tags and should stay on."
+        },
+        {
+          "text": "Tag each image with a unique value, such as the Git commit ID, and deploy that tag",
+          "correct": true,
+          "rationale": "A unique tag points to one specific build."
+        },
+        {
+          "text": "Push every build to the same tag",
+          "correct": false,
+          "rationale": "Reusing one tag makes it impossible to tell which build is deployed."
+        },
+        {
+          "text": "Enable tag immutability on the ECR repository",
+          "correct": true,
+          "rationale": "Immutable tags cannot be overwritten by a later push."
+        },
+        {
+          "text": "Deploy the latest tag in every environment",
+          "correct": false,
+          "rationale": "latest moves with each push, so environments may run different, untested builds."
+        }
+      ],
+      "explanation": "Unique, immutable tags make deployments reproducible.",
+      "difficulty": 2,
+      "tags": [
+        "ecr",
+        "image-tags",
+        "immutability"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-tag-mutability.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-3.1-04",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "single",
+      "stem": "A container image for a compiled application includes the full build toolchain, which makes the image large. The toolchain is not needed at runtime. How should the developer change the Dockerfile?",
+      "options": [
+        {
+          "text": "Add a final RUN step that compresses the toolchain files inside the existing image layers",
+          "correct": false,
+          "rationale": "Layers are already compressed for transfer; the toolchain still ships."
+        },
+        {
+          "text": "Use a multi-stage build that copies the compiled output into a slim final image",
+          "correct": true,
+          "rationale": "The build stage keeps the tools, and the final stage contains only what runs."
+        },
+        {
+          "text": "Push the image to two ECR repositories",
+          "correct": false,
+          "rationale": "Duplicating the image does not make it smaller."
+        },
+        {
+          "text": "Turn on tag immutability",
+          "correct": false,
+          "rationale": "Immutability affects tags, not image size."
+        }
+      ],
+      "explanation": "Multi-stage builds separate build-time dependencies from the runtime image.",
+      "difficulty": 2,
+      "tags": [
+        "docker",
+        "containers"
+      ],
+      "refs": [
+        "https://docs.docker.com/build/building/multi-stage/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-3.1-05",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "single",
+      "stem": "A build server runs docker push to an Amazon ECR repository and gets an error that it has no basic auth credentials. What should the build run first?",
+      "options": [
+        {
+          "text": "aws ecr create-repository with the same name as the image",
+          "correct": false,
+          "rationale": "Creating a repository does not authenticate Docker."
+        },
+        {
+          "text": "docker build with the --no-cache option",
+          "correct": false,
+          "rationale": "Rebuilding the image does not supply credentials."
+        },
+        {
+          "text": "aws ecr get-login-password, piped to docker login for the registry",
+          "correct": true,
+          "rationale": "Docker needs an ECR authorization token before it can push."
+        },
+        {
+          "text": "aws configure set region to the repository's AWS Region before the push",
+          "correct": false,
+          "rationale": "A Region setting alone does not log Docker in to the registry."
+        }
+      ],
+      "explanation": "Docker clients authenticate to ECR with a temporary token from get-login-password.",
+      "difficulty": 2,
+      "tags": [
+        "ecr",
+        "docker",
+        "authentication"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry_auth.html",
+        "https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-3.1-06",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "single",
+      "stem": "Several teams publish internal npm packages and also use public packages from npmjs.com. The company wants one private place to fetch both. Which service should the developer use?",
+      "options": [
+        {
+          "text": "Amazon ECR",
+          "correct": false,
+          "rationale": "ECR stores container images, not npm packages."
+        },
+        {
+          "text": "An Amazon S3 bucket with a folder for each package and its published versions",
+          "correct": false,
+          "rationale": "S3 can hold files but does not work as an npm registry."
+        },
+        {
+          "text": "AWS CodeBuild",
+          "correct": false,
+          "rationale": "CodeBuild runs builds; it does not host packages."
+        },
+        {
+          "text": "AWS CodeArtifact, with an external connection to the public npm registry",
+          "correct": true,
+          "rationale": "CodeArtifact hosts private packages and can proxy and cache public ones."
+        }
+      ],
+      "explanation": "CodeArtifact is a managed package repository for npm, PyPI, Maven and more.",
+      "difficulty": 2,
+      "tags": [
+        "codeartifact",
+        "dependencies"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/codeartifact/latest/ug/welcome.html",
+        "https://docs.aws.amazon.com/codeartifact/latest/ug/external-connection.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-3.1-07",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "single",
+      "stem": "A team wants to turn a new feature on or off for users without redeploying the application, and to roll the change out gradually with automatic rollback if alarms go off. Which service fits?",
+      "options": [
+        {
+          "text": "AWS AppConfig",
+          "correct": true,
+          "rationale": "AppConfig deploys configuration and feature flags with deployment strategies and alarm-based rollback."
+        },
+        {
+          "text": "AWS CloudFormation",
+          "correct": false,
+          "rationale": "CloudFormation provisions infrastructure; changing a flag would mean a stack update."
+        },
+        {
+          "text": "Lambda environment variables",
+          "correct": false,
+          "rationale": "Changing an environment variable updates the function and is not gradual."
+        },
+        {
+          "text": "Amazon ECR",
+          "correct": false,
+          "rationale": "ECR stores container images, not runtime flags."
+        }
+      ],
+      "explanation": "AppConfig separates configuration changes from code deployments.",
+      "difficulty": 2,
+      "tags": [
+        "appconfig",
+        "feature-flags"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/appconfig/latest/userguide/what-is-appconfig.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-3.1-08",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "single",
+      "stem": "The same application code runs in dev, test and prod. Each environment has its own database URL and settings. How can the developer store these values so the code can load the right set?",
+      "options": [
+        {
+          "text": "Store all environments' values in one JSON parameter and parse the right section in code",
+          "correct": false,
+          "rationale": "This mixes environments and makes access control harder."
+        },
+        {
+          "text": "Store them in Parameter Store under a path per environment and read them by path",
+          "correct": true,
+          "rationale": "Parameter hierarchies group settings, and GetParametersByPath loads one environment's set."
+        },
+        {
+          "text": "Hardcode the values and pick them with a build flag",
+          "correct": false,
+          "rationale": "Hardcoded settings need a new build to change."
+        },
+        {
+          "text": "Store them as tags on the application's IAM role",
+          "correct": false,
+          "rationale": "Role tags are for access control, not application configuration."
+        }
+      ],
+      "explanation": "Parameter Store hierarchies are a simple way to keep environment-specific configuration.",
+      "difficulty": 2,
+      "tags": [
+        "parameter-store",
+        "configuration"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-hierarchies.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-3.1-09",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "single",
+      "stem": "A developer added a new resource to a REST API in the Amazon API Gateway console, but clients calling the prod stage URL get errors for the new path. What did the developer miss?",
+      "options": [
+        {
+          "text": "Enabling caching on the stage",
+          "correct": false,
+          "rationale": "Caching is optional and does not publish changes."
+        },
+        {
+          "text": "Creating a usage plan",
+          "correct": false,
+          "rationale": "Usage plans meter and throttle clients."
+        },
+        {
+          "text": "Deploying the API to the prod stage",
+          "correct": true,
+          "rationale": "Changes take effect for clients only after the API is deployed to a stage."
+        },
+        {
+          "text": "Adding a custom domain name for the stage",
+          "correct": false,
+          "rationale": "The stage URL already works without a custom domain."
+        }
+      ],
+      "explanation": "A deployment is a snapshot of the API; each stage serves one deployment.",
+      "difficulty": 1,
+      "tags": [
+        "api-gateway",
+        "stages",
+        "deployment"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-deployments.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-3.1-10",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "single",
+      "stem": "A REST API in Amazon API Gateway must be reachable only from inside the company's VPC. Which endpoint type should the developer use?",
+      "options": [
+        {
+          "text": "An edge-optimized API served through CloudFront edge locations",
+          "correct": false,
+          "rationale": "Edge-optimized APIs are public and served through CloudFront locations."
+        },
+        {
+          "text": "A Regional API",
+          "correct": false,
+          "rationale": "Regional APIs are public endpoints in one Region."
+        },
+        {
+          "text": "A Regional API with a custom domain name",
+          "correct": false,
+          "rationale": "A custom domain does not make the API private."
+        },
+        {
+          "text": "A private API, accessed through an interface VPC endpoint",
+          "correct": true,
+          "rationale": "Private APIs are reachable only through interface endpoints in a VPC."
+        }
+      ],
+      "explanation": "API Gateway endpoint types: edge-optimized and Regional are public; private is VPC-only.",
+      "difficulty": 2,
+      "tags": [
+        "api-gateway",
+        "private-api"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-endpoint-types.html",
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-private-apis.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    }
+  ]
+}

@@ -1,0 +1,449 @@
+{
+  "formatVersion": 1,
+  "questions": [
+    {
+      "id": "dva-c03-2.2-01",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "An application must encrypt 50 MB files with a key that is protected by AWS KMS. What should the developer do?",
+      "options": [
+        {
+          "text": "Send each file to the KMS Encrypt API and store the ciphertext that it returns",
+          "correct": false,
+          "rationale": "Encrypt accepts only small amounts of data, so it cannot encrypt large files directly."
+        },
+        {
+          "text": "Encrypt with a data key from GenerateDataKey, and store the plaintext data key next to the file",
+          "correct": false,
+          "rationale": "Anyone with the file could then decrypt it."
+        },
+        {
+          "text": "Encrypt with a data key from GenerateDataKey, and store the encrypted data key with the file",
+          "correct": true,
+          "rationale": "This is envelope encryption: KMS protects the data key, and large data is encrypted locally."
+        },
+        {
+          "text": "Export the KMS key and encrypt the files with it",
+          "correct": false,
+          "rationale": "KMS keys do not leave AWS KMS unencrypted."
+        }
+      ],
+      "explanation": "Envelope encryption: encrypt data with a data key, then keep only the KMS-encrypted copy of that key.",
+      "difficulty": 3,
+      "tags": [
+        "kms",
+        "envelope-encryption"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/kms/latest/developerguide/kms-cryptography.html",
+        "https://docs.aws.amazon.com/kms/latest/APIReference/API_GenerateDataKey.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-2.2-02",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "Objects in an Amazon S3 bucket must be encrypted at rest with a key whose use is controlled by a key policy and logged in AWS CloudTrail. Which encryption option meets these requirements?",
+      "options": [
+        {
+          "text": "Server-side encryption with Amazon S3 managed keys (SSE-S3)",
+          "correct": false,
+          "rationale": "S3 manages these keys for you, so there is no key policy to control."
+        },
+        {
+          "text": "Server-side encryption with customer-provided keys (SSE-C)",
+          "correct": false,
+          "rationale": "With SSE-C you manage the keys yourself outside AWS KMS."
+        },
+        {
+          "text": "No encryption, with a bucket policy that denies public access",
+          "correct": false,
+          "rationale": "Blocking public access is not encryption at rest."
+        },
+        {
+          "text": "Server-side encryption with AWS KMS keys (SSE-KMS)",
+          "correct": true,
+          "rationale": "SSE-KMS uses a KMS key with its own policy, and each use of it is logged in CloudTrail."
+        }
+      ],
+      "explanation": "Choose SSE-KMS when you need control over who can use the key and an audit trail of its use.",
+      "difficulty": 2,
+      "tags": [
+        "s3",
+        "sse-kms",
+        "kms"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-2.2-03",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "A company requires that data is encrypted before it leaves the application, so that AWS never receives it in plaintext. Which approach meets this requirement?",
+      "options": [
+        {
+          "text": "Client-side encryption, for example with the AWS Encryption SDK",
+          "correct": true,
+          "rationale": "Data is encrypted in the application before it is sent to AWS."
+        },
+        {
+          "text": "Server-side encryption with Amazon S3 managed keys",
+          "correct": false,
+          "rationale": "S3 receives the plaintext and encrypts it on arrival."
+        },
+        {
+          "text": "Server-side encryption with AWS KMS keys that the company manages",
+          "correct": false,
+          "rationale": "S3 still receives the plaintext before encrypting it."
+        },
+        {
+          "text": "HTTPS between the application and AWS",
+          "correct": false,
+          "rationale": "TLS protects data in transit but AWS decrypts it on arrival."
+        }
+      ],
+      "explanation": "Server-side encryption protects data at rest after AWS receives it; client-side encryption protects it before it is sent.",
+      "difficulty": 2,
+      "tags": [
+        "client-side-encryption",
+        "encryption-sdk"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingClientSideEncryption.html",
+        "https://docs.aws.amazon.com/encryption-sdk/latest/developer-guide/introduction.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-2.2-04",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "A security review requires that all requests to an Amazon S3 bucket use HTTPS. What should the developer add?",
+      "options": [
+        {
+          "text": "Default bucket encryption with SSE-S3 applied to every object that is uploaded",
+          "correct": false,
+          "rationale": "Default encryption protects data at rest, not in transit."
+        },
+        {
+          "text": "A bucket policy that denies requests where aws:SecureTransport is false",
+          "correct": true,
+          "rationale": "The condition blocks any request made over plain HTTP."
+        },
+        {
+          "text": "S3 Versioning",
+          "correct": false,
+          "rationale": "Versioning keeps object versions and has nothing to do with transport."
+        },
+        {
+          "text": "An S3 Lifecycle rule",
+          "correct": false,
+          "rationale": "Lifecycle rules move and delete objects by age."
+        }
+      ],
+      "explanation": "The aws:SecureTransport condition key is the standard way to require TLS for a bucket.",
+      "difficulty": 2,
+      "tags": [
+        "s3",
+        "encryption-in-transit"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/security-best-practices.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-2.2-05",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "An Application Load Balancer needs a public TLS certificate for www.example.com that renews automatically. What should the developer use?",
+      "options": [
+        {
+          "text": "A self-signed certificate imported into ACM and attached to the listener",
+          "correct": false,
+          "rationale": "Browsers do not trust self-signed certificates, and imported ones are not renewed by ACM."
+        },
+        {
+          "text": "A certificate from AWS Private CA",
+          "correct": false,
+          "rationale": "Private certificates are trusted only inside your organization, not by public browsers."
+        },
+        {
+          "text": "A public ACM certificate attached to the HTTPS listener",
+          "correct": true,
+          "rationale": "ACM issues public certificates and manages their renewal, automatically when DNS validation is used."
+        },
+        {
+          "text": "An Amazon EC2 key pair",
+          "correct": false,
+          "rationale": "Key pairs are for SSH access, not TLS."
+        }
+      ],
+      "explanation": "ACM public certificates are free for integrated services and renew automatically.",
+      "difficulty": 1,
+      "tags": [
+        "acm",
+        "tls",
+        "elb"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html",
+        "https://docs.aws.amazon.com/acm/latest/userguide/managed-renewal.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-2.2-06",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "A developer requested an ACM certificate in the eu-west-1 Region, but it does not appear when configuring a custom domain for an Amazon CloudFront distribution. What should the developer do?",
+      "options": [
+        {
+          "text": "Add the eu-west-1 certificate's ARN to the distribution's origin settings",
+          "correct": false,
+          "rationale": "Origin settings describe where CloudFront fetches content; the viewer certificate must come from ACM in us-east-1."
+        },
+        {
+          "text": "Wait for the certificate to replicate to all Regions",
+          "correct": false,
+          "rationale": "ACM certificates are Regional and do not replicate."
+        },
+        {
+          "text": "Upload the certificate to the S3 origin bucket",
+          "correct": false,
+          "rationale": "Origins do not supply certificates for the distribution's domain."
+        },
+        {
+          "text": "Request or import the certificate in the US East (N. Virginia) Region",
+          "correct": true,
+          "rationale": "CloudFront uses certificates from ACM in us-east-1."
+        }
+      ],
+      "explanation": "Certificates for CloudFront must be in us-east-1, whatever Region the origin is in.",
+      "difficulty": 2,
+      "tags": [
+        "acm",
+        "cloudfront"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cnames-and-https-requirements.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-2.2-07",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "Internal microservices must use TLS certificates issued by the company's own certificate authority. The certificates do not need to be trusted by public browsers. Which service should the developer use?",
+      "options": [
+        {
+          "text": "AWS Private CA",
+          "correct": true,
+          "rationale": "Private CA issues private certificates for internal services and devices."
+        },
+        {
+          "text": "Public certificates from AWS Certificate Manager",
+          "correct": false,
+          "rationale": "Public certificates are for publicly trusted domains."
+        },
+        {
+          "text": "AWS Secrets Manager",
+          "correct": false,
+          "rationale": "Secrets Manager stores and rotates secrets; it does not issue certificates."
+        },
+        {
+          "text": "AWS KMS asymmetric keys",
+          "correct": false,
+          "rationale": "KMS keys sign and encrypt data but are not a certificate authority."
+        }
+      ],
+      "explanation": "Use AWS Private CA for an internal PKI; use public ACM certificates for public endpoints.",
+      "difficulty": 2,
+      "tags": [
+        "private-ca",
+        "tls"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/privateca/latest/userguide/PcaWelcome.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-2.2-08",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "A developer needs an SSH key pair to connect to a new development instance. The developer wants AWS to keep only the public key. What should the developer do?",
+      "options": [
+        {
+          "text": "Create an asymmetric key in AWS KMS and download its private key",
+          "correct": false,
+          "rationale": "KMS never exports the private key of an asymmetric KMS key."
+        },
+        {
+          "text": "Create an EC2 key pair and download its private key once",
+          "correct": true,
+          "rationale": "EC2 stores the public key and gives you the private key once."
+        },
+        {
+          "text": "Request a certificate from AWS Certificate Manager",
+          "correct": false,
+          "rationale": "ACM certificates are for TLS, not SSH sign-in."
+        },
+        {
+          "text": "Store a password in AWS Secrets Manager",
+          "correct": false,
+          "rationale": "A password is not an SSH key pair."
+        }
+      ],
+      "explanation": "EC2 key pairs (created in EC2 or imported) are the standard way to get SSH keys for instances.",
+      "difficulty": 1,
+      "tags": [
+        "ec2",
+        "key-pair",
+        "ssh"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-2.2-09",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "Application logs in Amazon CloudWatch Logs sometimes contain email addresses and credit card numbers. Most people who read the logs must not see these values. What should the developer configure?",
+      "options": [
+        {
+          "text": "AWS KMS encryption of the log group with a customer managed key that rotates",
+          "correct": false,
+          "rationale": "Encryption protects data at rest, but anyone allowed to read the logs still sees the values."
+        },
+        {
+          "text": "A shorter retention period",
+          "correct": false,
+          "rationale": "Shorter retention limits how long data is kept, not who sees it."
+        },
+        {
+          "text": "A data protection policy on the log group that masks sensitive data",
+          "correct": true,
+          "rationale": "Matching data is masked when the logs are viewed unless the reader has unmask permission."
+        },
+        {
+          "text": "A metric filter that counts the sensitive values",
+          "correct": false,
+          "rationale": "Metric filters create metrics; they do not hide log content."
+        }
+      ],
+      "explanation": "CloudWatch Logs data protection policies find and mask sensitive data such as PII.",
+      "difficulty": 2,
+      "tags": [
+        "cloudwatch-logs",
+        "pii",
+        "data-protection"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/mask-sensitive-log-data.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-2.2-10",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "multi",
+      "stem": "A Lambda function connects to an Amazon RDS database. The password must not appear in code or configuration and must rotate automatically. Which steps will meet these requirements? (Select TWO.)",
+      "options": [
+        {
+          "text": "Package the password in a Lambda layer",
+          "correct": false,
+          "rationale": "The secret would sit in plaintext in every function that uses the layer."
+        },
+        {
+          "text": "Allow secretsmanager:GetSecretValue in the execution role and read the secret at runtime",
+          "correct": true,
+          "rationale": "The function fetches the current password when it needs it."
+        },
+        {
+          "text": "Store the password as a String parameter in Parameter Store",
+          "correct": false,
+          "rationale": "A plain String parameter is not encrypted and does not rotate."
+        },
+        {
+          "text": "Store the credentials in AWS Secrets Manager and turn on automatic rotation",
+          "correct": true,
+          "rationale": "Secrets Manager rotates database credentials on a schedule."
+        },
+        {
+          "text": "Store the password in an environment variable and redeploy to rotate it",
+          "correct": false,
+          "rationale": "The password is visible in the configuration and rotation is manual."
+        }
+      ],
+      "explanation": "Secrets Manager plus a runtime lookup keeps secrets out of code and supports rotation; caching the value reduces calls.",
+      "difficulty": 2,
+      "tags": [
+        "secrets-manager",
+        "lambda",
+        "rotation"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html",
+        "https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieving-secrets_lambda.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    }
+  ]
+}

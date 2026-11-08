@@ -1,0 +1,453 @@
+{
+  "formatVersion": 1,
+  "questions": [
+    {
+      "id": "dva-c03-1.3-01",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "A DynamoDB table uses an order status attribute, with values such as PENDING and SHIPPED, as its partition key. Most traffic goes to a few partitions and requests are throttled. What should the developer change?",
+      "options": [
+        {
+          "text": "Switch every read to strongly consistent",
+          "correct": false,
+          "rationale": "Consistency does not change how traffic is spread across partitions."
+        },
+        {
+          "text": "Use a high-cardinality attribute, such as order ID, as the partition key",
+          "correct": true,
+          "rationale": "Many distinct key values spread requests evenly across partitions."
+        },
+        {
+          "text": "Add a local secondary index that uses the status attribute as its sort key",
+          "correct": false,
+          "rationale": "An LSI shares the table's partition key, so the hot partitions remain."
+        },
+        {
+          "text": "Use Scan instead of Query to read orders",
+          "correct": false,
+          "rationale": "Scans read the whole table and use more capacity."
+        }
+      ],
+      "explanation": "A partition key with few values creates hot partitions; choose a key with many distinct values.",
+      "difficulty": 2,
+      "tags": [
+        "dynamodb",
+        "partition-key"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-partition-key-uniform-load.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-1.3-02",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "Right after updating an item in a DynamoDB table, an application reads the item back and sometimes gets the old value. The read must always return the latest data. What should the developer do?",
+      "options": [
+        {
+          "text": "Query a global secondary index with strongly consistent reads",
+          "correct": false,
+          "rationale": "Global secondary indexes support only eventually consistent reads."
+        },
+        {
+          "text": "Add a DynamoDB Accelerator (DAX) cluster in front of the table",
+          "correct": false,
+          "rationale": "DAX serves eventually consistent reads from its cache."
+        },
+        {
+          "text": "Set ConsistentRead to true on the GetItem request",
+          "correct": true,
+          "rationale": "A strongly consistent read reflects all writes that succeeded before the read."
+        },
+        {
+          "text": "Increase the table's read capacity",
+          "correct": false,
+          "rationale": "More capacity does not change the consistency model."
+        }
+      ],
+      "explanation": "Reads are eventually consistent by default; request a strongly consistent read when the latest value is required.",
+      "difficulty": 2,
+      "tags": [
+        "dynamodb",
+        "consistency"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-1.3-03",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "multi",
+      "stem": "A DynamoDB table holds orders for many customers. An application must retrieve one customer's orders without reading the rest of the table. Which approaches will do this? (Select TWO.)",
+      "options": [
+        {
+          "text": "Scan the table with a projection expression",
+          "correct": false,
+          "rationale": "A projection limits the attributes returned, not the items read."
+        },
+        {
+          "text": "Query a global secondary index whose partition key is customer ID",
+          "correct": true,
+          "rationale": "A GSI lets you query efficiently on an attribute that is not the table's key."
+        },
+        {
+          "text": "Run a parallel scan on the table",
+          "correct": false,
+          "rationale": "Parallel scans finish faster but still read the whole table."
+        },
+        {
+          "text": "Query the table when customer ID is its partition key",
+          "correct": true,
+          "rationale": "Query reads only the items with that partition key value."
+        },
+        {
+          "text": "Scan the table with a filter expression on customer ID",
+          "correct": false,
+          "rationale": "A scan reads every item; the filter only trims what is returned."
+        }
+      ],
+      "explanation": "Query reads by key; Scan reads everything. Design keys and indexes so access patterns use Query.",
+      "difficulty": 2,
+      "tags": [
+        "dynamodb",
+        "query",
+        "scan",
+        "gsi"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-query-scan.html",
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-1.3-04",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "An existing DynamoDB table uses user ID as its partition key. The application now also needs to look up users by email address. What should the developer add?",
+      "options": [
+        {
+          "text": "A new local secondary index that uses email as its sort key",
+          "correct": false,
+          "rationale": "Local secondary indexes can only be created along with the table and keep the same partition key."
+        },
+        {
+          "text": "A filter expression on a Scan of the table",
+          "correct": false,
+          "rationale": "Scans read the whole table for every lookup."
+        },
+        {
+          "text": "A DynamoDB stream on the table",
+          "correct": false,
+          "rationale": "Streams record item changes; they do not enable new queries."
+        },
+        {
+          "text": "A global secondary index with email as its partition key",
+          "correct": true,
+          "rationale": "GSIs can be added to existing tables and use a different partition key."
+        }
+      ],
+      "explanation": "Use a GSI for a new access pattern on an existing table.",
+      "difficulty": 2,
+      "tags": [
+        "dynamodb",
+        "gsi",
+        "lsi"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.html",
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.OnlineOps.html",
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LSI.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-1.3-05",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "Session items in a DynamoDB table should be removed automatically a set time after they are created, without extra write costs. What should the developer use?",
+      "options": [
+        {
+          "text": "Time to Live (TTL), with an expiry timestamp attribute on each item",
+          "correct": true,
+          "rationale": "DynamoDB deletes expired items in the background without using write capacity."
+        },
+        {
+          "text": "A scheduled Lambda function that scans for and deletes expired items",
+          "correct": false,
+          "rationale": "This works but costs read and write capacity and needs code to maintain."
+        },
+        {
+          "text": "An Amazon S3 Lifecycle rule on the table",
+          "correct": false,
+          "rationale": "Lifecycle rules apply to S3 objects, not DynamoDB items."
+        },
+        {
+          "text": "A conditional write on each new item",
+          "correct": false,
+          "rationale": "Condition expressions control whether a write happens, not when an item expires."
+        }
+      ],
+      "explanation": "TTL takes an epoch timestamp attribute and removes items after that time.",
+      "difficulty": 1,
+      "tags": [
+        "dynamodb",
+        "ttl"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-1.3-06",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "Application logs are written to an Amazon S3 bucket. They must move to a cheaper archive storage class after 90 days and be deleted after one year. What should the developer configure?",
+      "options": [
+        {
+          "text": "S3 Versioning on the bucket",
+          "correct": false,
+          "rationale": "Versioning keeps earlier versions; it does not move or delete objects by age."
+        },
+        {
+          "text": "An S3 Lifecycle rule with a transition action and an expiration action",
+          "correct": true,
+          "rationale": "Lifecycle rules move objects between storage classes and delete them on a schedule."
+        },
+        {
+          "text": "S3 Object Lock in compliance mode, with a retention period set to one year",
+          "correct": false,
+          "rationale": "Object Lock prevents deletion during retention and does not move objects to another storage class."
+        },
+        {
+          "text": "A DynamoDB TTL attribute on each log file",
+          "correct": false,
+          "rationale": "TTL applies to DynamoDB items, not S3 objects."
+        }
+      ],
+      "explanation": "Use transition actions to change storage class and expiration actions to delete.",
+      "difficulty": 1,
+      "tags": [
+        "s3",
+        "lifecycle"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-1.3-07",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "An application stores user-uploaded videos that can be several gigabytes each. The data must be highly durable and served to users by URL. Which data store fits this access pattern?",
+      "options": [
+        {
+          "text": "Amazon DynamoDB",
+          "correct": false,
+          "rationale": "DynamoDB items have a small maximum size, so large files are usually kept in S3."
+        },
+        {
+          "text": "Amazon ElastiCache",
+          "correct": false,
+          "rationale": "ElastiCache is an in-memory cache, not durable storage for large files."
+        },
+        {
+          "text": "Amazon S3",
+          "correct": true,
+          "rationale": "S3 stores large objects durably and serves them over HTTPS."
+        },
+        {
+          "text": "Amazon RDS, with the videos in a binary column",
+          "correct": false,
+          "rationale": "Storing large binaries in a relational database is costly and slow to serve."
+        }
+      ],
+      "explanation": "Large objects go in S3; databases hold metadata and a pointer to the object.",
+      "difficulty": 1,
+      "tags": [
+        "s3",
+        "data-store-selection"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-use-s3-too.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-1.3-08",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "A read-heavy application uses DynamoDB and needs microsecond read latency for repeated reads of the same items, with as few code changes as possible. Which caching solution fits?",
+      "options": [
+        {
+          "text": "Amazon ElastiCache with lazy loading code",
+          "correct": false,
+          "rationale": "This works but needs cache-management logic written into the application."
+        },
+        {
+          "text": "Amazon CloudFront in front of the table",
+          "correct": false,
+          "rationale": "CloudFront caches HTTP content at edge locations, not DynamoDB API calls."
+        },
+        {
+          "text": "An Amazon RDS read replica",
+          "correct": false,
+          "rationale": "Read replicas apply to relational databases, not DynamoDB."
+        },
+        {
+          "text": "DynamoDB Accelerator (DAX)",
+          "correct": true,
+          "rationale": "DAX is an in-memory cache for DynamoDB that is API-compatible, so code changes are small."
+        }
+      ],
+      "explanation": "For DynamoDB, DAX is the purpose-built cache; for other data stores, ElastiCache is the usual choice.",
+      "difficulty": 2,
+      "tags": [
+        "dax",
+        "caching",
+        "dynamodb"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-1.3-09",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "multi",
+      "stem": "An application caches database query results in Amazon ElastiCache by using lazy loading. After records are updated, users sometimes see old data. Which changes will reduce stale reads? (Select TWO.)",
+      "options": [
+        {
+          "text": "Read from a database read replica instead of the primary",
+          "correct": false,
+          "rationale": "Replicas can lag, and the cache would still hold stale entries."
+        },
+        {
+          "text": "Set a time to live (TTL) on cached entries",
+          "correct": true,
+          "rationale": "Entries expire and are reloaded, which limits how long stale data can be served."
+        },
+        {
+          "text": "Use a larger cache node type",
+          "correct": false,
+          "rationale": "More memory holds more entries but does not make them fresher."
+        },
+        {
+          "text": "Turn off cache eviction",
+          "correct": false,
+          "rationale": "Keeping entries longer increases staleness."
+        },
+        {
+          "text": "Update or delete the cache entry whenever the record is written to the database",
+          "correct": true,
+          "rationale": "Writing through to the cache keeps it in step with the database."
+        }
+      ],
+      "explanation": "Lazy loading only refreshes on a miss; add TTLs or write-through updates to limit stale data.",
+      "difficulty": 3,
+      "tags": [
+        "elasticache",
+        "caching",
+        "lazy-loading"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Strategies.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-1.3-10",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "Logs in an Amazon CloudWatch Logs log group grow without limit. The company needs only the last 30 days. What is the simplest way to keep only 30 days of logs?",
+      "options": [
+        {
+          "text": "Set the log group's retention period to 30 days",
+          "correct": true,
+          "rationale": "CloudWatch Logs deletes events older than the retention setting automatically."
+        },
+        {
+          "text": "Create an S3 Lifecycle rule for the log group",
+          "correct": false,
+          "rationale": "Lifecycle rules apply to S3 buckets, not log groups."
+        },
+        {
+          "text": "Write a scheduled function that deletes old log streams",
+          "correct": false,
+          "rationale": "This needs code and does not remove older events inside active streams."
+        },
+        {
+          "text": "Add a DynamoDB TTL attribute to each log event",
+          "correct": false,
+          "rationale": "TTL is a DynamoDB feature."
+        }
+      ],
+      "explanation": "Log groups keep data forever by default until you set a retention period.",
+      "difficulty": 1,
+      "tags": [
+        "cloudwatch-logs",
+        "retention"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    }
+  ]
+}

@@ -17,10 +17,10 @@
   ],
   "version": {
     "current": "DVA-C03",
-    "registrationOpens": "2026-12-01",
+    "registrationOpens": "2026-10-27",
     "supersedes": "DVA-C02",
     "supersededLastExamDay": "2026-11-30",
-    "note": "Per the guide: 'Registration for the updated version of the exam (DVA-C03) opens December 1, 2026. The last day to take the current version of the exam (DVA-C02) is November 30, 2026.' DVA-C02 (guide Version 1.3) had weights 32/26/24/18 and a different task structure; this pack is for DVA-C03 only."
+    "note": "Per the guide (rechecked 2026-11-08): \"Registration for the updated version of the exam (DVA-C03) opened on October 27, 2026. The last day to take the current version of the exam (DVA-C02) is November 30, 2026.\" An earlier copy of the guide said December 1. DVA-C02 (guide Version 1.3) had weights 32/26/24/18 and a different task structure; this pack is for DVA-C03 only."
   },
   "exam": {
     "code": "DVA-C03",
@@ -31,7 +31,10 @@
     "readinessTargetPct": 80,
     "readinessTargetNote": "Your own per-exam target for dashboard/map status (default 80%). Not a vendor figure.",
     "scaledPassScore": 720,
-    "scaleRange": [100, 1000],
+    "scaleRange": [
+      100,
+      1000
+    ],
     "timeLimitMin": 130,
     "timeLimitNote": "From the AWS certification page, not the exam guide. Verify for DVA-C03.",
     "questionCount": 65,
@@ -50,6 +53,40 @@
         "Weighted toward building: Development with AWS Services is 30% and Security is 26%.",
         "Deployment, testing and troubleshooting make up the other 44%, split evenly.",
         "The longest exam here at 130 minutes: pacing matters as much as recall."
+      ]
+    },
+    "profile": {
+      "single": {
+        "options": 4
+      },
+      "multi": {
+        "minOptions": 5,
+        "minCorrect": 2
+      },
+      "bannedOptionText": [
+        "all of the above",
+        "none of the above"
+      ],
+      "outOfScopeTerms": [
+        "QuickSight",
+        "Amazon Connect",
+        "WorkMail",
+        "AppStream",
+        "WorkSpaces",
+        "GameLift",
+        "Polly",
+        "Rekognition",
+        "SageMaker",
+        "Strands Agents",
+        "AWS Managed Services",
+        "Elastic Transcoder",
+        "Application Discovery Service",
+        "Application Migration Service",
+        "Transfer Family",
+        "Shield",
+        "Snowball",
+        "Snow Family",
+        "Storage Gateway"
       ]
     },
     "domains": [

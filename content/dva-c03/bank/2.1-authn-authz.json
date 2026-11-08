@@ -1,0 +1,499 @@
+{
+  "formatVersion": 1,
+  "questions": [
+    {
+      "id": "dva-c03-2.1-01",
+      "domain": "d2",
+      "objective": "2.1",
+      "type": "multi",
+      "stem": "A mobile app lets users sign in with their Google accounts. After sign-in, the app must upload files directly to Amazon S3 with temporary AWS credentials. Which steps will meet these requirements? (Select TWO.)",
+      "options": [
+        {
+          "text": "Use an Amazon Cognito user pool, federated with Google, to sign users in",
+          "correct": true,
+          "rationale": "The user pool handles sign-in, including federation with social identity providers."
+        },
+        {
+          "text": "Create an IAM user for each app user",
+          "correct": false,
+          "rationale": "IAM users are for long-term identities, not for large numbers of app users."
+        },
+        {
+          "text": "Give each user an API Gateway API key",
+          "correct": false,
+          "rationale": "API keys identify clients for usage plans; they do not grant AWS credentials."
+        },
+        {
+          "text": "Use an Amazon Cognito identity pool to exchange the user's token for temporary AWS credentials",
+          "correct": true,
+          "rationale": "Identity pools issue temporary credentials for an IAM role."
+        },
+        {
+          "text": "Embed one IAM access key in the app for all users",
+          "correct": false,
+          "rationale": "Keys in an app can be extracted and are shared by everyone."
+        }
+      ],
+      "explanation": "User pools authenticate users; identity pools turn that sign-in into temporary AWS credentials.",
+      "difficulty": 3,
+      "tags": [
+        "cognito",
+        "federation"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools.html",
+        "https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-2.1-02",
+      "domain": "d2",
+      "objective": "2.1",
+      "type": "single",
+      "stem": "A REST API in Amazon API Gateway must accept only requests from users who signed in through an Amazon Cognito user pool. What should the developer configure?",
+      "options": [
+        {
+          "text": "IAM authorization on each method, with clients sending their user pool user name and password",
+          "correct": false,
+          "rationale": "IAM authorization expects SigV4-signed requests, not passwords."
+        },
+        {
+          "text": "A Cognito user pool authorizer, with clients sending their token in the Authorization header",
+          "correct": true,
+          "rationale": "API Gateway validates the token against the user pool before calling the backend."
+        },
+        {
+          "text": "An API key required on each method",
+          "correct": false,
+          "rationale": "API keys are not a way to authenticate individual users."
+        },
+        {
+          "text": "A CORS configuration that allows the user pool's domain",
+          "correct": false,
+          "rationale": "CORS controls browser origins, not user authentication."
+        }
+      ],
+      "explanation": "Cognito user pool authorizers let API Gateway verify user pool tokens without custom code.",
+      "difficulty": 2,
+      "tags": [
+        "cognito",
+        "api-gateway",
+        "authorizer"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-integrate-with-cognito.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-2.1-03",
+      "domain": "d2",
+      "objective": "2.1",
+      "type": "single",
+      "stem": "Users must be able to download private reports from an Amazon S3 bucket for 15 minutes after they request them. The bucket must stay private. What should the application do?",
+      "options": [
+        {
+          "text": "Make each report public, then delete it with a scheduled job after 15 minutes",
+          "correct": false,
+          "rationale": "Public objects are open to anyone who finds the URL."
+        },
+        {
+          "text": "Add a bucket policy that allows anonymous reads",
+          "correct": false,
+          "rationale": "This makes every object in the bucket public."
+        },
+        {
+          "text": "Generate a presigned URL for the object with a 15-minute expiry",
+          "correct": true,
+          "rationale": "A presigned URL grants time-limited access with the signer's permissions."
+        },
+        {
+          "text": "Give each user IAM access keys for the bucket",
+          "correct": false,
+          "rationale": "Distributing long-term keys is risky and hard to revoke."
+        }
+      ],
+      "explanation": "Presigned URLs give temporary access to a private object without changing the bucket's permissions.",
+      "difficulty": 1,
+      "tags": [
+        "s3",
+        "presigned-url"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-2.1-04",
+      "domain": "d2",
+      "objective": "2.1",
+      "type": "single",
+      "stem": "A web application lets users upload files directly from the browser to a private Amazon S3 bucket, without sending the files through the application's servers. What should the backend give the browser?",
+      "options": [
+        {
+          "text": "The backend's IAM access keys, sent over HTTPS for safety",
+          "correct": false,
+          "rationale": "Exposing keys in the browser gives anyone full use of them."
+        },
+        {
+          "text": "A public bucket name with write access for everyone",
+          "correct": false,
+          "rationale": "Anyone could upload anything to the bucket."
+        },
+        {
+          "text": "A CloudFront signed cookie",
+          "correct": false,
+          "rationale": "Signed cookies control access to content served through CloudFront, not direct uploads to S3."
+        },
+        {
+          "text": "A presigned URL for a PUT request to the object's key",
+          "correct": true,
+          "rationale": "The browser uploads straight to S3 with the URL, which expires after a set time."
+        }
+      ],
+      "explanation": "Presigned URLs work for uploads as well as downloads.",
+      "difficulty": 2,
+      "tags": [
+        "s3",
+        "presigned-url",
+        "upload"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/PresignedUrlUploadObject.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-2.1-05",
+      "domain": "d2",
+      "objective": "2.1",
+      "type": "single",
+      "stem": "A video site serves premium content through Amazon CloudFront. Subscribers must be able to watch many video segment files without the site changing every file URL. What should the developer use?",
+      "options": [
+        {
+          "text": "CloudFront signed cookies",
+          "correct": true,
+          "rationale": "Signed cookies grant access to many files without changing their URLs."
+        },
+        {
+          "text": "CloudFront signed URLs for each segment file",
+          "correct": false,
+          "rationale": "Signed URLs work per file, so every segment URL would change."
+        },
+        {
+          "text": "S3 presigned URLs to the origin bucket",
+          "correct": false,
+          "rationale": "Presigned URLs bypass CloudFront and still change each URL."
+        },
+        {
+          "text": "A public origin bucket with obscure file names",
+          "correct": false,
+          "rationale": "Hidden names are not access control."
+        }
+      ],
+      "explanation": "Use signed URLs for individual files and signed cookies for many files or when URLs must stay the same.",
+      "difficulty": 3,
+      "tags": [
+        "cloudfront",
+        "signed-cookies"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-choosing-signed-urls-cookies.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-2.1-06",
+      "domain": "d2",
+      "objective": "2.1",
+      "type": "single",
+      "stem": "An application in account A must read items from a DynamoDB table in account B. Which approach gives the application temporary credentials for the table?",
+      "options": [
+        {
+          "text": "Create an IAM user in account B and store that user's access keys in the application",
+          "correct": false,
+          "rationale": "Long-term keys are harder to secure and rotate than temporary credentials."
+        },
+        {
+          "text": "Create a role in account B that trusts account A, and assume it with AWS STS",
+          "correct": true,
+          "rationale": "The role grants temporary credentials scoped to the table, and account B controls the trust."
+        },
+        {
+          "text": "Copy the table to account A every hour",
+          "correct": false,
+          "rationale": "Copying data adds cost and staleness instead of granting access."
+        },
+        {
+          "text": "Add account A's root user to the table's key schema",
+          "correct": false,
+          "rationale": "Key schemas define table keys, not permissions."
+        }
+      ],
+      "explanation": "A role in the target account, assumed with sts:AssumeRole, is the standard pattern; DynamoDB resource-based policies are another option.",
+      "difficulty": 2,
+      "tags": [
+        "iam",
+        "sts",
+        "assume-role",
+        "cross-account"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-2.1-07",
+      "domain": "d2",
+      "objective": "2.1",
+      "type": "single",
+      "stem": "An application on Amazon EC2 instances must write to an Amazon S3 bucket. How should the application get AWS credentials?",
+      "options": [
+        {
+          "text": "Store an IAM user's access keys in the credentials file on each instance",
+          "correct": false,
+          "rationale": "Long-term keys on disk can leak and must be rotated by hand."
+        },
+        {
+          "text": "Put the root user's access keys in environment variables",
+          "correct": false,
+          "rationale": "Root keys should never be used by applications."
+        },
+        {
+          "text": "Attach an IAM role through an instance profile and let the SDK find it",
+          "correct": true,
+          "rationale": "The SDK's default credential chain finds the role's temporary credentials automatically."
+        },
+        {
+          "text": "Hardcode access keys in the application source",
+          "correct": false,
+          "rationale": "Keys in code end up in repositories and builds."
+        }
+      ],
+      "explanation": "Roles give applications temporary credentials that rotate automatically.",
+      "difficulty": 1,
+      "tags": [
+        "iam",
+        "ec2",
+        "instance-profile"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-2.1-08",
+      "domain": "d2",
+      "objective": "2.1",
+      "type": "single",
+      "stem": "Developers need to run AWS CLI commands from their laptops. They sign in to AWS through the company's single sign-on portal, and the company does not want long-term access keys on laptops. What should the developers do?",
+      "options": [
+        {
+          "text": "Create IAM access keys for each developer and rotate them every month with a script",
+          "correct": false,
+          "rationale": "This still leaves long-term keys on laptops."
+        },
+        {
+          "text": "Share one administrator's access keys",
+          "correct": false,
+          "rationale": "Shared keys remove accountability and give everyone the same broad access."
+        },
+        {
+          "text": "Use the console password as the CLI secret key",
+          "correct": false,
+          "rationale": "Console passwords cannot sign API requests."
+        },
+        {
+          "text": "Configure an SSO profile in the AWS CLI and run aws sso login",
+          "correct": true,
+          "rationale": "The CLI then uses short-term credentials that refresh through the sign-in session."
+        }
+      ],
+      "explanation": "SSO profiles give the CLI temporary credentials without stored keys.",
+      "difficulty": 2,
+      "tags": [
+        "cli",
+        "sso",
+        "programmatic-access"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-2.1-09",
+      "domain": "d2",
+      "objective": "2.1",
+      "type": "multi",
+      "stem": "A company requires MFA before a developer can call the API that deletes production data. The developer uses the AWS CLI with an IAM user. Which steps will enforce this? (Select TWO.)",
+      "options": [
+        {
+          "text": "Add an MFA condition to the KMS key policy",
+          "correct": false,
+          "rationale": "The requirement is on the delete API, not on a KMS key."
+        },
+        {
+          "text": "Add an aws:MultiFactorAuthPresent condition to the policy that allows the delete action",
+          "correct": true,
+          "rationale": "The action is allowed only when the request's credentials came from an MFA sign-in."
+        },
+        {
+          "text": "Enable MFA on the account's root user",
+          "correct": false,
+          "rationale": "Root MFA protects the root user, not this developer's API calls."
+        },
+        {
+          "text": "Call sts:AssumeRoleWithWebIdentity with the developer's password",
+          "correct": false,
+          "rationale": "That API exchanges web identity tokens, not passwords."
+        },
+        {
+          "text": "Have the developer call sts:GetSessionToken with an MFA code and use the temporary credentials",
+          "correct": true,
+          "rationale": "Temporary credentials obtained with MFA carry the MFA context."
+        }
+      ],
+      "explanation": "MFA-protected API access combines a policy condition with temporary credentials obtained using MFA.",
+      "difficulty": 3,
+      "tags": [
+        "iam",
+        "mfa",
+        "sts"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_configure-api-require.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-2.1-10",
+      "domain": "d2",
+      "objective": "2.1",
+      "type": "single",
+      "stem": "A Lambda function must be invoked when objects are created in an Amazon S3 bucket. The S3 event notification fails to save because S3 is not allowed to invoke the function. What should the developer add?",
+      "options": [
+        {
+          "text": "Allow Amazon S3 to invoke the function in the function's resource-based policy",
+          "correct": true,
+          "rationale": "Resource-based policies grant other services permission to invoke a function."
+        },
+        {
+          "text": "Add Amazon S3 read and write permissions for the bucket to the function's execution role",
+          "correct": false,
+          "rationale": "The execution role controls what the function can call, not who can call it."
+        },
+        {
+          "text": "Add a bucket policy that allows the function to read objects",
+          "correct": false,
+          "rationale": "Reading objects is separate from S3 invoking the function."
+        },
+        {
+          "text": "Create an IAM user for Amazon S3 to use",
+          "correct": false,
+          "rationale": "Services are granted access through policies, not IAM users."
+        }
+      ],
+      "explanation": "Execution role: what the function may do. Resource-based policy: who may invoke the function.",
+      "difficulty": 2,
+      "tags": [
+        "lambda",
+        "resource-based-policy",
+        "s3"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-2.1-11",
+      "domain": "d2",
+      "objective": "2.1",
+      "type": "single",
+      "stem": "A backend service calls a REST API in Amazon API Gateway that uses IAM authorization. The service sends plain HTTP requests without an AWS SDK, and every call is rejected. What must the service do?",
+      "options": [
+        {
+          "text": "Add an x-api-key header with a valid API key to each request",
+          "correct": false,
+          "rationale": "API keys do not satisfy IAM authorization."
+        },
+        {
+          "text": "Sign each request with Signature Version 4 (SigV4)",
+          "correct": true,
+          "rationale": "IAM-authorized APIs accept requests signed with SigV4 (or SigV4a) by principals with execute-api:Invoke permission."
+        },
+        {
+          "text": "Send its IAM user name in a custom header",
+          "correct": false,
+          "rationale": "A name is not a signature and proves nothing."
+        },
+        {
+          "text": "Call the API over HTTP instead of HTTPS",
+          "correct": false,
+          "rationale": "Dropping TLS weakens security and does not authenticate the request."
+        }
+      ],
+      "explanation": "SDKs and the CLI sign requests automatically; raw HTTP clients must add SigV4 signing.",
+      "difficulty": 2,
+      "tags": [
+        "sigv4",
+        "api-gateway",
+        "iam"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html",
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/permissions.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    }
+  ]
+}

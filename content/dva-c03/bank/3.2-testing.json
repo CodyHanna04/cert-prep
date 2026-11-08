@@ -1,0 +1,447 @@
+{
+  "formatVersion": 1,
+  "questions": [
+    {
+      "id": "dva-c03-3.2-01",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "multi",
+      "stem": "A developer wants to test a Lambda function locally with a realistic Amazon S3 event before deploying. Which AWS SAM CLI steps will do this? (Select TWO.)",
+      "options": [
+        {
+          "text": "Create a sample S3 event payload with sam local generate-event",
+          "correct": true,
+          "rationale": "generate-event writes a sample event in the shape the service sends."
+        },
+        {
+          "text": "Run sam deploy and upload a test object to the bucket",
+          "correct": false,
+          "rationale": "This tests in the cloud after deploying, not locally."
+        },
+        {
+          "text": "Run sam validate",
+          "correct": false,
+          "rationale": "validate checks the template; it does not run the function."
+        },
+        {
+          "text": "Run the function with sam local invoke and pass the event file",
+          "correct": true,
+          "rationale": "sam local invoke runs the function in a local container with the given event."
+        },
+        {
+          "text": "Run sam local start-api",
+          "correct": false,
+          "rationale": "start-api serves HTTP endpoints for API events, not S3 events."
+        }
+      ],
+      "explanation": "generate-event plus local invoke is the quick local loop for event-driven functions.",
+      "difficulty": 2,
+      "tags": [
+        "sam",
+        "local-testing"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-local-generate-event.html",
+        "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-local-invoke.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-3.2-02",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "single",
+      "stem": "A developer wants to call the endpoints of an AWS SAM application from a browser on their laptop, before deploying it. Which command should the developer run?",
+      "options": [
+        {
+          "text": "sam local start-api",
+          "correct": true,
+          "rationale": "It runs a local HTTP server that invokes the functions behind each API route."
+        },
+        {
+          "text": "sam local invoke with an API event",
+          "correct": false,
+          "rationale": "invoke runs one function once with an event; it does not serve HTTP."
+        },
+        {
+          "text": "sam deploy --guided",
+          "correct": false,
+          "rationale": "This deploys to AWS rather than running locally."
+        },
+        {
+          "text": "sam logs",
+          "correct": false,
+          "rationale": "logs fetches logs from deployed functions."
+        }
+      ],
+      "explanation": "start-api emulates API Gateway locally for quick testing.",
+      "difficulty": 2,
+      "tags": [
+        "sam",
+        "local-testing",
+        "api-gateway"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-local-start-api.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-3.2-03",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "single",
+      "stem": "A team defines infrastructure with the AWS CDK. They want unit tests that fail if a stack stops creating an encrypted S3 bucket. What should they use?",
+      "options": [
+        {
+          "text": "cdk deploy to a test account followed by a check in the console",
+          "correct": false,
+          "rationale": "This is slow, manual and not a unit test."
+        },
+        {
+          "text": "Fine-grained assertions from the CDK assertions module",
+          "correct": true,
+          "rationale": "Assertions check that the template contains resources with specific properties."
+        },
+        {
+          "text": "AWS CloudTrail",
+          "correct": false,
+          "rationale": "CloudTrail records API activity in deployed accounts."
+        },
+        {
+          "text": "cdk bootstrap",
+          "correct": false,
+          "rationale": "bootstrap prepares an account for deployments; it does not test stacks."
+        }
+      ],
+      "explanation": "CDK assertions test the CloudFormation template that a stack synthesizes.",
+      "difficulty": 2,
+      "tags": [
+        "cdk",
+        "unit-testing"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/cdk/v2/guide/testing.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-3.2-04",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "single",
+      "stem": "A front-end team needs a working API to build against, but the backend service will not be ready for weeks. The responses can be fixed sample data. What should the developer set up?",
+      "options": [
+        {
+          "text": "A Lambda proxy integration to an empty function",
+          "correct": false,
+          "rationale": "An empty function returns nothing useful to build against."
+        },
+        {
+          "text": "An HTTP proxy integration that points at the unfinished backend service",
+          "correct": false,
+          "rationale": "The backend is not ready to answer requests."
+        },
+        {
+          "text": "Mock integrations in API Gateway that return sample responses",
+          "correct": true,
+          "rationale": "Mock integrations return responses from API Gateway without calling a backend."
+        },
+        {
+          "text": "A usage plan with a low throttle",
+          "correct": false,
+          "rationale": "Throttling does not produce responses."
+        }
+      ],
+      "explanation": "Mock integrations let teams work in parallel and test against stable responses.",
+      "difficulty": 1,
+      "tags": [
+        "api-gateway",
+        "mock-integration"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-mock-integration.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-3.2-05",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "single",
+      "stem": "A developer is testing a Lambda function behind an API Gateway Lambda proxy integration from the Lambda console. What should the test event contain?",
+      "options": [
+        {
+          "text": "The raw request body as plain text, without any other fields",
+          "correct": false,
+          "rationale": "Proxy events wrap the body in a larger JSON structure."
+        },
+        {
+          "text": "An Amazon S3 event record that contains the request's object key",
+          "correct": false,
+          "rationale": "S3 events have a different structure from API requests."
+        },
+        {
+          "text": "A JSON object that lists the function's environment variables and values",
+          "correct": false,
+          "rationale": "Environment variables are configuration, not the event."
+        },
+        {
+          "text": "A JSON event in the API Gateway proxy format, with the body as a string",
+          "correct": true,
+          "rationale": "The function receives this structure from API Gateway, so the test should match it."
+        }
+      ],
+      "explanation": "Test events should match what the invoking service actually sends; the console offers templates for common services.",
+      "difficulty": 2,
+      "tags": [
+        "lambda",
+        "test-events",
+        "api-gateway"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/testing-functions.html",
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-3.2-06",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "single",
+      "stem": "A team runs dev, test and prod versions of the same Lambda function. Each environment must point to a specific published version, and promoting a release should not change the ARN that callers use. What should the developer use?",
+      "options": [
+        {
+          "text": "An alias for each environment that points to a function version",
+          "correct": true,
+          "rationale": "Callers use the alias ARN, and promotion just moves the alias to a new version."
+        },
+        {
+          "text": "$LATEST for every environment",
+          "correct": false,
+          "rationale": "$LATEST changes with every update, so environments would not be isolated."
+        },
+        {
+          "text": "A copy of the function for each environment, with a new name per release",
+          "correct": false,
+          "rationale": "New names per release change the ARN callers use."
+        },
+        {
+          "text": "Different handler names for each environment",
+          "correct": false,
+          "rationale": "The handler names the entry point; it does not version the function."
+        }
+      ],
+      "explanation": "Versions are immutable snapshots; aliases are movable pointers to them.",
+      "difficulty": 2,
+      "tags": [
+        "lambda",
+        "aliases",
+        "versions"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-3.2-07",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "single",
+      "stem": "A front-end team that hosts its web app on AWS Amplify wants a temporary, separate preview environment for every pull request so reviewers can try the changes. What should the developer enable?",
+      "options": [
+        {
+          "text": "A Lambda alias for each pull request",
+          "correct": false,
+          "rationale": "Aliases version Lambda functions, not front-end sites."
+        },
+        {
+          "text": "Pull request previews in Amplify Hosting",
+          "correct": true,
+          "rationale": "Amplify builds each pull request into its own preview URL."
+        },
+        {
+          "text": "An API Gateway canary release for each pull request",
+          "correct": false,
+          "rationale": "Canaries shift a share of production API traffic."
+        },
+        {
+          "text": "An ECR image for each pull request",
+          "correct": false,
+          "rationale": "ECR stores container images, not Amplify front ends."
+        }
+      ],
+      "explanation": "Amplify connects to branches and pull requests and deploys each to its own environment.",
+      "difficulty": 2,
+      "tags": [
+        "amplify",
+        "environments"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/amplify/latest/userguide/pr-previews.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-3.2-08",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "single",
+      "stem": "A developer uses Kiro and wants the agent to automatically update the related unit tests whenever the agent saves changes to a source file. Which Kiro feature should the developer use?",
+      "options": [
+        {
+          "text": "A steering file that describes the testing rules",
+          "correct": false,
+          "rationale": "Steering files give the agent standing guidance; they do not react to events."
+        },
+        {
+          "text": "A spec with a task for updating tests",
+          "correct": false,
+          "rationale": "Specs plan a feature as requirements, design and tasks."
+        },
+        {
+          "text": "An agent hook with a File Save trigger",
+          "correct": true,
+          "rationale": "Hooks run an agent action or command automatically on events such as file saves."
+        },
+        {
+          "text": "A Lambda alias",
+          "correct": false,
+          "rationale": "Aliases point to function versions and are unrelated to Kiro."
+        }
+      ],
+      "explanation": "Kiro hooks automate repetitive work, such as keeping tests up to date, on events in the workspace.",
+      "difficulty": 2,
+      "tags": [
+        "kiro",
+        "testing",
+        "ai-tools"
+      ],
+      "refs": [
+        "https://kiro.dev/docs/hooks/types/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-3.2-09",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "single",
+      "stem": "A team wants its pipeline to catch errors in AWS SAM templates before any deployment is attempted. What should the build stage run?",
+      "options": [
+        {
+          "text": "sam local start-api against the template",
+          "correct": false,
+          "rationale": "This serves the API locally; it is not a template check."
+        },
+        {
+          "text": "sam logs",
+          "correct": false,
+          "rationale": "logs reads logs from deployed functions."
+        },
+        {
+          "text": "sam delete",
+          "correct": false,
+          "rationale": "delete removes a deployed stack."
+        },
+        {
+          "text": "sam validate, with linting turned on",
+          "correct": true,
+          "rationale": "validate checks the template against the SAM specification and can run cfn-lint for more checks."
+        }
+      ],
+      "explanation": "Validating templates early fails the pipeline fast and cheaply.",
+      "difficulty": 2,
+      "tags": [
+        "sam",
+        "validation",
+        "ci"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-validate.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-3.2-10",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "single",
+      "stem": "A team runs unit tests in AWS CodeBuild. It wants each build's pass and fail results, and trends over time, shown in the CodeBuild console instead of reading raw build logs. What should the developer configure?",
+      "options": [
+        {
+          "text": "A reports section in the buildspec that points to the test result files",
+          "correct": true,
+          "rationale": "CodeBuild creates test reports from result files such as JUnit XML and shows them in report groups."
+        },
+        {
+          "text": "A post_build command that prints the results to the build log",
+          "correct": false,
+          "rationale": "The results stay buried in the log, with no report view or trends."
+        },
+        {
+          "text": "Amazon CloudWatch Logs retention on the build logs",
+          "correct": false,
+          "rationale": "Retention controls how long logs are kept, not how results are shown."
+        },
+        {
+          "text": "An artifacts section that uploads the source code to Amazon S3",
+          "correct": false,
+          "rationale": "Artifacts store build outputs; they do not create test reports."
+        }
+      ],
+      "explanation": "CodeBuild test reports turn test output files into pass/fail results with history.",
+      "difficulty": 2,
+      "tags": [
+        "codebuild",
+        "test-reports"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/codebuild/latest/userguide/test-reporting.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    }
+  ]
+}

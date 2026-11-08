@@ -1,0 +1,454 @@
+{
+  "formatVersion": 1,
+  "questions": [
+    {
+      "id": "dva-c03-4.2-01",
+      "domain": "d4",
+      "objective": "4.2",
+      "type": "single",
+      "stem": "A team wants to query Lambda logs by fields such as requestId, userId and orderStatus in CloudWatch Logs Insights. How should the functions write their logs?",
+      "options": [
+        {
+          "text": "As free-form text sentences that mention each field's value",
+          "correct": false,
+          "rationale": "Free text needs fragile parsing in every query."
+        },
+        {
+          "text": "As print statements with no named fields",
+          "correct": false,
+          "rationale": "Unstructured output cannot be filtered by field."
+        },
+        {
+          "text": "As structured JSON, with those fields as keys",
+          "correct": true,
+          "rationale": "Logs Insights discovers JSON fields so queries can filter and group on them."
+        },
+        {
+          "text": "To a local file in /tmp",
+          "correct": false,
+          "rationale": "Files in /tmp are lost when the environment is recycled and are not in CloudWatch Logs."
+        }
+      ],
+      "explanation": "Structured logging makes logs searchable and easy to turn into metrics.",
+      "difficulty": 1,
+      "tags": [
+        "structured-logging",
+        "cloudwatch-logs"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/monitoring-cloudwatchlogs-logformat.html",
+        "https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-4.2-02",
+      "domain": "d4",
+      "objective": "4.2",
+      "type": "single",
+      "stem": "A Lambda function must publish a custom business metric on every invocation, without adding a synchronous CloudWatch API call to each request. What should the developer use?",
+      "options": [
+        {
+          "text": "A PutMetricData API call from the handler on every invocation",
+          "correct": false,
+          "rationale": "This adds a synchronous API call to each request."
+        },
+        {
+          "text": "X-Ray annotations on each trace",
+          "correct": false,
+          "rationale": "Annotations index traces; they are not CloudWatch metrics."
+        },
+        {
+          "text": "An Amazon SNS message for each value",
+          "correct": false,
+          "rationale": "SNS delivers messages; it does not create metrics."
+        },
+        {
+          "text": "Embedded metric format (EMF) in the function's log output",
+          "correct": true,
+          "rationale": "CloudWatch extracts the metric from the structured log event asynchronously."
+        }
+      ],
+      "explanation": "EMF lets code emit metrics through logs, with no extra API call.",
+      "difficulty": 3,
+      "tags": [
+        "emf",
+        "custom-metrics",
+        "lambda"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Embedded_Metric_Format.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-4.2-03",
+      "domain": "d4",
+      "objective": "4.2",
+      "type": "multi",
+      "stem": "An application on Amazon EC2 instances must publish a custom metric for the number of items in an in-memory queue. Which approaches will publish it to CloudWatch? (Select TWO.)",
+      "options": [
+        {
+          "text": "Enable EC2 detailed monitoring",
+          "correct": false,
+          "rationale": "Detailed monitoring adds one-minute EC2 metrics, not application values."
+        },
+        {
+          "text": "Send the value to the CloudWatch agent, for example through StatsD",
+          "correct": true,
+          "rationale": "The agent collects custom metrics and publishes them to CloudWatch."
+        },
+        {
+          "text": "Change the X-Ray sampling rate",
+          "correct": false,
+          "rationale": "Sampling controls tracing, not metrics."
+        },
+        {
+          "text": "Call the PutMetricData API from the application through the AWS SDK",
+          "correct": true,
+          "rationale": "PutMetricData publishes custom metric data points."
+        },
+        {
+          "text": "Turn on AWS CloudTrail data events",
+          "correct": false,
+          "rationale": "CloudTrail records API activity, not application values."
+        }
+      ],
+      "explanation": "Custom metrics come from PutMetricData, the CloudWatch agent or embedded metric format logs.",
+      "difficulty": 2,
+      "tags": [
+        "custom-metrics",
+        "cloudwatch",
+        "ec2"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html",
+        "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-4.2-04",
+      "domain": "d4",
+      "objective": "4.2",
+      "type": "single",
+      "stem": "The team wants an email when a function's error count goes above 10 in five minutes. What should the developer set up?",
+      "options": [
+        {
+          "text": "A CloudWatch alarm on the Errors metric that notifies an SNS topic",
+          "correct": true,
+          "rationale": "The alarm changes state at the threshold and notifies the topic's email subscribers."
+        },
+        {
+          "text": "An X-Ray group with a filter expression for requests that have errors",
+          "correct": false,
+          "rationale": "Groups organize traces; they do not send email."
+        },
+        {
+          "text": "A CloudWatch Logs retention policy",
+          "correct": false,
+          "rationale": "Retention controls log storage."
+        },
+        {
+          "text": "An X-Ray sampling rule for failed requests",
+          "correct": false,
+          "rationale": "Sampling rules decide which requests are traced; they do not send notifications."
+        }
+      ],
+      "explanation": "Alarms watch metrics and notify through SNS.",
+      "difficulty": 1,
+      "tags": [
+        "cloudwatch-alarm",
+        "sns"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-4.2-05",
+      "domain": "d4",
+      "objective": "4.2",
+      "type": "single",
+      "stem": "Developers want an email each time an AWS CodePipeline execution succeeds or fails. What should the developer configure?",
+      "options": [
+        {
+          "text": "A CloudWatch Logs metric filter on the CodeBuild logs that counts failed builds",
+          "correct": false,
+          "rationale": "Build logs do not carry the pipeline's overall result in a reliable way."
+        },
+        {
+          "text": "An EventBridge rule for pipeline state changes that targets an SNS topic",
+          "correct": true,
+          "rationale": "CodePipeline emits state-change events that rules can route to notifications."
+        },
+        {
+          "text": "A manual approval action at the end of the pipeline",
+          "correct": false,
+          "rationale": "Approvals pause the pipeline; they do not notify on completion."
+        },
+        {
+          "text": "AWS CloudTrail Insights",
+          "correct": false,
+          "rationale": "CloudTrail Insights detects unusual API activity."
+        }
+      ],
+      "explanation": "Deployment and pipeline events flow through EventBridge, which can notify on completion.",
+      "difficulty": 2,
+      "tags": [
+        "codepipeline",
+        "eventbridge",
+        "notifications"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/codepipeline/latest/userguide/detect-state-changes-cloudwatch-events.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-4.2-06",
+      "domain": "d4",
+      "objective": "4.2",
+      "type": "single",
+      "stem": "A team wants to be warned before its Lambda functions reach the account's concurrency limit. What should a CloudWatch alarm watch?",
+      "options": [
+        {
+          "text": "The average Duration metric of the busiest function, measured over five minutes",
+          "correct": false,
+          "rationale": "Duration measures run time, not concurrency."
+        },
+        {
+          "text": "The Invocations metric of one function",
+          "correct": false,
+          "rationale": "Invocations count requests, not concurrent instances."
+        },
+        {
+          "text": "ClaimedAccountConcurrency compared with the account's concurrency quota",
+          "correct": true,
+          "rationale": "Lambda uses this metric to track how much account concurrency is already claimed, including reserved and provisioned concurrency."
+        },
+        {
+          "text": "The number of Lambda Invoke events recorded by CloudTrail",
+          "correct": false,
+          "rationale": "CloudTrail events are API records, not a concurrency measure."
+        }
+      ],
+      "explanation": "Lambda's documentation recommends alarming on ClaimedAccountConcurrency against the quota; ConcurrentExecutions alone can understate what is claimed.",
+      "difficulty": 2,
+      "tags": [
+        "lambda",
+        "quotas",
+        "cloudwatch-alarm"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/monitoring-concurrency.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-4.2-07",
+      "domain": "d4",
+      "objective": "4.2",
+      "type": "single",
+      "stem": "A developer wants to search X-Ray traces by customer ID to investigate one customer's slow requests. How should the code record the customer ID?",
+      "options": [
+        {
+          "text": "As metadata on the segment",
+          "correct": false,
+          "rationale": "Metadata is stored with the trace but is not indexed for search."
+        },
+        {
+          "text": "As a CloudWatch metric dimension",
+          "correct": false,
+          "rationale": "Metric dimensions do not make traces searchable."
+        },
+        {
+          "text": "In the function's environment variables",
+          "correct": false,
+          "rationale": "Environment variables are configuration, not per-request data."
+        },
+        {
+          "text": "As an annotation on the segment",
+          "correct": true,
+          "rationale": "Annotations are indexed, so filter expressions can search on them."
+        }
+      ],
+      "explanation": "Use annotations for values you filter on and metadata for extra detail.",
+      "difficulty": 2,
+      "tags": [
+        "xray",
+        "annotations"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-4.2-08",
+      "domain": "d4",
+      "objective": "4.2",
+      "type": "multi",
+      "stem": "A developer wants end-to-end traces for requests that go through an API Gateway REST API, a Lambda function and DynamoDB. Which steps are needed? (Select TWO.)",
+      "options": [
+        {
+          "text": "Turn on CloudTrail data events for the table",
+          "correct": false,
+          "rationale": "CloudTrail records API calls for auditing, not traces."
+        },
+        {
+          "text": "Enable detailed monitoring on the API",
+          "correct": false,
+          "rationale": "Detailed metrics do not connect a request's path across services."
+        },
+        {
+          "text": "Turn on active tracing for the Lambda function and instrument its AWS SDK calls",
+          "correct": true,
+          "rationale": "Lambda records its segment, and instrumentation records the DynamoDB calls."
+        },
+        {
+          "text": "Enable VPC Flow Logs",
+          "correct": false,
+          "rationale": "Flow logs record network traffic metadata, not request traces."
+        },
+        {
+          "text": "Enable X-Ray tracing on the API Gateway stage",
+          "correct": true,
+          "rationale": "API Gateway then starts or continues the trace for each request."
+        }
+      ],
+      "explanation": "Tracing must be on at each hop, plus SDK instrumentation for downstream calls.",
+      "difficulty": 2,
+      "tags": [
+        "xray",
+        "api-gateway",
+        "lambda"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-xray.html",
+        "https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-4.2-09",
+      "domain": "d4",
+      "objective": "4.2",
+      "type": "single",
+      "stem": "An Application Load Balancer keeps routing requests to instances whose application has stopped responding. The health check uses the default path /, which the web server still answers. What should the developer change?",
+      "options": [
+        {
+          "text": "Point the target group's health check at an application path such as /health",
+          "correct": true,
+          "rationale": "The load balancer stops routing to targets that fail the check."
+        },
+        {
+          "text": "Increase the load balancer's idle timeout so that slow targets have more time to answer",
+          "correct": false,
+          "rationale": "Idle timeout affects connection reuse, not health."
+        },
+        {
+          "text": "Turn on access logs",
+          "correct": false,
+          "rationale": "Access logs record requests; they do not take targets out of service."
+        },
+        {
+          "text": "Add a second listener on port 443",
+          "correct": false,
+          "rationale": "Another listener does not detect unhealthy targets."
+        }
+      ],
+      "explanation": "Health checks should exercise the application, not just the port.",
+      "difficulty": 2,
+      "tags": [
+        "elb",
+        "health-checks"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-4.2-10",
+      "domain": "d4",
+      "objective": "4.2",
+      "type": "single",
+      "stem": "On Amazon EKS, new pods receive traffic before they finish loading their cache, and early requests fail. What should the developer add to the pod specification?",
+      "options": [
+        {
+          "text": "A liveness probe that restarts the pod when the cache is missing",
+          "correct": false,
+          "rationale": "Liveness probes restart containers; restarts would not stop early traffic."
+        },
+        {
+          "text": "A readiness probe that succeeds once the cache is loaded",
+          "correct": true,
+          "rationale": "Pods receive traffic only once their readiness probe succeeds."
+        },
+        {
+          "text": "A larger memory limit",
+          "correct": false,
+          "rationale": "More memory does not delay traffic until the pod is ready."
+        },
+        {
+          "text": "An extra replica of the deployment",
+          "correct": false,
+          "rationale": "More pods still receive traffic too early."
+        }
+      ],
+      "explanation": "Readiness controls traffic; liveness controls restarts.",
+      "difficulty": 2,
+      "tags": [
+        "eks",
+        "probes",
+        "health"
+      ],
+      "refs": [
+        "https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    }
+  ]
+}

@@ -17,7 +17,7 @@ Changes made from the first round of feedback:
 
 - **Lint CLI:** `npm run content:lint [-- paths] [--strict]` checks `content/<pack>/questions/**/*.json` against the pack blueprint: everything the importer checks, plus required stable ids across files, `profile.outOfScopeTerms` (services the guide lists as out of scope; new optional pack field), and doc 07 section 5 batch warnings (answer-position imbalance, longest-option-is-correct tell, absolute words, NOT/EXCEPT stems, `lastVerified` over a year old). Exit 1 on errors.
 - **Blind verification:** `npm run content:blind -- <batch>` writes a copy with no key or rationales; a separate model answers it; `npm run content:check -- <batch> <answers> --write` flags disagreements with `needsAttention`. The tooling is built and tested. Running the check still needs a second session or a person: nothing in the app calls a model.
-- **Prompt kit:** `content/prompts/draft-questions.md` and `verify-blind.md`, a README with the step-by-step flow, and `content/clf-c02/style.md`. DVA-C03 has no style file yet.
+- **Prompt kit:** `content/prompts/draft-questions.md` and `verify-blind.md`, a README with the step-by-step flow, and `content/clf-c02/style.md`. DVA-C03 got its style file in Revision 7.
 - **Coverage page** (Library, Coverage): approved, draft and target counts per objective with a default target of four exams' worth split by domain weight (then evenly by objective), practice-ready (10 or more approved) and mock-ready (2 exams' worth) indicators, and a Prompt page per objective that fills the drafting prompt with the objective's scope and the questions already in the bank.
 - **Export approved** in Library (T-027).
 - **Pilot batch:** `content/clf-c02/questions/2.1-2026-11-01.json`, 10 draft questions for objective 2.1 (shared responsibility), grounded in three AWS pages named in each question's `refs`. Lint: 0 errors, 0 warnings. Not yet blind-checked, imported or human-reviewed.
@@ -73,6 +73,25 @@ Changes made from the first round of feedback:
   - **Weak citations:** several, now replaced with docs pages.
 
   Explanations name both old and new names wherever the exam guide still uses the old one.
+
+## Revision 7 (question quality and DVA-C03 bank, 2026-11-08)
+
+- **Quality review:** the learner found CLF-C02 questions too hard, wrong or more up to date than the exam. The cause and the new rules are in [17-question-quality-review.md](17-question-quality-review.md): the exam guide sets names, scope and depth, and the current docs only confirm facts. Revision 6's "old and new names" approach was the wrong call. The rules are now in `content/prompts/draft-questions.md` and the review step of the prompt README. Fixing the 12 CLF-C02 questions with post-guide wording is still open.
+- **DVA-C03:**
+  - The pack now has `style.md`, calibrated against AWS's official sample questions.
+  - Its blueprint has a lint profile, including the guide's out-of-scope services.
+  - The guide now says registration opened on October 27, 2026.
+- **123 DVA-C03 questions** are in the shared bank: 10 or 11 per objective (every objective is practice-ready), 17 of them multiple-response (style.md aims for about 25 percent, so later batches should add more).
+  - The blind check agreed on 123 of 123.
+  - The source checks found no wrong keys, but did find:
+    - outdated rationales (ACM public certificates can now be exported; API Gateway integration timeouts can be raised; Lambda recommends ClaimedAccountConcurrency for account-limit alarms);
+    - out-of-scope distractors (AWS Config, Trusted Advisor);
+    - a CodeArtifact term ("external connection", not "upstream");
+    - a Kiro detail (file hooks fire on the agent's edits);
+    - weak refs.
+
+    All are fixed.
+  - The correct answer was the longest option in 74 of the first draft's single-answer questions. It is now 2 of 99.
 
 ## Run it
 
@@ -134,7 +153,7 @@ First real account (no public sign-up): `npm run user:create -- "Your Name"` pri
 - T-012 domain/objective editor, T-013 theme lab and design notes, T-076 trends, "create exam manually", "new question" form, pack-reload diff (part of T-011).
 - T-081 browser end-to-end test (the data-layer golden path is tested; the UI was exercised by hand).
 - T-082 remainder: adapt and install `docker/nginx-study.conf.example` (untested draft), the Namecheap record, certificates, scheduled `pg_dump` and a restore drill. T-083 remainder: CSP with nonces, nginx rate limits, the pre-exposure checklist run-through.
-- Content: the CLF-C02 shared bank has 275 approved questions (26 multiple-response), above the 260 coverage target; every objective is practice-ready. DVA-C03 has no questions yet.
+- Content: the CLF-C02 shared bank has 275 approved questions (26 multiple-response), above the 260 coverage target; every objective is practice-ready. DVA-C03 has 123 approved questions (10 or 11 per objective) toward its 260 target.
 
 ## Findings that changed the plan
 

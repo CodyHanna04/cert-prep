@@ -1,0 +1,493 @@
+{
+  "formatVersion": 1,
+  "questions": [
+    {
+      "id": "dva-c03-1.1-01",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "An order service calls an inventory service synchronously over HTTP. During sales events the inventory service slows down, and orders fail with timeouts. The orders do not need to be processed instantly. Which solution will meet these requirements?",
+      "options": [
+        {
+          "text": "Increase the HTTP client timeout in the order service",
+          "correct": false,
+          "rationale": "Longer waits keep the services tightly coupled and still fail when the backlog grows."
+        },
+        {
+          "text": "Add Amazon Route 53 weighted routing in front of the inventory service",
+          "correct": false,
+          "rationale": "Weighted DNS splits traffic between endpoints but does not buffer requests."
+        },
+        {
+          "text": "Run both services on one larger Amazon EC2 instance so that calls between them stay local",
+          "correct": false,
+          "rationale": "Co-locating the services keeps the synchronous dependency and adds a single point of failure."
+        },
+        {
+          "text": "Send each order to an Amazon SQS queue and let the inventory service poll the queue",
+          "correct": true,
+          "rationale": "The queue absorbs bursts and decouples the two services, so the inventory service works at its own pace."
+        }
+      ],
+      "explanation": "A queue between producer and consumer turns a tightly coupled synchronous call into loosely coupled asynchronous processing.",
+      "difficulty": 2,
+      "tags": [
+        "decoupling",
+        "sqs"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-1.1-02",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "A REST API in Amazon API Gateway starts a report that takes several minutes to build. Clients currently wait on the request and receive timeout errors. What should the developer do?",
+      "options": [
+        {
+          "text": "Return a job ID, queue the work in Amazon SQS, and let the client fetch the report later",
+          "correct": true,
+          "rationale": "The API responds immediately and a worker builds the report asynchronously."
+        },
+        {
+          "text": "Invoke the report function synchronously and raise the HTTP timeout on the client and the API",
+          "correct": false,
+          "rationale": "Holding a request open for minutes is fragile, and API Gateway's integration timeout is short by default."
+        },
+        {
+          "text": "Enable API Gateway caching for the report resource",
+          "correct": false,
+          "rationale": "Caching reuses earlier responses; it does not make the first build faster."
+        },
+        {
+          "text": "Build the report inside an API Gateway mapping template",
+          "correct": false,
+          "rationale": "Mapping templates transform payloads; they cannot run long jobs."
+        }
+      ],
+      "explanation": "Long-running work belongs behind an asynchronous pattern: accept the request, queue it, and let the client poll or be notified.",
+      "difficulty": 2,
+      "tags": [
+        "async",
+        "api-gateway",
+        "sqs"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html",
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-execution-service-limits-table.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-1.1-03",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "An application that writes to Amazon DynamoDB sometimes receives throttling errors during traffic spikes. How should the application handle these errors?",
+      "options": [
+        {
+          "text": "Retry the request immediately in a loop until it succeeds",
+          "correct": false,
+          "rationale": "Immediate retries add load at the moment the table is already throttling."
+        },
+        {
+          "text": "Retry the request with exponential backoff and jitter",
+          "correct": true,
+          "rationale": "Spacing out retries with random delays gives capacity time to recover and avoids synchronized retry storms."
+        },
+        {
+          "text": "Discard the request and log the error",
+          "correct": false,
+          "rationale": "Throttling errors are retryable, so dropping the write loses data unnecessarily."
+        },
+        {
+          "text": "Send the request to a table in another AWS Region",
+          "correct": false,
+          "rationale": "Switching Regions does not address throttling and leaves the data split across tables."
+        }
+      ],
+      "explanation": "AWS SDKs retry throttling errors with exponential backoff by default; custom retry code should follow the same pattern.",
+      "difficulty": 2,
+      "tags": [
+        "retries",
+        "backoff",
+        "dynamodb"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-1.1-04",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "A developer wants Amazon API Gateway to reject POST requests whose JSON body is missing required fields, before the backend is invoked. What should the developer configure?",
+      "options": [
+        {
+          "text": "A Lambda authorizer that inspects the request body and denies requests with missing fields",
+          "correct": false,
+          "rationale": "Lambda authorizers decide whether a caller is allowed, and they do not receive the request body."
+        },
+        {
+          "text": "A usage plan with an API key",
+          "correct": false,
+          "rationale": "Usage plans throttle and meter clients; they do not validate payloads."
+        },
+        {
+          "text": "A request validator on the method, with a model that defines the required fields",
+          "correct": true,
+          "rationale": "API Gateway checks the body against the model's JSON schema and returns 400 Bad Request when it does not match."
+        },
+        {
+          "text": "A stage variable that lists the required fields",
+          "correct": false,
+          "rationale": "Stage variables are name-value settings for a stage, not validation rules."
+        }
+      ],
+      "explanation": "Request validation keeps malformed requests from ever reaching the integration.",
+      "difficulty": 2,
+      "tags": [
+        "api-gateway",
+        "validation"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-method-request-validation.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-1.1-05",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "A legacy backend expects request fields with different names than the ones that clients send to a REST API in Amazon API Gateway. The backend cannot be changed. What should the developer use?",
+      "options": [
+        {
+          "text": "A Lambda proxy integration that passes the request through to the backend unchanged",
+          "correct": false,
+          "rationale": "Proxy integrations forward the request as it is, so the field names would not change."
+        },
+        {
+          "text": "Cross-origin resource sharing (CORS) on the resource",
+          "correct": false,
+          "rationale": "CORS controls which browser origins may call the API."
+        },
+        {
+          "text": "A gateway response that rewrites error messages",
+          "correct": false,
+          "rationale": "Gateway responses customize errors from API Gateway itself, not normal requests."
+        },
+        {
+          "text": "A non-proxy integration with a mapping template that renames the fields",
+          "correct": true,
+          "rationale": "Mapping templates transform the request and response between the method and the integration."
+        }
+      ],
+      "explanation": "Use a non-proxy (custom) integration with mapping templates when the client and backend formats differ.",
+      "difficulty": 3,
+      "tags": [
+        "api-gateway",
+        "mapping-templates"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-1.1-06",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "Sensors send readings to Amazon Kinesis Data Streams. Readings from the same sensor must stay in order, and the load must spread across shards as more sensors are added. What should the producer use as the partition key?",
+      "options": [
+        {
+          "text": "The sensor ID",
+          "correct": true,
+          "rationale": "Records with the same partition key go to the same shard, where their order is preserved."
+        },
+        {
+          "text": "A random value for each record",
+          "correct": false,
+          "rationale": "Random keys spread one sensor's readings across shards, so their order is not kept."
+        },
+        {
+          "text": "The current timestamp",
+          "correct": false,
+          "rationale": "Timestamps change with every record and spread one sensor across many shards."
+        },
+        {
+          "text": "The same constant value for every record",
+          "correct": false,
+          "rationale": "A single key sends all traffic to one shard and limits throughput."
+        }
+      ],
+      "explanation": "The partition key decides the shard, and ordering is guaranteed only within a shard.",
+      "difficulty": 2,
+      "tags": [
+        "kinesis",
+        "streaming",
+        "partition-key"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-1.1-07",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "A company wants to load clickstream events into Amazon S3 in near real time, batched into files, without writing or running any consumer code. Which service meets this requirement?",
+      "options": [
+        {
+          "text": "Amazon Kinesis Data Streams with a custom consumer application",
+          "correct": false,
+          "rationale": "A custom consumer is code that must be written and run, which the requirement rules out."
+        },
+        {
+          "text": "Amazon Data Firehose",
+          "correct": true,
+          "rationale": "Firehose buffers incoming records and delivers them to destinations such as Amazon S3 with no consumer code."
+        },
+        {
+          "text": "Amazon SQS with an Amazon EC2 worker",
+          "correct": false,
+          "rationale": "A worker would have to be written and operated to move the messages to S3."
+        },
+        {
+          "text": "AWS Step Functions",
+          "correct": false,
+          "rationale": "Step Functions orchestrates workflows; it is not a streaming delivery service."
+        }
+      ],
+      "explanation": "Firehose is the managed way to stream data into storage and analytics destinations.",
+      "difficulty": 2,
+      "tags": [
+        "firehose",
+        "streaming",
+        "s3"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/firehose/latest/dev/what-is-this-service.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-1.1-08",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "A Lambda function behind an API Gateway Lambda proxy integration reads event.body.orderId, but the value is always undefined even though clients send it. What is the cause?",
+      "options": [
+        {
+          "text": "The function's memory setting is too low to hold the whole request body",
+          "correct": false,
+          "rationale": "Memory size does not change how the body is delivered."
+        },
+        {
+          "text": "API Gateway removes request bodies unless caching is enabled",
+          "correct": false,
+          "rationale": "Caching has nothing to do with passing the body to the integration."
+        },
+        {
+          "text": "The body is a JSON string and must be parsed before its fields are read",
+          "correct": true,
+          "rationale": "In the proxy event, body is a string, so the code must deserialize it first."
+        },
+        {
+          "text": "The function needs a resource-based policy to read the body",
+          "correct": false,
+          "rationale": "Permissions control who can invoke the function, not what the event contains."
+        }
+      ],
+      "explanation": "Serialization matters at every boundary: parse incoming JSON strings, and return the response body as a string.",
+      "difficulty": 2,
+      "tags": [
+        "serialization",
+        "lambda",
+        "api-gateway"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-1.1-09",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "multi",
+      "stem": "When an image is uploaded to an Amazon S3 bucket, two separate applications must each receive the event and process the image independently. Which solutions will meet these requirements? (Select TWO.)",
+      "options": [
+        {
+          "text": "Send the event to one Amazon SQS standard queue that both applications poll",
+          "correct": false,
+          "rationale": "Each message is processed by only one consumer, so the applications would split the events."
+        },
+        {
+          "text": "Send the S3 event notification to an Amazon SNS topic, and subscribe an Amazon SQS queue for each application",
+          "correct": true,
+          "rationale": "SNS fans the event out so each queue gets its own copy."
+        },
+        {
+          "text": "Have the first application forward each event to the second after it finishes processing",
+          "correct": false,
+          "rationale": "This chains the applications, so a failure or delay in the first one stops the second."
+        },
+        {
+          "text": "Send the event to an Amazon SQS FIFO queue that both applications share",
+          "correct": false,
+          "rationale": "A FIFO queue still delivers each message to a single consumer."
+        },
+        {
+          "text": "Enable Amazon EventBridge for the bucket, and create a rule that targets both applications",
+          "correct": true,
+          "rationale": "EventBridge can route the same S3 event to several targets."
+        }
+      ],
+      "explanation": "Fan-out needs a copy per consumer: SNS-to-SQS or an EventBridge rule with several targets.",
+      "difficulty": 3,
+      "tags": [
+        "event-driven",
+        "s3",
+        "sns",
+        "eventbridge"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/EventNotifications.html",
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/EventBridge.html",
+        "https://docs.aws.amazon.com/sns/latest/dg/sns-sqs-as-subscriber.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-1.1-10",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "An application uses a foundation model in Amazon Bedrock to write product descriptions. The team expects to switch to a different model later and does not want to rewrite how requests and responses are formatted. What should the developer use?",
+      "options": [
+        {
+          "text": "The InvokeModel API with each model's native request body",
+          "correct": false,
+          "rationale": "InvokeModel uses model-specific payloads, so switching models means rewriting the request code."
+        },
+        {
+          "text": "A model hosted on Amazon EC2 behind an HTTP endpoint",
+          "correct": false,
+          "rationale": "Self-hosting adds infrastructure and does not give a common interface across models."
+        },
+        {
+          "text": "Amazon Kinesis Data Streams to send prompts to the model",
+          "correct": false,
+          "rationale": "Kinesis streams data records; it is not a way to call a model."
+        },
+        {
+          "text": "The Amazon Bedrock Converse API",
+          "correct": true,
+          "rationale": "Converse gives a consistent request and response format across the models that support it."
+        }
+      ],
+      "explanation": "Converse lets code send messages the same way regardless of which supported model handles them.",
+      "difficulty": 2,
+      "tags": [
+        "bedrock",
+        "converse"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-1.1-11",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "Before writing any code for a new feature, a developer wants an AI tool to produce requirements, a technical design and a list of implementation tasks that can then be worked through. Which Kiro feature does this?",
+      "options": [
+        {
+          "text": "A spec",
+          "correct": true,
+          "rationale": "A Kiro spec produces requirements, design and tasks documents for a feature before implementation."
+        },
+        {
+          "text": "A steering file",
+          "correct": false,
+          "rationale": "Steering files give the agent standing guidance such as coding standards; they do not plan a feature."
+        },
+        {
+          "text": "An agent hook",
+          "correct": false,
+          "rationale": "Hooks run actions automatically on events such as saving a file."
+        },
+        {
+          "text": "An MCP server",
+          "correct": false,
+          "rationale": "MCP servers give the agent extra tools and data sources."
+        }
+      ],
+      "explanation": "Spec-driven development turns a feature request into requirements.md, design.md and tasks.md.",
+      "difficulty": 2,
+      "tags": [
+        "kiro",
+        "ai-assisted-development"
+      ],
+      "refs": [
+        "https://kiro.dev/docs/specs/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    }
+  ]
+}

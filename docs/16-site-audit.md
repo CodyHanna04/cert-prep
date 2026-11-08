@@ -27,7 +27,7 @@ A walk through every page on the local dev build: desktop, phone width (375 px),
 
 **Content**
 7. **CLF-C02:** 275 approved after this pass, above the 260 target. Next: more multiple-response questions (about 7% now; the exam is closer to 10–15%) and a second pass on the thinnest objectives.
-8. **DVA-C03:** no bank and no `style.md`. Its course card says "Soon".
+8. **DVA-C03:** 123 approved questions and a `style.md` (2026-11-08). Next: grow each objective toward its target of about 19 to 26.
 
 **Polish**
 9. **Account:** the Sign out button sits loose between cards; put it in the Passkeys or Devices card.
@@ -36,6 +36,8 @@ A walk through every page on the local dev build: desktop, phone width (375 px),
 12. **Theme lab** (T-013) and two more themes (Atlas, Soft modern), with design notes.
 
 **Production**
-13. **HSTS** header at the proxy, and a CSP with nonces in the app.
+13. **CSP with nonces** in the app. The proxy already sends HSTS (`max-age=63072000; preload`) and a frame/base/form CSP. To join the browser preload list, the header also needs `includeSubDomains`, and every subdomain must serve HTTPS. Otherwise drop `preload`.
 14. **Backups:** a nightly `pg_dump` and one restore drill before inviting anyone (doc 15 §6).
 15. **Remove the temporary sudo** for `deploy` on the LXC.
+
+Done since the audit (2026-11-02): HSTS at the proxy, and the admin site checked from the tailnet with the admin account created.
