@@ -55,3 +55,9 @@ APIs · benefits of migrating to the AWS Cloud · AWS CAF · AWS Compliance · c
 - **Storage:** Amazon FSx for Lustre
 
 Services that appear on neither list (for example Amazon Kendra, AWS Local Zones, the Snow Family, AWS DataSync, AWS Audit Manager) are suspect: leave them out of questions, distractors included.
+
+**Beyond the printed list:**
+- **Amazon Bedrock** is not on the printed in-scope list. The learner saw it, alongside SageMaker, as an answer choice on the real CLF-C02 exam, so it can appear (the list is non-exhaustive).
+- **Depth:** use it at recognition level only. Bedrock builds generative AI applications on foundation models through an API, while SageMaker AI builds, trains and deploys your own models. Keep deeper generative-AI concepts (RAG, fine-tuning, prompt technique) out.
+
+The lint's `outOfScopeTerms` covers the out-of-scope list above, plus retired names, retired plans, and services on neither list that are known to be gone (Kendra, Local Zones, Snow Family, DataSync, Audit Manager), so they can't drift back in.

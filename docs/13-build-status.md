@@ -108,8 +108,13 @@ Changes made from the first round of feedback:
   - Explanations now name the clue and the nearest distractor.
   - Weak or silly distractors replaced, and the longest-option giveaway removed.
 - **DVA-C03 quality pass:** 53 questions edited, with clearer explanations, realistic distractors and balanced option lengths. 10 were converted to "(Select TWO.)", so 27 of 123 are now multiple-response.
+- **Bedrock and terms on the real exam:** the learner sat the real CLF-C02 exam and saw Amazon Bedrock and SageMaker among the answer choices. Some of our answer choices also used wrong terms, for example in a billing question.
+  - **Bedrock:** it isn't on the guide's printed in-scope list, but the list is non-exhaustive. CLF now covers Bedrock at recognition level: Bedrock vs SageMaker AI.
+  - **Retired names in the lint:** the CLF lint also blocks retired names and plans and services that are gone (QuickSight, Developer Support, Enterprise On-Ramp, Kendra, Local Zones, DataSync and others).
+  - **DVA:** three Bedrock questions that tested AI concepts were replaced by developer tasks: applying a guardrail in the Converse request, detecting `stopReason: guardrail_intervened` in code, and scoping `bedrock:InvokeModel` to one model's ARN.
+  - **Terminology audit:** every question in both banks was checked against official sources only (docs.aws.amazon.com, aws.amazon.com and the exam guides), covering each option's term, each key and each claim.
 - **Checks:**
-  - Blind checks agreed with the key on all 170 changed CLF questions and all 53 changed DVA questions.
+  - Blind checks agreed with the key on all 170 changed CLF questions, all 53 changed DVA questions, and the 3 new DVA AI questions.
   - Lint passes with 0 errors and 0 warnings.
   - The 139 tests pass (run on the homelab LXC).
 

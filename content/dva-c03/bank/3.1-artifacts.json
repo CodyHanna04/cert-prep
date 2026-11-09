@@ -147,7 +147,7 @@
         {
           "text": "Add a final RUN step that compresses the toolchain files inside the existing image layers",
           "correct": false,
-          "rationale": "Layers are already compressed for transfer; the toolchain still ships."
+          "rationale": "Image layers are immutable once created, so a later step cannot remove the toolchain from the earlier layers."
         },
         {
           "text": "Use a multi-stage build that copies the compiled output into a slim final image",
@@ -172,7 +172,8 @@
         "containers"
       ],
       "refs": [
-        "https://docs.docker.com/build/building/multi-stage/"
+        "https://docs.docker.com/build/building/multi-stage/",
+        "https://docs.docker.com/get-started/docker-concepts/building-images/understanding-image-layers/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",

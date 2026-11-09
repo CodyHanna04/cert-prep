@@ -234,7 +234,7 @@
         {
           "text": "The sensor ID",
           "correct": true,
-          "rationale": "Records with the same partition key go to the same shard, where their order is preserved."
+          "rationale": "All records with the same partition key map to the same shard, and sequence numbers within a shard increase over time, so one sensor's readings stay in order."
         },
         {
           "text": "A random value for each record",
@@ -252,7 +252,7 @@
           "rationale": "A single key sends all traffic to one shard and limits throughput."
         }
       ],
-      "explanation": "The partition key decides the shard, and ordering is guaranteed only within a shard.",
+      "explanation": "The partition key decides the shard, and sequence numbers order records within a shard, not across shards.",
       "difficulty": 2,
       "tags": [
         "kinesis",
@@ -260,7 +260,8 @@
         "partition-key"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html"
+        "https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html",
+        "https://docs.aws.amazon.com/kinesis/latest/APIReference/API_PutRecord.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",

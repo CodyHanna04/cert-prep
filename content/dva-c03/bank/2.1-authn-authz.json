@@ -323,7 +323,7 @@
       "domain": "d2",
       "objective": "2.1",
       "type": "single",
-      "stem": "Developers need to run AWS CLI commands from their laptops. They sign in to AWS through the company's single sign-on portal, and the company does not want long-term access keys on laptops. What should the developers do?",
+      "stem": "Developers need to run AWS CLI commands from their laptops. They sign in to AWS through the company's AWS access portal in IAM Identity Center, and the company does not want long-term access keys on laptops. What should the developers do?",
       "options": [
         {
           "text": "Create IAM access keys for each developer and rotate them every month with a script",
@@ -341,12 +341,12 @@
           "rationale": "Console passwords cannot sign API requests."
         },
         {
-          "text": "Configure an SSO profile in the AWS CLI and run aws sso login",
+          "text": "Use an IAM Identity Center profile in the CLI and run aws sso login",
           "correct": true,
-          "rationale": "The CLI then uses short-term credentials that refresh through the sign-in session."
+          "rationale": "The CLI retrieves temporary credentials for the profile's role and renews them while the IAM Identity Center session is valid."
         }
       ],
-      "explanation": "SSO profiles give the CLI temporary credentials without stored keys.",
+      "explanation": "IAM Identity Center profiles, set up with aws configure sso, give the CLI temporary credentials without stored keys.",
       "difficulty": 2,
       "tags": [
         "cli",

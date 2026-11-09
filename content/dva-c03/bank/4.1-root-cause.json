@@ -275,7 +275,7 @@
         {
           "text": "The most recent event in the stack's events list, with its status reason",
           "correct": false,
-          "rationale": "The final events describe the rollback, not the original cause."
+          "rationale": "Events are listed newest first, so the most recent events describe the rollback, not the original cause."
         },
         {
           "text": "The stack's Resources tab",
@@ -290,16 +290,19 @@
         {
           "text": "The first CREATE_FAILED event in the stack's events, with its reason",
           "correct": true,
-          "rationale": "The first failure usually causes the rest of the rollback."
+          "rationale": "CloudFormation stops at the first failure on a provisioning path and then rolls back, so the earliest failed event's status reason shows the original cause."
         }
       ],
-      "explanation": "Read stack events in time order and start from the first failure.",
+      "explanation": "Work back through the stack events to the first failure and read its status reason; the console's Detect root cause feature can label that event as the likely root cause.",
       "difficulty": 2,
       "tags": [
         "cloudformation",
         "deployment-failure"
       ],
       "refs": [
+        "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/determine-root-cause-for-stack-failures.html",
+        "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/view-stack-events.html",
+        "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stack-failure-options.html",
         "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html"
       ],
       "source": "ai-draft",

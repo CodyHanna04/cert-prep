@@ -42,7 +42,8 @@
       ],
       "refs": [
         "https://docs.aws.amazon.com/kms/latest/developerguide/kms-cryptography.html",
-        "https://docs.aws.amazon.com/kms/latest/APIReference/API_GenerateDataKey.html"
+        "https://docs.aws.amazon.com/kms/latest/APIReference/API_GenerateDataKey.html",
+        "https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
@@ -442,7 +443,7 @@
       ],
       "refs": [
         "https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html",
-        "https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieving-secrets_lambda.html"
+        "https://docs.aws.amazon.com/lambda/latest/dg/with-secrets-manager.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",

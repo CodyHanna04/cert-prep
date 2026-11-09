@@ -95,7 +95,19 @@
         "Cloud Directory",
         "Network Firewall",
         "FSx for Lustre",
-        "RoboMaker"
+        "RoboMaker",
+        "QuickSight",
+        "Kendra",
+        "Local Zone",
+        "Snowball",
+        "Snow Family",
+        "DataSync",
+        "Audit Manager",
+        "Cloud9",
+        "CodeCommit",
+        "Developer Support",
+        "Enterprise On-Ramp",
+        "WorkSpaces Applications"
       ]
     },
     "marketing": {

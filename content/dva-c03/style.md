@@ -3,6 +3,16 @@
 - **Stems:** 1 to 3 sentences of scenario ("A developer is building...", "An application..."), then a question line: "Which solution will meet these requirements?", "What should the developer do?", "Which combination of steps...? (Select TWO.)". Use "LEAST operational overhead" or "MOST cost-effective" only when the scenario sets up that trade-off, and write the qualifier in capitals.
 - **Options:** short actions, often "Do X. Configure Y." in one or two sentences, with parallel wording. Distractors are plausible mechanisms that fail for a specific reason: the wrong service for the job (Parameter Store rotation, an IAM user for Lambda, environment variables for secrets), the right service with the wrong setting, or a step that wouldn't solve the stated symptom.
 - **Names:** use the short names the exam uses: Amazon SNS, Amazon SQS, AWS KMS, Amazon ECR, AWS SAM, AWS CDK, AWS STS, Amazon API Gateway. Use only services on the guide's in-scope list (`in-scope-services.md`), distractors included.
-- **AI topics (2.3 and the AI skills in 1.1, 3.2, 3.3, 4.1, 4.3):** stick to documented basics and to what the developer does. Examples: apply an Amazon Bedrock guardrail to model calls (ID and version, or ApplyGuardrail), pick the guardrail policy that addresses a risk, keep traffic private with a VPC interface endpoint, control access with IAM, keep sensitive data out of logs, use Kiro specs, hooks and steering, and use Amazon Bedrock AgentCore features such as session isolation, Identity for tool credentials, and Gateway to expose APIs as tools. These services change fast, so cite the page for every fact.
+- **AI topics (2.3 and the AI skills in 1.1, 3.2, 3.3, 4.1, 4.3):** write from the developer's seat, about what the code and configuration do, and stick to documented basics. Examples:
+  - call a model (Converse);
+  - grant and scope access with IAM;
+  - keep traffic private with a VPC interface endpoint;
+  - apply a guardrail in the request (ID and version, or ApplyGuardrail) and handle its result in code;
+  - pick the guardrail policy only when the choice turns on a practical difference (block vs mask, a topic vs exact words);
+  - keep sensitive data out of logs;
+  - use Kiro specs, hooks and steering;
+  - use Amazon Bedrock AgentCore features such as session isolation.
+
+  Leave out AI concepts for their own sake (what a foundation model or RAG is, which model to pick, prompt-writing technique, recalling what a policy page says). Those belong to the AWS Certified AI Practitioner exam, and the DVA-C03 guide lists model selection, prompt engineering and guardrail design as out of scope. These services change fast, so cite the page for every fact.
 - **Code:** short snippets or pseudocode are fine when the skill is about code (SDK retries, lazy loading, structured logs). Keep them to a few lines and language-neutral where possible.
 - **Tags:** the relevant services or concepts, e.g. `["lambda", "dlq"]`.

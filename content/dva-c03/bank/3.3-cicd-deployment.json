@@ -455,7 +455,7 @@
       "domain": "d3",
       "objective": "3.3",
       "type": "single",
-      "stem": "A team wants to run the Kiro agent inside its CI/CD pipeline, without an interactive sign-in, to check each deployment after it finishes. How can the pipeline run Kiro?",
+      "stem": "A team wants to run the Kiro agent inside its CI/CD pipeline, without an interactive sign-in, to troubleshoot failed builds. How can the pipeline run Kiro?",
       "options": [
         {
           "text": "Install the Kiro IDE on the build server and open it for each run",
@@ -478,7 +478,7 @@
           "rationale": "ECR stores container images, not Kiro specs."
         }
       ],
-      "explanation": "The Kiro CLI supports headless use in pipelines for tasks such as post-deployment checks.",
+      "explanation": "Headless mode runs the Kiro CLI without an interactive terminal, using an API key set in the KIRO_API_KEY environment variable, so a pipeline can use it for tasks such as code reviews and troubleshooting build failures.",
       "difficulty": 3,
       "tags": [
         "kiro",
