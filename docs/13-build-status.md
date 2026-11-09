@@ -112,7 +112,23 @@ Changes made from the first round of feedback:
   - **Bedrock:** it isn't on the guide's printed in-scope list, but the list is non-exhaustive. CLF now covers Bedrock at recognition level: Bedrock vs SageMaker AI.
   - **Retired names in the lint:** the CLF lint also blocks retired names and plans and services that are gone (QuickSight, Developer Support, Enterprise On-Ramp, Kendra, Local Zones, DataSync and others).
   - **DVA:** three Bedrock questions that tested AI concepts were replaced by developer tasks: applying a guardrail in the Converse request, detecting `stopReason: guardrail_intervened` in code, and scoping `bedrock:InvokeModel` to one model's ARN.
-  - **Terminology audit:** every question in both banks was checked against official sources only (docs.aws.amazon.com, aws.amazon.com and the exam guides), covering each option's term, each key and each claim.
+  - **Terminology audit (2026-11-09):** every question in both banks was checked against official sources only (docs.aws.amazon.com, aws.amazon.com and the exam guides), covering each option's term, each key and each claim.
+    - Wrong keys: none.
+    - Corrected: 95 CLF questions and 10 DVA questions. Examples:
+      - AWS's exact wording ("Increase speed and agility"; customer gateway device);
+      - S3 and DynamoDB now always encrypt, which voided two distractors;
+      - Security Hub split from Security Hub CSPM;
+      - the Amazon Q Developer console chat is now the AWS assistant, so 3.7-15 is about the IDE;
+      - the IAM Identity Center profile term in the CLI;
+      - Bedrock guardrail enforcement;
+      - refs moved off blogs and off the "How AWS Pricing Works" whitepaper, which AWS now marks as historical.
+    - Added two CLF questions on Bedrock vs SageMaker AI. CLF now has 284 questions.
+    - Blind checks agreed with all 24 questions whose stem or options changed.
+- **Mark a course done:**
+  - Course settings can mark a course "Passed" (with a date and an optional scaled score from 100 to 1,000) or "Finished", and you can clear it.
+  - The dashboard, Courses page and course overview show the badge, and it replaces the countdown.
+  - Changes: migration `0006_exam_outcome.sql`; `setExamOutcome` and `setExamOutcomeAction`; `OutcomeBadge`. Export and restore carry the outcome.
+  - Tests: three new course tests and an export round-trip check (142 tests).
 - **Checks:**
   - Blind checks agreed with the key on all 170 changed CLF questions, all 53 changed DVA questions, and the 3 new DVA AI questions.
   - Lint passes with 0 errors and 0 warnings.
