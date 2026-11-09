@@ -29,7 +29,7 @@
           "rationale": "The function's role needs permission to invoke the specific model."
         }
       ],
-      "explanation": "Grant model access to the calling role with IAM, scoped to the models the application uses.",
+      "explanation": "Model access is enabled and other roles succeed, so the problem is the function's own role: allow bedrock:InvokeModel on the model there. A resource-based policy is the trap, because access to Bedrock base models is granted through identity-based IAM policies.",
       "difficulty": 2,
       "tags": [
         "bedrock",
@@ -162,7 +162,7 @@
           "rationale": "Logging records conversations but blocks nothing."
         }
       ],
-      "explanation": "Content filters cover categories such as hate, insults, sexual content, violence, misconduct and prompt attacks.",
+      "explanation": "The requirement is to block harmful language in both inputs and outputs, which content filters do for categories such as hate and insults. Denied topics are the nearest distractor, but they block subject areas rather than abusive wording.",
       "difficulty": 2,
       "tags": [
         "bedrock",
@@ -206,7 +206,7 @@
           "rationale": "Denied topics block a subject area described in natural language."
         }
       ],
-      "explanation": "Use denied topics for subjects the application must not discuss.",
+      "explanation": "The clue is \"phrase the request in different ways\": a denied topic is described in natural language, so it catches rephrased requests. A word filter is the trap; it matches exact words and blocks harmless uses of them.",
       "difficulty": 2,
       "tags": [
         "bedrock",
@@ -295,7 +295,7 @@
           "rationale": "Response length does not stop the attack."
         }
       ],
-      "explanation": "Prompt attack detection is part of Bedrock Guardrails content filters.",
+      "explanation": "The message tries to override the application's instructions, which is a prompt attack, so use the prompt attack category of the content filters. A word filter is the trap: one blocked word is easy to avoid and blocks normal messages.",
       "difficulty": 2,
       "tags": [
         "bedrock",
@@ -374,7 +374,7 @@
           "rationale": "Least privilege limits the damage if the agent is misled."
         },
         {
-          "text": "Let the model choose which permissions to request at runtime",
+          "text": "Let the model decide at runtime which permissions it should request",
           "correct": false,
           "rationale": "Model output can be manipulated, so it should not decide its own permissions."
         },
@@ -384,7 +384,7 @@
           "rationale": "Prompts can be extracted, exposing the keys."
         },
         {
-          "text": "Require a person to approve sensitive actions, such as refunds, before they run",
+          "text": "Require a person to approve sensitive actions, such as refunds",
           "correct": true,
           "rationale": "Human-in-the-loop approval stops unwanted high-impact actions."
         }
@@ -430,9 +430,9 @@
           "rationale": "CloudTrail records API activity and is unrelated to the content of these logs."
         },
         {
-          "text": "Apply a CloudWatch Logs data protection policy that masks PII in the log group",
+          "text": "Apply a data protection policy that masks PII in the log group",
           "correct": true,
-          "rationale": "Readers without unmask permission see masked values."
+          "rationale": "CloudWatch Logs data protection masks matching values for readers without unmask permission."
         },
         {
           "text": "Copy the logs to a public Amazon S3 bucket for analysis",

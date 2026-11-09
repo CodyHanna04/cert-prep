@@ -14,7 +14,7 @@
           "rationale": "Well-Architected reviews workload design against six pillars, not adoption perspectives."
         },
         {
-          "text": "AWS Cloud Adoption Framework (AWS CAF)",
+          "text": "AWS Cloud Adoption Framework",
           "correct": true,
           "rationale": "AWS CAF groups its capabilities into six perspectives: Business, People, Governance, Platform, Security and Operations."
         },
@@ -29,7 +29,7 @@
           "rationale": "Trusted Advisor checks your account against best practices."
         }
       ],
-      "explanation": "AWS CAF uses AWS experience and best practices to help organizations digitally transform and accelerate business outcomes through the cloud.",
+      "explanation": "The clue is planning cloud adoption through perspectives such as Business and People, which is AWS CAF. The Well-Architected Framework, the nearest neighbor, reviews the design of individual workloads.",
       "difficulty": 1,
       "tags": [
         "caf",
@@ -42,7 +42,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.3-02",
@@ -52,14 +52,14 @@
       "stem": "Which is a business outcome that AWS CAF identifies as a benefit of cloud transformation?",
       "options": [
         {
-          "text": "Higher up-front capital spending",
+          "text": "Fixed, predictable hardware spending",
           "correct": false,
-          "rationale": "Cloud adoption generally reduces up-front capital spending."
+          "rationale": "Cloud spending is usage-based; fixed hardware spending is not an AWS CAF outcome."
         },
         {
-          "text": "Longer software release cycles",
+          "text": "Removal of compliance obligations",
           "correct": false,
-          "rationale": "Cloud adoption aims to speed up delivery, not slow it."
+          "rationale": "Customers keep compliance responsibilities for what they run on AWS."
         },
         {
           "text": "Reduced business risk",
@@ -67,9 +67,9 @@
           "rationale": "AWS CAF lists reduced business risk, improved ESG performance, increased revenue and increased operational efficiency."
         },
         {
-          "text": "More on-premises hardware to manage",
+          "text": "Full physical control of servers",
           "correct": false,
-          "rationale": "Moving to the cloud reduces the hardware you manage."
+          "rationale": "Customers do not get physical control of AWS hardware."
         }
       ],
       "explanation": "AWS CAF describes four business outcomes: reduced business risk, improved environmental, social and governance (ESG) performance, increased revenue and increased operational efficiency.",
@@ -84,7 +84,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.3-03",
@@ -236,12 +236,12 @@
           "rationale": "Repurchasing, also called drop and shop, moves to a different product, typically SaaS."
         },
         {
-          "text": "Retain",
+          "text": "Replatform",
           "correct": false,
-          "rationale": "Retaining keeps the application where it is for now."
+          "rationale": "Replatforming keeps the same application and makes a few cloud optimizations, such as moving to a managed database."
         }
       ],
-      "explanation": "Repurchase replaces an existing application with a different one, often a SaaS offering.",
+      "explanation": "The clue is switching to a different product delivered as SaaS, which is repurchase. Replatform keeps the same application and only optimizes how it runs.",
       "difficulty": 2,
       "tags": [
         "migration",
@@ -254,7 +254,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.3-07",
@@ -269,22 +269,22 @@
           "rationale": "Rehosting makes no changes at all."
         },
         {
-          "text": "Refactor",
-          "correct": false,
-          "rationale": "Refactoring re-architects the application."
-        },
-        {
-          "text": "Retire",
-          "correct": false,
-          "rationale": "Retiring switches the application off."
-        },
-        {
           "text": "Replatform",
           "correct": true,
           "rationale": "Replatforming makes a few cloud optimizations, such as moving to a managed database, without changing the core architecture."
+        },
+        {
+          "text": "Refactor",
+          "correct": false,
+          "rationale": "Refactoring re-architects the application to use cloud-native features."
+        },
+        {
+          "text": "Repurchase",
+          "correct": false,
+          "rationale": "Repurchasing replaces the application with a different product, such as SaaS."
         }
       ],
-      "explanation": "Replatform, sometimes called lift, tinker and shift, gains some cloud benefits without re-architecting.",
+      "explanation": "The clue is a managed database with the same core architecture: replatform, sometimes called lift, tinker and shift. Refactor would change the architecture itself.",
       "difficulty": 2,
       "tags": [
         "migration",
@@ -298,7 +298,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.3-08",
@@ -351,27 +351,27 @@
       "stem": "A company wants to migrate an on-premises database to AWS while the source database stays fully operational during the migration. Which service should it use?",
       "options": [
         {
-          "text": "AWS DataSync",
+          "text": "AWS Application Migration Service",
           "correct": false,
-          "rationale": "DataSync transfers files and objects, not live database migrations."
+          "rationale": "Application Migration Service moves whole servers by replicating them to AWS, not a database on its own."
         },
         {
-          "text": "AWS Database Migration Service (AWS DMS)",
+          "text": "AWS Database Migration Service",
           "correct": true,
-          "rationale": "AWS DMS migrates databases to AWS while the source remains operational, minimizing downtime."
+          "rationale": "AWS DMS migrates databases to AWS while the source stays fully operational, minimizing downtime."
+        },
+        {
+          "text": "AWS Schema Conversion Tool",
+          "correct": false,
+          "rationale": "AWS SCT converts a database schema for a different engine; it does not keep the source and target in sync."
         },
         {
           "text": "AWS Backup",
           "correct": false,
           "rationale": "AWS Backup centralizes backups; it is not a migration tool."
-        },
-        {
-          "text": "Amazon Athena",
-          "correct": false,
-          "rationale": "Athena queries data in Amazon S3."
         }
       ],
-      "explanation": "AWS DMS supports homogeneous and heterogeneous migrations and can keep replicating changes until you cut over.",
+      "explanation": "The clue is a database that keeps running while it moves: AWS DMS keeps the source fully operational until the migration is complete. AWS SCT only converts the schema when the target engine is different.",
       "difficulty": 2,
       "tags": [
         "migration",
@@ -384,7 +384,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.3-10",
@@ -414,9 +414,9 @@
           "rationale": "Retain keeps an application in its current environment for now."
         },
         {
-          "text": "Rebuild hardware",
+          "text": "Replicate",
           "correct": false,
-          "rationale": "Rebuilding hardware is not one of the migration strategies."
+          "rationale": "Replication, for example with AWS DMS, is a technique used during a migration, not one of the 7 Rs."
         }
       ],
       "explanation": "The 7 Rs are retire, retain, rehost, relocate, repurchase, replatform and refactor.",
@@ -432,7 +432,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.3-11",
@@ -447,9 +447,9 @@
           "rationale": "AWS DMS migrates databases, not whole servers."
         },
         {
-          "text": "AWS Application Migration Service (now AWS Transform MGN)",
+          "text": "AWS Application Migration Service",
           "correct": true,
-          "rationale": "Application Migration Service replicates source servers and launches them on AWS with minimal changes."
+          "rationale": "Application Migration Service continuously replicates source servers and launches them on AWS with minimal changes."
         },
         {
           "text": "AWS Schema Conversion Tool (AWS SCT)",
@@ -462,7 +462,7 @@
           "rationale": "AWS Config records resource configurations."
         }
       ],
-      "explanation": "AWS Application Migration Service, now called AWS Transform MGN, is the recommended service for rehosting physical, virtual and cloud servers on AWS.",
+      "explanation": "The clue is whole servers moved as they are (rehost), which is what AWS Application Migration Service automates. AWS DMS moves only databases, and AWS SCT only converts database schemas.",
       "difficulty": 2,
       "tags": [
         "migration",
@@ -470,13 +470,14 @@
         "rehost"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/mgn/latest/ug/what-is-application-migration-service.html"
+        "https://docs.aws.amazon.com/mgn/latest/ug/what-is-application-migration-service.html",
+        "https://docs.aws.amazon.com/prescriptive-guidance/latest/large-migration-guide/migration-strategies.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.3-12",
@@ -486,19 +487,19 @@
       "stem": "Which service collects information about on-premises servers, their configuration and their usage to help plan a migration?",
       "options": [
         {
+          "text": "AWS Application Migration Service",
+          "correct": false,
+          "rationale": "Application Migration Service carries out the server move itself; it does not gather planning data."
+        },
+        {
           "text": "AWS CloudTrail",
           "correct": false,
           "rationale": "CloudTrail records API activity in AWS accounts."
         },
         {
-          "text": "Amazon Inspector",
-          "correct": false,
-          "rationale": "Inspector scans AWS workloads for vulnerabilities."
-        },
-        {
           "text": "AWS Application Discovery Service",
           "correct": true,
-          "rationale": "Application Discovery Service gathers data about on-premises servers and their dependencies."
+          "rationale": "Application Discovery Service collects configuration, usage and network-connection data about on-premises servers to help plan a migration."
         },
         {
           "text": "AWS Config",
@@ -506,7 +507,7 @@
           "rationale": "AWS Config records AWS resource configurations, not on-premises servers."
         }
       ],
-      "explanation": "Discovery data helps you size targets and decide which migration strategy fits each application. AWS Application Discovery Service is no longer open to new customers (AWS points to AWS Transform instead), but the CLF-C02 exam guide still lists it.",
+      "explanation": "The clue is collecting data about on-premises servers to plan a migration. Application Migration Service, the nearest neighbor, performs the move after the planning is done.",
       "difficulty": 2,
       "tags": [
         "migration",
@@ -519,50 +520,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
-    },
-    {
-      "id": "clf-c02-1.3-13",
-      "domain": "d1",
-      "objective": "1.3",
-      "type": "single",
-      "stem": "A company wants partners to keep uploading files with SFTP, but store the files in Amazon S3. Which service supports this?",
-      "options": [
-        {
-          "text": "Amazon CloudFront",
-          "correct": false,
-          "rationale": "CloudFront delivers content to users."
-        },
-        {
-          "text": "AWS Direct Connect",
-          "correct": false,
-          "rationale": "Direct Connect is a private network connection."
-        },
-        {
-          "text": "Amazon Route 53",
-          "correct": false,
-          "rationale": "Route 53 is a DNS service."
-        },
-        {
-          "text": "AWS Transfer Family",
-          "correct": true,
-          "rationale": "Transfer Family provides managed SFTP, FTPS and FTP endpoints backed by Amazon S3 or Amazon EFS."
-        }
-      ],
-      "explanation": "Transfer Family is part of the migration and transfer category in the exam guide.",
-      "difficulty": 2,
-      "tags": [
-        "migration",
-        "transfer-family"
-      ],
-      "refs": [
-        "https://docs.aws.amazon.com/transfer/latest/userguide/what-is-aws-transfer-family.html"
-      ],
-      "source": "ai-draft",
-      "reviewStatus": "approved",
-      "generator": "claude-opus-5-5",
-      "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.3-14",
@@ -649,6 +607,93 @@
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-1.3-16",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "A company's migration team wants AWS-written guides and step-by-step patterns for planning and carrying out its migration. Which AWS resource provides these?",
+      "options": [
+        {
+          "text": "AWS re:Post",
+          "correct": false,
+          "rationale": "re:Post is a community question-and-answer site where users and AWS experts answer individual questions."
+        },
+        {
+          "text": "AWS Well-Architected Framework",
+          "correct": false,
+          "rationale": "The Well-Architected Framework describes best practices for workload design across six pillars, not migration patterns."
+        },
+        {
+          "text": "AWS Prescriptive Guidance",
+          "correct": true,
+          "rationale": "AWS Prescriptive Guidance offers guides and patterns from AWS experts for migration, optimization and modernization."
+        },
+        {
+          "text": "AWS Artifact",
+          "correct": false,
+          "rationale": "Artifact provides AWS compliance reports and agreements."
+        }
+      ],
+      "explanation": "The clue is AWS-written guides and patterns for a migration project, which AWS Prescriptive Guidance publishes. re:Post offers community answers to individual questions rather than structured guides.",
+      "difficulty": 1,
+      "tags": [
+        "migration",
+        "prescriptive-guidance"
+      ],
+      "refs": [
+        "https://aws.amazon.com/prescriptive-guidance/",
+        "https://docs.aws.amazon.com/prescriptive-guidance/latest/large-migration-guide/migration-strategies.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "clf-c02-1.3-17",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "A company wants its cloud adoption to help it meet sustainability targets and report on them more openly. Which AWS CAF business outcome matches this goal?",
+      "options": [
+        {
+          "text": "Increased revenue",
+          "correct": false,
+          "rationale": "Increased revenue comes from new products, new customers and new markets."
+        },
+        {
+          "text": "Increased operational efficiency",
+          "correct": false,
+          "rationale": "Operational efficiency is about lower operating costs and higher productivity."
+        },
+        {
+          "text": "Reduced business risk",
+          "correct": false,
+          "rationale": "Reduced business risk comes from better reliability, performance and security."
+        },
+        {
+          "text": "Improved ESG performance",
+          "correct": true,
+          "rationale": "ESG stands for environmental, social and governance; this outcome covers sustainability and transparency."
+        }
+      ],
+      "explanation": "The clue is sustainability and transparency, which AWS CAF groups under environmental, social and governance (ESG) performance. Operational efficiency, the nearest neighbor, is about cost and productivity rather than sustainability.",
+      "difficulty": 1,
+      "tags": [
+        "caf",
+        "esg"
+      ],
+      "refs": [
+        "https://aws.amazon.com/cloud-adoption-framework/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
     }
   ]
 }

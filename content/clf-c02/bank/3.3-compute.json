@@ -97,7 +97,7 @@
         {
           "text": "Memory optimized",
           "correct": false,
-          "rationale": "Memory optimized instances focus on RAM."
+          "rationale": "Memory optimized instances focus on RAM for large in-memory data sets."
         },
         {
           "text": "Compute optimized",
@@ -105,17 +105,17 @@
           "rationale": "Compute optimized instances focus on CPU."
         },
         {
-          "text": "General purpose",
+          "text": "Accelerated computing",
           "correct": false,
-          "rationale": "General purpose instances are balanced, not storage-focused."
+          "rationale": "Accelerated computing instances use hardware accelerators such as GPUs."
         },
         {
           "text": "Storage optimized",
           "correct": true,
-          "rationale": "Storage optimized instances deliver many low-latency random I/O operations per second for local storage."
+          "rationale": "Storage optimized instances are built for high, sequential read and write access to large data sets on local storage."
         }
       ],
-      "explanation": "Storage optimized instances suit data warehousing, log processing and distributed file systems.",
+      "explanation": "The clue is heavy access to local storage; storage optimized instances suit data warehousing and log processing, while memory optimized suits large in-memory data sets.",
       "difficulty": 2,
       "tags": [
         "ec2",
@@ -128,7 +128,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.3-04",
@@ -225,9 +225,9 @@
       "stem": "A company already uses Kubernetes and wants a managed Kubernetes service on AWS. Which service should it choose?",
       "options": [
         {
-          "text": "Amazon Elastic Container Service (Amazon ECS)",
+          "text": "Amazon ECS",
           "correct": false,
-          "rationale": "ECS is AWS's own container orchestrator, not Kubernetes."
+          "rationale": "Amazon Elastic Container Service (Amazon ECS) is AWS's own container orchestrator, not Kubernetes."
         },
         {
           "text": "AWS Lambda",
@@ -235,9 +235,9 @@
           "rationale": "Lambda runs functions, not Kubernetes clusters."
         },
         {
-          "text": "Amazon Elastic Kubernetes Service (Amazon EKS)",
+          "text": "Amazon EKS",
           "correct": true,
-          "rationale": "EKS is the managed Kubernetes service on AWS."
+          "rationale": "Amazon Elastic Kubernetes Service (Amazon EKS) is the managed Kubernetes service on AWS."
         },
         {
           "text": "Amazon EC2 Auto Scaling",
@@ -258,7 +258,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.3-07",
@@ -268,7 +268,7 @@
       "stem": "Which feature automatically adds or removes Amazon EC2 instances as demand changes?",
       "options": [
         {
-          "text": "Elastic Load Balancing",
+          "text": "Elastic Load Balancing (ELB)",
           "correct": false,
           "rationale": "Load balancers spread traffic but do not add or remove instances."
         },
@@ -302,7 +302,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.3-08",
@@ -312,9 +312,9 @@
       "stem": "What is the main purpose of Elastic Load Balancing?",
       "options": [
         {
-          "text": "Distributing incoming traffic across multiple targets such as EC2 instances",
+          "text": "Spreading traffic across several servers",
           "correct": true,
-          "rationale": "Load balancers spread requests across healthy targets in one or more Availability Zones."
+          "rationale": "A load balancer spreads incoming requests across healthy targets, such as EC2 instances, in one or more Availability Zones."
         },
         {
           "text": "Adding instances when demand rises",
@@ -322,7 +322,7 @@
           "rationale": "That is the job of Auto Scaling."
         },
         {
-          "text": "Caching static content at edge locations",
+          "text": "Caching static content at edge locations near users",
           "correct": false,
           "rationale": "That describes Amazon CloudFront."
         },
@@ -332,7 +332,7 @@
           "rationale": "Encryption is a storage feature."
         }
       ],
-      "explanation": "Elastic Load Balancing improves availability by sending traffic only to healthy targets.",
+      "explanation": "Elastic Load Balancing distributes traffic and sends it only to healthy targets, while Auto Scaling changes how many targets there are.",
       "difficulty": 1,
       "tags": [
         "load-balancing",
@@ -345,7 +345,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.3-09",
@@ -527,48 +527,49 @@
       "lastVerified": "2026-11-02"
     },
     {
-      "id": "clf-c02-3.3-13",
+      "id": "clf-c02-3.3-14",
       "domain": "d3",
       "objective": "3.3",
       "type": "single",
-      "stem": "Which service runs AWS infrastructure and services on premises, in a company's own data center?",
+      "stem": "A company wants a fully managed AWS service to deploy and scale its containerized applications, and it does not want to use Kubernetes. Which service should it choose?",
       "options": [
         {
-          "text": "AWS Local Zones",
+          "text": "Amazon Elastic Kubernetes Service (Amazon EKS)",
           "correct": false,
-          "rationale": "Local Zones are AWS-run sites near large cities."
+          "rationale": "EKS is the managed Kubernetes service, which the company wants to avoid."
         },
         {
-          "text": "AWS Wavelength Zones",
-          "correct": false,
-          "rationale": "Wavelength Zones are inside telecom 5G networks."
-        },
-        {
-          "text": "AWS Direct Connect",
-          "correct": false,
-          "rationale": "Direct Connect is a network link, not compute on premises."
-        },
-        {
-          "text": "AWS Outposts",
+          "text": "Amazon Elastic Container Service (Amazon ECS)",
           "correct": true,
-          "rationale": "Outposts brings AWS hardware and services into your facility."
+          "rationale": "ECS is a fully managed container orchestration service that deploys, manages and scales containerized applications."
+        },
+        {
+          "text": "Amazon Elastic Container Registry (Amazon ECR)",
+          "correct": false,
+          "rationale": "ECR stores and manages container images; it does not run containers."
+        },
+        {
+          "text": "Elastic Load Balancing (ELB)",
+          "correct": false,
+          "rationale": "ELB distributes traffic to containers but does not deploy or run them."
         }
       ],
-      "explanation": "Outposts supports hybrid workloads that need low latency to on-premises systems or local data processing.",
-      "difficulty": 2,
+      "explanation": "The clue is \"not Kubernetes\": Amazon ECS is AWS's own container orchestrator, while Amazon EKS runs Kubernetes and Amazon ECR only stores container images.",
+      "difficulty": 1,
       "tags": [
-        "compute",
-        "outposts",
-        "hybrid"
+        "containers",
+        "ecs"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/outposts/latest/userguide/what-is-outposts.html"
+        "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html",
+        "https://docs.aws.amazon.com/AmazonECR/latest/userguide/what-is-ecr.html",
+        "https://aws.amazon.com/eks/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
-      "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
     }
   ]
 }

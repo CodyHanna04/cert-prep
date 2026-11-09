@@ -100,7 +100,7 @@
           "rationale": "A projection limits the attributes returned, not the items read."
         },
         {
-          "text": "Query a global secondary index whose partition key is customer ID",
+          "text": "Query a global secondary index keyed on customer ID",
           "correct": true,
           "rationale": "A GSI lets you query efficiently on an attribute that is not the table's key."
         },
@@ -166,7 +166,7 @@
           "rationale": "GSIs can be added to existing tables and use a different partition key."
         }
       ],
-      "explanation": "Use a GSI for a new access pattern on an existing table.",
+      "explanation": "A new lookup key on an existing table calls for a global secondary index, which can be added later and has its own partition key. A local secondary index is the nearest distractor, but it can only be created with the table and keeps the table's partition key.",
       "difficulty": 2,
       "tags": [
         "dynamodb",
@@ -231,8 +231,8 @@
       "id": "dva-c03-1.3-06",
       "domain": "d1",
       "objective": "1.3",
-      "type": "single",
-      "stem": "Application logs are written to an Amazon S3 bucket. They must move to a cheaper archive storage class after 90 days and be deleted after one year. What should the developer configure?",
+      "type": "multi",
+      "stem": "Application logs are written to an Amazon S3 bucket. They must move to a cheaper archive storage class after 90 days and be deleted after one year. Which actions should the developer configure? (Select TWO.)",
       "options": [
         {
           "text": "S3 Versioning on the bucket",
@@ -240,22 +240,27 @@
           "rationale": "Versioning keeps earlier versions; it does not move or delete objects by age."
         },
         {
-          "text": "An S3 Lifecycle rule with a transition action and an expiration action",
-          "correct": true,
-          "rationale": "Lifecycle rules move objects between storage classes and delete them on a schedule."
-        },
-        {
           "text": "S3 Object Lock in compliance mode, with a retention period set to one year",
           "correct": false,
           "rationale": "Object Lock prevents deletion during retention and does not move objects to another storage class."
         },
         {
+          "text": "An S3 Lifecycle expiration action at 365 days",
+          "correct": true,
+          "rationale": "Expiration actions make S3 delete objects once they reach a set age."
+        },
+        {
           "text": "A DynamoDB TTL attribute on each log file",
           "correct": false,
           "rationale": "TTL applies to DynamoDB items, not S3 objects."
+        },
+        {
+          "text": "An S3 Lifecycle transition to S3 Glacier Flexible Retrieval at 90 days",
+          "correct": true,
+          "rationale": "Transition actions move objects to another storage class once they reach a set age."
         }
       ],
-      "explanation": "Use transition actions to change storage class and expiration actions to delete.",
+      "explanation": "One Lifecycle rule can hold a transition action (change storage class by age) and an expiration action (delete by age). Object Lock is the nearest distractor, but it prevents deletion and never moves objects.",
       "difficulty": 1,
       "tags": [
         "s3",
@@ -341,7 +346,7 @@
           "rationale": "DAX is an in-memory cache for DynamoDB that is API-compatible, so code changes are small."
         }
       ],
-      "explanation": "For DynamoDB, DAX is the purpose-built cache; for other data stores, ElastiCache is the usual choice.",
+      "explanation": "The clues are DynamoDB, microsecond repeated reads and few code changes: DAX is an API-compatible cache for DynamoDB. ElastiCache is the nearest distractor; it works, but the application must add its own cache-management code.",
       "difficulty": 2,
       "tags": [
         "dax",
@@ -385,9 +390,9 @@
           "rationale": "Keeping entries longer increases staleness."
         },
         {
-          "text": "Update or delete the cache entry whenever the record is written to the database",
+          "text": "Update or delete the cached entry on each write",
           "correct": true,
-          "rationale": "Writing through to the cache keeps it in step with the database."
+          "rationale": "Refreshing or removing the entry when the record changes keeps the cache in step with the database."
         }
       ],
       "explanation": "Lazy loading only refreshes on a miss; add TTLs or write-through updates to limit stale data.",

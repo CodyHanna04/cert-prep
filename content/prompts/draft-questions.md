@@ -22,7 +22,7 @@ What the vendor says this objective covers:
 
 ## Fit to the exam (as important as being correct)
 
-- **The exam guide decides names, plans and scope.** Use the service names the guide uses, even if AWS has renamed a service since. If a fact changed after the guide was published, leave it out of the question rather than update it. The current docs confirm that a fact is correct; they do not change what the exam asks.
+- **The current exam guide decides names, plans and scope.** AWS revises guides in place, so check the live guide's revisions page and make sure the pack's `blueprint.json` and `in-scope-services.md` match the latest version before drafting. Use the service names and support plans that version uses. If AWS has changed something the guide has not caught up with yet, leave it out of the question rather than guess which version the exam will use.
 - **Match the guide's verbs and the depth of the vendor's official sample questions.** Test the decision a candidate at this level makes, not trivia: no quotas, prices, rule-evaluation order or exact principle wording unless the objective names them.
 - **Every service in the question is on the in-scope list,** distractors included.
 - **Explanations teach the decision.** No rename dates, retirement dates or "closed to new customers" notes.

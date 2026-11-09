@@ -144,9 +144,9 @@
           "rationale": "Cost optimization focuses on avoiding unnecessary costs."
         },
         {
-          "text": "Reliability",
-          "correct": false,
-          "rationale": "Reliability is about performing correctly and recovering from failure."
+          "text": "Performance efficiency",
+          "correct": true,
+          "rationale": "Performance efficiency is about using computing resources efficiently to meet requirements as demand changes."
         },
         {
           "text": "Sustainability",
@@ -154,25 +154,25 @@
           "rationale": "Sustainability is about minimizing environmental impact."
         },
         {
-          "text": "Performance efficiency",
-          "correct": true,
-          "rationale": "Performance efficiency is about using computing resources efficiently to meet requirements as demand changes."
+          "text": "Operational excellence",
+          "correct": false,
+          "rationale": "Operational excellence is about running and monitoring systems and improving operations."
         }
       ],
-      "explanation": "Performance efficiency includes choosing appropriate resource types and sizes and monitoring performance as requirements evolve.",
+      "explanation": "The clue is choosing resource types and sizes to meet demand, which is performance efficiency. Cost optimization looks at the same choices with the goal of lower spending.",
       "difficulty": 2,
       "tags": [
         "well-architected",
         "performance-efficiency"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/wellarchitected/latest/framework/performance-efficiency.html"
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/perf-dp.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.2-05",
@@ -245,51 +245,52 @@
           "rationale": "Operational excellence is about running and improving operations."
         }
       ],
-      "explanation": "Sustainability is the sixth pillar, added to cover the environmental impact of cloud workloads.",
+      "explanation": "The clue is environmental impact, which is the sustainability pillar's focus. Cost optimization often reduces waste too, but its goal is spending rather than energy and resource use.",
       "difficulty": 1,
       "tags": [
         "well-architected",
         "sustainability"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/wellarchitected/latest/framework/sustainability.html"
+        "https://docs.aws.amazon.com/wellarchitected/latest/sustainability-pillar/design-principles-for-sustainability-in-the-cloud.html",
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.2-07",
       "domain": "d1",
       "objective": "1.2",
       "type": "single",
-      "stem": "A team safely automates its operations and makes frequent, small, reversible changes. Which pillar's design principles is the team following?",
+      "stem": "A team automates its deployments and releases changes in small batches that are easy to roll back. Which Well-Architected pillar does this practice support?",
       "options": [
         {
           "text": "Security",
           "correct": false,
-          "rationale": "Security principles include a strong identity foundation and traceability."
+          "rationale": "Security covers protecting data, systems and assets, for example through identity and encryption."
         },
         {
-          "text": "Reliability",
+          "text": "Sustainability",
           "correct": false,
-          "rationale": "Reliability principles include automatic recovery and horizontal scaling."
+          "rationale": "Sustainability covers reducing the environmental impact of workloads."
         },
         {
           "text": "Operational excellence",
           "correct": true,
-          "rationale": "Safely automating where possible and making frequent, small, reversible changes are operational excellence design principles."
+          "rationale": "Operational excellence covers how a team runs and changes its workloads, including safe automation and small, reversible changes."
         },
         {
-          "text": "Cost optimization",
+          "text": "Performance efficiency",
           "correct": false,
-          "rationale": "Cost optimization principles include adopting a consumption model."
+          "rationale": "Performance efficiency covers choosing and using resources efficiently to meet demand."
         }
       ],
-      "explanation": "Operational excellence design principles include safely automating where possible, making frequent, small, reversible changes, and learning from all operational events and metrics.",
-      "difficulty": 2,
+      "explanation": "The clue is how the team releases changes: automated, small, reversible changes are an operational excellence practice. Performance efficiency is about how well resources meet demand, not how changes are released.",
+      "difficulty": 1,
       "tags": [
         "well-architected",
         "operational-excellence"
@@ -301,38 +302,38 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.2-08",
       "domain": "d1",
       "objective": "1.2",
       "type": "single",
-      "stem": "Which design principle belongs to the reliability pillar of the Well-Architected Framework?",
+      "stem": "A workload monitors its servers and automatically replaces any server that fails, without anyone stepping in. Which Well-Architected pillar does this design support?",
       "options": [
         {
-          "text": "Apply security at all layers",
+          "text": "Security",
           "correct": false,
-          "rationale": "This is a security design principle."
+          "rationale": "Security covers protecting data, systems and assets."
         },
         {
-          "text": "Adopt a consumption model",
+          "text": "Performance efficiency",
           "correct": false,
-          "rationale": "This is a cost optimization design principle."
+          "rationale": "Performance efficiency covers using resources efficiently as demand changes."
         },
         {
-          "text": "Experiment more often",
-          "correct": false,
-          "rationale": "This is a performance efficiency design principle."
-        },
-        {
-          "text": "Automatically recover from failure",
+          "text": "Reliability",
           "correct": true,
-          "rationale": "Monitoring for failures and recovering automatically is a reliability design principle."
+          "rationale": "Reliability covers a workload performing its function correctly and recovering from failure, including automatic recovery."
+        },
+        {
+          "text": "Cost optimization",
+          "correct": false,
+          "rationale": "Cost optimization covers avoiding unnecessary spending."
         }
       ],
-      "explanation": "Reliability design principles include automatically recovering from failure, testing recovery procedures, scaling horizontally, stopping guessing capacity and managing change through automation.",
-      "difficulty": 2,
+      "explanation": "The clue is recovering from failure automatically, which is the focus of reliability. Performance efficiency is about meeting demand efficiently, not about surviving failures.",
+      "difficulty": 1,
       "tags": [
         "well-architected",
         "reliability"
@@ -344,7 +345,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.2-09",
@@ -361,12 +362,12 @@
         {
           "text": "Four",
           "correct": false,
-          "rationale": "There are more than four pillars."
+          "rationale": "Four leaves out two of the pillars."
         },
         {
           "text": "Five",
           "correct": false,
-          "rationale": "There were five before sustainability was added."
+          "rationale": "Five leaves out one of the pillars."
         },
         {
           "text": "Seven",
@@ -374,7 +375,7 @@
           "rationale": "There are six pillars, not seven."
         }
       ],
-      "explanation": "The framework has six pillars; sustainability was the most recent addition.",
+      "explanation": "The six pillars are operational excellence, security, reliability, performance efficiency, cost optimization and sustainability.",
       "difficulty": 1,
       "tags": [
         "well-architected"
@@ -386,85 +387,88 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.2-10",
       "domain": "d1",
       "objective": "1.2",
       "type": "multi",
-      "stem": "Which TWO are design principles of the security pillar? (Choose TWO.)",
+      "stem": "Which TWO practices belong to the security pillar of the Well-Architected Framework? (Choose TWO.)",
       "options": [
         {
-          "text": "Use serverless architectures",
+          "text": "Spreading a workload across several smaller resources",
           "correct": false,
-          "rationale": "This is a performance efficiency design principle."
+          "rationale": "This limits the impact of a single failure, which is a reliability practice."
         },
         {
-          "text": "Maintain traceability",
+          "text": "Granting each user the least privilege needed",
           "correct": true,
-          "rationale": "Monitoring, alerting and auditing actions and changes in real time is a security design principle."
+          "rationale": "Least privilege is part of the security pillar's strong identity foundation."
         },
         {
-          "text": "Measure overall efficiency",
+          "text": "Testing different instance types to compare performance",
           "correct": false,
-          "rationale": "This is a cost optimization design principle."
+          "rationale": "Comparing resource types to meet performance needs is a performance efficiency practice."
         },
         {
-          "text": "Implement a strong identity foundation",
+          "text": "Encrypting data at rest and in transit",
           "correct": true,
-          "rationale": "Least privilege and centralized identity management are part of the security pillar."
+          "rationale": "Protecting data in transit and at rest, for example with encryption, is a security practice."
         },
         {
-          "text": "Stop guessing capacity",
+          "text": "Stopping development servers outside working hours",
           "correct": false,
-          "rationale": "This is a reliability design principle."
+          "rationale": "Paying for resources while they are needed is a cost optimization practice."
         }
       ],
-      "explanation": "Security design principles include implementing a strong identity foundation, maintaining traceability, applying security at all layers, automating security best practices and protecting data in transit and at rest.",
+      "explanation": "Least privilege and encryption protect data and systems, which is the security pillar's focus. The other practices improve resilience, speed or cost, so they belong to reliability, performance efficiency and cost optimization.",
       "difficulty": 2,
       "tags": [
         "well-architected",
         "security"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/wellarchitected/latest/framework/sec-design.html"
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/sec-design.html",
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/rel-dp.html",
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/perf-dp.html",
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/cost-dp.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.2-11",
       "domain": "d1",
       "objective": "1.2",
       "type": "single",
-      "stem": "A team uses managed services so it can use technologies such as NoSQL databases and machine learning without building deep in-house expertise. Which performance efficiency design principle is this?",
+      "stem": "A team tests several instance types and a serverless option to see which gives its application the fastest response times. Which Well-Architected pillar does this practice support?",
       "options": [
         {
-          "text": "Democratize advanced technologies",
+          "text": "Cost optimization",
+          "correct": false,
+          "rationale": "Cost optimization focuses on spending; the goal here is speed, not price."
+        },
+        {
+          "text": "Performance efficiency",
           "correct": true,
-          "rationale": "Consuming advanced technologies as services lets teams use them without becoming experts."
+          "rationale": "Performance efficiency covers selecting the resources that best meet performance needs, including experimenting with different types."
         },
         {
-          "text": "Stop guessing capacity",
+          "text": "Reliability",
           "correct": false,
-          "rationale": "This is a reliability design principle."
+          "rationale": "Reliability covers performing correctly and recovering from failure."
         },
         {
-          "text": "Implement a strong identity foundation",
+          "text": "Operational excellence",
           "correct": false,
-          "rationale": "This is a security design principle."
-        },
-        {
-          "text": "Adopt a consumption model",
-          "correct": false,
-          "rationale": "This is a cost optimization design principle."
+          "rationale": "Operational excellence covers running and improving operations."
         }
       ],
-      "explanation": "Performance efficiency design principles include democratizing advanced technologies, going global in minutes, using serverless architectures, experimenting more often and considering mechanical sympathy.",
+      "explanation": "The clue is fastest response times: comparing resource types to meet performance needs is performance efficiency. Cost optimization would compare the same options on price instead.",
       "difficulty": 2,
       "tags": [
         "well-architected",
@@ -477,38 +481,38 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.2-12",
       "domain": "d1",
       "objective": "1.2",
       "type": "single",
-      "stem": "Paying only for the computing resources you use, and increasing or decreasing usage with business requirements, is which cost optimization design principle?",
+      "stem": "A company stops its development and test servers at night and on weekends so that it pays for them only while they are in use. Which Well-Architected pillar does this practice support?",
       "options": [
         {
-          "text": "Automatically recover from failure",
+          "text": "Performance efficiency",
           "correct": false,
-          "rationale": "This is a reliability design principle."
+          "rationale": "Performance efficiency covers meeting demand efficiently, not lowering the bill."
         },
         {
-          "text": "Adopt a consumption model",
+          "text": "Reliability",
+          "correct": false,
+          "rationale": "Reliability covers performing correctly and recovering from failure."
+        },
+        {
+          "text": "Operational excellence",
+          "correct": false,
+          "rationale": "Operational excellence covers running and improving operations."
+        },
+        {
+          "text": "Cost optimization",
           "correct": true,
-          "rationale": "Pay for what you consume and scale with need instead of forecasting."
-        },
-        {
-          "text": "Apply security at all layers",
-          "correct": false,
-          "rationale": "This is a security design principle."
-        },
-        {
-          "text": "Experiment more often",
-          "correct": false,
-          "rationale": "This is a performance efficiency design principle."
+          "rationale": "Cost optimization includes a consumption model: paying for resources while you need them and stopping them when you do not."
         }
       ],
-      "explanation": "Cost optimization design principles include adopting a consumption model, measuring overall efficiency and analyzing and attributing expenditure.",
-      "difficulty": 2,
+      "explanation": "The clue is paying for servers while they are used, which is the consumption model of cost optimization. Performance efficiency is about how well resources meet demand, not how much they cost.",
+      "difficulty": 1,
       "tags": [
         "well-architected",
         "cost-optimization"
@@ -520,37 +524,37 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.2-13",
       "domain": "d1",
       "objective": "1.2",
       "type": "single",
-      "stem": "Which is a design principle of the sustainability pillar of the Well-Architected Framework?",
+      "stem": "A company combines several lightly used servers onto fewer, busier ones. Its stated goal is to cut the energy its workloads consume. Which Well-Architected pillar focuses on this goal?",
       "options": [
         {
-          "text": "Implement a strong identity foundation",
+          "text": "Cost optimization",
           "correct": false,
-          "rationale": "This is a security design principle."
+          "rationale": "Consolidation also saves money, but cost optimization focuses on spending, not energy use."
         },
         {
-          "text": "Test recovery procedures",
-          "correct": false,
-          "rationale": "This is a reliability design principle."
-        },
-        {
-          "text": "Maximize utilization",
+          "text": "Sustainability",
           "correct": true,
-          "rationale": "Right-sizing and running resources at high utilization reduces energy use per unit of work."
+          "rationale": "Sustainability covers reducing energy and resource use, for example by running fewer resources at higher utilization."
         },
         {
-          "text": "Make frequent, small, reversible changes",
+          "text": "Reliability",
           "correct": false,
-          "rationale": "This is an operational excellence design principle."
+          "rationale": "Reliability covers performing correctly and recovering from failure."
+        },
+        {
+          "text": "Security",
+          "correct": false,
+          "rationale": "Security covers protecting data, systems and assets."
         }
       ],
-      "explanation": "Sustainability design principles include understanding your impact, maximizing utilization, using managed services and reducing downstream impact.",
+      "explanation": "The clue is the goal of using less energy, which is sustainability. Cost optimization often benefits from the same change, but its focus is spending.",
       "difficulty": 2,
       "tags": [
         "well-architected",
@@ -563,37 +567,37 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.2-14",
       "domain": "d1",
       "objective": "1.2",
       "type": "single",
-      "stem": "Which AWS service lets a company review its workloads against the Well-Architected Framework and track improvements over time?",
+      "stem": "What does the AWS Well-Architected Tool help a company do?",
       "options": [
         {
-          "text": "AWS Trusted Advisor",
+          "text": "Run automated checks on an account and suggest cost and security fixes",
           "correct": false,
-          "rationale": "Trusted Advisor runs automated account checks; it is not a framework review of your workload."
+          "rationale": "That describes AWS Trusted Advisor, which checks account resources against best practices automatically."
         },
         {
-          "text": "AWS Config",
-          "correct": false,
-          "rationale": "AWS Config records resource configuration changes."
-        },
-        {
-          "text": "AWS Artifact",
-          "correct": false,
-          "rationale": "Artifact provides compliance reports."
-        },
-        {
-          "text": "AWS Well-Architected Tool",
+          "text": "Review workloads against the framework's pillars and track improvements",
           "correct": true,
-          "rationale": "The Well-Architected Tool reviews workloads against the framework's best practices and records improvement plans."
+          "rationale": "The Well-Architected Tool runs structured workload reviews against AWS best practices and records milestones and improvement plans."
+        },
+        {
+          "text": "Record configuration changes to resources and evaluate them against rules",
+          "correct": false,
+          "rationale": "That describes AWS Config."
+        },
+        {
+          "text": "Download AWS compliance reports and agreements on demand",
+          "correct": false,
+          "rationale": "That describes AWS Artifact."
         }
       ],
-      "explanation": "The Well-Architected Tool is the console service for framework reviews.",
+      "explanation": "The tool is a structured review of a workload's design against the framework, with improvements you track over time. Trusted Advisor, the nearest neighbor, runs automated checks on account resources instead of a design review.",
       "difficulty": 2,
       "tags": [
         "well-architected",
@@ -606,38 +610,38 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.2-15",
       "domain": "d1",
       "objective": "1.2",
       "type": "single",
-      "stem": "Replacing one large resource with several smaller ones, so that a single failure has less impact, follows which reliability design principle?",
+      "stem": "A company replaces one large server with several smaller servers so that the failure of one server has less impact on the application. Which Well-Architected pillar does this design support?",
       "options": [
         {
-          "text": "Scale horizontally to increase aggregate workload availability",
+          "text": "Reliability",
           "correct": true,
-          "rationale": "Spreading requests across many smaller resources removes a single point of failure."
+          "rationale": "Reliability includes scaling horizontally so that a single failure does not take down the workload."
         },
         {
-          "text": "Stop guessing capacity",
+          "text": "Performance efficiency",
           "correct": false,
-          "rationale": "This principle is about monitoring demand and adjusting capacity."
+          "rationale": "Performance efficiency covers meeting demand efficiently; the goal here is limiting the impact of failure."
         },
         {
-          "text": "Manage change through automation",
+          "text": "Cost optimization",
           "correct": false,
-          "rationale": "This principle is about automating infrastructure changes."
+          "rationale": "Cost optimization covers avoiding unnecessary spending."
         },
         {
-          "text": "Measure overall efficiency",
+          "text": "Security",
           "correct": false,
-          "rationale": "This is a cost optimization principle."
+          "rationale": "Security covers protecting data, systems and assets."
         }
       ],
-      "explanation": "Reliability design principles include scaling horizontally, automatically recovering from failure and testing recovery procedures.",
-      "difficulty": 2,
+      "explanation": "The clue is reducing the impact of a failure, which is reliability. Performance efficiency also involves choosing resources, but its goal is meeting demand efficiently.",
+      "difficulty": 1,
       "tags": [
         "well-architected",
         "reliability"
@@ -649,7 +653,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.2-16",
@@ -664,24 +668,24 @@
           "rationale": "Cost optimization is one of the six pillars."
         },
         {
-          "text": "Scalability",
+          "text": "Business continuity",
           "correct": false,
-          "rationale": "Scalability is a property workloads aim for, not a pillar."
+          "rationale": "Business continuity is a goal the reliability pillar supports, not a pillar itself."
         },
         {
           "text": "Sustainability",
           "correct": true,
-          "rationale": "Sustainability is the sixth pillar."
+          "rationale": "Sustainability is one of the six pillars."
         },
         {
-          "text": "Elasticity",
+          "text": "High availability",
           "correct": false,
-          "rationale": "Elasticity is a cloud characteristic, not a pillar."
+          "rationale": "High availability is a property the reliability pillar helps achieve, not a pillar."
         },
         {
-          "text": "Agility",
+          "text": "Scalability",
           "correct": false,
-          "rationale": "Agility is a benefit of the cloud, not a pillar."
+          "rationale": "Scalability is a property workloads aim for, not a pillar."
         }
       ],
       "explanation": "The pillars are operational excellence, security, reliability, performance efficiency, cost optimization and sustainability.",
@@ -696,7 +700,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     }
   ]
 }

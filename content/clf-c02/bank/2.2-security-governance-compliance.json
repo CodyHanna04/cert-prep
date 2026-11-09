@@ -9,9 +9,9 @@
       "stem": "Where can a company download AWS compliance reports, such as SOC and ISO reports, to share with its auditors?",
       "options": [
         {
-          "text": "AWS Audit Manager",
+          "text": "AWS Security Hub",
           "correct": false,
-          "rationale": "Audit Manager collects evidence about your own AWS usage; it does not host AWS's reports."
+          "rationale": "Security Hub checks your own accounts against security standards; it does not provide AWS's audit reports."
         },
         {
           "text": "AWS Config",
@@ -21,7 +21,7 @@
         {
           "text": "AWS Artifact",
           "correct": true,
-          "rationale": "AWS Artifact provides on-demand access to AWS security and compliance reports and agreements."
+          "rationale": "AWS Artifact provides on-demand downloads of AWS security and compliance reports and agreements."
         },
         {
           "text": "Amazon Inspector",
@@ -29,20 +29,21 @@
           "rationale": "Inspector scans workloads for software vulnerabilities."
         }
       ],
-      "explanation": "AWS Artifact is the self-service portal for AWS compliance reports (for example SOC and ISO certifications) and agreements.",
+      "explanation": "The clue is reports about AWS itself, such as SOC and ISO reports, to hand to auditors: AWS Artifact provides these on demand. Security Hub and AWS Config check your own resources, not AWS's.",
       "difficulty": 1,
       "tags": [
         "compliance",
         "artifact"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/artifact/latest/ug/what-is-aws-artifact.html"
+        "https://docs.aws.amazon.com/artifact/latest/ug/what-is-aws-artifact.html",
+        "https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-2.2-02",
@@ -199,12 +200,12 @@
           "rationale": "CloudWatch monitors resources and applications with metrics, logs and alarms."
         },
         {
-          "text": "AWS Artifact",
+          "text": "AWS Trusted Advisor",
           "correct": false,
-          "rationale": "Artifact provides compliance reports."
+          "rationale": "Trusted Advisor checks the account against best practices; it does not collect metrics or set alarms."
         }
       ],
-      "explanation": "CloudWatch is the monitoring service; CloudTrail is the auditing service. They are often confused.",
+      "explanation": "The clue is metrics and alarms: CloudWatch is the monitoring service. CloudTrail is the one people confuse it with; it records API calls for auditing.",
       "difficulty": 1,
       "tags": [
         "governance",
@@ -212,13 +213,14 @@
         "monitoring"
       ],
       "refs": [
-        "https://aws.amazon.com/cloudwatch/"
+        "https://aws.amazon.com/cloudwatch/",
+        "https://aws.amazon.com/premiumsupport/technology/trusted-advisor/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-2.2-06",
@@ -248,7 +250,7 @@
           "rationale": "GuardDuty continuously monitors accounts and workloads for malicious activity."
         }
       ],
-      "explanation": "GuardDuty is threat detection. Inspector is vulnerability management. Shield and WAF are protection services.",
+      "explanation": "The clue is detecting malicious activity, such as unusual API calls: GuardDuty is the threat detection service. Inspector is the nearest neighbor, but it finds software vulnerabilities, while Shield and WAF block attack traffic.",
       "difficulty": 2,
       "tags": [
         "security-services",
@@ -261,7 +263,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-2.2-07",
@@ -321,7 +323,7 @@
         {
           "text": "AWS Shield",
           "correct": true,
-          "rationale": "AWS Shield is a managed DDoS protection service; Shield Standard is included at no extra cost."
+          "rationale": "AWS Shield is a managed DDoS protection service; Shield Standard is included at no extra charge."
         },
         {
           "text": "AWS Config",
@@ -329,12 +331,12 @@
           "rationale": "AWS Config records configuration changes."
         },
         {
-          "text": "AWS Audit Manager",
+          "text": "Amazon GuardDuty",
           "correct": false,
-          "rationale": "Audit Manager collects audit evidence."
+          "rationale": "GuardDuty detects suspicious activity in the account; it does not absorb DDoS traffic."
         }
       ],
-      "explanation": "AWS Shield Standard is applied automatically to all AWS customers at no extra cost; Shield Advanced adds more protection, visibility and DDoS response support.",
+      "explanation": "The clue is DDoS: AWS Shield is the DDoS protection service, and Shield Standard is applied automatically at no extra charge. GuardDuty detects suspicious activity but does not protect against attack traffic.",
       "difficulty": 1,
       "tags": [
         "security-services",
@@ -348,7 +350,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-2.2-09",
@@ -401,14 +403,9 @@
       "stem": "Which TWO statements about encryption on AWS are correct? (Choose TWO.)",
       "options": [
         {
-          "text": "Encrypting data removes the need for access controls",
+          "text": "Encrypting data removes the need for IAM access controls",
           "correct": false,
           "rationale": "Encryption complements access control; it does not replace it."
-        },
-        {
-          "text": "TLS protects data in transit between clients and AWS service endpoints",
-          "correct": true,
-          "rationale": "Encryption in transit commonly uses TLS."
         },
         {
           "text": "Customers cannot create or manage their own encryption keys",
@@ -416,17 +413,22 @@
           "rationale": "AWS KMS lets customers create and control keys."
         },
         {
-          "text": "Data can be encrypted at rest, for example in Amazon S3 or Amazon EBS",
+          "text": "TLS encrypts data in transit to AWS service endpoints",
           "correct": true,
-          "rationale": "Storage services support encryption at rest, often with keys from AWS KMS."
+          "rationale": "Encryption in transit commonly uses TLS."
         },
         {
-          "text": "Amazon EBS volumes cannot be encrypted at rest",
+          "text": "Encryption in transit is the term for protecting stored data",
           "correct": false,
-          "rationale": "EBS supports encryption at rest."
+          "rationale": "Protecting stored data is encryption at rest; in transit means data moving over a network."
+        },
+        {
+          "text": "Amazon S3 and Amazon EBS support encryption at rest",
+          "correct": true,
+          "rationale": "Storage services support encryption at rest, often with keys from AWS KMS."
         }
       ],
-      "explanation": "Know both forms: encryption at rest (stored data) and encryption in transit (data moving over the network). AWS KMS manages keys.",
+      "explanation": "Encryption at rest protects stored data, for example in S3 or EBS; encryption in transit, usually TLS, protects data moving over the network. AWS KMS lets customers create and control the keys.",
       "difficulty": 2,
       "tags": [
         "encryption",
@@ -440,7 +442,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-2.2-11",
@@ -576,34 +578,35 @@
       "domain": "d2",
       "objective": "2.2",
       "type": "single",
-      "stem": "Which service helps analysts investigate the root cause of security findings by linking related activity over time?",
+      "stem": "A security team wants to find the root cause of a suspicious finding by looking at related account activity over time. Which service is designed for this investigation?",
       "options": [
+        {
+          "text": "Amazon GuardDuty",
+          "correct": false,
+          "rationale": "GuardDuty detects threats and creates findings, which Detective then helps investigate."
+        },
+        {
+          "text": "Amazon Detective",
+          "correct": true,
+          "rationale": "Detective links related activity from logs into visual summaries so analysts can find the root cause."
+        },
         {
           "text": "Amazon Macie",
           "correct": false,
           "rationale": "Macie finds sensitive data in S3."
         },
         {
-          "text": "Amazon Detective",
-          "correct": true,
-          "rationale": "Detective builds a linked view of activity to speed up investigations."
-        },
-        {
           "text": "AWS Config",
           "correct": false,
-          "rationale": "AWS Config records configuration changes."
-        },
-        {
-          "text": "AWS Certificate Manager",
-          "correct": false,
-          "rationale": "Certificate Manager provisions TLS certificates."
+          "rationale": "AWS Config records resource configuration changes, not a linked view of activity for investigations."
         }
       ],
-      "explanation": "GuardDuty detects; Detective investigates.",
-      "difficulty": 3,
+      "explanation": "The clue is investigating the root cause of a finding: Detective analyzes and links related activity so analysts can see what happened. GuardDuty is the nearest neighbor; it detects the threat, and Detective helps investigate it.",
+      "difficulty": 2,
       "tags": [
         "security-services",
-        "detective"
+        "detective",
+        "guardduty"
       ],
       "refs": [
         "https://docs.aws.amazon.com/detective/latest/userguide/what-is-detective.html"
@@ -612,7 +615,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-2.2-15",
@@ -662,43 +665,44 @@
       "domain": "d2",
       "objective": "2.2",
       "type": "single",
-      "stem": "A company must keep its encryption keys in dedicated, single-tenant hardware security modules under its exclusive control. Which service meets this need?",
+      "stem": "A company's compliance rules require its encryption keys to be stored in dedicated, single-tenant hardware security modules (HSMs). Which service provides these HSMs?",
       "options": [
         {
           "text": "AWS Key Management Service (AWS KMS)",
           "correct": false,
-          "rationale": "KMS is a managed, multi-tenant key service rather than dedicated HSMs you control."
+          "rationale": "AWS KMS is a managed key service in which AWS operates the HSMs for you; it suits most needs that do not require HSMs of your own."
         },
         {
           "text": "AWS Secrets Manager",
           "correct": false,
-          "rationale": "Secrets Manager stores secrets, not HSM-held keys."
+          "rationale": "Secrets Manager stores secrets such as database credentials."
         },
         {
           "text": "AWS Certificate Manager",
           "correct": false,
-          "rationale": "Certificate Manager manages certificates."
+          "rationale": "Certificate Manager manages SSL/TLS certificates."
         },
         {
           "text": "AWS CloudHSM",
           "correct": true,
-          "rationale": "CloudHSM provides dedicated hardware security modules in the AWS Cloud."
+          "rationale": "CloudHSM gives you single-tenant HSMs in the AWS Cloud that you control."
         }
       ],
-      "explanation": "Choose CloudHSM when compliance requires dedicated HSMs; choose KMS for managed key control.",
-      "difficulty": 3,
+      "explanation": "The clue is dedicated, single-tenant HSMs: CloudHSM gives a company its own HSMs. AWS KMS also protects keys with HSMs, but it is a managed service in which AWS operates them.",
+      "difficulty": 2,
       "tags": [
         "encryption",
         "cloudhsm"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/cloudhsm/latest/userguide/introduction.html"
+        "https://docs.aws.amazon.com/cloudhsm/latest/userguide/introduction.html",
+        "https://docs.aws.amazon.com/kms/latest/developerguide/overview.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-2.2-17",
@@ -728,7 +732,7 @@
           "rationale": "Shield protects against DDoS attacks."
         }
       ],
-      "explanation": "ACM certificates are used with services such as Elastic Load Balancing and CloudFront.",
+      "explanation": "The clue is SSL/TLS certificates: ACM creates, stores and renews them for services such as Amazon CloudFront. AWS KMS is the nearest neighbor, but it manages encryption keys, not certificates.",
       "difficulty": 2,
       "tags": [
         "encryption",
@@ -742,7 +746,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-2.2-18",
@@ -757,7 +761,7 @@
           "rationale": "Compliance scope varies by service."
         },
         {
-          "text": "That each service it plans to use is in scope for that program",
+          "text": "Whether each service is in scope for the program",
           "correct": true,
           "rationale": "AWS lists which services are in scope for each compliance program."
         },
@@ -784,7 +788,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-2.2-19",
@@ -794,31 +798,32 @@
       "stem": "Which service centrally configures and manages firewall rules, such as AWS WAF rules, across the accounts in an organization?",
       "options": [
         {
-          "text": "AWS Network Firewall",
+          "text": "AWS WAF",
           "correct": false,
-          "rationale": "Network Firewall filters traffic for a VPC; Firewall Manager can deploy it centrally."
+          "rationale": "AWS WAF holds the web rules themselves; Firewall Manager deploys them across accounts."
         },
         {
           "text": "AWS Security Hub",
           "correct": false,
-          "rationale": "Security Hub aggregates findings."
+          "rationale": "Security Hub collects security findings; it does not deploy firewall rules."
         },
         {
           "text": "AWS Firewall Manager",
           "correct": true,
-          "rationale": "Firewall Manager applies firewall rules across accounts in AWS Organizations."
+          "rationale": "Firewall Manager sets up protections such as AWS WAF rules once and applies them across the accounts in AWS Organizations."
         },
         {
-          "text": "AWS Shield",
+          "text": "AWS IAM Identity Center",
           "correct": false,
-          "rationale": "Shield protects against DDoS attacks."
+          "rationale": "IAM Identity Center manages workforce sign-in across accounts, not firewall rules."
         }
       ],
-      "explanation": "Firewall Manager is for central management; WAF, Shield and Network Firewall do the protecting.",
-      "difficulty": 3,
+      "explanation": "The clue is \"centrally across the accounts in an organization\": Firewall Manager applies the same protections to many accounts, including new ones as they join. AWS WAF is the nearest neighbor; it holds the rules but does not manage them across accounts.",
+      "difficulty": 2,
       "tags": [
         "security-services",
-        "firewall-manager"
+        "firewall-manager",
+        "waf"
       ],
       "refs": [
         "https://docs.aws.amazon.com/waf/latest/developerguide/fms-chapter.html"
@@ -827,7 +832,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-2.2-20",

@@ -9,7 +9,7 @@
       "stem": "A mobile app lets users sign in with their Google accounts. After sign-in, the app must upload files directly to Amazon S3 with temporary AWS credentials. Which steps will meet these requirements? (Select TWO.)",
       "options": [
         {
-          "text": "Use an Amazon Cognito user pool, federated with Google, to sign users in",
+          "text": "Sign users in with an Amazon Cognito user pool federated with Google",
           "correct": true,
           "rationale": "The user pool handles sign-in, including federation with social identity providers."
         },
@@ -24,12 +24,12 @@
           "rationale": "API keys identify clients for usage plans; they do not grant AWS credentials."
         },
         {
-          "text": "Use an Amazon Cognito identity pool to exchange the user's token for temporary AWS credentials",
+          "text": "Use an Amazon Cognito identity pool to get temporary AWS credentials",
           "correct": true,
-          "rationale": "Identity pools issue temporary credentials for an IAM role."
+          "rationale": "Identity pools exchange the user's token for temporary credentials for an IAM role."
         },
         {
-          "text": "Embed one IAM access key in the app for all users",
+          "text": "Embed one IAM access key in the mobile app and share it across all users",
           "correct": false,
           "rationale": "Keys in an app can be extracted and are shared by everyone."
         }
@@ -228,18 +228,18 @@
       "id": "dva-c03-2.1-06",
       "domain": "d2",
       "objective": "2.1",
-      "type": "single",
-      "stem": "An application in account A must read items from a DynamoDB table in account B. Which approach gives the application temporary credentials for the table?",
+      "type": "multi",
+      "stem": "An application that runs under an IAM role in account A must read items from a DynamoDB table in account B by using temporary credentials. Which combination of steps will meet these requirements? (Select TWO.)",
       "options": [
+        {
+          "text": "Allow the application's role in account A to call sts:AssumeRole on that role",
+          "correct": true,
+          "rationale": "Account A must also permit its principal to assume the role; AWS STS then returns temporary credentials."
+        },
         {
           "text": "Create an IAM user in account B and store that user's access keys in the application",
           "correct": false,
-          "rationale": "Long-term keys are harder to secure and rotate than temporary credentials."
-        },
-        {
-          "text": "Create a role in account B that trusts account A, and assume it with AWS STS",
-          "correct": true,
-          "rationale": "The role grants temporary credentials scoped to the table, and account B controls the trust."
+          "rationale": "Access keys are long-term credentials, which the requirement rules out, and they are harder to secure and rotate."
         },
         {
           "text": "Copy the table to account A every hour",
@@ -247,12 +247,17 @@
           "rationale": "Copying data adds cost and staleness instead of granting access."
         },
         {
-          "text": "Add account A's root user to the table's key schema",
+          "text": "Peer the VPCs in the two accounts so the application can reach the table",
           "correct": false,
-          "rationale": "Key schemas define table keys, not permissions."
+          "rationale": "DynamoDB access is controlled by IAM; network connectivity does not grant permissions."
+        },
+        {
+          "text": "In account B, create a role that trusts account A and allows reads on the table",
+          "correct": true,
+          "rationale": "The role's trust policy names account A, and its permissions policy grants read access to the table."
         }
       ],
-      "explanation": "A role in the target account, assumed with sts:AssumeRole, is the standard pattern; DynamoDB resource-based policies are another option.",
+      "explanation": "Cross-account role access needs a role in account B that trusts account A, plus permission in account A to assume it; STS then issues temporary credentials. An IAM user in account B is the nearest distractor, but its keys are long-term credentials.",
       "difficulty": 2,
       "tags": [
         "iam",
@@ -370,7 +375,7 @@
           "rationale": "The requirement is on the delete API, not on a KMS key."
         },
         {
-          "text": "Add an aws:MultiFactorAuthPresent condition to the policy that allows the delete action",
+          "text": "Add an aws:MultiFactorAuthPresent condition to the delete permission",
           "correct": true,
           "rationale": "The action is allowed only when the request's credentials came from an MFA sign-in."
         },
@@ -380,12 +385,12 @@
           "rationale": "Root MFA protects the root user, not this developer's API calls."
         },
         {
-          "text": "Call sts:AssumeRoleWithWebIdentity with the developer's password",
+          "text": "Call sts:AssumeRoleWithWebIdentity and pass the developer's IAM password",
           "correct": false,
           "rationale": "That API exchanges web identity tokens, not passwords."
         },
         {
-          "text": "Have the developer call sts:GetSessionToken with an MFA code and use the temporary credentials",
+          "text": "Call sts:GetSessionToken with an MFA code and use those credentials",
           "correct": true,
           "rationale": "Temporary credentials obtained with MFA carry the MFA context."
         }

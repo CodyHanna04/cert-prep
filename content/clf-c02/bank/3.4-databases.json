@@ -14,9 +14,9 @@
           "rationale": "DynamoDB is a NoSQL key-value and document database."
         },
         {
-          "text": "Amazon MemoryDB",
+          "text": "Amazon ElastiCache",
           "correct": false,
-          "rationale": "MemoryDB is an in-memory database."
+          "rationale": "ElastiCache is an in-memory cache and data store, not a relational database service."
         },
         {
           "text": "Amazon RDS",
@@ -29,7 +29,7 @@
           "rationale": "S3 is object storage, not a relational database."
         }
       ],
-      "explanation": "Relational databases on AWS: Amazon RDS and Amazon Aurora.",
+      "explanation": "The clue is relational engines such as MySQL and SQL Server: Amazon RDS runs them as a managed service, while DynamoDB and ElastiCache are non-relational.",
       "difficulty": 1,
       "tags": [
         "databases",
@@ -37,13 +37,14 @@
         "relational"
       ],
       "refs": [
-        "https://aws.amazon.com/rds/"
+        "https://aws.amazon.com/rds/",
+        "https://aws.amazon.com/elasticache/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.4-02",
@@ -55,12 +56,12 @@
         {
           "text": "Amazon DynamoDB",
           "correct": false,
-          "rationale": "DynamoDB is NoSQL."
+          "rationale": "DynamoDB is a NoSQL database."
         },
         {
-          "text": "Amazon MemoryDB",
+          "text": "Amazon DocumentDB",
           "correct": false,
-          "rationale": "MemoryDB is an in-memory database."
+          "rationale": "DocumentDB is a MongoDB-compatible document database, not a relational one."
         },
         {
           "text": "Amazon Neptune",
@@ -73,7 +74,7 @@
           "rationale": "Aurora is a MySQL- and PostgreSQL-compatible relational database built for the cloud."
         }
       ],
-      "explanation": "Aurora is part of Amazon RDS and offers high performance and availability for MySQL and PostgreSQL workloads.",
+      "explanation": "The clue is a relational database compatible with MySQL and PostgreSQL: that is Aurora, while DynamoDB, DocumentDB and Neptune are non-relational.",
       "difficulty": 1,
       "tags": [
         "databases",
@@ -81,13 +82,14 @@
         "relational"
       ],
       "refs": [
-        "https://aws.amazon.com/rds/aurora/"
+        "https://aws.amazon.com/rds/aurora/",
+        "https://aws.amazon.com/documentdb/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.4-03",
@@ -102,14 +104,14 @@
           "rationale": "DynamoDB is a serverless NoSQL database with consistent single-digit millisecond performance."
         },
         {
-          "text": "Amazon RDS",
+          "text": "Amazon RDS for MySQL",
           "correct": false,
-          "rationale": "RDS runs relational databases."
+          "rationale": "RDS for MySQL is a managed relational database."
         },
         {
           "text": "Amazon Aurora",
           "correct": false,
-          "rationale": "Aurora is relational."
+          "rationale": "Aurora is a relational database."
         },
         {
           "text": "Amazon Redshift",
@@ -117,7 +119,7 @@
           "rationale": "Redshift is a data warehouse."
         }
       ],
-      "explanation": "DynamoDB is the NoSQL database to know for this exam.",
+      "explanation": "The clues are NoSQL and key-value: DynamoDB is a serverless key-value database, while RDS and Aurora are relational and Redshift is for analytics.",
       "difficulty": 1,
       "tags": [
         "databases",
@@ -131,24 +133,24 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.4-04",
       "domain": "d3",
       "objective": "3.4",
       "type": "single",
-      "stem": "A company needs an in-memory database for microsecond read latency on data it reads constantly. Which service fits this need?",
+      "stem": "A company wants to keep frequently read data in memory so its application gets microsecond read latency. Which service fits this need?",
       "options": [
         {
-          "text": "Amazon S3 Glacier",
+          "text": "Amazon RDS for PostgreSQL",
           "correct": false,
-          "rationale": "Glacier is archival storage with retrieval times of minutes to hours."
+          "rationale": "Amazon RDS is a managed relational database that keeps its data on disk, not an in-memory store."
         },
         {
-          "text": "Amazon MemoryDB",
+          "text": "Amazon ElastiCache",
           "correct": true,
-          "rationale": "MemoryDB is a durable, in-memory database with microsecond read latency."
+          "rationale": "ElastiCache is a fully managed in-memory caching service with microsecond latency."
         },
         {
           "text": "Amazon Elastic Block Store (Amazon EBS)",
@@ -161,46 +163,46 @@
           "rationale": "Redshift is a data warehouse for analytics."
         }
       ],
-      "explanation": "Memory-based databases keep data in RAM for extremely fast access.",
+      "explanation": "The clue is keeping data in memory: ElastiCache is the memory-based option, while RDS is a relational database on disk and Redshift is for analytics.",
       "difficulty": 2,
       "tags": [
         "databases",
-        "memorydb",
+        "elasticache",
         "in-memory"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/memorydb/latest/devguide/what-is-memorydb.html"
+        "https://aws.amazon.com/elasticache/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.4-05",
       "domain": "d3",
       "objective": "3.4",
       "type": "single",
-      "stem": "When is running a database on Amazon EC2 a better choice than using Amazon RDS?",
+      "stem": "When is it better for a company to run its database on Amazon EC2 instead of Amazon RDS?",
       "options": [
         {
-          "text": "When the company wants AWS to handle patching and backups",
+          "text": "When it wants AWS to handle patching, backups and upgrades",
           "correct": false,
           "rationale": "That is what Amazon RDS provides."
         },
         {
-          "text": "When the company wants the least operational effort",
+          "text": "When it wants the least operational effort",
           "correct": false,
           "rationale": "A managed service is lower effort."
         },
         {
-          "text": "When the company needs full control of the operating system and database settings",
+          "text": "When it needs full control of the operating system",
           "correct": true,
-          "rationale": "Self-managing on EC2 gives full control, at the cost of more operational work."
+          "rationale": "Self-managing on EC2 gives full control of the operating system and database settings, at the cost of more operational work."
         },
         {
-          "text": "When the company wants AWS-managed automatic Multi-AZ failover",
+          "text": "When it wants AWS-managed Multi-AZ failover",
           "correct": false,
           "rationale": "RDS Multi-AZ provides that."
         }
@@ -221,7 +223,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.4-06",
@@ -231,9 +233,14 @@
       "stem": "Which tool converts a database schema from one engine to another, for example from Oracle to Amazon Aurora PostgreSQL, before the data is migrated?",
       "options": [
         {
-          "text": "AWS DataSync",
+          "text": "AWS Application Migration Service",
           "correct": false,
-          "rationale": "DataSync transfers files and objects."
+          "rationale": "Application Migration Service rehosts whole servers on Amazon EC2; it does not convert a database to a new engine."
+        },
+        {
+          "text": "AWS SCT",
+          "correct": true,
+          "rationale": "The AWS Schema Conversion Tool (AWS SCT) converts a database schema from one engine to another."
         },
         {
           "text": "AWS Backup",
@@ -241,17 +248,12 @@
           "rationale": "AWS Backup manages backups."
         },
         {
-          "text": "Amazon Athena",
+          "text": "AWS Glue",
           "correct": false,
-          "rationale": "Athena queries data in S3."
-        },
-        {
-          "text": "AWS Schema Conversion Tool (AWS SCT)",
-          "correct": true,
-          "rationale": "AWS SCT converts schemas and code for heterogeneous migrations."
+          "rationale": "AWS Glue discovers, prepares and moves data for analytics; it does not convert schemas between database engines."
         }
       ],
-      "explanation": "AWS SCT handles the schema conversion and AWS DMS moves the data.",
+      "explanation": "The clue is converting the schema between different engines: AWS SCT does that, and AWS DMS then moves the data.",
       "difficulty": 2,
       "tags": [
         "databases",
@@ -259,13 +261,15 @@
         "sct"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_Welcome.html"
+        "https://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_Welcome.html",
+        "https://aws.amazon.com/application-migration-service/",
+        "https://docs.aws.amazon.com/glue/latest/dg/what-is-glue.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.4-07",
@@ -285,9 +289,9 @@
           "rationale": "DynamoDB is for key-value access at scale, not analytic queries."
         },
         {
-          "text": "Amazon MemoryDB",
+          "text": "Amazon ElastiCache",
           "correct": false,
-          "rationale": "MemoryDB is an in-memory database."
+          "rationale": "ElastiCache is an in-memory cache for fast reads, not an analytics warehouse."
         },
         {
           "text": "Amazon Neptune",
@@ -309,7 +313,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.4-08",
@@ -334,7 +338,7 @@
           "rationale": "Backups support point-in-time recovery, not instant failover."
         },
         {
-          "text": "Encryption at rest",
+          "text": "Encryption at rest with AWS KMS",
           "correct": false,
           "rationale": "Encryption protects data but does not provide availability."
         }
@@ -354,7 +358,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.4-09",
@@ -408,14 +412,14 @@
       "stem": "A company plans a heterogeneous migration from an on-premises Oracle database to Amazon Aurora PostgreSQL. Which TWO AWS tools are commonly used together for this? (Choose TWO.)",
       "options": [
         {
-          "text": "Amazon Athena",
+          "text": "AWS Application Migration Service",
           "correct": false,
-          "rationale": "Athena queries data in S3."
+          "rationale": "Application Migration Service rehosts whole servers on Amazon EC2; it does not convert a database to a new engine."
         },
         {
-          "text": "AWS Database Migration Service (AWS DMS)",
+          "text": "AWS DMS",
           "correct": true,
-          "rationale": "AWS DMS migrates the data, keeping the source operational."
+          "rationale": "AWS Database Migration Service (AWS DMS) migrates the data while the source database stays operational."
         },
         {
           "text": "AWS Backup",
@@ -423,14 +427,14 @@
           "rationale": "AWS Backup protects data but does not migrate between engines."
         },
         {
-          "text": "AWS Schema Conversion Tool (AWS SCT)",
+          "text": "AWS SCT",
           "correct": true,
-          "rationale": "AWS SCT converts the schema from Oracle to PostgreSQL."
+          "rationale": "The AWS Schema Conversion Tool (AWS SCT) converts the schema from Oracle to PostgreSQL."
         },
         {
-          "text": "AWS DataSync",
+          "text": "Amazon Athena",
           "correct": false,
-          "rationale": "DataSync copies files and objects, not database schemas or data."
+          "rationale": "Athena queries data in S3."
         }
       ],
       "explanation": "Heterogeneous migrations (different engines) use AWS SCT for the schema and AWS DMS for the data.",
@@ -443,13 +447,14 @@
       ],
       "refs": [
         "https://aws.amazon.com/dms/",
-        "https://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_Welcome.html"
+        "https://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_Welcome.html",
+        "https://aws.amazon.com/application-migration-service/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.4-11",
@@ -494,6 +499,50 @@
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.4-12",
+      "domain": "d3",
+      "objective": "3.4",
+      "type": "single",
+      "stem": "A company's application uses a MongoDB database. The company wants a fully managed AWS database that works with MongoDB APIs and drivers. Which service should it choose?",
+      "options": [
+        {
+          "text": "Amazon Neptune",
+          "correct": false,
+          "rationale": "Neptune is a graph database for highly connected data."
+        },
+        {
+          "text": "Amazon DynamoDB",
+          "correct": false,
+          "rationale": "DynamoDB is a key-value and document database with its own API, not a MongoDB-compatible one."
+        },
+        {
+          "text": "Amazon DocumentDB",
+          "correct": true,
+          "rationale": "DocumentDB is a fully managed document database that is compatible with MongoDB APIs and drivers."
+        },
+        {
+          "text": "Amazon ElastiCache",
+          "correct": false,
+          "rationale": "ElastiCache is an in-memory cache, not a document database."
+        }
+      ],
+      "explanation": "The clue is MongoDB compatibility: Amazon DocumentDB is the MongoDB-compatible document database, while DynamoDB is a NoSQL database with its own API.",
+      "difficulty": 1,
+      "tags": [
+        "databases",
+        "documentdb",
+        "nosql"
+      ],
+      "refs": [
+        "https://aws.amazon.com/documentdb/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
     }
   ]
 }

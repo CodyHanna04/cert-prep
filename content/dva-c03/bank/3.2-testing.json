@@ -14,7 +14,7 @@
           "rationale": "generate-event writes a sample event in the shape the service sends."
         },
         {
-          "text": "Run sam deploy and upload a test object to the bucket",
+          "text": "Run sam deploy, then upload a test object to the bucket to trigger it",
           "correct": false,
           "rationale": "This tests in the cloud after deploying, not locally."
         },
@@ -78,7 +78,7 @@
           "rationale": "logs fetches logs from deployed functions."
         }
       ],
-      "explanation": "start-api emulates API Gateway locally for quick testing.",
+      "explanation": "The clue is calling endpoints from a browser: sam local start-api runs a local HTTP server in front of the functions. sam local invoke is the nearest distractor, but it runs one function once and does not serve HTTP.",
       "difficulty": 2,
       "tags": [
         "sam",
@@ -332,15 +332,15 @@
         {
           "text": "An agent hook with a File Save trigger",
           "correct": true,
-          "rationale": "Hooks run an agent action or command automatically on events such as file saves."
+          "rationale": "Hooks run an agent action or command automatically on events such as the agent saving a file."
         },
         {
-          "text": "A Lambda alias",
+          "text": "An MCP server that provides a test runner",
           "correct": false,
-          "rationale": "Aliases point to function versions and are unrelated to Kiro."
+          "rationale": "MCP servers give the agent extra tools, but they do not run anything automatically when files are saved."
         }
       ],
-      "explanation": "Kiro hooks automate repetitive work, such as keeping tests up to date, on events in the workspace.",
+      "explanation": "The clue is \"whenever the agent saves\": hooks react to workspace events such as File Save. Steering files and specs are the nearest distractors, but they guide or plan the agent's work rather than trigger it.",
       "difficulty": 2,
       "tags": [
         "kiro",
@@ -404,31 +404,36 @@
       "id": "dva-c03-3.2-10",
       "domain": "d3",
       "objective": "3.2",
-      "type": "single",
-      "stem": "A team runs unit tests in AWS CodeBuild. It wants each build's pass and fail results, and trends over time, shown in the CodeBuild console instead of reading raw build logs. What should the developer configure?",
+      "type": "multi",
+      "stem": "A team runs unit tests in AWS CodeBuild. It wants each build's pass and fail results, and trends over time, shown in the CodeBuild console instead of reading raw build logs. Which combination of steps will meet these requirements? (Select TWO.)",
       "options": [
         {
-          "text": "A reports section in the buildspec that points to the test result files",
-          "correct": true,
-          "rationale": "CodeBuild creates test reports from result files such as JUnit XML and shows them in report groups."
-        },
-        {
-          "text": "A post_build command that prints the results to the build log",
+          "text": "Add a post_build command that prints the results to the build log",
           "correct": false,
           "rationale": "The results stay buried in the log, with no report view or trends."
         },
         {
-          "text": "Amazon CloudWatch Logs retention on the build logs",
-          "correct": false,
-          "rationale": "Retention controls how long logs are kept, not how results are shown."
+          "text": "Add a reports section to the buildspec that points to the result files",
+          "correct": true,
+          "rationale": "The reports section names a report group and the files that CodeBuild reads to create each test report."
         },
         {
-          "text": "An artifacts section that uploads the source code to Amazon S3",
+          "text": "Add an artifacts section that uploads the test result files to an Amazon S3 bucket",
           "correct": false,
-          "rationale": "Artifacts store build outputs; they do not create test reports."
+          "rationale": "Artifacts store build outputs; they do not create test reports or trends."
+        },
+        {
+          "text": "Have the tests write result files in a supported format such as JUnit XML",
+          "correct": true,
+          "rationale": "CodeBuild creates reports from result files in formats such as JUnit XML, NUnit XML, TestNG XML and Cucumber JSON."
+        },
+        {
+          "text": "Set a CloudWatch Logs retention period on the build logs",
+          "correct": false,
+          "rationale": "Retention controls how long logs are kept, not how results are shown."
         }
       ],
-      "explanation": "CodeBuild test reports turn test output files into pass/fail results with history.",
+      "explanation": "CodeBuild test reports need result files in a supported format and a buildspec reports section that points to them. Uploading the files as artifacts is the nearest distractor: it stores them but creates no report.",
       "difficulty": 2,
       "tags": [
         "codebuild",

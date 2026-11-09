@@ -1,44 +1,40 @@
 # 17 — Question quality review (2026-11-08)
 
-You took 74 CLF-C02 questions on the live site and reported that many were too complicated for the exam, wrong, or more up to date than the exam material. This note explains what went wrong in drafting and review, and the rules that now prevent it. The rules are written into `content/prompts/draft-questions.md` and each pack's `style.md`.
+You took 74 CLF-C02 questions on the live site and reported that many were too complicated, wrong, or written for a different version of the exam than the current one. This note explains what went wrong and the rules that now prevent it. The rules are written into `content/prompts/draft-questions.md`, the review step in `content/prompts/README.md`, and each pack's `style.md`.
 
 ## What went wrong
 
-**1. The source checks pulled questions toward today's AWS, not the exam's AWS.** The CLF-C02 exam guide dates from 2023. The source-check agents compared each question with the current docs, and every difference got "fixed" toward the current docs. Twelve questions ended up teaching facts the exam will never ask:
-- New support plans: Business Support+ and Unified Operations replace the guide's Developer, Business and Enterprise On-Ramp plans.
-- Renames: SageMaker AI, AWS Transform MGN, WorkSpaces Applications.
-- Closures with dates: Application Discovery Service, AMS Advanced.
+**1. The pack was built from an out-of-date copy of the exam guide.**
+- **The update history.** AWS revises CLF-C02 in place: version 1.0 in June 2026, then 1.1, 1.2 and 1.3 on October 29, 2026. Each update takes effect about a month after it is published. The pack's `in-scope-services.md` and objective scopes came from an older CLF-C02 PDF.
+- **What the current guide uses.** Business Support+, Enterprise Support and Unified Operations for support plans; Amazon SageMaker AI; Amazon Quick. It moves Billing Conductor, AWS Activate, AWS IQ, AMS, Wavelength, MemoryDB, CodeDeploy, AppConfig, CloudShell, CodeArtifact, Greengrass, Network Firewall and Transfer Family out of scope. It drops Kendra, Local Zones, the Snow Family, Audit Manager, Cloud9 and CodeCommit, and adds Amazon Q, Amazon Quick, DocumentDB, Service Quotas, PrivateLink, Transit Gateway and WorkSpaces Secure Browser.
+- **The result:** a bank that mixed old and new names and plans, with questions on services the current exam no longer covers.
 
-The real exam uses the guide's names and plans. Mixing in the new ones made distractors look right and correct answers look wrong. The support-plan question you missed is an example: Business Support+ was listed as an option.
+The first version of this note (earlier the same day) got the cause backwards. It said questions were "newer than the exam guide" and should use the old names. Checking the live guide showed the opposite: the guide is current, and the pack's copy of it was stale.
 
-**2. Some questions went deeper than a recognition exam.** The CLF style guide says "identify, recognize, describe", but some questions asked for detail the exam doesn't test:
-- The exact wording of Well-Architected design principles (1.2-15, which took you 5½ minutes).
-- Shared controls from the compliance whitepaper (2.1-05).
-- Network ACL rule evaluation order (2.4-14).
-- IAM last-accessed information (2.3-17).
-- Data-transfer pricing cases (4.1-09).
+**2. Some questions went deeper than the guide asks.** Examples:
+- The exact wording of Well-Architected design principles (the guide names the pillars and how they differ).
+- Network ACL rule evaluation order.
 
-Most of these were tagged difficulty 3, a level a foundational exam rarely reaches.
+Others that looked deep are named in the task statements and stay: Dedicated Hosts vs Dedicated Instances, Reserved Instance flexibility and sharing, Region-to-Region data transfer, and access reports.
 
-**3. Explanations carried trivia.** Rename dates, end-of-support dates and "closed to new customers" notes added reading without helping anyone pass.
+**3. Explanations carried trivia:** rename dates, retirement dates and "the exam guide still says" notes.
 
-**4. Distractors outside the exam's service list,** for example AWS DataSync on CLF-C02.
-
-None of your 16 misses had a wrong key. The checks caught wrong keys; what they missed was **fit to the exam**.
+None of your 16 misses had a wrong key. The checks caught wrong keys; what they missed was **fit to the current exam**.
 
 ## Rules from now on
 
-1. **The exam guide is the source of truth for names, plans and scope.** Use the guide's service names, even when AWS has since renamed them. A fact changed after the guide's date is left out of the question rather than updated. Current docs confirm that a fact is correct; they don't change what the exam asks.
-2. **Match the guide's verbs and the official sample questions' depth.**
-   - Foundational (CLF): name the service or concept.
+1. **Check the guide's version before every content pass.**
+   - Open the live guide (HTML) and its revisions page.
+   - Transcribe the task statements and service lists from the current version.
+   - Record the version and date in `blueprint.json`.
+2. **The current guide decides names, scope and depth.** Use its service names and support plans exactly. Every service in a question, distractors included, is on its in-scope list. The pack's `outOfScopeTerms` lint enforces its out-of-scope list.
+3. **Match the guide's verbs and target candidate.**
+   - Foundational (CLF): up to 6 months of exposure; identify and recognize.
    - Associate (DVA): a short developer scenario solved by a well-known pattern.
-   - Neither tests quotas, prices, rule-evaluation trivia or principle wording.
-3. **Explanations teach the decision, not the history.** No rename dates, retirement dates or "closed to new customers" notes.
-4. **Every service in a question is on the guide's in-scope list,** distractors included. The pack's `outOfScopeTerms` lint enforces the guide's out-of-scope list.
-5. **Source checks report two separate things:** "wrong for the exam" (a key or fact error) and "differs from current docs" (ignore it if the guide's version still holds).
+   - Test what the task statements name. Leave out quotas, prices and mechanics they don't name.
+4. **Explanations teach the decision:** the clue in the stem and how the answer differs from its nearest neighbor. No rename or retirement history.
+5. **Questions are original and judged on their own merits** (correctness, clarity, teaching value), not on resemblance to real exam questions.
 
-## CLF-C02 follow-up
+## Follow-up (2026-11-08)
 
-- The 12 questions with post-guide wording should go back to the guide's names and plans: 1.3-11, 1.3-12, 3.1-13, 3.7-01, 3.7-02, 3.7-10, 3.8-06, 3.8-12, 4.3-01, 4.3-02, 4.3-03, 4.3-04.
-- The difficulty-3 questions should be simplified or replaced.
-- Add the post-guide names to CLF's `outOfScopeTerms` so the lint catches them.
+The CLF-C02 pack now uses guide v1.3. That covers the blueprint sources and scopes, `in-scope-services.md`, `style.md` and the lint profile. The whole bank is going through a review against it.

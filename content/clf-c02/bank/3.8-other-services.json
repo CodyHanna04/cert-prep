@@ -52,14 +52,14 @@
       "stem": "Which service sends a message to many subscribers at once, such as email addresses, SMS numbers and HTTP endpoints, using publish/subscribe?",
       "options": [
         {
-          "text": "Amazon Simple Queue Service (Amazon SQS)",
+          "text": "Amazon SQS",
           "correct": false,
-          "rationale": "SQS queues messages for consumers to pull."
+          "rationale": "Amazon Simple Queue Service (SQS) queues messages for consumers to pull."
         },
         {
-          "text": "Amazon Simple Email Service (Amazon SES)",
+          "text": "Amazon SES",
           "correct": false,
-          "rationale": "SES sends email at scale but is not pub/sub fan-out."
+          "rationale": "Amazon Simple Email Service (SES) sends email at scale but is not publish/subscribe fan-out."
         },
         {
           "text": "Amazon Connect",
@@ -67,12 +67,12 @@
           "rationale": "Connect is a contact center service."
         },
         {
-          "text": "Amazon Simple Notification Service (Amazon SNS)",
+          "text": "Amazon SNS",
           "correct": true,
-          "rationale": "SNS is a managed publish/subscribe messaging service."
+          "rationale": "Amazon Simple Notification Service (SNS) is a managed publish/subscribe messaging service."
         }
       ],
-      "explanation": "SNS fans out one message to many subscribers.",
+      "explanation": "The clue is one message to many kinds of subscribers: SNS pushes to every subscriber of a topic, while SQS holds messages until a consumer pulls them.",
       "difficulty": 1,
       "tags": [
         "application-integration",
@@ -85,7 +85,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.8-03",
@@ -97,7 +97,7 @@
         {
           "text": "Amazon EventBridge",
           "correct": true,
-          "rationale": "EventBridge is a serverless event bus that routes events using rules."
+          "rationale": "EventBridge is a serverless event bus that routes events to targets using rules."
         },
         {
           "text": "Amazon Simple Queue Service (Amazon SQS)",
@@ -110,12 +110,12 @@
           "rationale": "SES sends email."
         },
         {
-          "text": "AWS AppSync",
+          "text": "Amazon Simple Notification Service (Amazon SNS)",
           "correct": false,
-          "rationale": "AppSync builds GraphQL APIs."
+          "rationale": "SNS pushes messages published to a topic out to that topic's subscribers."
         }
       ],
-      "explanation": "EventBridge helps build event-driven applications.",
+      "explanation": "The clue is routing events from many sources by rules: EventBridge is an event bus, while SNS fans out messages that are published to a topic.",
       "difficulty": 2,
       "tags": [
         "application-integration",
@@ -128,7 +128,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.8-04",
@@ -140,7 +140,7 @@
         {
           "text": "Amazon Connect",
           "correct": false,
-          "rationale": "Connect runs contact centers."
+          "rationale": "Connect runs cloud contact centers."
         },
         {
           "text": "Amazon Simple Email Service (Amazon SES)",
@@ -148,9 +148,9 @@
           "rationale": "SES is a cloud email service for transactional and marketing messages."
         },
         {
-          "text": "Amazon Simple Queue Service (Amazon SQS)",
+          "text": "Amazon Simple Notification Service (Amazon SNS)",
           "correct": false,
-          "rationale": "SQS is a message queue."
+          "rationale": "SNS sends notifications to topic subscribers; it is not an email service for campaigns and receipts."
         },
         {
           "text": "Amazon WorkSpaces",
@@ -158,20 +158,21 @@
           "rationale": "WorkSpaces provides virtual desktops."
         }
       ],
-      "explanation": "SES is in the business applications category of the exam guide.",
+      "explanation": "The clue is marketing and transactional email: SES is built for sending email from applications, while SNS sends short notifications to the subscribers of a topic.",
       "difficulty": 1,
       "tags": [
         "business-applications",
         "ses"
       ],
       "refs": [
-        "https://aws.amazon.com/ses/"
+        "https://aws.amazon.com/ses/",
+        "https://aws.amazon.com/sns/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.8-05",
@@ -201,7 +202,7 @@
           "rationale": "WorkSpaces provides virtual desktops."
         }
       ],
-      "explanation": "Amazon Connect is in the business applications category.",
+      "explanation": "The clue is a contact center: Connect runs the whole customer service operation, and a Lex chatbot can be one part of it.",
       "difficulty": 1,
       "tags": [
         "business-applications",
@@ -214,50 +215,53 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.8-06",
       "domain": "d3",
       "objective": "3.8",
       "type": "single",
-      "stem": "Which service provides virtual desktops that employees can use from almost any device?",
+      "stem": "Which service provides full virtual desktops that employees can use from almost any device?",
       "options": [
         {
-          "text": "Amazon WorkSpaces Applications",
+          "text": "Amazon AppStream 2.0",
           "correct": false,
-          "rationale": "WorkSpaces Applications (formerly AppStream 2.0) streams individual applications rather than full desktops."
+          "rationale": "AppStream 2.0 streams individual desktop applications rather than full desktops."
         },
         {
-          "text": "Amazon Connect",
+          "text": "Amazon WorkSpaces Secure Browser",
           "correct": false,
-          "rationale": "Connect is a contact center service."
+          "rationale": "WorkSpaces Secure Browser gives access to websites and SaaS apps, not a whole desktop."
         },
         {
           "text": "AWS Amplify",
           "correct": false,
-          "rationale": "Amplify builds web and mobile apps."
+          "rationale": "Amplify builds and hosts web and mobile apps."
         },
         {
           "text": "Amazon WorkSpaces",
           "correct": true,
-          "rationale": "WorkSpaces provides managed virtual desktops."
+          "rationale": "WorkSpaces provides managed cloud desktops."
         }
       ],
-      "explanation": "End-user computing services: Amazon WorkSpaces for desktops, and Amazon WorkSpaces Applications for applications (formerly AppStream 2.0, the name the exam guide uses).",
+      "explanation": "The clue is a full desktop: WorkSpaces gives each user a cloud desktop, while AppStream 2.0 streams single applications and WorkSpaces Secure Browser covers web access.",
       "difficulty": 2,
       "tags": [
         "end-user-computing",
-        "workspaces"
+        "workspaces",
+        "appstream"
       ],
       "refs": [
-        "https://aws.amazon.com/workspaces/"
+        "https://aws.amazon.com/workspaces/",
+        "https://docs.aws.amazon.com/appstream2/latest/developerguide/what-is-appstream.html",
+        "https://aws.amazon.com/workspaces/secure-browser/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.8-07",
@@ -272,9 +276,9 @@
           "rationale": "Amplify provides tools and hosting for full-stack web and mobile apps."
         },
         {
-          "text": "AWS AppSync",
+          "text": "Amazon API Gateway",
           "correct": false,
-          "rationale": "AppSync builds GraphQL APIs, one part of an app's back end."
+          "rationale": "API Gateway creates and manages APIs, one part of an app's back end."
         },
         {
           "text": "AWS CodeBuild",
@@ -287,20 +291,21 @@
           "rationale": "Connect is a contact center service."
         }
       ],
-      "explanation": "Amplify and AppSync are in the frontend web and mobile category.",
+      "explanation": "The clue is front-end web and mobile developers who also need hosting: Amplify covers building, deploying and hosting the app, while API Gateway provides only the APIs.",
       "difficulty": 2,
       "tags": [
         "frontend",
         "amplify"
       ],
       "refs": [
-        "https://aws.amazon.com/amplify/"
+        "https://aws.amazon.com/amplify/",
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.8-08",
@@ -310,14 +315,14 @@
       "stem": "Which service connects IoT devices to the AWS Cloud so they can securely interact with cloud applications?",
       "options": [
         {
-          "text": "AWS IoT Greengrass",
+          "text": "Amazon Kinesis",
           "correct": false,
-          "rationale": "Greengrass runs local compute and messaging on edge devices."
+          "rationale": "Kinesis collects and processes streaming data but does not manage device connections."
         },
         {
           "text": "AWS IoT Core",
           "correct": true,
-          "rationale": "IoT Core lets billions of devices connect and send messages to AWS."
+          "rationale": "IoT Core connects IoT devices to other devices and AWS cloud services."
         },
         {
           "text": "Amazon Connect",
@@ -330,20 +335,21 @@
           "rationale": "Amplify builds web and mobile apps."
         }
       ],
-      "explanation": "IoT Core is the cloud connection point; Greengrass extends AWS to the devices themselves.",
+      "explanation": "The clue is connecting devices: IoT Core is the managed entry point for IoT devices, while Kinesis processes streams of data once they arrive.",
       "difficulty": 2,
       "tags": [
         "iot",
         "iot-core"
       ],
       "refs": [
-        "https://aws.amazon.com/iot-core/"
+        "https://docs.aws.amazon.com/iot/latest/developerguide/what-is-aws-iot.html",
+        "https://aws.amazon.com/kinesis/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.8-09",
@@ -358,14 +364,14 @@
           "rationale": "CodeBuild compiles and tests code as one stage."
         },
         {
-          "text": "AWS CodeDeploy",
+          "text": "AWS CloudFormation",
           "correct": false,
-          "rationale": "CodeDeploy automates deployments as one stage."
+          "rationale": "CloudFormation provisions infrastructure from templates; it does not run a release pipeline."
         },
         {
           "text": "AWS CodePipeline",
           "correct": true,
-          "rationale": "CodePipeline is a continuous delivery service that orchestrates release stages."
+          "rationale": "CodePipeline is a continuous delivery service that automates the stages of a release."
         },
         {
           "text": "AWS X-Ray",
@@ -373,20 +379,21 @@
           "rationale": "X-Ray traces requests in running applications."
         }
       ],
-      "explanation": "CodePipeline orchestrates; CodeBuild builds; CodeDeploy deploys.",
+      "explanation": "The clue is the whole release process across stages: CodePipeline orchestrates the stages, while CodeBuild handles the build-and-test step inside them.",
       "difficulty": 2,
       "tags": [
         "developer-tools",
         "codepipeline"
       ],
       "refs": [
-        "https://aws.amazon.com/codepipeline/"
+        "https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html",
+        "https://docs.aws.amazon.com/codebuild/latest/userguide/welcome.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.8-10",
@@ -396,261 +403,267 @@
       "stem": "Which service helps developers trace requests through a distributed application to find performance bottlenecks?",
       "options": [
         {
-          "text": "AWS CodeDeploy",
+          "text": "AWS CloudTrail",
           "correct": false,
-          "rationale": "CodeDeploy automates deployments."
+          "rationale": "CloudTrail records actions taken in an AWS account, not requests moving through an application."
         },
         {
-          "text": "AWS CloudShell",
+          "text": "AWS CodePipeline",
           "correct": false,
-          "rationale": "CloudShell is a browser-based shell."
+          "rationale": "CodePipeline automates software releases."
         },
-        {
-          "text": "AWS AppConfig",
-          "correct": false,
-          "rationale": "AppConfig manages application configuration."
-        },
-        {
-          "text": "AWS X-Ray",
-          "correct": true,
-          "rationale": "X-Ray traces requests as they travel through an application."
-        }
-      ],
-      "explanation": "X-Ray shows a map of services and where time is spent.",
-      "difficulty": 2,
-      "tags": [
-        "developer-tools",
-        "x-ray"
-      ],
-      "refs": [
-        "https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html"
-      ],
-      "source": "ai-draft",
-      "reviewStatus": "approved",
-      "generator": "claude-opus-5-5",
-      "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
-    },
-    {
-      "id": "clf-c02-3.8-11",
-      "domain": "d3",
-      "objective": "3.8",
-      "type": "multi",
-      "stem": "Which TWO are AWS developer tools? (Choose TWO.)",
-      "options": [
-        {
-          "text": "Amazon Connect",
-          "correct": false,
-          "rationale": "Connect is a business application."
-        },
-        {
-          "text": "Amazon Simple Email Service (Amazon SES)",
-          "correct": false,
-          "rationale": "SES is a business application."
-        },
-        {
-          "text": "AWS CodeDeploy",
-          "correct": true,
-          "rationale": "CodeDeploy automates application deployments."
-        },
-        {
-          "text": "Amazon WorkSpaces",
-          "correct": false,
-          "rationale": "WorkSpaces is end-user computing."
-        },
-        {
-          "text": "AWS CodeBuild",
-          "correct": true,
-          "rationale": "CodeBuild compiles source code and runs tests."
-        }
-      ],
-      "explanation": "Developer tools in scope include AWS CodeBuild, CodeDeploy, CodePipeline, CodeArtifact, CloudShell, AppConfig and X-Ray.",
-      "difficulty": 1,
-      "tags": [
-        "developer-tools"
-      ],
-      "refs": [
-        "https://aws.amazon.com/codebuild/",
-        "https://aws.amazon.com/codedeploy/"
-      ],
-      "source": "ai-draft",
-      "reviewStatus": "approved",
-      "generator": "claude-opus-5-5",
-      "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
-    },
-    {
-      "id": "clf-c02-3.8-12",
-      "domain": "d3",
-      "objective": "3.8",
-      "type": "single",
-      "stem": "Which AWS offering operates a company's AWS infrastructure on its behalf, including patching, monitoring and incident response?",
-      "options": [
-        {
-          "text": "AWS Marketplace",
-          "correct": false,
-          "rationale": "Marketplace is a software catalog."
-        },
-        {
-          "text": "AWS Artifact",
-          "correct": false,
-          "rationale": "Artifact provides compliance reports."
-        },
-        {
-          "text": "AWS Managed Services (AMS)",
-          "correct": true,
-          "rationale": "AMS provides ongoing operation of AWS infrastructure for enterprises."
-        },
-        {
-          "text": "Basic Support",
-          "correct": false,
-          "rationale": "Basic Support covers account and billing questions."
-        }
-      ],
-      "explanation": "AMS operates your AWS infrastructure for you, including patching, monitoring and incident management, and is listed under customer engagement in the exam guide. The AMS Advanced model stopped accepting new customers on June 30, 2026 (support ends June 30, 2027); AMS Accelerate is the continuing model.",
-      "difficulty": 2,
-      "tags": [
-        "customer-engagement",
-        "ams"
-      ],
-      "refs": [
-        "https://docs.aws.amazon.com/managedservices/latest/userguide/what-is-ams.html",
-        "https://docs.aws.amazon.com/managedservices/latest/userguide/SunsetPlan.html"
-      ],
-      "source": "ai-draft",
-      "reviewStatus": "approved",
-      "generator": "claude-opus-5-5",
-      "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
-    },
-    {
-      "id": "clf-c02-3.8-13",
-      "domain": "d3",
-      "objective": "3.8",
-      "type": "single",
-      "stem": "Which program gives eligible startups AWS credits, tools and resources to help them build on AWS?",
-      "options": [
-        {
-          "text": "AWS Marketplace",
-          "correct": false,
-          "rationale": "Marketplace sells third-party software."
-        },
-        {
-          "text": "AWS Partner Network",
-          "correct": false,
-          "rationale": "The Partner Network is for companies that build or deliver AWS-based solutions."
-        },
-        {
-          "text": "AWS Artifact",
-          "correct": false,
-          "rationale": "Artifact provides compliance reports."
-        },
-        {
-          "text": "AWS Activate",
-          "correct": true,
-          "rationale": "AWS Activate offers credits and support for startups."
-        }
-      ],
-      "explanation": "AWS Activate is in the customer engagement category of the exam guide.",
-      "difficulty": 1,
-      "tags": [
-        "customer-engagement",
-        "activate"
-      ],
-      "refs": [
-        "https://aws.amazon.com/startups/credits"
-      ],
-      "source": "ai-draft",
-      "reviewStatus": "approved",
-      "generator": "claude-opus-5-5",
-      "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
-    },
-    {
-      "id": "clf-c02-3.8-14",
-      "domain": "d3",
-      "objective": "3.8",
-      "type": "single",
-      "stem": "Which service lets teams change application configuration and feature flags safely without redeploying code?",
-      "options": [
-        {
-          "text": "AWS AppConfig",
-          "correct": true,
-          "rationale": "AppConfig deploys configuration changes gradually and can roll them back."
-        },
-        {
-          "text": "AWS CloudFormation",
-          "correct": false,
-          "rationale": "CloudFormation provisions infrastructure."
-        },
-        {
-          "text": "AWS CodeDeploy",
-          "correct": false,
-          "rationale": "CodeDeploy deploys application code."
-        },
-        {
-          "text": "AWS X-Ray",
-          "correct": false,
-          "rationale": "X-Ray traces requests."
-        }
-      ],
-      "explanation": "AppConfig separates configuration changes from code deployments.",
-      "difficulty": 2,
-      "tags": [
-        "developer-tools",
-        "appconfig"
-      ],
-      "refs": [
-        "https://docs.aws.amazon.com/appconfig/latest/userguide/what-is-appconfig.html"
-      ],
-      "source": "ai-draft",
-      "reviewStatus": "approved",
-      "generator": "claude-opus-5-5",
-      "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
-    },
-    {
-      "id": "clf-c02-3.8-15",
-      "domain": "d3",
-      "objective": "3.8",
-      "type": "single",
-      "stem": "Which service is a managed repository for software packages such as npm, Maven and PyPI packages?",
-      "options": [
         {
           "text": "AWS CodeBuild",
           "correct": false,
           "rationale": "CodeBuild compiles and tests code."
         },
         {
-          "text": "AWS CodeArtifact",
+          "text": "AWS X-Ray",
           "correct": true,
-          "rationale": "CodeArtifact stores and shares software packages for builds."
-        },
-        {
-          "text": "AWS CodeDeploy",
-          "correct": false,
-          "rationale": "CodeDeploy automates deployments."
-        },
-        {
-          "text": "AWS AppConfig",
-          "correct": false,
-          "rationale": "AppConfig manages application configuration."
+          "rationale": "X-Ray traces requests as they travel through an application and its downstream services."
         }
       ],
-      "explanation": "CodeArtifact works with common package managers and build tools.",
+      "explanation": "The clue is tracing application requests to find bottlenecks: X-Ray maps where time is spent, while CloudTrail records who did what in the AWS account.",
       "difficulty": 2,
       "tags": [
         "developer-tools",
-        "codeartifact"
+        "x-ray"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/codeartifact/latest/ug/welcome.html"
+        "https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html",
+        "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "clf-c02-3.8-11",
+      "domain": "d3",
+      "objective": "3.8",
+      "type": "multi",
+      "stem": "Which TWO services help developers build, release or troubleshoot applications? (Choose TWO.)",
+      "options": [
+        {
+          "text": "Amazon Connect",
+          "correct": false,
+          "rationale": "Connect is a business application for contact centers."
+        },
+        {
+          "text": "Amazon Simple Email Service (Amazon SES)",
+          "correct": false,
+          "rationale": "SES is a business application for sending email."
+        },
+        {
+          "text": "AWS CodePipeline",
+          "correct": true,
+          "rationale": "CodePipeline automates the stages of a software release."
+        },
+        {
+          "text": "Amazon WorkSpaces",
+          "correct": false,
+          "rationale": "WorkSpaces is end-user computing that provides virtual desktops."
+        },
+        {
+          "text": "AWS X-Ray",
+          "correct": true,
+          "rationale": "X-Ray traces requests to help troubleshoot running applications."
+        }
+      ],
+      "explanation": "The developer tools here are AWS CodeBuild, AWS CodePipeline and AWS X-Ray; Connect and SES are business applications and WorkSpaces is end-user computing.",
+      "difficulty": 1,
+      "tags": [
+        "developer-tools"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html",
+        "https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-02",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "clf-c02-3.8-16",
+      "domain": "d3",
+      "objective": "3.8",
+      "type": "single",
+      "stem": "A company wants to open a case with AWS to get help with a technical issue in its account. Which AWS offering provides this?",
+      "options": [
+        {
+          "text": "AWS Trusted Advisor",
+          "correct": false,
+          "rationale": "Trusted Advisor inspects the account and recommends ways to save money and improve security and performance; it does not handle cases."
+        },
+        {
+          "text": "AWS Health Dashboard",
+          "correct": false,
+          "rationale": "The Health Dashboard shows AWS events and planned changes that can affect your resources."
+        },
+        {
+          "text": "AWS Support",
+          "correct": true,
+          "rationale": "AWS Support gives access to customer service and, with a paid plan, to technical support from AWS experts."
+        },
+        {
+          "text": "AWS Marketplace",
+          "correct": false,
+          "rationale": "Marketplace is a catalog for finding and buying third-party software."
+        }
+      ],
+      "explanation": "The clue is opening a case: AWS Support handles cases through the Support Center, while Trusted Advisor gives automated recommendations without anyone working an issue.",
+      "difficulty": 1,
+      "tags": [
+        "business-support",
+        "aws-support"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html",
+        "https://docs.aws.amazon.com/awssupport/latest/user/trusted-advisor.html",
+        "https://docs.aws.amazon.com/health/latest/ug/what-is-aws-health.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "clf-c02-3.8-17",
+      "domain": "d3",
+      "objective": "3.8",
+      "type": "single",
+      "stem": "A company wants employees to run a desktop design application from a web browser without installing it and without giving each employee a full virtual desktop. Which service should it use?",
+      "options": [
+        {
+          "text": "Amazon WorkSpaces",
+          "correct": false,
+          "rationale": "WorkSpaces provides full cloud desktops, which is more than the company needs."
+        },
+        {
+          "text": "Amazon AppStream 2.0",
+          "correct": true,
+          "rationale": "AppStream 2.0 is a fully managed service that streams desktop applications to users."
+        },
+        {
+          "text": "Amazon WorkSpaces Secure Browser",
+          "correct": false,
+          "rationale": "WorkSpaces Secure Browser gives access to websites and SaaS apps, not installed desktop applications."
+        },
+        {
+          "text": "AWS Amplify",
+          "correct": false,
+          "rationale": "Amplify builds and hosts new web and mobile apps; it does not stream existing desktop applications."
+        }
+      ],
+      "explanation": "The clue is streaming one desktop application without a full desktop: AppStream 2.0 streams applications, while WorkSpaces delivers an entire virtual desktop.",
+      "difficulty": 2,
+      "tags": [
+        "end-user-computing",
+        "appstream"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/appstream2/latest/developerguide/what-is-appstream.html",
+        "https://aws.amazon.com/workspaces/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "clf-c02-3.8-18",
+      "domain": "d3",
+      "objective": "3.8",
+      "type": "single",
+      "stem": "What does Amazon WorkSpaces Secure Browser provide?",
+      "options": [
+        {
+          "text": "A full cloud desktop for each user",
+          "correct": false,
+          "rationale": "Full cloud desktops are what Amazon WorkSpaces provides."
+        },
+        {
+          "text": "Streaming of installed desktop applications",
+          "correct": false,
+          "rationale": "Streaming desktop applications is what Amazon AppStream 2.0 does."
+        },
+        {
+          "text": "Isolated browsing of private websites and SaaS apps",
+          "correct": true,
+          "rationale": "Secure Browser runs browsing sessions in AWS, so users reach private websites and SaaS apps while company data stays off their devices."
+        },
+        {
+          "text": "An encrypted VPN tunnel from each user's laptop into a VPC",
+          "correct": false,
+          "rationale": "An encrypted tunnel from a user's device into a VPC is what AWS Client VPN provides."
+        }
+      ],
+      "explanation": "Secure Browser is about web access: browsing runs in AWS and only the display reaches the user's own browser, unlike WorkSpaces (whole desktops) and AppStream 2.0 (desktop applications).",
+      "difficulty": 1,
+      "tags": [
+        "end-user-computing",
+        "workspaces-secure-browser"
+      ],
+      "refs": [
+        "https://aws.amazon.com/workspaces/secure-browser/",
+        "https://aws.amazon.com/workspaces/",
+        "https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/what-is.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "clf-c02-3.8-19",
+      "domain": "d3",
+      "objective": "3.8",
+      "type": "single",
+      "stem": "Which fully managed service compiles source code, runs tests and produces software packages that are ready to deploy?",
+      "options": [
+        {
+          "text": "AWS CodePipeline",
+          "correct": false,
+          "rationale": "CodePipeline automates the stages of a release process and can call CodeBuild for its build stage."
+        },
+        {
+          "text": "AWS CodeBuild",
+          "correct": true,
+          "rationale": "CodeBuild is a managed build service, so there are no build servers to run."
+        },
+        {
+          "text": "AWS X-Ray",
+          "correct": false,
+          "rationale": "X-Ray traces requests in a running application."
+        },
+        {
+          "text": "AWS CloudFormation",
+          "correct": false,
+          "rationale": "CloudFormation provisions infrastructure from templates."
+        }
+      ],
+      "explanation": "The clue is compiling and testing code: CodeBuild does the build step itself, while CodePipeline connects build, test and deploy steps into one release workflow.",
+      "difficulty": 1,
+      "tags": [
+        "developer-tools",
+        "codebuild"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/codebuild/latest/userguide/welcome.html",
+        "https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
     }
   ]
 }

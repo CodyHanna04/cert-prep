@@ -9,7 +9,7 @@
       "stem": "What is Amazon Virtual Private Cloud (Amazon VPC)?",
       "options": [
         {
-          "text": "A managed DNS service for domain names",
+          "text": "A managed DNS service for registering and resolving domain names",
           "correct": false,
           "rationale": "That describes Amazon Route 53."
         },
@@ -29,7 +29,7 @@
           "rationale": "A VPC is your own isolated network where you launch AWS resources."
         }
       ],
-      "explanation": "A VPC contains subnets, route tables and gateways that you control.",
+      "explanation": "The clue is a virtual network: a VPC is where you launch resources and control its subnets, route tables and gateways, while Direct Connect is a link into AWS rather than a network of your own.",
       "difficulty": 1,
       "tags": [
         "networking",
@@ -42,7 +42,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.5-02",
@@ -94,44 +94,46 @@
       "domain": "d3",
       "objective": "3.5",
       "type": "single",
-      "stem": "Which VPC component allows communication between resources in a VPC and the internet?",
+      "stem": "A company wants a web server in its VPC to be reachable from the public internet. Which component must be attached to the VPC?",
       "options": [
+        {
+          "text": "NAT gateway",
+          "correct": false,
+          "rationale": "A NAT gateway lets instances in private subnets start outbound connections, but it blocks connections started from the internet."
+        },
         {
           "text": "Virtual private gateway",
           "correct": false,
-          "rationale": "A virtual private gateway is the AWS side of a VPN connection."
+          "rationale": "A virtual private gateway is the AWS end of a Site-to-Site VPN to an on-premises network, not a path to the internet."
         },
         {
           "text": "Internet gateway",
           "correct": true,
-          "rationale": "An internet gateway enables traffic between the VPC and the internet."
+          "rationale": "An internet gateway attached to the VPC allows traffic in both directions between the VPC and the internet."
         },
         {
-          "text": "Security group",
+          "text": "Customer gateway",
           "correct": false,
-          "rationale": "Security groups filter traffic; they do not provide internet connectivity."
-        },
-        {
-          "text": "Network ACL",
-          "correct": false,
-          "rationale": "Network ACLs filter subnet traffic."
+          "rationale": "A customer gateway represents the company's own VPN device on the on-premises side of a VPN connection."
         }
       ],
-      "explanation": "Internet gateways are horizontally scaled, redundant and highly available VPC components.",
+      "explanation": "The clue is the public internet: an internet gateway connects a VPC to the internet, while a virtual private gateway connects a VPC to a company's own network through a VPN.",
       "difficulty": 1,
       "tags": [
         "networking",
         "vpc",
-        "internet-gateway"
+        "internet-gateway",
+        "virtual-private-gateway"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html"
+        "https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html",
+        "https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.5-04",
@@ -187,25 +189,25 @@
         {
           "text": "Amazon CloudFront",
           "correct": false,
-          "rationale": "CloudFront delivers cached content."
+          "rationale": "CloudFront delivers cached content from edge locations."
         },
         {
-          "text": "Elastic Load Balancing",
+          "text": "Amazon API Gateway",
           "correct": false,
-          "rationale": "Load balancers distribute traffic within a Region."
+          "rationale": "API Gateway creates and manages APIs; it does not answer DNS queries."
         },
         {
           "text": "AWS Global Accelerator",
           "correct": false,
-          "rationale": "Global Accelerator routes traffic over the AWS network using static IP addresses."
+          "rationale": "Global Accelerator routes traffic over the AWS network using static IP addresses rather than DNS."
         },
         {
           "text": "Amazon Route 53",
           "correct": true,
-          "rationale": "Route 53 is a DNS web service with routing policies and health checks."
+          "rationale": "Route 53 is a DNS web service that registers domains, routes traffic and checks the health of resources."
         }
       ],
-      "explanation": "Route 53 also registers domain names.",
+      "explanation": "The clue is DNS: Route 53 resolves domain names and can route traffic away from unhealthy resources, while Global Accelerator directs traffic through static IP addresses instead of DNS.",
       "difficulty": 1,
       "tags": [
         "networking",
@@ -213,13 +215,13 @@
         "dns"
       ],
       "refs": [
-        "https://aws.amazon.com/route53/"
+        "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/Welcome.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.5-06",
@@ -275,12 +277,12 @@
         {
           "text": "Internet gateway",
           "correct": false,
-          "rationale": "An internet gateway provides internet access."
+          "rationale": "An internet gateway connects a VPC to the internet, not to an on-premises network."
         },
         {
           "text": "Virtual private gateway",
           "correct": true,
-          "rationale": "The virtual private gateway is the VPN concentrator on the AWS side."
+          "rationale": "A virtual private gateway is the VPN endpoint on the AWS side, attached to one VPC."
         },
         {
           "text": "NAT gateway",
@@ -288,13 +290,13 @@
           "rationale": "A NAT gateway provides outbound internet access for private subnets."
         },
         {
-          "text": "Customer gateway",
+          "text": "On-premises customer gateway",
           "correct": false,
-          "rationale": "The customer gateway represents the device on the on-premises side."
+          "rationale": "The customer gateway represents the company's VPN device on the on-premises side."
         }
       ],
-      "explanation": "A Site-to-Site VPN connects a customer gateway (on premises) to a virtual private gateway or transit gateway (on AWS).",
-      "difficulty": 3,
+      "explanation": "The clue is the AWS side of a VPN: the virtual private gateway is attached to the VPC, while the customer gateway stands for the device in the company's data center.",
+      "difficulty": 2,
       "tags": [
         "networking",
         "vpn"
@@ -306,7 +308,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.5-08",
@@ -404,43 +406,44 @@
         {
           "text": "Amazon S3 buckets",
           "correct": false,
-          "rationale": "S3 buckets are storage, not VPC components."
+          "rationale": "S3 buckets are Regional storage that exists outside any VPC."
         },
         {
           "text": "Route tables",
           "correct": true,
-          "rationale": "Route tables decide where network traffic is directed."
+          "rationale": "Route tables are VPC components that decide where subnet traffic goes, such as to an internet gateway."
         },
         {
           "text": "IAM users",
           "correct": false,
-          "rationale": "IAM users are identities, not network components."
+          "rationale": "IAM users are identities in an account, not network parts of a VPC."
         },
         {
           "text": "Subnets",
           "correct": true,
-          "rationale": "Subnets divide a VPC's IP address range, each in one Availability Zone."
+          "rationale": "Subnets are ranges of IP addresses inside a VPC, each in one Availability Zone."
         },
         {
           "text": "Edge locations",
           "correct": false,
-          "rationale": "Edge locations are part of the global infrastructure, not a VPC."
+          "rationale": "Edge locations are CloudFront sites in the global infrastructure, outside any VPC."
         }
       ],
-      "explanation": "VPC building blocks include subnets, route tables, internet gateways, NAT gateways, security groups and network ACLs.",
+      "explanation": "VPC components are the network pieces you create inside a VPC: subnets, route tables, internet and NAT gateways, security groups and network ACLs. S3 buckets, IAM users and edge locations exist outside any VPC.",
       "difficulty": 1,
       "tags": [
         "networking",
         "vpc"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html"
+        "https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html",
+        "https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.5-11",
@@ -452,17 +455,17 @@
         {
           "text": "Amazon Route 53",
           "correct": false,
-          "rationale": "Route 53 is DNS."
+          "rationale": "Route 53 is a DNS service."
         },
         {
           "text": "Amazon CloudFront",
           "correct": false,
-          "rationale": "CloudFront delivers cached content."
+          "rationale": "CloudFront delivers cached content from edge locations."
         },
         {
-          "text": "AWS Direct Connect",
+          "text": "AWS Global Accelerator",
           "correct": false,
-          "rationale": "Direct Connect is a private network connection."
+          "rationale": "Global Accelerator routes traffic over the AWS network using static IP addresses."
         },
         {
           "text": "Amazon API Gateway",
@@ -470,7 +473,7 @@
           "rationale": "API Gateway is a managed service for building and running APIs."
         }
       ],
-      "explanation": "API Gateway often fronts AWS Lambda functions in serverless applications.",
+      "explanation": "The clue is creating and publishing APIs: API Gateway is the front door for APIs, often in front of AWS Lambda functions, while CloudFront caches and delivers content.",
       "difficulty": 1,
       "tags": [
         "networking",
@@ -483,7 +486,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.5-12",
@@ -493,7 +496,7 @@
       "stem": "Which Amazon Route 53 routing policy sends each user to the Region that gives them the lowest network latency?",
       "options": [
         {
-          "text": "Latency-based routing",
+          "text": "Latency routing",
           "correct": true,
           "rationale": "Latency routing answers with the Region that has the lowest latency for the user."
         },
@@ -510,11 +513,11 @@
         {
           "text": "Geolocation routing",
           "correct": false,
-          "rationale": "Geolocation routes by the user's location, not by measured latency."
+          "rationale": "Geolocation routing goes by where the user is located, not by measured latency."
         }
       ],
-      "explanation": "Route 53 routing policies include simple, weighted, latency, failover, geolocation and more.",
-      "difficulty": 3,
+      "explanation": "The clue is lowest latency: latency routing picks the Region with the best measured latency, while geolocation routing picks by the user's location.",
+      "difficulty": 2,
       "tags": [
         "networking",
         "route53"
@@ -526,7 +529,52 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "clf-c02-3.5-13",
+      "domain": "d3",
+      "objective": "3.5",
+      "type": "single",
+      "stem": "A company wants its Amazon EC2 instances scanned automatically for software vulnerabilities and unintended network exposure. Which service should it use?",
+      "options": [
+        {
+          "text": "Amazon GuardDuty",
+          "correct": false,
+          "rationale": "GuardDuty detects threats by analyzing activity in logs such as CloudTrail events and VPC flow logs; it does not scan software for vulnerabilities."
+        },
+        {
+          "text": "Amazon Inspector",
+          "correct": true,
+          "rationale": "Inspector continually scans EC2 instances, container images and Lambda functions for software vulnerabilities and network exposure."
+        },
+        {
+          "text": "AWS Shield",
+          "correct": false,
+          "rationale": "Shield protects applications against DDoS attacks."
+        },
+        {
+          "text": "Network access control lists (network ACLs)",
+          "correct": false,
+          "rationale": "Network ACLs allow or deny traffic at the subnet boundary; they do not scan instances."
+        }
+      ],
+      "explanation": "The clue is scanning for software vulnerabilities: Inspector finds weaknesses in workloads, while GuardDuty watches account and network activity for signs of an attack.",
+      "difficulty": 1,
+      "tags": [
+        "networking",
+        "vpc-security",
+        "inspector"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/inspector/latest/user/what-is-inspector.html",
+        "https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
     }
   ]
 }

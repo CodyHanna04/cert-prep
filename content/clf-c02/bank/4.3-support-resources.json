@@ -9,27 +9,27 @@
       "stem": "Which AWS Support plan is included for every AWS customer at no additional cost?",
       "options": [
         {
-          "text": "Business Support+",
+          "text": "AWS Business Support+",
           "correct": false,
-          "rationale": "Business Support+ is a paid plan."
+          "rationale": "AWS Business Support+ is a paid plan that adds 24/7 access to Cloud Support Engineers for technical cases."
         },
         {
-          "text": "Enterprise Support",
+          "text": "AWS Enterprise Support",
           "correct": false,
-          "rationale": "Enterprise Support is a paid plan."
+          "rationale": "AWS Enterprise Support is a paid plan that adds a designated Technical Account Manager."
         },
         {
-          "text": "Unified Operations",
+          "text": "AWS Unified Operations",
           "correct": false,
-          "rationale": "Unified Operations is a paid plan."
+          "rationale": "AWS Unified Operations is the highest-level paid plan, with a designated team for critical workloads."
         },
         {
           "text": "Basic Support",
           "correct": true,
-          "rationale": "Basic Support is included for all customers and covers account and billing questions and documentation."
+          "rationale": "Basic Support is included for every customer and covers account and billing questions, documentation and core Trusted Advisor checks."
         }
       ],
-      "explanation": "Paid plans add technical support cases and the full set of Trusted Advisor checks. The current plans are Basic, Business Support+, Enterprise Support and Unified Operations. The CLF-C02 exam guide still lists the older Developer, Business and Enterprise On-Ramp plans, which end on January 1, 2027.",
+      "explanation": "'No additional cost' points to Basic Support. Technical support cases with Cloud Support Engineers start at AWS Business Support+.",
       "difficulty": 1,
       "tags": [
         "support",
@@ -43,37 +43,37 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-4.3-02",
       "domain": "d4",
       "objective": "4.3",
       "type": "single",
-      "stem": "Which AWS Support plan includes a designated Technical Account Manager (TAM)?",
+      "stem": "A company on AWS Business Support+ wants a designated Technical Account Manager (TAM) for proactive guidance. What is the lowest-cost way to get one?",
       "options": [
         {
-          "text": "Enterprise Support",
+          "text": "Keep AWS Business Support+ and ask for a TAM",
+          "correct": false,
+          "rationale": "AWS Business Support+ gives 24/7 access to Cloud Support Engineers but does not include a TAM."
+        },
+        {
+          "text": "Hire AWS Professional Services for a TAM",
+          "correct": false,
+          "rationale": "Professional Services delivers project engagements; a designated TAM comes with a support plan."
+        },
+        {
+          "text": "Upgrade to AWS Unified Operations",
+          "correct": false,
+          "rationale": "AWS Unified Operations includes a TAM, but it is a higher-priced plan than Enterprise Support."
+        },
+        {
+          "text": "Upgrade to AWS Enterprise Support",
           "correct": true,
-          "rationale": "Enterprise Support includes a designated TAM."
-        },
-        {
-          "text": "Business Support+",
-          "correct": false,
-          "rationale": "Business Support+ does not include a TAM."
-        },
-        {
-          "text": "Developer Support",
-          "correct": false,
-          "rationale": "Developer Support does not include a TAM."
-        },
-        {
-          "text": "Basic Support",
-          "correct": false,
-          "rationale": "Basic Support does not include technical support."
+          "rationale": "AWS Enterprise Support is the lowest-priced plan that includes a designated TAM."
         }
       ],
-      "explanation": "Enterprise Support includes a designated TAM, and so does the higher Unified Operations plan. The retiring Enterprise On-Ramp plan offered a pool of TAMs.",
+      "explanation": "AWS Business Support+ adds 24/7 technical help and the full set of Trusted Advisor checks, but no TAM. AWS Enterprise Support is the first plan with a designated TAM; AWS Unified Operations also has one at a higher price.",
       "difficulty": 2,
       "tags": [
         "support",
@@ -81,56 +81,61 @@
         "tam"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/awssupport/latest/user/aws-support-plans.html"
+        "https://docs.aws.amazon.com/awssupport/latest/user/aws-support-plans.html",
+        "https://aws.amazon.com/premiumsupport/plans/enterprise/",
+        "https://aws.amazon.com/premiumsupport/pricing/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-4.3-03",
       "domain": "d4",
       "objective": "4.3",
       "type": "single",
-      "stem": "Which AWS Support plan offers a response time of 15 minutes for production-critical (business-critical) issues?",
+      "stem": "A small company needs 24/7 phone, web and chat access to AWS Cloud Support Engineers, with fast help when a business-critical system is down. It does not need a TAM. Which is the lowest-cost AWS Support plan that meets these needs?",
       "options": [
-        {
-          "text": "Business Support+",
-          "correct": false,
-          "rationale": "Business Support+ lists a slower response for business-critical cases."
-        },
-        {
-          "text": "Enterprise Support",
-          "correct": true,
-          "rationale": "Enterprise Support lists a response of up to 15 minutes for production-critical cases."
-        },
-        {
-          "text": "Developer Support",
-          "correct": false,
-          "rationale": "Developer Support is for business-hours guidance, not critical production issues."
-        },
         {
           "text": "Basic Support",
           "correct": false,
-          "rationale": "Basic Support does not include technical support cases."
+          "rationale": "Basic Support covers account and billing questions but not technical support cases."
+        },
+        {
+          "text": "AWS Enterprise Support",
+          "correct": false,
+          "rationale": "AWS Enterprise Support meets the needs but adds a designated TAM at a higher price."
+        },
+        {
+          "text": "AWS Business Support+",
+          "correct": true,
+          "rationale": "AWS Business Support+ gives 24/7 phone, web and chat access to Cloud Support Engineers and a response within 30 minutes for business-critical system down cases."
+        },
+        {
+          "text": "AWS Unified Operations",
+          "correct": false,
+          "rationale": "AWS Unified Operations is the highest-priced plan, with a designated team for mission-critical workloads."
         }
       ],
-      "explanation": "Faster critical-case response and a designated TAM distinguish Enterprise Support from lower plans.",
+      "explanation": "Around-the-clock technical help without a TAM points to AWS Business Support+. Enterprise Support is the nearest choice, but its extras, a designated TAM and a faster production-critical response, aren't needed here.",
       "difficulty": 2,
       "tags": [
         "support",
-        "support-plans"
+        "support-plans",
+        "business-support-plus"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/awssupport/latest/user/aws-support-plans.html"
+        "https://docs.aws.amazon.com/awssupport/latest/user/aws-support-plans.html",
+        "https://aws.amazon.com/premiumsupport/plans/business-plus/",
+        "https://aws.amazon.com/premiumsupport/pricing/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-4.3-04",
@@ -160,20 +165,21 @@
           "rationale": "Marketplace is a software catalog."
         }
       ],
-      "explanation": "Basic Support includes the core checks; Business Support+ (previously Business Support) and higher include the full set and the Trusted Advisor API.",
+      "explanation": "The clue is best-practice recommendations for your own account; the Health Dashboard reports AWS events instead. Basic Support includes the core checks, and AWS Business Support+ and higher plans include the full set.",
       "difficulty": 1,
       "tags": [
         "support",
         "trusted-advisor"
       ],
       "refs": [
-        "https://aws.amazon.com/premiumsupport/technology/trusted-advisor/"
+        "https://aws.amazon.com/premiumsupport/technology/trusted-advisor/",
+        "https://aws.amazon.com/premiumsupport/plans/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-4.3-05",
@@ -190,20 +196,20 @@
         {
           "text": "AWS CloudTrail",
           "correct": false,
-          "rationale": "CloudTrail records API calls."
+          "rationale": "CloudTrail records API calls made in your account."
         },
         {
-          "text": "AWS Cost Explorer",
+          "text": "Amazon CloudWatch dashboards",
           "correct": false,
-          "rationale": "Cost Explorer analyzes spending."
+          "rationale": "CloudWatch dashboards show metrics and alarms from your own resources, not AWS maintenance or service events."
         },
         {
           "text": "AWS Health Dashboard",
           "correct": true,
-          "rationale": "The Health Dashboard shows service health and events that affect your account."
+          "rationale": "The Health Dashboard shows service events, planned changes and notifications that affect your AWS resources."
         }
       ],
-      "explanation": "The AWS Health API gives programmatic access to the same events.",
+      "explanation": "The clue is AWS events, such as maintenance or a service issue, that affect your resources. The AWS Health API gives programmatic access to the same events.",
       "difficulty": 1,
       "tags": [
         "support",
@@ -216,7 +222,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-4.3-06",
@@ -271,7 +277,7 @@
         {
           "text": "AWS Professional Services",
           "correct": false,
-          "rationale": "Professional Services helps customers with projects."
+          "rationale": "Professional Services helps customers deliver projects on AWS."
         },
         {
           "text": "The AWS Trust and Safety team",
@@ -279,14 +285,14 @@
           "rationale": "Trust and Safety handles reports of abuse involving AWS resources."
         },
         {
-          "text": "The AWS Partner Network",
+          "text": "An AWS Partner Network consulting partner",
           "correct": false,
-          "rationale": "APN partners do not handle abuse reports."
+          "rationale": "APN consulting partners help customers build on AWS; they do not handle abuse reports."
         },
         {
-          "text": "AWS Marketplace sellers",
+          "text": "The AWS Health Dashboard",
           "correct": false,
-          "rationale": "Sellers do not handle abuse of AWS resources."
+          "rationale": "The Health Dashboard shows AWS events that affect your account, not abuse reports."
         }
       ],
       "explanation": "Abuse such as spam, port scanning or malware hosting is reported to AWS Trust and Safety.",
@@ -302,7 +308,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-4.3-08",
@@ -357,25 +363,25 @@
         {
           "text": "The AWS Trust and Safety team",
           "correct": false,
-          "rationale": "Trust and Safety handles abuse reports."
+          "rationale": "Trust and Safety handles reports of abuse involving AWS resources."
         },
         {
           "text": "AWS Health Dashboard",
           "correct": false,
-          "rationale": "The Health Dashboard reports service events."
+          "rationale": "The Health Dashboard reports AWS events that affect your account."
         },
         {
           "text": "AWS Artifact",
           "correct": false,
-          "rationale": "Artifact provides compliance reports."
+          "rationale": "Artifact provides compliance reports and agreements."
         },
         {
-          "text": "The AWS Partner Network (APN)",
+          "text": "The AWS Partner Network",
           "correct": true,
-          "rationale": "APN includes consulting partners and system integrators with AWS expertise."
+          "rationale": "The AWS Partner Network (APN) includes consulting partners and system integrators with AWS expertise."
         }
       ],
-      "explanation": "APN also includes independent software vendors (ISVs) that sell through AWS Marketplace.",
+      "explanation": "The clue is a third-party firm, which points to the AWS Partner Network. APN also includes independent software vendors (ISVs) that sell through AWS Marketplace.",
       "difficulty": 1,
       "tags": [
         "support",
@@ -389,7 +395,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-4.3-10",
@@ -399,24 +405,24 @@
       "stem": "Which resource provides time-tested strategies, guides and patterns from AWS and AWS Partners for migration and modernization projects?",
       "options": [
         {
-          "text": "AWS Prescriptive Guidance",
-          "correct": true,
-          "rationale": "Prescriptive Guidance offers strategies, guides and patterns for common projects."
+          "text": "AWS Trusted Advisor checks",
+          "correct": false,
+          "rationale": "Trusted Advisor checks your own account against best practices; it does not publish migration guides."
         },
         {
-          "text": "AWS Artifact",
-          "correct": false,
-          "rationale": "Artifact provides compliance reports."
+          "text": "AWS Prescriptive Guidance",
+          "correct": true,
+          "rationale": "Prescriptive Guidance offers strategies, guides and patterns for common projects such as migration."
         },
         {
           "text": "AWS Health Dashboard",
           "correct": false,
-          "rationale": "The Health Dashboard reports service events."
+          "rationale": "The Health Dashboard reports AWS events that affect your account."
         },
         {
           "text": "AWS Marketplace",
           "correct": false,
-          "rationale": "Marketplace is a software catalog."
+          "rationale": "Marketplace is a catalog for finding and buying third-party software."
         }
       ],
       "explanation": "Technical resources include AWS documentation, whitepapers, blogs, Prescriptive Guidance, the Knowledge Center and re:Post.",
@@ -432,7 +438,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-4.3-11",
@@ -481,6 +487,145 @@
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-4.3-12",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "single",
+      "stem": "A company runs mission-critical workloads and wants a designated TAM plus domain specialist engineers, with a response within 5 minutes during critical incidents. Which should it choose?",
+      "options": [
+        {
+          "text": "AWS Enterprise Support",
+          "correct": false,
+          "rationale": "AWS Enterprise Support has a designated TAM and up to 15-minute production-critical response, but not domain specialist engineers."
+        },
+        {
+          "text": "AWS Professional Services",
+          "correct": false,
+          "rationale": "Professional Services is a consulting team for projects, not a support plan."
+        },
+        {
+          "text": "AWS Unified Operations",
+          "correct": true,
+          "rationale": "AWS Unified Operations adds a designated TAM and domain specialist engineers, with incident engineers who respond within 5 minutes."
+        },
+        {
+          "text": "AWS Business Support+",
+          "correct": false,
+          "rationale": "AWS Business Support+ gives 24/7 access to Cloud Support Engineers but no designated TAM."
+        }
+      ],
+      "explanation": "Domain specialist engineers and a 5-minute critical response point to AWS Unified Operations. Enterprise Support is the nearest plan: it also has a designated TAM, but not that dedicated team.",
+      "difficulty": 2,
+      "tags": [
+        "support",
+        "support-plans",
+        "unified-operations"
+      ],
+      "refs": [
+        "https://aws.amazon.com/premiumsupport/plans/unified-operations/",
+        "https://docs.aws.amazon.com/awssupport/latest/user/aws-support-plans.html",
+        "https://aws.amazon.com/premiumsupport/plans/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "clf-c02-4.3-13",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "single",
+      "stem": "A company wants to find, buy and deploy security software from independent software vendors (ISVs), with the charges on its AWS bill. Which should it use?",
+      "options": [
+        {
+          "text": "AWS Service Catalog",
+          "correct": false,
+          "rationale": "Service Catalog lets an organization publish its own curated catalog of approved AWS resources."
+        },
+        {
+          "text": "AWS Marketplace",
+          "correct": true,
+          "rationale": "AWS Marketplace is a catalog where customers find, buy, deploy and manage software from ISVs and other sellers."
+        },
+        {
+          "text": "The AWS Partner Network",
+          "correct": false,
+          "rationale": "The AWS Partner Network is the program that partner companies such as ISVs join; it is not where customers buy software."
+        },
+        {
+          "text": "AWS License Manager",
+          "correct": false,
+          "rationale": "License Manager manages software licenses you already have."
+        }
+      ],
+      "explanation": "The clue is buying third-party software and paying through the AWS bill, which is AWS Marketplace. The AWS Partner Network is the program those ISVs belong to, not the store.",
+      "difficulty": 1,
+      "tags": [
+        "support",
+        "marketplace",
+        "apn"
+      ],
+      "refs": [
+        "https://aws.amazon.com/marketplace/",
+        "https://aws.amazon.com/partners/",
+        "https://aws.amazon.com/servicecatalog/",
+        "https://aws.amazon.com/license-manager/",
+        "https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/getting-viewing-bill.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "clf-c02-4.3-14",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "single",
+      "stem": "A company wants its own operations tool to pull information about AWS events that affect its account, such as scheduled maintenance, by calling an API. What should it use?",
+      "options": [
+        {
+          "text": "AWS CloudTrail",
+          "correct": false,
+          "rationale": "CloudTrail records API calls made in your account, not AWS service events."
+        },
+        {
+          "text": "AWS Trusted Advisor",
+          "correct": false,
+          "rationale": "Trusted Advisor checks your account against best practices."
+        },
+        {
+          "text": "AWS Health API",
+          "correct": true,
+          "rationale": "The AWS Health API gives programmatic access to the events shown in the AWS Health Dashboard; it needs AWS Business Support+ or a higher plan."
+        },
+        {
+          "text": "Amazon CloudWatch",
+          "correct": false,
+          "rationale": "CloudWatch collects metrics and logs from your own resources."
+        }
+      ],
+      "explanation": "'Calling an API' for AWS events points to the AWS Health API; the Health Dashboard shows the same events in the console. CloudTrail is the nearest trap, but it logs actions taken in your account.",
+      "difficulty": 2,
+      "tags": [
+        "support",
+        "health-api",
+        "health-dashboard"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/health/latest/ug/health-api.html",
+        "https://aws.amazon.com/premiumsupport/technology/aws-health-dashboard/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
     }
   ]
 }

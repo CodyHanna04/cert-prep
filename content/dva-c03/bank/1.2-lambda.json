@@ -9,12 +9,12 @@
       "stem": "A Lambda function must query an Amazon RDS database in private subnets of a VPC. Which steps are required? (Select TWO.)",
       "options": [
         {
-          "text": "Configure the function with the VPC's private subnets and a security group that the database allows",
+          "text": "Put the function in the private subnets, with a security group the database allows",
           "correct": true,
           "rationale": "The function then gets network interfaces in the VPC and can reach the database."
         },
         {
-          "text": "Add a NAT gateway so the function can reach the database",
+          "text": "Add a NAT gateway to the VPC so that the function can reach the database through it",
           "correct": false,
           "rationale": "A NAT gateway is for outbound internet access; the database is already inside the VPC."
         },
@@ -24,9 +24,9 @@
           "rationale": "Internet gateways do not help traffic that stays inside the VPC."
         },
         {
-          "text": "Give the execution role permissions to manage network interfaces, such as the AWSLambdaVPCAccessExecutionRole policy",
+          "text": "Give the execution role permission to create and manage network interfaces",
           "correct": true,
-          "rationale": "Lambda needs these permissions to create the interfaces it uses in the VPC."
+          "rationale": "Lambda needs these permissions, such as those in the AWSLambdaVPCAccessExecutionRole policy, to create its VPC interfaces."
         },
         {
           "text": "Make the database publicly accessible",
@@ -54,31 +54,36 @@
       "id": "dva-c03-1.2-02",
       "domain": "d1",
       "objective": "1.2",
-      "type": "single",
-      "stem": "A Lambda function connected to private subnets in a VPC must also call a public third-party API. The calls time out. What should the developer do?",
+      "type": "multi",
+      "stem": "A Lambda function connected to private subnets in a VPC must also call a public third-party API, and the calls time out. The VPC already has a public subnet with a route to an internet gateway. Which combination of steps will fix this? (Select TWO.)",
       "options": [
         {
-          "text": "Route outbound traffic from the private subnets through a NAT gateway",
-          "correct": true,
-          "rationale": "Lambda's network interfaces have no public IP, so internet access from the VPC goes through NAT."
-        },
-        {
-          "text": "Move the function to a public subnet with a route to an internet gateway",
+          "text": "Move the function to the public subnet so that it can use the internet gateway",
           "correct": false,
-          "rationale": "A function in a public subnet still gets no public IP, so it cannot reach the internet that way."
+          "rationale": "Connecting a function to a public subnet does not give it internet access, because its network interfaces have no public IP."
         },
         {
-          "text": "Increase the function's timeout",
+          "text": "Create a NAT gateway in the public subnet",
+          "correct": true,
+          "rationale": "The NAT gateway gives resources in private subnets outbound internet access through the public subnet."
+        },
+        {
+          "text": "Increase the function's timeout so the calls have more time",
           "correct": false,
           "rationale": "More time does not create a network path to the internet."
         },
         {
-          "text": "Add the API's domain to the function's environment variables",
+          "text": "Route 0.0.0.0/0 to the NAT gateway in the private subnets' route table",
+          "correct": true,
+          "rationale": "The route sends the function's internet-bound traffic through the NAT gateway."
+        },
+        {
+          "text": "Add a route from the private subnets to the internet gateway",
           "correct": false,
-          "rationale": "Environment variables do not change network routing."
+          "rationale": "Without public IPs, the function cannot use an internet gateway directly; private subnets reach the internet through NAT."
         }
       ],
-      "explanation": "A VPC-connected function reaches the internet through a NAT gateway (or NAT instance) in a public subnet.",
+      "explanation": "A VPC-connected function has no public IP, so internet access needs a NAT gateway in a public subnet plus a route to it from the private subnets. Moving the function to a public subnet is the trap: that alone does not give it internet access.",
       "difficulty": 3,
       "tags": [
         "lambda",
@@ -165,7 +170,7 @@
           "rationale": "Moving code into a layer does not change how long the function may run."
         }
       ],
-      "explanation": "Timeout is a per-function setting; set it to cover the longest expected run.",
+      "explanation": "\"Task timed out\" means the function reached its configured timeout, so raise the timeout to cover the longest run. Concurrency settings are the trap: they control how many copies run, not how long each may run.",
       "difficulty": 1,
       "tags": [
         "lambda",
@@ -208,7 +213,7 @@
           "rationale": "Lambda allocates CPU in proportion to memory, so more memory also means more CPU."
         }
       ],
-      "explanation": "Memory is the single knob for Lambda compute power.",
+      "explanation": "\"CPU-intensive\" is the clue: Lambda allocates CPU in proportion to memory, so more memory makes the function faster. A longer timeout is the trap; it lets a slow run finish but does not speed it up.",
       "difficulty": 2,
       "tags": [
         "lambda",
@@ -237,7 +242,7 @@
           "rationale": "A function DLQ receives asynchronous events that fail all retry attempts."
         },
         {
-          "text": "An event source mapping that reads from the queue",
+          "text": "An event source mapping on the function that reads from the queue",
           "correct": false,
           "rationale": "An event source mapping makes the function consume the queue, not write failures to it."
         },
@@ -388,7 +393,7 @@
           "rationale": "Memory changes speed, not how many instances run."
         }
       ],
-      "explanation": "Reserved concurrency both guarantees and limits a function's concurrency.",
+      "explanation": "The clue is capping how many copies run at once, which is what reserved concurrency does. Provisioned concurrency is the nearest distractor, but it keeps instances warm and does not cap concurrency.",
       "difficulty": 2,
       "tags": [
         "lambda",

@@ -97,14 +97,14 @@
       "stem": "In a standalone AWS account, which task requires signing in with the root user credentials?",
       "options": [
         {
-          "text": "Creating an IAM user",
+          "text": "Creating an IAM user for a new employee",
           "correct": false,
           "rationale": "IAM administrators can create IAM users."
         },
         {
-          "text": "Changing the account's root user email address",
+          "text": "Changing the root user's email address",
           "correct": true,
-          "rationale": "Changing account settings such as the root email address is a root user task."
+          "rationale": "In a standalone account, changing the root user's email address, password or access keys requires the root user."
         },
         {
           "text": "Launching an Amazon EC2 instance",
@@ -112,7 +112,7 @@
           "rationale": "An IAM identity with permissions can launch instances."
         },
         {
-          "text": "Creating an Amazon S3 bucket",
+          "text": "Creating an Amazon S3 bucket for logs",
           "correct": false,
           "rationale": "An IAM identity with permissions can create buckets."
         }
@@ -130,7 +130,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-2.3-04",
@@ -140,19 +140,19 @@
       "stem": "What is the recommended way to give the same permissions to many IAM users?",
       "options": [
         {
-          "text": "Share one IAM user's credentials among them",
+          "text": "Have them all sign in as one shared IAM user",
           "correct": false,
-          "rationale": "Credentials should not be shared; each person needs their own identity."
+          "rationale": "Each person needs their own identity; sharing one user breaks accountability."
         },
         {
           "text": "Give each of them the root user password",
           "correct": false,
-          "rationale": "Root credentials should never be shared."
+          "rationale": "Root credentials should not be shared."
         },
         {
-          "text": "Add the users to an IAM group and attach policies to the group",
+          "text": "Add them to an IAM group that has the policies",
           "correct": true,
-          "rationale": "Groups let you manage permissions for many users at once."
+          "rationale": "Policies attached to an IAM group apply to every user in it."
         },
         {
           "text": "Create one access key and send it to every user",
@@ -173,7 +173,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-2.3-05",
@@ -291,7 +291,7 @@
           "rationale": "Public storage is the wrong place for credentials."
         }
       ],
-      "explanation": "Secrets Manager removes hard-coded credentials from applications; AWS Systems Manager Parameter Store is another place to keep configuration and secrets.",
+      "explanation": "The clue is automatic rotation of database credentials: Secrets Manager stores secrets and rotates them. AWS KMS is the nearest neighbor; it manages encryption keys but does not store or rotate passwords.",
       "difficulty": 2,
       "tags": [
         "iam",
@@ -299,13 +299,14 @@
         "credentials"
       ],
       "refs": [
-        "https://aws.amazon.com/secrets-manager/"
+        "https://aws.amazon.com/secrets-manager/",
+        "https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-2.3-08",
@@ -330,9 +331,9 @@
           "rationale": "The account password policy defines length, complexity and rotation rules for IAM user passwords."
         },
         {
-          "text": "Turn on AWS CloudTrail",
+          "text": "Turn on AWS CloudTrail to log sign-in events",
           "correct": false,
-          "rationale": "CloudTrail records API calls; it does not enforce passwords."
+          "rationale": "CloudTrail records sign-in and API activity; it does not enforce password rules."
         }
       ],
       "explanation": "A custom password policy applies to IAM users in the account.",
@@ -348,7 +349,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-2.3-09",
@@ -358,7 +359,7 @@
       "stem": "What is an AWS managed policy?",
       "options": [
         {
-          "text": "A policy embedded directly in a single IAM user",
+          "text": "A policy embedded directly in one IAM user or role",
           "correct": false,
           "rationale": "That describes an inline policy."
         },
@@ -373,9 +374,9 @@
           "rationale": "That describes a security group rule."
         },
         {
-          "text": "A standalone policy that AWS creates and maintains",
+          "text": "A reusable policy that AWS creates and maintains",
           "correct": true,
-          "rationale": "AWS managed policies are created and updated by AWS and can be attached to many identities."
+          "rationale": "AWS managed policies are standalone policies created and updated by AWS that can be attached to many identities."
         }
       ],
       "explanation": "Identity-based policies are AWS managed, customer managed or inline. Customer managed policies are created by you; inline policies belong to one identity.",
@@ -391,7 +392,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-2.3-10",
@@ -406,7 +407,7 @@
           "rationale": "Shared keys remove accountability."
         },
         {
-          "text": "Use IAM roles instead of long-term access keys where possible",
+          "text": "Prefer IAM roles over long-term access keys",
           "correct": true,
           "rationale": "Roles provide temporary credentials that expire automatically."
         },
@@ -440,7 +441,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-2.3-11",
@@ -508,25 +509,26 @@
           "rationale": "Inline policies are embedded in one identity and are not reusable."
         },
         {
-          "text": "Security group",
+          "text": "Service control policy (SCP)",
           "correct": false,
-          "rationale": "Security groups control network traffic."
+          "rationale": "An SCP sets maximum permissions for accounts in AWS Organizations; it is not attached to IAM users or roles and grants no permissions."
         }
       ],
-      "explanation": "Use AWS managed policies to start quickly and customer managed policies for least privilege tailored to you.",
+      "explanation": "The clue is a reusable policy the company writes itself: a customer managed policy. AWS managed policies are also reusable, but AWS writes and updates them.",
       "difficulty": 2,
       "tags": [
         "iam",
         "policies"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html"
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html",
+        "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-2.3-13",
@@ -664,17 +666,12 @@
       "domain": "d2",
       "objective": "2.3",
       "type": "single",
-      "stem": "Besides AWS Secrets Manager, which service can store configuration data and encrypted values (SecureString) as named parameters?",
+      "stem": "Besides AWS Secrets Manager, which AWS feature can centrally store configuration data and encrypted values as named parameters?",
       "options": [
         {
-          "text": "AWS Systems Manager Parameter Store",
-          "correct": true,
-          "rationale": "Parameter Store keeps configuration data and can encrypt values with AWS KMS as SecureString parameters."
-        },
-        {
-          "text": "AWS Artifact",
+          "text": "AWS Key Management Service (AWS KMS)",
           "correct": false,
-          "rationale": "Artifact provides compliance reports."
+          "rationale": "AWS KMS creates and protects encryption keys, which Parameter Store can use, but it does not store configuration values."
         },
         {
           "text": "Amazon CloudWatch",
@@ -682,12 +679,17 @@
           "rationale": "CloudWatch monitors metrics and logs."
         },
         {
+          "text": "AWS Systems Manager Parameter Store",
+          "correct": true,
+          "rationale": "Parameter Store keeps configuration data as named parameters and can encrypt values with AWS KMS as SecureString parameters."
+        },
+        {
           "text": "AWS Config",
           "correct": false,
-          "rationale": "AWS Config records resource configurations."
+          "rationale": "AWS Config records resource configurations; it does not store application settings."
         }
       ],
-      "explanation": "Secrets Manager is purpose-built for secrets and adds built-in rotation; Parameter Store is a simpler, central store for configuration data, with optional KMS-encrypted SecureString values.",
+      "explanation": "The clue is named parameters: Parameter Store is a central store for configuration data, with SecureString values encrypted by AWS KMS. Secrets Manager is the recommended choice for secrets such as database passwords because it adds automatic rotation.",
       "difficulty": 2,
       "tags": [
         "iam",
@@ -701,51 +703,52 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-2.3-17",
       "domain": "d2",
       "objective": "2.3",
       "type": "single",
-      "stem": "Which IAM feature shows when services were last accessed by an identity, helping remove unused permissions?",
+      "stem": "An administrator wants to see which AWS services an IAM role has actually used, and when, so that unused permissions can be removed. Which IAM feature shows this?",
       "options": [
         {
           "text": "AWS Artifact reports",
           "correct": false,
-          "rationale": "Artifact provides compliance reports."
+          "rationale": "Artifact provides AWS compliance reports, not data about your identities."
         },
         {
-          "text": "Last accessed information (access advisor)",
+          "text": "IAM last accessed information",
           "correct": true,
-          "rationale": "Last accessed data shows which permissions are actually used, supporting least privilege."
+          "rationale": "Last accessed information shows when an identity last used each allowed service, so unused permissions can be removed."
         },
         {
-          "text": "Amazon Inspector findings for EC2 instances",
+          "text": "Amazon Inspector findings",
           "correct": false,
-          "rationale": "Inspector reports vulnerabilities."
+          "rationale": "Inspector reports software vulnerabilities in workloads."
         },
         {
-          "text": "AWS Shield metrics",
+          "text": "AWS Trusted Advisor security checks",
           "correct": false,
-          "rationale": "Shield metrics are about DDoS events."
+          "rationale": "Trusted Advisor checks the account against best practices, such as root user MFA, rather than showing each role's service use."
         }
       ],
-      "explanation": "Access reports such as last accessed information help refine permissions over time.",
-      "difficulty": 3,
+      "explanation": "The clue is removing unused permissions: last accessed information is an IAM access report that shows which services an identity really uses, which supports least privilege. Trusted Advisor is broader; it checks account-wide best practices.",
+      "difficulty": 2,
       "tags": [
         "iam",
         "least-privilege",
         "access-reports"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_last-accessed.html"
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_last-accessed.html",
+        "https://docs.aws.amazon.com/awssupport/latest/user/security-checks.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-2.3-18",

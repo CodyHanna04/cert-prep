@@ -58,9 +58,9 @@
           "rationale": "Regions contain multiple Availability Zones, each with one or more data centers."
         },
         {
-          "text": "Each Region is a separate area with multiple Availability Zones",
+          "text": "Each Region contains multiple Availability Zones",
           "correct": true,
-          "rationale": "Regions are physical locations around the world, each made up of multiple isolated AZs."
+          "rationale": "Each Region is a separate geographic area made up of multiple isolated Availability Zones."
         },
         {
           "text": "Resources are copied to every Region automatically",
@@ -70,10 +70,10 @@
         {
           "text": "Regions and edge locations are the same thing",
           "correct": false,
-          "rationale": "Edge locations are separate sites used to serve content."
+          "rationale": "Edge locations are separate sites used to serve content close to users."
         }
       ],
-      "explanation": "Data does not leave a Region unless you move it, which matters for data sovereignty.",
+      "explanation": "A Region is a geographic area built from several isolated Availability Zones; edge locations are separate sites, and data stays in a Region unless you copy it elsewhere.",
       "difficulty": 1,
       "tags": [
         "global-infrastructure",
@@ -86,7 +86,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.2-03",
@@ -149,17 +149,17 @@
           "rationale": "Instance size does not protect against a Regional outage."
         },
         {
-          "text": "Enable MFA on the root user",
-          "correct": false,
-          "rationale": "MFA improves account security, not availability."
+          "text": "Deploy the workload in a second Region",
+          "correct": true,
+          "rationale": "A multi-Region design protects against the loss of a whole Region, which supports disaster recovery."
         },
         {
-          "text": "Deploy the workload in a second Region as part of a disaster recovery plan",
-          "correct": true,
-          "rationale": "Multi-Region designs protect against the loss of a whole Region."
+          "text": "Spread instances across two Availability Zones",
+          "correct": false,
+          "rationale": "Multiple AZs protect against the loss of one AZ, but they all sit in the same Region."
         }
       ],
-      "explanation": "Reasons to use multiple Regions: disaster recovery and business continuity, low latency for distant users, and data sovereignty.",
+      "explanation": "The clue is an entire Region becoming unavailable: multiple Availability Zones protect against an AZ failure, but only a second Region protects against a Regional outage.",
       "difficulty": 2,
       "tags": [
         "global-infrastructure",
@@ -173,7 +173,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.2-05",
@@ -232,9 +232,9 @@
           "rationale": "Databases run in Regions and Availability Zones."
         },
         {
-          "text": "Caching content closer to users through services such as Amazon CloudFront",
+          "text": "Caching content close to end users",
           "correct": true,
-          "rationale": "Edge locations serve cached content and run edge services with low latency."
+          "rationale": "Edge locations cache content for services such as Amazon CloudFront so users receive it with lower latency."
         },
         {
           "text": "Grouping several AWS Regions together",
@@ -247,7 +247,7 @@
           "rationale": "Backup vaults live in Regions."
         }
       ],
-      "explanation": "CloudFront and Route 53 use edge locations to bring content and DNS answers closer to users.",
+      "explanation": "Edge locations are sites separate from Regions where CloudFront caches content near users; databases and backup vaults run inside Regions.",
       "difficulty": 1,
       "tags": [
         "global-infrastructure",
@@ -261,29 +261,29 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.2-07",
       "domain": "d3",
       "objective": "3.2",
       "type": "single",
-      "stem": "Which service improves the availability and performance of applications by routing user traffic over the AWS global network to the nearest healthy endpoint using static IP addresses?",
+      "stem": "Which service gives an application static IP addresses and routes user traffic over the AWS global network to healthy endpoints?",
       "options": [
         {
           "text": "Amazon CloudFront",
           "correct": false,
-          "rationale": "CloudFront caches content at edge locations; it does not provide static IP addresses for your application."
+          "rationale": "CloudFront caches and delivers content from edge locations; it does not give your application static IP addresses."
         },
         {
-          "text": "Elastic Load Balancing",
+          "text": "Elastic Load Balancing (ELB)",
           "correct": false,
           "rationale": "Elastic Load Balancing distributes traffic to targets within a Region rather than routing users across the AWS global network."
         },
         {
           "text": "AWS Global Accelerator",
           "correct": true,
-          "rationale": "Global Accelerator provides static anycast IP addresses and routes traffic over the AWS network."
+          "rationale": "Global Accelerator provides static anycast IP addresses and routes traffic over the AWS global network to the nearest healthy endpoint."
         },
         {
           "text": "AWS Direct Connect",
@@ -291,8 +291,8 @@
           "rationale": "Direct Connect links an on-premises network to AWS."
         }
       ],
-      "explanation": "CloudFront speeds up content delivery with caching; Global Accelerator speeds up and stabilizes TCP and UDP traffic to applications.",
-      "difficulty": 3,
+      "explanation": "The clue is static IP addresses: Global Accelerator gives fixed entry points on the AWS edge network, while CloudFront speeds up delivery by caching content.",
+      "difficulty": 2,
       "tags": [
         "global-infrastructure",
         "global-accelerator"
@@ -304,93 +304,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
-    },
-    {
-      "id": "clf-c02-3.2-08",
-      "domain": "d3",
-      "objective": "3.2",
-      "type": "single",
-      "stem": "A company wants to run latency-sensitive applications, such as real-time video rendering, close to users in a large city that is far from the nearest AWS Region. Which option should it consider?",
-      "options": [
-        {
-          "text": "AWS Wavelength Zones",
-          "correct": false,
-          "rationale": "Wavelength is for applications on 5G mobile networks, inside telecommunications providers' networks."
-        },
-        {
-          "text": "An Availability Zone in a distant Region",
-          "correct": false,
-          "rationale": "A distant Region does not provide low latency to that city."
-        },
-        {
-          "text": "Edge locations alone",
-          "correct": false,
-          "rationale": "Edge locations cache content but do not run general application compute."
-        },
-        {
-          "text": "AWS Local Zones",
-          "correct": true,
-          "rationale": "Local Zones place compute, storage and other services close to large population centers for single-digit millisecond latency."
-        }
-      ],
-      "explanation": "Local Zones extend a Region to a metro area. Wavelength Zones extend AWS into 5G networks.",
-      "difficulty": 3,
-      "tags": [
-        "global-infrastructure",
-        "local-zones"
-      ],
-      "refs": [
-        "https://aws.amazon.com/about-aws/global-infrastructure/localzones/"
-      ],
-      "source": "ai-draft",
-      "reviewStatus": "approved",
-      "generator": "claude-opus-5-5",
-      "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
-    },
-    {
-      "id": "clf-c02-3.2-09",
-      "domain": "d3",
-      "objective": "3.2",
-      "type": "single",
-      "stem": "Which option embeds AWS compute and storage inside telecommunications providers' 5G networks for ultra-low-latency mobile applications?",
-      "options": [
-        {
-          "text": "AWS Wavelength Zones",
-          "correct": true,
-          "rationale": "Wavelength Zones put AWS infrastructure at the edge of 5G networks."
-        },
-        {
-          "text": "AWS Local Zones",
-          "correct": false,
-          "rationale": "Local Zones serve metro areas but are not inside carrier 5G networks."
-        },
-        {
-          "text": "Availability Zones",
-          "correct": false,
-          "rationale": "AZs are part of a Region, not inside carrier networks."
-        },
-        {
-          "text": "Edge locations",
-          "correct": false,
-          "rationale": "Edge locations cache content for services such as CloudFront."
-        }
-      ],
-      "explanation": "Wavelength lets mobile application traffic reach AWS compute without leaving the carrier network.",
-      "difficulty": 2,
-      "tags": [
-        "global-infrastructure",
-        "wavelength"
-      ],
-      "refs": [
-        "https://aws.amazon.com/wavelength/"
-      ],
-      "source": "ai-draft",
-      "reviewStatus": "approved",
-      "generator": "claude-opus-5-5",
-      "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.2-10",
@@ -405,9 +319,9 @@
           "rationale": "Edge locations are separate sites for caching and edge services."
         },
         {
-          "text": "They are connected by low-latency, high-bandwidth networking",
+          "text": "They are linked by low-latency networking",
           "correct": true,
-          "rationale": "Fast links between AZs make synchronous replication practical."
+          "rationale": "AZs are connected by redundant, low-latency networks, which makes synchronous replication practical."
         },
         {
           "text": "Each Availability Zone is in a different country",
@@ -415,14 +329,14 @@
           "rationale": "AZs in a Region are in the same geographic area."
         },
         {
-          "text": "They are physically separated from each other within a Region",
+          "text": "They are physically separate within a Region",
           "correct": true,
-          "rationale": "Separation means a local event such as a fire or flood does not affect other AZs."
+          "rationale": "AZs are many kilometers apart, so a local event such as a fire or flood does not affect the others."
         },
         {
           "text": "They share a single power source to reduce costs",
           "correct": false,
-          "rationale": "Each AZ has independent, redundant power."
+          "rationale": "Each AZ has independent power."
         }
       ],
       "explanation": "Availability Zones do not share single points of failure, which is why multi-AZ designs are highly available.",
@@ -439,7 +353,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.2-11",
@@ -448,11 +362,6 @@
       "type": "single",
       "stem": "A company wants a copy of its Amazon S3 data in a Region on another continent for disaster recovery. Which statement is correct?",
       "options": [
-        {
-          "text": "The company must set up replication, for example with S3 Cross-Region Replication",
-          "correct": true,
-          "rationale": "Data stays in its Region until you choose to copy it elsewhere."
-        },
         {
           "text": "AWS copies all data to every Region automatically",
           "correct": false,
@@ -464,12 +373,17 @@
           "rationale": "Regions are isolated from each other."
         },
         {
+          "text": "The company must configure replication itself",
+          "correct": true,
+          "rationale": "Data stays in its Region until you copy it, for example with S3 Cross-Region Replication."
+        },
+        {
           "text": "Edge locations keep backups of S3 buckets",
           "correct": false,
           "rationale": "Edge locations cache content; they are not backup storage."
         }
       ],
-      "explanation": "Region isolation supports data sovereignty; replication is an explicit choice.",
+      "explanation": "Data stays in the Region where you store it, which supports data sovereignty; copying it to another Region for disaster recovery is an explicit choice, such as S3 Cross-Region Replication.",
       "difficulty": 2,
       "tags": [
         "global-infrastructure",
@@ -483,7 +397,102 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "clf-c02-3.2-12",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "single",
+      "stem": "A company runs its web application in one AWS Region in North America. Users in Asia report slow response times. Which approach reduces latency for those users?",
+      "options": [
+        {
+          "text": "Spread the instances across more Availability Zones",
+          "correct": false,
+          "rationale": "AZs are all in the same Region, so users in Asia are still far away."
+        },
+        {
+          "text": "Deploy the application in a Region in Asia",
+          "correct": true,
+          "rationale": "Running the application in a Region close to its users shortens the network distance to them."
+        },
+        {
+          "text": "Switch to a larger Amazon EC2 instance type",
+          "correct": false,
+          "rationale": "A bigger instance adds capacity but does not shorten the distance to distant users."
+        },
+        {
+          "text": "Purchase Reserved Instances for the servers",
+          "correct": false,
+          "rationale": "Reserved Instances lower cost; they do not change latency."
+        }
+      ],
+      "explanation": "The clue is users far from the only Region: low latency for end users is a reason to use multiple Regions, while more Availability Zones improve availability within one Region.",
+      "difficulty": 1,
+      "tags": [
+        "global-infrastructure",
+        "regions",
+        "latency"
+      ],
+      "refs": [
+        "https://aws.amazon.com/blogs/architecture/what-to-consider-when-selecting-a-region-for-your-workloads/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "clf-c02-3.2-13",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "multi",
+      "stem": "Which TWO AWS services use edge locations to serve users with low latency? (Choose TWO.)",
+      "options": [
+        {
+          "text": "Amazon RDS",
+          "correct": false,
+          "rationale": "RDS databases run in Regions and Availability Zones, not at edge locations."
+        },
+        {
+          "text": "Amazon CloudFront",
+          "correct": true,
+          "rationale": "CloudFront caches and delivers content from edge locations close to users."
+        },
+        {
+          "text": "AWS Batch",
+          "correct": false,
+          "rationale": "AWS Batch runs batch jobs on compute in a Region."
+        },
+        {
+          "text": "Amazon Route 53",
+          "correct": true,
+          "rationale": "Route 53 answers DNS queries from a global network of edge locations."
+        },
+        {
+          "text": "Amazon Elastic Block Store (Amazon EBS)",
+          "correct": false,
+          "rationale": "EBS volumes live in one Availability Zone and attach to EC2 instances there."
+        }
+      ],
+      "explanation": "Edge locations are sites separate from Regions that bring cached content and DNS answers close to users; databases, block storage and batch jobs run inside Regions.",
+      "difficulty": 1,
+      "tags": [
+        "global-infrastructure",
+        "edge-locations",
+        "cloudfront",
+        "route-53"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html",
+        "https://aws.amazon.com/route53/faqs/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
     }
   ]
 }

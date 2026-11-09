@@ -98,12 +98,12 @@
         {
           "text": "AWS Management Console",
           "correct": false,
-          "rationale": "The console is interactive and not suited to scripting."
+          "rationale": "The console is a point-and-click web interface and is not suited to scripting."
         },
         {
-          "text": "AWS Command Line Interface (AWS CLI)",
+          "text": "AWS CLI",
           "correct": true,
-          "rationale": "The AWS CLI controls AWS services from the command line and scripts."
+          "rationale": "The AWS Command Line Interface (AWS CLI) controls AWS services from a terminal and from scripts."
         },
         {
           "text": "Amazon WorkSpaces",
@@ -111,12 +111,12 @@
           "rationale": "WorkSpaces provides virtual desktops."
         },
         {
-          "text": "AWS Marketplace",
+          "text": "AWS Elastic Beanstalk",
           "correct": false,
-          "rationale": "Marketplace is a software catalog."
+          "rationale": "Elastic Beanstalk deploys and runs web applications from uploaded code."
         }
       ],
-      "explanation": "The AWS CLI is a unified tool for managing AWS services from a terminal and automating them through scripts.",
+      "explanation": "The clue is scripts run from a terminal: the AWS CLI is the command-line tool for AWS, while the Management Console is used by hand in a browser.",
       "difficulty": 1,
       "tags": [
         "access",
@@ -129,7 +129,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.1-04",
@@ -149,7 +149,7 @@
           "rationale": "Where code is stored does not make it infrastructure as code."
         },
         {
-          "text": "Defining infrastructure in templates or code so it can be provisioned repeatably",
+          "text": "Defining resources in templates so they deploy repeatably",
           "correct": true,
           "rationale": "Infrastructure as code treats infrastructure definitions like software: versioned, reviewed and repeatable."
         },
@@ -159,7 +159,7 @@
           "rationale": "Manual configuration is the opposite of infrastructure as code."
         }
       ],
-      "explanation": "AWS CloudFormation is AWS's infrastructure as code service.",
+      "explanation": "The clue is repeatable provisioning from a definition: infrastructure as code describes resources in templates or code, such as AWS CloudFormation templates, instead of configuring each one by hand.",
       "difficulty": 1,
       "tags": [
         "iac",
@@ -172,7 +172,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.1-05",
@@ -194,15 +194,15 @@
         {
           "text": "Ask AWS Support to build each environment",
           "correct": false,
-          "rationale": "AWS Support does not build customer environments."
+          "rationale": "AWS Support gives guidance but does not build customer environments."
         },
         {
-          "text": "Use infrastructure as code templates, such as AWS CloudFormation",
+          "text": "Deploy them from AWS CloudFormation templates",
           "correct": true,
-          "rationale": "Templates create the same environment every time, which suits repeatable processes."
+          "rationale": "CloudFormation templates create the same environment every time, which suits repeatable work."
         }
       ],
-      "explanation": "One-time operations can be done by hand; repeatable processes should be automated with infrastructure as code.",
+      "explanation": "The clue is identical environments built many times: repeatable processes should be automated with infrastructure as code, while clicking through the console suits one-time tasks.",
       "difficulty": 2,
       "tags": [
         "iac",
@@ -210,13 +210,14 @@
         "automation"
       ],
       "refs": [
-        "https://aws.amazon.com/cloudformation/"
+        "https://aws.amazon.com/cloudformation/",
+        "https://docs.aws.amazon.com/whitepapers/latest/introduction-devops-aws/infrastructure-as-code.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.1-06",
@@ -407,14 +408,14 @@
           "rationale": "SDKs call AWS APIs from application code."
         },
         {
-          "text": "AWS Marketplace",
+          "text": "AWS Management Console",
           "correct": false,
-          "rationale": "Marketplace is a software catalog."
+          "rationale": "The console is a point-and-click web interface rather than programmatic access."
         },
         {
-          "text": "AWS Command Line Interface (AWS CLI)",
+          "text": "AWS CLI",
           "correct": true,
-          "rationale": "The CLI sends API requests from a terminal or script."
+          "rationale": "The AWS Command Line Interface (AWS CLI) sends API requests from a terminal or script."
         },
         {
           "text": "AWS Artifact",
@@ -422,7 +423,7 @@
           "rationale": "Artifact provides compliance documents."
         }
       ],
-      "explanation": "Programmatic access means using AWS APIs, directly or through the CLI and SDKs.",
+      "explanation": "Programmatic access means calling AWS APIs from code or commands, which the SDKs and the AWS CLI do; the Management Console is used by hand in a browser.",
       "difficulty": 1,
       "tags": [
         "access",
@@ -437,7 +438,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.1-11",
@@ -457,17 +458,17 @@
           "rationale": "A one-time review is not a repeatable process."
         },
         {
-          "text": "Closing an AWS account that is no longer used",
+          "text": "Closing an unused AWS account",
           "correct": false,
           "rationale": "Closing an account is a one-time action."
         },
         {
-          "text": "Creating the same VPC layout for every new project",
+          "text": "Building the same VPC for each new project",
           "correct": true,
-          "rationale": "A layout built again and again should come from a template, such as AWS CloudFormation."
+          "rationale": "A layout built again and again should come from a template, such as an AWS CloudFormation template."
         }
       ],
-      "explanation": "Automate repeatable processes with infrastructure as code; one-time operations can be done by hand.",
+      "explanation": "The clue is doing the same build for every project: repeatable processes are automated with infrastructure as code, while one-time operations can be done by hand.",
       "difficulty": 2,
       "tags": [
         "iac",
@@ -480,7 +481,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.1-12",
@@ -526,48 +527,93 @@
       "lastVerified": "2026-11-02"
     },
     {
-      "id": "clf-c02-3.1-13",
+      "id": "clf-c02-3.1-14",
       "domain": "d3",
       "objective": "3.1",
       "type": "single",
-      "stem": "Which service provides a browser-based shell, already authenticated with the console user's credentials, for running AWS CLI commands?",
+      "stem": "An employee needs to create one Amazon S3 bucket for a short test and will not repeat the task. Which approach needs the least setup?",
       "options": [
         {
-          "text": "Amazon WorkSpaces",
+          "text": "Write an AWS CloudFormation template",
           "correct": false,
-          "rationale": "WorkSpaces provides virtual desktops."
+          "rationale": "A template pays off when the same resources are created again and again."
         },
         {
-          "text": "AWS CloudShell",
+          "text": "Write a shell script that uses the AWS CLI",
+          "correct": false,
+          "rationale": "A script needs the AWS CLI installed and configured, which is extra work for a single task."
+        },
+        {
+          "text": "Use the AWS Management Console",
           "correct": true,
-          "rationale": "CloudShell is a browser-based shell with the AWS CLI preinstalled and your credentials available."
+          "rationale": "The console is a web interface, so a one-time task can be done by signing in and clicking through it."
         },
         {
-          "text": "AWS Config",
+          "text": "Build a small program with an AWS SDK",
           "correct": false,
-          "rationale": "AWS Config records resource configurations."
-        },
-        {
-          "text": "Amazon WorkSpaces Applications",
-          "correct": false,
-          "rationale": "WorkSpaces Applications streams desktop applications."
+          "rationale": "An SDK program means writing code, which suits applications rather than a single manual task."
         }
       ],
-      "explanation": "CloudShell is a quick way to use the CLI without installing anything.",
-      "difficulty": 2,
+      "explanation": "The clue is a task that will not be repeated: one-time operations suit the console, while templates, scripts and SDK code are worth their setup for repeatable processes.",
+      "difficulty": 1,
       "tags": [
         "access",
-        "cloudshell",
-        "cli"
+        "console",
+        "one-time-operations"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/cloudshell/latest/userguide/welcome.html"
+        "https://aws.amazon.com/console/",
+        "https://docs.aws.amazon.com/whitepapers/latest/introduction-devops-aws/infrastructure-as-code.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
-      "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "clf-c02-3.1-15",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "single",
+      "stem": "As part of a hybrid deployment, a company wants to run AWS services and APIs inside its own data center, close to its local systems. Which service should it use?",
+      "options": [
+        {
+          "text": "AWS Direct Connect",
+          "correct": false,
+          "rationale": "Direct Connect is a dedicated network link to AWS; it does not run AWS services on premises."
+        },
+        {
+          "text": "AWS Outposts",
+          "correct": true,
+          "rationale": "Outposts is AWS-managed hardware at the customer's site that runs AWS services such as Amazon EC2 and Amazon EBS locally."
+        },
+        {
+          "text": "AWS Site-to-Site VPN",
+          "correct": false,
+          "rationale": "Site-to-Site VPN is an encrypted link over the internet; it does not run AWS services on premises."
+        },
+        {
+          "text": "AWS Storage Gateway",
+          "correct": false,
+          "rationale": "Storage Gateway gives on-premises applications access to cloud storage; it does not run AWS compute on premises."
+        }
+      ],
+      "explanation": "The clue is running AWS services inside the company's own data center: Outposts brings AWS infrastructure on premises, while Direct Connect and VPN only connect a data center to AWS.",
+      "difficulty": 2,
+      "tags": [
+        "deployment-models",
+        "hybrid",
+        "outposts"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/outposts/latest/userguide/what-is-outposts.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
     }
   ]
 }

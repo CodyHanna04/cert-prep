@@ -61,17 +61,17 @@
           "rationale": "AWS operates the virtualization layer and the host operating system."
         },
         {
-          "text": "Configuring the security group rules for each instance",
+          "text": "Configuring security group rules for the instances",
           "correct": true,
-          "rationale": "The customer configures the AWS-provided firewall, called a security group, on each instance."
+          "rationale": "The customer configures the AWS-provided firewall, called a security group, for each instance."
         },
         {
-          "text": "Replacing failed physical host hardware",
+          "text": "Replacing failed hardware in the physical host servers",
           "correct": false,
           "rationale": "AWS maintains the hardware that runs EC2."
         }
       ],
-      "explanation": "EC2 is infrastructure as a service, so the customer handles the guest operating system, installed software and security group configuration.",
+      "explanation": "EC2 is infrastructure as a service, so the customer configures what runs on and around each instance: its security groups, guest operating system and software. The facilities, hypervisor and hardware belong to AWS.",
       "difficulty": 2,
       "tags": [
         "shared-responsibility",
@@ -85,7 +85,7 @@
       "reviewStatus": "approved",
       "generator": "claude-sonnet-5-5",
       "generatedAt": "2026-11-01",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-2.1-03",
@@ -153,7 +153,7 @@
           "rationale": "Performance characteristics do not decide security responsibilities."
         },
         {
-          "text": "The sensitivity of the data, company requirements, and applicable laws",
+          "text": "Data sensitivity, company requirements and applicable laws",
           "correct": true,
           "rationale": "AWS documentation lists these as factors that, together with the service used, shape the customer's responsibilities."
         }
@@ -172,38 +172,38 @@
       "reviewStatus": "approved",
       "generator": "claude-sonnet-5-5",
       "generatedAt": "2026-11-01",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-2.1-05",
       "domain": "d2",
       "objective": "2.1",
       "type": "single",
-      "stem": "Which example describes a shared control in the AWS shared responsibility model?",
+      "stem": "Some controls in the shared responsibility model are shared: AWS applies them to its infrastructure, and the customer applies them to its own resources. Which is an example of a shared control?",
       "options": [
         {
-          "text": "Physical and environmental controls at AWS data centers",
+          "text": "Physical and environmental protection",
           "correct": false,
-          "rationale": "These are inherited controls: the customer fully inherits them from AWS."
+          "rationale": "AWS alone protects its data centers, so the customer fully inherits this control."
         },
         {
-          "text": "Patch management, with AWS and the customer each patching their own layer",
+          "text": "Patch management",
           "correct": true,
-          "rationale": "AWS patches the infrastructure while the customer patches the guest operating system and applications."
+          "rationale": "AWS patches its infrastructure, and the customer patches its own guest operating systems and applications."
         },
         {
-          "text": "Routing a customer's data into specific security zones",
+          "text": "Classifying the customer's data",
           "correct": false,
-          "rationale": "This is a customer-specific control that depends on the customer's own application."
+          "rationale": "Classifying data is the customer's responsibility, whichever service is used."
         },
         {
-          "text": "Protecting the hardware that runs Amazon S3",
+          "text": "Maintaining the hypervisor",
           "correct": false,
-          "rationale": "Infrastructure protection belongs to AWS alone."
+          "rationale": "The virtualization layer is run by AWS alone."
         }
       ],
-      "explanation": "Shared controls apply to both the infrastructure and customer layers, but in separate contexts. Other examples are configuration management and awareness and training.",
-      "difficulty": 3,
+      "explanation": "The clue is that both parties do the same kind of work, each on its own layer: AWS patches the infrastructure and the customer patches its guest operating systems and applications. Physical protection is different because AWS does all of it and the customer simply inherits it.",
+      "difficulty": 2,
       "tags": [
         "shared-responsibility",
         "shared-controls"
@@ -215,7 +215,7 @@
       "reviewStatus": "approved",
       "generator": "claude-sonnet-5-5",
       "generatedAt": "2026-11-01",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-2.1-06",
@@ -309,12 +309,12 @@
       "domain": "d2",
       "objective": "2.1",
       "type": "single",
-      "stem": "Why does a customer's security workload differ between Amazon EC2 and Amazon S3?",
+      "stem": "Why does a company have fewer security tasks when it stores data in Amazon S3 than when it runs servers on Amazon EC2?",
       "options": [
         {
-          "text": "EC2 resources are stored in a different Region than S3 buckets",
+          "text": "S3 data is kept in a different Region from EC2 instances",
           "correct": false,
-          "rationale": "Region placement does not change who is responsible for what."
+          "rationale": "Region choice does not change who is responsible for what."
         },
         {
           "text": "Amazon S3 is outside the shared responsibility model",
@@ -322,18 +322,18 @@
           "rationale": "The model applies to every AWS service."
         },
         {
-          "text": "AWS manages the operating system and platforms for S3, leaving fewer layers to the customer",
+          "text": "AWS runs the operating system and platform for S3",
           "correct": true,
-          "rationale": "For services such as S3, AWS runs the infrastructure, operating system and platforms; on EC2 the customer manages the guest operating system."
+          "rationale": "For abstracted services such as S3, AWS operates the infrastructure, operating system and platforms; on EC2 the customer manages the guest operating system."
         },
         {
-          "text": "Customers pay for S3 storage, which removes their security duties",
+          "text": "Paying for S3 storage moves the security duties to AWS",
           "correct": false,
           "rationale": "Payment does not transfer responsibility; customers still manage their data and permissions."
         }
       ],
-      "explanation": "The customer's responsibility depends on the service: EC2 (IaaS) leaves more to the customer than abstracted services such as S3 and DynamoDB.",
-      "difficulty": 3,
+      "explanation": "The clue is the type of service: EC2 is infrastructure as a service, so the customer manages the guest operating system and everything above it, while S3 is an abstracted service where AWS runs those layers. In both, the customer still manages its data and permissions.",
+      "difficulty": 2,
       "tags": [
         "shared-responsibility",
         "ec2",
@@ -346,7 +346,7 @@
       "reviewStatus": "approved",
       "generator": "claude-sonnet-5-5",
       "generatedAt": "2026-11-01",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-2.1-09",
@@ -405,7 +405,7 @@
       "stem": "For an abstracted service such as Amazon DynamoDB, which layers does AWS operate?",
       "options": [
         {
-          "text": "The infrastructure layer, the operating system, and the platforms",
+          "text": "The infrastructure, operating system and platforms",
           "correct": true,
           "rationale": "For abstracted services, AWS runs the infrastructure, operating system and platforms; customers only use the service endpoints to store and retrieve data."
         },
@@ -438,7 +438,7 @@
       "reviewStatus": "approved",
       "generator": "claude-sonnet-5-5",
       "generatedAt": "2026-11-01",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-2.1-11",
@@ -502,7 +502,7 @@
           "rationale": "Network access rules are the customer's to configure."
         },
         {
-          "text": "Managing the host operating system the database runs on",
+          "text": "Managing the underlying host operating system",
           "correct": true,
           "rationale": "AWS manages the underlying infrastructure and host operating system for RDS."
         },
@@ -526,7 +526,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-2.1-13",
@@ -536,27 +536,27 @@
       "stem": "A company runs applications on Amazon EC2. Who installs security patches on the guest operating system?",
       "options": [
         {
-          "text": "AWS",
+          "text": "AWS, as part of running the EC2 service",
           "correct": false,
-          "rationale": "AWS patches the host and virtualization layer, not the guest operating system."
+          "rationale": "AWS patches the host operating system and virtualization layer under the instance, not the guest operating system inside it."
         },
         {
-          "text": "AWS Support",
+          "text": "AWS Support, after the company opens a case",
           "correct": false,
-          "rationale": "AWS Support advises; it does not patch customer instances."
+          "rationale": "AWS Support gives guidance; it does not sign in to or patch customer instances."
         },
         {
-          "text": "The hardware manufacturer",
-          "correct": false,
-          "rationale": "Hardware vendors do not patch guest operating systems."
-        },
-        {
-          "text": "The company",
+          "text": "The company running the instances",
           "correct": true,
-          "rationale": "For EC2, the guest operating system and its updates are the customer's responsibility."
+          "rationale": "On EC2 the customer controls the guest operating system, so installing its updates and security patches is the customer's job."
+        },
+        {
+          "text": "AWS and the company together",
+          "correct": false,
+          "rationale": "Patch management is shared, but it is split by layer: the guest operating system layer belongs to the company alone."
         }
       ],
-      "explanation": "EC2 is infrastructure as a service, so the customer manages everything from the guest OS upward.",
+      "explanation": "The clue is \"guest operating system\": that is the OS inside the instance, which the customer chooses and controls, so the customer patches it. AWS patches the host operating system and virtualization layer underneath, and it patches the OS for you on managed services such as Amazon RDS.",
       "difficulty": 1,
       "tags": [
         "shared-responsibility",
@@ -570,7 +570,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-2.1-14",
@@ -580,9 +580,9 @@
       "stem": "Under the shared responsibility model, who is responsible for classifying data and deciding who can access it?",
       "options": [
         {
-          "text": "The customer, whichever service is used",
+          "text": "The customer, for any AWS service",
           "correct": true,
-          "rationale": "Customers always own their data, its classification and its access control."
+          "rationale": "Customers own their data, its classification and its access control on every service."
         },
         {
           "text": "AWS, when a managed service is used",
@@ -613,7 +613,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-2.1-15",
@@ -663,22 +663,22 @@
       "domain": "d2",
       "objective": "2.1",
       "type": "single",
-      "stem": "Which task is always the customer's responsibility under the shared responsibility model?",
+      "stem": "Which task is the customer's responsibility under the shared responsibility model?",
       "options": [
         {
-          "text": "Securing the hypervisor on host servers",
+          "text": "Securing the hypervisor on the host servers",
           "correct": false,
           "rationale": "The virtualization layer belongs to AWS."
         },
         {
-          "text": "Controlling access to AWS data center buildings",
+          "text": "Controlling who can enter AWS data center buildings",
           "correct": false,
           "rationale": "Facility access belongs to AWS."
         },
         {
-          "text": "Encrypting data on the client side before sending it to AWS",
+          "text": "Encrypting data on the client side before upload",
           "correct": true,
-          "rationale": "Client-side encryption is listed among customer responsibilities."
+          "rationale": "Encryption choices for the customer's data are customer responsibilities, and client-side encryption runs on the customer's own systems."
         },
         {
           "text": "Maintaining the AWS global network backbone",
@@ -686,7 +686,7 @@
           "rationale": "The global network belongs to AWS."
         }
       ],
-      "explanation": "Customer responsibilities include data, platform and application management, identity and access, operating systems on EC2, and client-side and server-side encryption choices.",
+      "explanation": "The clue is \"client side\": that encryption happens on the customer's own systems before the data reaches AWS, so it is security in the cloud. The other three options are parts of the infrastructure that AWS runs.",
       "difficulty": 2,
       "tags": [
         "shared-responsibility",
@@ -699,7 +699,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-2.1-17",
@@ -724,9 +724,9 @@
           "rationale": "Application code is the customer's responsibility."
         },
         {
-          "text": "The Regions, Availability Zones and edge locations that run AWS services",
+          "text": "The data centers in each Availability Zone",
           "correct": true,
-          "rationale": "The global infrastructure is part of what AWS protects."
+          "rationale": "The global infrastructure, including the data centers that make up each Availability Zone, is part of what AWS protects."
         }
       ],
       "explanation": "AWS protects the infrastructure: hardware, software, networking and the facilities of its global infrastructure.",
@@ -742,7 +742,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-2.1-18",
@@ -752,7 +752,7 @@
       "stem": "As a company moves from self-managed software on Amazon EC2 to services such as Amazon DynamoDB, how does its share of security responsibility change?",
       "options": [
         {
-          "text": "It decreases, because AWS operates more layers of the stack",
+          "text": "It decreases, because AWS runs more of the stack",
           "correct": true,
           "rationale": "Abstracted services leave the customer with fewer layers to manage."
         },
@@ -769,7 +769,7 @@
         {
           "text": "All of it moves to AWS",
           "correct": false,
-          "rationale": "Customers always keep responsibility for data and access."
+          "rationale": "Customers keep responsibility for their data and access on every service."
         }
       ],
       "explanation": "The customer still manages data, classification and IAM permissions on abstracted services.",
@@ -786,7 +786,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-2.1-19",

@@ -11,25 +11,25 @@
         {
           "text": "Spot Instances",
           "correct": false,
-          "rationale": "Spot Instances can be interrupted when AWS needs the capacity back."
+          "rationale": "Spot Instances use spare capacity that AWS can reclaim, so they can be interrupted."
+        },
+        {
+          "text": "Compute Savings Plans",
+          "correct": false,
+          "rationale": "Compute Savings Plans lower prices in exchange for a one- or three-year commitment."
         },
         {
           "text": "On-Demand Instances",
           "correct": true,
-          "rationale": "On-Demand has no commitment and is not interrupted, which suits short, unpredictable workloads."
+          "rationale": "On-Demand Instances are billed for the time they run, with no commitment, and AWS does not interrupt them."
         },
         {
           "text": "Reserved Instances",
           "correct": false,
-          "rationale": "Reserved Instances need a one- or three-year commitment."
-        },
-        {
-          "text": "Dedicated Hosts",
-          "correct": false,
-          "rationale": "Dedicated Hosts are for licensing or compliance needs, not short-term flexibility."
+          "rationale": "Reserved Instances give a discount in exchange for a one- or three-year term."
         }
       ],
-      "explanation": "On-Demand: pay by the second or hour with no commitment.",
+      "explanation": "'Short-term and unpredictable' rules out the long-term commitments of Reserved Instances and Savings Plans, and 'cannot be interrupted' rules out Spot, which leaves On-Demand.",
       "difficulty": 1,
       "tags": [
         "pricing",
@@ -37,13 +37,14 @@
         "ec2"
       ],
       "refs": [
-        "https://aws.amazon.com/ec2/pricing/"
+        "https://aws.amazon.com/ec2/pricing/",
+        "https://docs.aws.amazon.com/savingsplans/latest/userguide/plan-types.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-4.1-02",
@@ -181,31 +182,31 @@
       "domain": "d4",
       "objective": "4.1",
       "type": "single",
-      "stem": "A company must use existing server-bound software licenses that are tied to physical sockets and cores. Which Amazon EC2 option supports this?",
+      "stem": "A company wants to bring its existing software licenses, which are priced per physical CPU socket and core, to Amazon EC2. Which option lets it see the sockets and cores of the server its instances run on?",
       "options": [
         {
           "text": "Dedicated Instances",
           "correct": false,
-          "rationale": "Dedicated Instances run on single-tenant hardware but do not give socket and core visibility or host control."
-        },
-        {
-          "text": "Dedicated Hosts",
-          "correct": true,
-          "rationale": "Dedicated Hosts give visibility into sockets and cores, which supports server-bound licenses."
+          "rationale": "Dedicated Instances run on hardware not shared with other customers, but they don't show the server's sockets and cores."
         },
         {
           "text": "Spot Instances",
           "correct": false,
-          "rationale": "Spot Instances are spare capacity at a discount."
+          "rationale": "Spot Instances are discounted spare capacity that can be interrupted, with no view of the physical server."
         },
         {
-          "text": "On-Demand Instances on shared tenancy",
+          "text": "Dedicated Hosts",
+          "correct": true,
+          "rationale": "A Dedicated Host is a whole physical server for your use, with visibility of its sockets and cores for per-socket or per-core licenses."
+        },
+        {
+          "text": "On-Demand Instances on shared hardware",
           "correct": false,
-          "rationale": "Shared tenancy does not give a dedicated physical server."
+          "rationale": "On-Demand Instances with default tenancy run on physical servers shared with other customers."
         }
       ],
-      "explanation": "Dedicated Hosts are physical servers dedicated to you; they help with licensing and compliance.",
-      "difficulty": 3,
+      "explanation": "The clue is licenses counted per socket or core: Dedicated Hosts show those details. Dedicated Instances also give single-tenant hardware but hide the physical server, so they fit isolation needs, not this kind of licensing.",
+      "difficulty": 2,
       "tags": [
         "pricing",
         "dedicated-hosts",
@@ -218,7 +219,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-4.1-06",
@@ -230,25 +231,25 @@
         {
           "text": "Spot Instances",
           "correct": false,
-          "rationale": "Spot capacity can be reclaimed."
+          "rationale": "Spot Instances use spare capacity that AWS can reclaim, so capacity is not guaranteed."
+        },
+        {
+          "text": "Capacity Reservations",
+          "correct": true,
+          "rationale": "On-Demand Capacity Reservations reserve EC2 capacity in a specific Availability Zone for as long as you need, with no term commitment."
         },
         {
           "text": "Savings Plans",
           "correct": false,
-          "rationale": "Savings Plans lower prices but do not reserve capacity."
+          "rationale": "Savings Plans lower prices in exchange for a one- or three-year commitment but do not reserve capacity."
         },
         {
-          "text": "On-Demand Capacity Reservations",
-          "correct": true,
-          "rationale": "Capacity Reservations reserve capacity in an AZ for any duration, billed at On-Demand rates."
-        },
-        {
-          "text": "Dedicated Instances",
+          "text": "Convertible Reserved Instances",
           "correct": false,
-          "rationale": "Dedicated Instances are about single-tenant hardware, not reserving capacity."
+          "rationale": "Convertible Reserved Instances are a billing discount that requires a one- or three-year term."
         }
       ],
-      "explanation": "Capacity Reservations ensure you can launch instances when you need them.",
+      "explanation": "The clues are guaranteed capacity in one Availability Zone and no long-term commitment. Savings Plans and Reserved Instances are discounts tied to a one- or three-year term.",
       "difficulty": 2,
       "tags": [
         "pricing",
@@ -261,51 +262,52 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-4.1-07",
       "domain": "d4",
       "objective": "4.1",
       "type": "single",
-      "stem": "Several accounts in an organization use consolidated billing. How can a Reserved Instance bought in one account benefit the others?",
+      "stem": "A company uses AWS Organizations with consolidated billing and the default discount sharing settings. Account A buys a Reserved Instance but runs no matching instance, while Account B runs a matching instance. What happens to the discount?",
       "options": [
         {
-          "text": "It is canceled when the account joins an organization",
+          "text": "It converts into Spot capacity for Account B",
           "correct": false,
-          "rationale": "Joining an organization does not cancel reservations."
+          "rationale": "A Reserved Instance is a billing discount; it does not turn into Spot Instances."
         },
         {
-          "text": "It converts into Spot Instances for the other accounts",
-          "correct": false,
-          "rationale": "Reservations do not become Spot Instances."
-        },
-        {
-          "text": "Its discount applies to the purchasing account and nowhere else",
-          "correct": false,
-          "rationale": "Discount sharing is on by default, though it can be turned off."
-        },
-        {
-          "text": "Its discount can apply to matching usage in other accounts in the organization",
+          "text": "It applies to Account B's matching instance",
           "correct": true,
-          "rationale": "With consolidated billing, RI and Savings Plans discounts are shared across accounts by default."
+          "rationale": "Consolidated billing treats the organization's accounts as one for billing, so the unused discount can cover matching usage in another account."
+        },
+        {
+          "text": "Account B must buy its own matching Reserved Instance",
+          "correct": false,
+          "rationale": "Account B does not need its own reservation, because accounts in the organization share Reserved Instance discounts."
+        },
+        {
+          "text": "It goes unused because it belongs to Account A",
+          "correct": false,
+          "rationale": "That happens if the management account turns off discount sharing, which is not the default."
         }
       ],
-      "explanation": "The management account can turn off discount sharing for specific accounts if needed.",
-      "difficulty": 3,
+      "explanation": "The clue is consolidated billing: discounts apply first to the purchasing account and then to matching usage in other accounts in the organization. The management account can turn sharing off for specific accounts.",
+      "difficulty": 2,
       "tags": [
         "pricing",
         "reserved-instances",
         "organizations"
       ],
       "refs": [
+        "https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ri-behavior.html",
         "https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ri-turn-off.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-4.1-08",
@@ -317,26 +319,26 @@
         {
           "text": "Data transferred into AWS from the internet",
           "correct": true,
-          "rationale": "Inbound data transfer from the internet is generally not charged."
+          "rationale": "AWS does not charge for inbound data transfer from the internet."
         },
         {
           "text": "Data transferred out of AWS to the internet",
           "correct": false,
-          "rationale": "Outbound transfer to the internet is charged."
+          "rationale": "Data transfer from AWS to the internet is charged, at rates set by the source Region."
         },
         {
           "text": "Data transferred between two AWS Regions",
           "correct": false,
-          "rationale": "Inter-Region transfer is charged."
+          "rationale": "Data transfer across Regions is charged."
         },
         {
-          "text": "Data transferred between Availability Zones",
+          "text": "Data transferred between Availability Zones in a Region",
           "correct": false,
-          "rationale": "Transfer between AZs in a Region is generally charged."
+          "rationale": "Traffic that crosses an Availability Zone boundary typically incurs a charge."
         }
       ],
-      "explanation": "Inbound is generally free; outbound to the internet and across Regions is charged.",
-      "difficulty": 2,
+      "explanation": "The clue is the direction: data coming into AWS from the internet is free, while data leaving to the internet, crossing Regions or crossing Availability Zones is generally charged.",
+      "difficulty": 1,
       "tags": [
         "pricing",
         "data-transfer"
@@ -348,50 +350,51 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-4.1-09",
       "domain": "d4",
       "objective": "4.1",
       "type": "single",
-      "stem": "Which data transfer typically incurs a charge?",
+      "stem": "A company wants to know which of its data transfers add to its AWS bill. Which transfer is typically charged?",
       "options": [
         {
           "text": "Data uploaded from the internet into Amazon S3",
           "correct": false,
-          "rationale": "Inbound transfer from the internet is generally free."
+          "rationale": "Data transferred in from the internet is not charged."
         },
         {
           "text": "Data sent from Amazon EC2 in one Region to another Region",
           "correct": true,
-          "rationale": "Inter-Region data transfer is billed."
+          "rationale": "Data transfer across Regions is charged."
         },
         {
           "text": "Data moved between Amazon EC2 and Amazon S3 in the same Region",
           "correct": false,
-          "rationale": "Transfer between EC2 and S3 in the same Region is free."
+          "rationale": "Data transfer between Amazon S3 and other AWS services in the same Region is not charged."
         },
         {
-          "text": "Data moved between instances in one Availability Zone over private IP addresses",
+          "text": "Data moved between two instances in the same Availability Zone",
           "correct": false,
-          "rationale": "Same-AZ transfer over private IP addresses is free."
+          "rationale": "Data transfer within the same Availability Zone is free."
         }
       ],
-      "explanation": "Keeping traffic in the same Region and AZ, and avoiding unnecessary outbound transfer, lowers costs.",
-      "difficulty": 3,
+      "explanation": "The clue is crossing a Region boundary, which is billed. Data coming in from the internet, and data that stays inside one Region between S3 and EC2 or inside one Availability Zone, has no transfer charge.",
+      "difficulty": 2,
       "tags": [
         "pricing",
         "data-transfer"
       ],
       "refs": [
-        "https://aws.amazon.com/blogs/architecture/overview-of-data-transfer-costs-for-common-architectures/"
+        "https://aws.amazon.com/blogs/architecture/overview-of-data-transfer-costs-for-common-architectures/",
+        "https://aws.amazon.com/s3/pricing/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-4.1-10",
@@ -401,24 +404,24 @@
       "stem": "Which TWO factors affect the cost of storing data in Amazon S3? (Choose TWO.)",
       "options": [
         {
-          "text": "The time zone of the AWS Region",
+          "text": "The amount of data uploaded from the internet",
           "correct": false,
-          "rationale": "Time zones do not affect pricing."
+          "rationale": "Data transferred into S3 from the internet is free."
         },
         {
           "text": "The number and type of requests made",
           "correct": true,
-          "rationale": "S3 charges for requests such as PUT and GET, and for retrievals in some classes."
+          "rationale": "S3 charges for requests such as PUT and GET, and for data retrievals in some storage classes."
         },
         {
           "text": "The number of Availability Zones in the Region",
           "correct": false,
-          "rationale": "AZ count is not an S3 pricing factor."
+          "rationale": "How many Availability Zones a Region has is not an S3 pricing factor."
         },
         {
-          "text": "The amount of data stored and its storage class",
+          "text": "Storage class and amount of data stored",
           "correct": true,
-          "rationale": "S3 storage is priced per GB-month, and the price depends on the storage class."
+          "rationale": "S3 storage is priced per GB per month, and the rate depends on the storage class."
         },
         {
           "text": "The number of IAM users in the account",
@@ -426,7 +429,7 @@
           "rationale": "IAM users do not affect S3 pricing."
         }
       ],
-      "explanation": "S3 costs come from storage, requests and retrievals, data transfer out, and management features.",
+      "explanation": "S3 bills for how much you store in each storage class and for requests and retrievals, plus data transferred out. Uploading data from the internet is the trap: inbound transfer is free.",
       "difficulty": 2,
       "tags": [
         "pricing",
@@ -440,50 +443,51 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-4.1-11",
       "domain": "d4",
       "objective": "4.1",
       "type": "single",
-      "stem": "Which type of Reserved Instance can be exchanged for one with a different instance family during its term?",
+      "stem": "A company plans to buy Reserved Instances but expects to move to a different instance family during the term. Which type of Reserved Instance can it exchange for one in a different instance family?",
       "options": [
         {
           "text": "Standard Reserved Instances",
           "correct": false,
-          "rationale": "Standard RIs offer a larger discount but cannot change instance family through exchange."
+          "rationale": "Standard Reserved Instances give a larger discount but can't be exchanged."
         },
         {
           "text": "Convertible Reserved Instances",
           "correct": true,
-          "rationale": "Convertible RIs can be exchanged for other Convertible RIs with different attributes."
+          "rationale": "Convertible Reserved Instances can be exchanged during the term for others with a different instance family, platform or tenancy."
+        },
+        {
+          "text": "Standard Reserved Instances with Regional scope",
+          "correct": false,
+          "rationale": "A Regional Reserved Instance can apply to different sizes within the same instance family, but not to a different family."
         },
         {
           "text": "Spot Instances",
           "correct": false,
-          "rationale": "Spot Instances are not reservations."
-        },
-        {
-          "text": "Dedicated Hosts",
-          "correct": false,
-          "rationale": "Dedicated Hosts are physical servers, not a Reserved Instance type."
+          "rationale": "Spot Instances are discounted spare capacity, not a reservation that can be exchanged."
         }
       ],
-      "explanation": "Standard RIs trade flexibility for a bigger discount; Convertible RIs trade some discount for flexibility.",
-      "difficulty": 3,
+      "explanation": "The clue is changing instance family, which Convertible Reserved Instances allow through an exchange. Regional Reserved Instances flex across sizes within one family, not across families.",
+      "difficulty": 2,
       "tags": [
         "pricing",
         "reserved-instances"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/reserved-instances-types.html"
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/reserved-instances-types.html",
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/apply_ri.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-4.1-12",
@@ -514,19 +518,20 @@
         }
       ],
       "explanation": "Choose Dedicated Hosts when licensing needs socket or core visibility; Dedicated Instances when only single tenancy is required.",
-      "difficulty": 3,
+      "difficulty": 2,
       "tags": [
         "pricing",
         "dedicated-instances"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html"
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html",
+        "https://aws.amazon.com/ec2/dedicated-hosts/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     }
   ]
 }

@@ -110,9 +110,9 @@
           "rationale": "AWS isolates customers; low prices do not come from removing isolation."
         },
         {
-          "text": "AWS bills for stored data but does not bill for compute",
+          "text": "Customers maintain the physical hardware they use",
           "correct": false,
-          "rationale": "Compute is billed; pricing is not limited to storage."
+          "rationale": "AWS operates and maintains the hardware; customers do not."
         }
       ],
       "explanation": "Because usage from hundreds of thousands of customers is aggregated in the cloud, AWS achieves higher economies of scale, which translates into lower pay-as-you-go prices.",
@@ -128,7 +128,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.1-04",
@@ -353,27 +353,27 @@
       "stem": "How does the AWS global infrastructure help a company serve users on several continents with low latency?",
       "options": [
         {
-          "text": "All AWS traffic is routed through one central Region",
+          "text": "It routes all user traffic through one central Region",
           "correct": false,
-          "rationale": "AWS Regions operate independently; traffic is not funneled through a single Region."
+          "rationale": "Regions are isolated from each other; traffic is not funneled through one Region."
         },
         {
-          "text": "AWS upgrades the home internet connection of every user",
-          "correct": false,
-          "rationale": "AWS does not control end users' internet connections."
-        },
-        {
-          "text": "Edge locations run the company's databases by default",
-          "correct": false,
-          "rationale": "Edge locations cache content; they do not host your databases by default."
-        },
-        {
-          "text": "It can deploy resources in Regions located close to those users",
+          "text": "It lets the company deploy in Regions close to those users",
           "correct": true,
-          "rationale": "Regions around the world let you place workloads near your users."
+          "rationale": "Regions around the world let you place workloads near your users, which lowers latency."
+        },
+        {
+          "text": "It automatically copies the application into every AWS Region",
+          "correct": false,
+          "rationale": "AWS does not replicate resources across Regions automatically; you choose where to deploy."
+        },
+        {
+          "text": "It runs the company's databases in edge locations by default",
+          "correct": false,
+          "rationale": "Edge locations cache and deliver content; they do not host your databases by default."
         }
       ],
-      "explanation": "Choosing Regions close to users reduces network distance, and therefore latency, for those users.",
+      "explanation": "The clue is users on several continents: deploying in Regions near each group shortens the network distance and lowers latency. AWS does not copy resources between Regions for you; you choose where to deploy.",
       "difficulty": 1,
       "tags": [
         "cloud-benefits",
@@ -381,13 +381,14 @@
         "regions"
       ],
       "refs": [
-        "https://aws.amazon.com/about-aws/global-infrastructure/"
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+        "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/six-advantages-of-cloud-computing.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.1-10",
@@ -444,40 +445,41 @@
       "stem": "A startup based in the United States wants to serve customers in Europe. How does the AWS global infrastructure help?",
       "options": [
         {
-          "text": "Data transfer between continents becomes free",
+          "text": "Data transfer between its US and European Regions becomes free",
           "correct": false,
-          "rationale": "Inter-Region data transfer is still charged."
+          "rationale": "Data transfer between Regions is still charged."
         },
         {
-          "text": "AWS translates the application for European users",
-          "correct": false,
-          "rationale": "Infrastructure does not translate applications."
-        },
-        {
-          "text": "The company is exempt from European data laws",
-          "correct": false,
-          "rationale": "Using AWS does not remove legal obligations."
-        },
-        {
-          "text": "It can launch resources in a European Region without building a data center",
+          "text": "It can launch resources in a European Region in minutes",
           "correct": true,
-          "rationale": "Regions around the world let you deploy close to new markets in minutes."
+          "rationale": "Regions around the world let a company deploy close to a new market without building any facilities."
+        },
+        {
+          "text": "AWS automatically copies its US resources into Europe",
+          "correct": false,
+          "rationale": "AWS does not replicate resources across Regions automatically; the company chooses where to deploy."
+        },
+        {
+          "text": "The company is exempt from European data protection laws",
+          "correct": false,
+          "rationale": "Using AWS does not remove a company's legal obligations."
         }
       ],
-      "explanation": "Global reach without building facilities is one of the main benefits of the AWS Cloud.",
+      "explanation": "The clue is reaching a new market: the company picks a Region near its European customers and deploys there, instead of building a data center. Nothing is copied to Europe until the company deploys it there.",
       "difficulty": 1,
       "tags": [
         "cloud-benefits",
         "global-reach"
       ],
       "refs": [
-        "https://aws.amazon.com/about-aws/global-infrastructure/regions_az/"
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+        "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/six-advantages-of-cloud-computing.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.1-12",
@@ -487,27 +489,27 @@
       "stem": "How does the AWS Cloud lower the cost of trying out a new idea?",
       "options": [
         {
-          "text": "Resources can be started for a test and shut down, paying for the time used",
-          "correct": true,
-          "rationale": "Experiments cost little because you stop paying when you turn resources off."
-        },
-        {
-          "text": "AWS refunds the cost of experiments that fail",
-          "correct": false,
-          "rationale": "AWS does not refund usage based on outcomes."
-        },
-        {
           "text": "Experiments in the cloud have no usage charges",
           "correct": false,
           "rationale": "Usage is billed, apart from limited free offers."
         },
         {
-          "text": "Hardware for experiments ships faster to the office",
+          "text": "A one-year commitment is required, which lowers the price of each test",
           "correct": false,
-          "rationale": "Cloud resources are virtual; nothing ships to you."
+          "rationale": "On-Demand resources need no commitment; commitments are optional discounts, not what makes experiments cheap."
+        },
+        {
+          "text": "Test resources can be shut down, so you pay for the time used",
+          "correct": true,
+          "rationale": "Experiments cost little because you stop paying when you turn the resources off."
+        },
+        {
+          "text": "Servers for the test can be bought up front at a discount",
+          "correct": false,
+          "rationale": "In the cloud you do not buy servers up front; you pay for what you use."
         }
       ],
-      "explanation": "Low-cost experimentation is part of the speed and agility advantage.",
+      "explanation": "Low-cost experimentation is part of the speed and agility advantage: start resources for a test, then turn them off and stop paying. No up-front purchase or commitment is needed.",
       "difficulty": 1,
       "tags": [
         "cloud-benefits",
@@ -520,7 +522,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.1-13",
@@ -537,20 +539,20 @@
         {
           "text": "Elasticity",
           "correct": true,
-          "rationale": "Capacity grows for the peak and shrinks afterwards, so you pay only for what you use."
+          "rationale": "Capacity grows for the peak and shrinks afterwards, so you pay for what you use."
         },
         {
           "text": "Data sovereignty",
           "correct": false,
-          "rationale": "Data sovereignty is about where data is stored."
+          "rationale": "Data sovereignty is about where data is stored and which laws apply."
         },
         {
-          "text": "Fixed capacity planning",
+          "text": "High availability",
           "correct": false,
-          "rationale": "Fixed capacity is what the cloud lets you avoid."
+          "rationale": "High availability keeps a workload running when components fail; it does not add or remove capacity."
         }
       ],
-      "explanation": "Elasticity matches resources to demand automatically.",
+      "explanation": "The clue is a temporary peak: elasticity adds capacity for the sale and removes it afterwards. High availability is about surviving failures, not following demand.",
       "difficulty": 1,
       "tags": [
         "cloud-benefits",
@@ -563,7 +565,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.1-14",
@@ -573,19 +575,19 @@
       "stem": "What does fault tolerance mean for a workload?",
       "options": [
         {
-          "text": "It scales resources up and down with demand",
+          "text": "It adds and removes resources automatically as demand changes",
           "correct": false,
           "rationale": "That describes elasticity."
         },
         {
-          "text": "It keeps its data stored inside one country",
+          "text": "It keeps its data stored inside a single country",
           "correct": false,
           "rationale": "That describes data residency."
         },
         {
-          "text": "It keeps operating without interruption when some components fail",
+          "text": "It keeps working when some of its components fail",
           "correct": true,
-          "rationale": "A fault-tolerant design has redundancy so a component failure does not stop the system."
+          "rationale": "A fault-tolerant design has redundancy, so a component failure does not stop the system."
         },
         {
           "text": "It runs at the lowest possible monthly cost",
@@ -593,7 +595,7 @@
           "rationale": "That describes cost optimization."
         }
       ],
-      "explanation": "Fault tolerance and high availability are both benefits of building across multiple Availability Zones.",
+      "explanation": "The clue is surviving component failures: fault tolerance relies on redundancy, for example across multiple Availability Zones. Elasticity, the nearest distractor, is about changing demand, not failures.",
       "difficulty": 2,
       "tags": [
         "cloud-benefits",
@@ -607,7 +609,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.1-15",
@@ -617,9 +619,9 @@
       "stem": "AWS has reduced its prices many times as its customer base has grown. Which advantage of cloud computing explains this?",
       "options": [
         {
-          "text": "Go global in minutes",
+          "text": "Stop spending money running and maintaining data centers",
           "correct": false,
-          "rationale": "Global reach is about where you can deploy."
+          "rationale": "This advantage is about AWS taking over facility work, not about why prices fall."
         },
         {
           "text": "Stop guessing capacity",
@@ -637,7 +639,7 @@
           "rationale": "Higher aggregate usage lets AWS lower its costs and pass the savings on to customers."
         }
       ],
-      "explanation": "Economies of scale translate into lower pay-as-you-go prices.",
+      "explanation": "The clue is lower prices as the customer base grows: aggregated usage gives AWS economies of scale, which become lower pay-as-you-go prices. Not running data centers saves you facility work but does not explain AWS price cuts.",
       "difficulty": 1,
       "tags": [
         "cloud-benefits",
@@ -650,7 +652,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.1-16",

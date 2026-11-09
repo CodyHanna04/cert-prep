@@ -76,7 +76,7 @@ Changes made from the first round of feedback:
 
 ## Revision 7 (question quality and DVA-C03 bank, 2026-11-08)
 
-- **Quality review:** the learner found CLF-C02 questions too hard, wrong or more up to date than the exam. The cause and the new rules are in [17-question-quality-review.md](17-question-quality-review.md): the exam guide sets names, scope and depth, and the current docs only confirm facts. Revision 6's "old and new names" approach was the wrong call. The rules are now in `content/prompts/draft-questions.md` and the review step of the prompt README. Fixing the 12 CLF-C02 questions with post-guide wording is still open.
+- **Quality review:** the learner found CLF-C02 questions too hard, wrong or more up to date than the exam. The cause and the new rules are in [17-question-quality-review.md](17-question-quality-review.md): the exam guide sets names, scope and depth. The rules are now in `content/prompts/draft-questions.md` and the review step of the prompt README. (The diagnosis was refined in Revision 8.)
 - **DVA-C03:**
   - The pack now has `style.md`, calibrated against AWS's official sample questions.
   - Its blueprint has a lint profile, including the guide's out-of-scope services.
@@ -92,6 +92,26 @@ Changes made from the first round of feedback:
 
     All are fixed.
   - The correct answer was the longest option in 74 of the first draft's single-answer questions. It is now 2 of 99.
+
+## Revision 8 (both banks reviewed against the current guides, 2026-11-08)
+
+- **CLF-C02 is on guide v1.3.** AWS revises the CLF-C02 guide in place (1.0 June 2026 to 1.3 on October 29, 2026). The pack had been built from an older PDF. Changed:
+  - Rebuilt from the live HTML guide: blueprint sources and objective scopes, `in-scope-services.md`, `style.md`, and a lint profile covering the v1.3 out-of-scope list.
+  - Corrected doc 17. Its first diagnosis said "use the old names"; the current guide uses the new ones.
+  - Added a rule: check the guide's revisions page before every content pass.
+- **CLF-C02 bank review:** five reviewers covered all 275 questions against v1.3.
+  - Changes: 150 edited, 13 retired (out of scope), 20 added, giving 282 questions, 27 of them multiple-response.
+  - Names and support plans: v1.3 names everywhere; support plans are now Basic, Business Support+, Enterprise and Unified Operations.
+  - Out-of-scope services removed, as questions or as distractors: Billing Conductor, Activate, AMS, Wavelength, Local Zones, Kendra, MemoryDB, CodeDeploy, AppConfig, CloudShell, CodeArtifact, Greengrass, Network Firewall, Transfer Family, DataSync, Audit Manager.
+  - Topics added to cover what the v1.3 task statements name: Amazon Quick, Amazon Q, DocumentDB, WorkSpaces Secure Browser, AppStream 2.0, CodeBuild, Inspector, the Health API, Unified Operations, and partners and the Marketplace.
+  - Well-Architected questions moved from principle wording to pillar level.
+  - Explanations now name the clue and the nearest distractor.
+  - Weak or silly distractors replaced, and the longest-option giveaway removed.
+- **DVA-C03 quality pass:** 53 questions edited, with clearer explanations, realistic distractors and balanced option lengths. 10 were converted to "(Select TWO.)", so 27 of 123 are now multiple-response.
+- **Checks:**
+  - Blind checks agreed with the key on all 170 changed CLF questions and all 53 changed DVA questions.
+  - Lint passes with 0 errors and 0 warnings.
+  - The 139 tests pass (run on the homelab LXC).
 
 ## Run it
 
@@ -153,7 +173,7 @@ First real account (no public sign-up): `npm run user:create -- "Your Name"` pri
 - T-012 domain/objective editor, T-013 theme lab and design notes, T-076 trends, "create exam manually", "new question" form, pack-reload diff (part of T-011).
 - T-081 browser end-to-end test (the data-layer golden path is tested; the UI was exercised by hand).
 - T-082 remainder: adapt and install `docker/nginx-study.conf.example` (untested draft), the Namecheap record, certificates, scheduled `pg_dump` and a restore drill. T-083 remainder: CSP with nonces, nginx rate limits, the pre-exposure checklist run-through.
-- Content: the CLF-C02 shared bank has 275 approved questions (26 multiple-response), above the 260 coverage target; every objective is practice-ready. DVA-C03 has 123 approved questions (10 or 11 per objective) toward its 260 target.
+- Content: the CLF-C02 shared bank has 282 approved questions (27 multiple-response) on guide v1.3, above the 260 coverage target; every objective is practice-ready. DVA-C03 has 123 approved questions (27 multiple-response, 10 or 11 per objective) toward its 260 target.
 
 ## Findings that changed the plan
 

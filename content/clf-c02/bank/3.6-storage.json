@@ -58,9 +58,9 @@
           "rationale": "Instance store data is lost when the instance stops or terminates."
         },
         {
-          "text": "Amazon Elastic Block Store (Amazon EBS)",
+          "text": "Amazon EBS",
           "correct": true,
-          "rationale": "EBS volumes persist independently and can be detached and reattached."
+          "rationale": "Amazon Elastic Block Store (EBS) volumes persist independently and can be detached and reattached."
         },
         {
           "text": "Amazon S3",
@@ -68,12 +68,12 @@
           "rationale": "S3 is object storage, not a volume."
         },
         {
-          "text": "Amazon S3 Glacier",
+          "text": "Amazon EFS",
           "correct": false,
-          "rationale": "Glacier is archival object storage."
+          "rationale": "Amazon Elastic File System (EFS) is a shared file system, not a block volume."
         }
       ],
-      "explanation": "Use EBS for persistent block storage such as boot volumes and databases on EC2.",
+      "explanation": "The clues are block volumes and data that outlives the instance: EBS fits both, while instance store is block storage that is lost and EFS is file storage.",
       "difficulty": 1,
       "tags": [
         "storage",
@@ -87,7 +87,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.6-03",
@@ -102,22 +102,22 @@
           "rationale": "Instance store does not persist after termination."
         },
         {
-          "text": "It can be detached and attached to another instance",
+          "text": "It can be detached and moved to a different instance",
           "correct": false,
-          "rationale": "Instance store cannot be moved between instances."
+          "rationale": "Instance store is tied to the host and cannot be moved between instances."
         },
         {
-          "text": "Its data is lost when the instance is stopped or terminated",
+          "text": "Its data is lost when the instance stops or terminates",
           "correct": true,
-          "rationale": "Instance store is temporary storage physically attached to the host."
+          "rationale": "Instance store is temporary storage on disks physically attached to the host."
         },
         {
-          "text": "It is the same thing as an Amazon EBS snapshot",
+          "text": "It is a backup copy that AWS stores as an Amazon EBS snapshot",
           "correct": false,
-          "rationale": "Snapshots are backups of EBS volumes stored by AWS."
+          "rationale": "EBS snapshots are backups of EBS volumes; instance store is a disk on the host."
         }
       ],
-      "explanation": "Instance store suits temporary data such as buffers, caches and scratch data.",
+      "explanation": "The clue is temporary storage on the host: instance store suits buffers, caches and scratch data, while Amazon EBS volumes keep their data when an instance stops.",
       "difficulty": 2,
       "tags": [
         "storage",
@@ -130,7 +130,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.6-04",
@@ -140,9 +140,9 @@
       "stem": "Which service provides a managed file system that many Linux-based Amazon EC2 instances can mount at the same time?",
       "options": [
         {
-          "text": "Amazon Elastic Block Store (Amazon EBS)",
+          "text": "Amazon EBS",
           "correct": false,
-          "rationale": "EBS volumes are block storage, typically attached to one instance."
+          "rationale": "Amazon Elastic Block Store (EBS) volumes are block storage, typically attached to one instance."
         },
         {
           "text": "EC2 instance store",
@@ -155,12 +155,12 @@
           "rationale": "Deep Archive is for long-term archives."
         },
         {
-          "text": "Amazon Elastic File System (Amazon EFS)",
+          "text": "Amazon EFS",
           "correct": true,
-          "rationale": "EFS is a serverless, elastic NFS file system that many instances can share."
+          "rationale": "Amazon Elastic File System (EFS) is a serverless, elastic NFS file system that many instances can share."
         }
       ],
-      "explanation": "EFS grows and shrinks automatically as you add and remove files.",
+      "explanation": "The clue is many instances mounting the same file system: EFS is shared file storage, while an EBS volume is block storage usually attached to one instance.",
       "difficulty": 2,
       "tags": [
         "storage",
@@ -174,7 +174,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.6-05",
@@ -204,7 +204,7 @@
           "rationale": "Glacier is archival storage."
         }
       ],
-      "explanation": "Amazon FSx offers managed file systems such as Windows File Server, Lustre, NetApp ONTAP and OpenZFS.",
+      "explanation": "The clue is SMB for Windows applications: FSx for Windows File Server is a managed Windows file server, while EFS serves Linux workloads over NFS.",
       "difficulty": 2,
       "tags": [
         "storage",
@@ -218,7 +218,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.6-06",
@@ -453,14 +453,14 @@
           "rationale": "Instance store data is lost when the instance stops."
         },
         {
-          "text": "Amazon MemoryDB",
+          "text": "Amazon ElastiCache",
           "correct": false,
-          "rationale": "MemoryDB is an in-memory database, not instance storage."
+          "rationale": "ElastiCache is a managed caching service for applications, not storage that instances keep files or volumes on."
         },
         {
-          "text": "Amazon Elastic File System (Amazon EFS)",
+          "text": "Amazon EFS",
           "correct": true,
-          "rationale": "EFS is persistent shared file storage."
+          "rationale": "Amazon Elastic File System (EFS) is persistent shared file storage."
         },
         {
           "text": "Amazon CloudFront",
@@ -468,12 +468,12 @@
           "rationale": "CloudFront is a content delivery network."
         },
         {
-          "text": "Amazon Elastic Block Store (Amazon EBS)",
+          "text": "Amazon EBS",
           "correct": true,
-          "rationale": "EBS volumes persist independently of the instance."
+          "rationale": "Amazon Elastic Block Store (EBS) volumes persist independently of the instance."
         }
       ],
-      "explanation": "EBS and EFS persist; instance store is temporary.",
+      "explanation": "The clue is keeping data after the instance stops: EBS volumes and EFS file systems are stored apart from the instance, while instance store lives on the host and loses its data.",
       "difficulty": 2,
       "tags": [
         "storage",
@@ -482,13 +482,14 @@
       ],
       "refs": [
         "https://aws.amazon.com/ebs/",
-        "https://aws.amazon.com/efs/"
+        "https://aws.amazon.com/efs/",
+        "https://aws.amazon.com/elasticache/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.6-12",

@@ -250,7 +250,7 @@
           "rationale": "CloudTrail does not contain application log lines."
         }
       ],
-      "explanation": "Logs Insights is the tool for ad hoc queries over CloudWatch Logs.",
+      "explanation": "The clue is searching past log lines across several log groups, which a Logs Insights query does in one step. Metric filters are the nearest distractor, but they count future matching events and do not search past logs.",
       "difficulty": 2,
       "tags": [
         "cloudwatch-logs",
@@ -316,29 +316,29 @@
       "stem": "An AWS CodeDeploy deployment to Amazon EC2 instances fails because the instances never report back to CodeDeploy. Which issues could cause this? (Select TWO.)",
       "options": [
         {
-          "text": "The Application Load Balancer idle timeout is too short",
+          "text": "The Application Load Balancer's idle timeout is too short for the deployment",
           "correct": false,
           "rationale": "Idle timeout affects client connections, not the agent."
         },
         {
-          "text": "The ECR repository has a lifecycle policy",
+          "text": "The deployment group uses an in-place deployment type",
           "correct": false,
-          "rationale": "EC2 deployments with CodeDeploy do not depend on ECR lifecycle policies."
+          "rationale": "In-place is a normal deployment type for EC2, and it still relies on the agent to report status."
         },
         {
-          "text": "The instances have no IAM instance profile, so the agent has no credentials to call CodeDeploy",
+          "text": "The instances were launched without an IAM instance profile",
           "correct": true,
           "rationale": "The agent polls CodeDeploy with the instance profile's credentials, so without one it never picks up the deployment."
         },
         {
-          "text": "The Lambda function alias points to an old version",
+          "text": "The deployment group uses a one-instance-at-a-time configuration",
           "correct": false,
-          "rationale": "Lambda aliases are not part of an EC2 deployment."
+          "rationale": "The deployment configuration sets how many instances are updated at once, not whether they report back."
         },
         {
-          "text": "The CodeDeploy agent is not installed or not running on the instances",
+          "text": "The CodeDeploy agent is not running on the instances",
           "correct": true,
-          "rationale": "The agent carries out the deployment and reports status."
+          "rationale": "The agent carries out the deployment and reports status, so if it is missing or stopped nothing reports back."
         }
       ],
       "explanation": "When instances never respond, check that the agent is running and that the instance has a profile it can use to reach CodeDeploy.",
@@ -350,7 +350,8 @@
       ],
       "refs": [
         "https://docs.aws.amazon.com/codedeploy/latest/userguide/troubleshooting-deployments.html",
-        "https://docs.aws.amazon.com/codedeploy/latest/userguide/codedeploy-agent.html"
+        "https://docs.aws.amazon.com/codedeploy/latest/userguide/codedeploy-agent.html",
+        "https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",

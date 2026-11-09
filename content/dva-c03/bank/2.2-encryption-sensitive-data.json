@@ -5,8 +5,8 @@
       "id": "dva-c03-2.2-01",
       "domain": "d2",
       "objective": "2.2",
-      "type": "single",
-      "stem": "An application must encrypt 50 MB files with a key that is protected by AWS KMS. What should the developer do?",
+      "type": "multi",
+      "stem": "An application must encrypt 50 MB files with a key that is protected by AWS KMS. Which combination of steps should the developer take? (Select TWO.)",
       "options": [
         {
           "text": "Send each file to the KMS Encrypt API and store the ciphertext that it returns",
@@ -14,22 +14,27 @@
           "rationale": "Encrypt accepts only small amounts of data, so it cannot encrypt large files directly."
         },
         {
-          "text": "Encrypt with a data key from GenerateDataKey, and store the plaintext data key next to the file",
-          "correct": false,
-          "rationale": "Anyone with the file could then decrypt it."
-        },
-        {
-          "text": "Encrypt with a data key from GenerateDataKey, and store the encrypted data key with the file",
+          "text": "Store the encrypted data key with the file and erase the plaintext key",
           "correct": true,
-          "rationale": "This is envelope encryption: KMS protects the data key, and large data is encrypted locally."
+          "rationale": "Only AWS KMS can decrypt the stored data key, so access to the file stays under the KMS key."
         },
         {
-          "text": "Export the KMS key and encrypt the files with it",
+          "text": "Export the KMS key and encrypt the files with it directly",
           "correct": false,
           "rationale": "KMS keys do not leave AWS KMS unencrypted."
+        },
+        {
+          "text": "Call GenerateDataKey and encrypt each file locally with the plaintext key",
+          "correct": true,
+          "rationale": "GenerateDataKey returns a plaintext and an encrypted copy of a data key; the plaintext copy encrypts the data outside KMS."
+        },
+        {
+          "text": "Store the plaintext data key next to each file so the file can be decrypted later",
+          "correct": false,
+          "rationale": "Anyone with the file could then decrypt it."
         }
       ],
-      "explanation": "Envelope encryption: encrypt data with a data key, then keep only the KMS-encrypted copy of that key.",
+      "explanation": "Envelope encryption: a data key from GenerateDataKey encrypts large data locally, and only the KMS-encrypted copy of that key is kept with the data. Calling Encrypt directly is the trap, because it accepts only small payloads.",
       "difficulty": 3,
       "tags": [
         "kms",
@@ -204,7 +209,7 @@
           "rationale": "Key pairs are for SSH access, not TLS."
         }
       ],
-      "explanation": "ACM public certificates are free for integrated services and renew automatically.",
+      "explanation": "The clues are a public certificate and automatic renewal, which a public ACM certificate on the listener provides. AWS Private CA is the nearest distractor, but browsers do not trust private certificates.",
       "difficulty": 1,
       "tags": [
         "acm",
@@ -379,7 +384,7 @@
           "rationale": "Metric filters create metrics; they do not hide log content."
         }
       ],
-      "explanation": "CloudWatch Logs data protection policies find and mask sensitive data such as PII.",
+      "explanation": "The clue is that most readers must not see the values: a data protection policy masks them for anyone without unmask permission. Encryption is the trap, because it protects stored data but not what an allowed reader sees.",
       "difficulty": 2,
       "tags": [
         "cloudwatch-logs",
@@ -408,9 +413,9 @@
           "rationale": "The secret would sit in plaintext in every function that uses the layer."
         },
         {
-          "text": "Allow secretsmanager:GetSecretValue in the execution role and read the secret at runtime",
+          "text": "Allow the execution role to read the secret, and fetch it at runtime",
           "correct": true,
-          "rationale": "The function fetches the current password when it needs it."
+          "rationale": "With secretsmanager:GetSecretValue, the function fetches the current password when it needs it."
         },
         {
           "text": "Store the password as a String parameter in Parameter Store",
@@ -418,7 +423,7 @@
           "rationale": "A plain String parameter is not encrypted and does not rotate."
         },
         {
-          "text": "Store the credentials in AWS Secrets Manager and turn on automatic rotation",
+          "text": "Store the credentials in AWS Secrets Manager with automatic rotation",
           "correct": true,
           "rationale": "Secrets Manager rotates database credentials on a schedule."
         },

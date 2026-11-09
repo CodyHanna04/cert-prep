@@ -11,7 +11,7 @@
         {
           "text": "AWS Cost Explorer",
           "correct": false,
-          "rationale": "Cost Explorer analyzes costs but is not where you set spending alerts."
+          "rationale": "Cost Explorer visualizes and forecasts costs; spending alerts are set in AWS Budgets."
         },
         {
           "text": "AWS Pricing Calculator",
@@ -21,15 +21,15 @@
         {
           "text": "AWS Budgets",
           "correct": true,
-          "rationale": "AWS Budgets sends alerts when actual or forecasted costs cross your thresholds."
+          "rationale": "AWS Budgets alerts you when actual or forecasted costs cross thresholds you set."
         },
         {
-          "text": "AWS Billing Conductor",
+          "text": "AWS Cost and Usage Report",
           "correct": false,
-          "rationale": "Billing Conductor customizes billing data for showback and chargeback."
+          "rationale": "The Cost and Usage Report delivers detailed line-item cost data to Amazon S3; it does not send alerts."
         }
       ],
-      "explanation": "Budgets can also track usage, Reserved Instance and Savings Plans utilization, and trigger actions.",
+      "explanation": "The clue is an alert at an amount you set, including forecasted spend, which is AWS Budgets. Cost Explorer also forecasts, but it is for analysis, not threshold alerts.",
       "difficulty": 1,
       "tags": [
         "billing",
@@ -42,7 +42,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-4.2-02",
@@ -57,14 +57,14 @@
           "rationale": "Pricing Calculator estimates the cost of planned architectures."
         },
         {
-          "text": "AWS Billing Conductor",
+          "text": "AWS Budgets",
           "correct": false,
-          "rationale": "Billing Conductor creates custom billing views for groups of accounts."
+          "rationale": "Budgets tracks spending against thresholds you set and sends alerts."
         },
         {
           "text": "AWS Artifact",
           "correct": false,
-          "rationale": "Artifact provides compliance reports."
+          "rationale": "Artifact provides compliance reports and agreements."
         },
         {
           "text": "AWS Cost Explorer",
@@ -85,7 +85,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-4.2-03",
@@ -189,17 +189,17 @@
         {
           "text": "Use a different security group for each department",
           "correct": false,
-          "rationale": "Security groups control traffic, not cost reporting."
+          "rationale": "Security groups control network traffic, not cost reporting."
         },
         {
-          "text": "Tag resources and activate those tags as cost allocation tags",
+          "text": "Tag resources and activate cost allocation tags",
           "correct": true,
-          "rationale": "Activated cost allocation tags let you group costs by your own categories."
+          "rationale": "Activated cost allocation tags let you group costs by your own categories, such as project or department."
         },
         {
           "text": "Deploy each project in its own AWS Region",
           "correct": false,
-          "rationale": "Regions are not a substitute for cost categorization."
+          "rationale": "Regions are not a way to categorize costs."
         }
       ],
       "explanation": "Cost allocation tags appear in Cost Explorer and the Cost and Usage Report once activated.",
@@ -215,7 +215,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-4.2-06",
@@ -225,14 +225,9 @@
       "stem": "Which provides the most detailed, line-item data about AWS costs and usage, delivered to an Amazon S3 bucket?",
       "options": [
         {
-          "text": "AWS Budgets",
-          "correct": false,
-          "rationale": "Budgets tracks thresholds and alerts."
-        },
-        {
           "text": "AWS Pricing Calculator",
           "correct": false,
-          "rationale": "Pricing Calculator estimates planned costs."
+          "rationale": "Pricing Calculator estimates the cost of planned workloads."
         },
         {
           "text": "AWS Trusted Advisor",
@@ -242,10 +237,15 @@
         {
           "text": "AWS Cost and Usage Report",
           "correct": true,
-          "rationale": "The Cost and Usage Report contains the most comprehensive cost and usage data."
+          "rationale": "The Cost and Usage Report contains the most comprehensive cost and usage data, as line items delivered to an S3 bucket you own."
+        },
+        {
+          "text": "The Bills page in the Billing and Cost Management console",
+          "correct": false,
+          "rationale": "The Bills page summarizes monthly charges and holds invoices, but it does not deliver line-item files to S3."
         }
       ],
-      "explanation": "The report can be analyzed with tools such as Amazon Athena or Amazon QuickSight.",
+      "explanation": "The clues are 'most detailed, line-item' and 'delivered to S3'. You can then query the report with Amazon Athena or load it into Amazon Quick.",
       "difficulty": 2,
       "tags": [
         "billing",
@@ -258,50 +258,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
-    },
-    {
-      "id": "clf-c02-4.2-07",
-      "domain": "d4",
-      "objective": "4.2",
-      "type": "single",
-      "stem": "A company wants to group its accounts and show each business unit a customized view of its AWS costs, for showback and chargeback. Which service is designed for this?",
-      "options": [
-        {
-          "text": "AWS Billing Conductor",
-          "correct": true,
-          "rationale": "Billing Conductor customizes billing data and pricing for groups of accounts."
-        },
-        {
-          "text": "AWS Budgets",
-          "correct": false,
-          "rationale": "Budgets sets spending thresholds and alerts."
-        },
-        {
-          "text": "AWS Cost Explorer",
-          "correct": false,
-          "rationale": "Cost Explorer analyzes costs but does not create custom billing views."
-        },
-        {
-          "text": "Service control policies",
-          "correct": false,
-          "rationale": "SCPs limit permissions in accounts."
-        }
-      ],
-      "explanation": "Billing Conductor supports showback and chargeback workflows.",
-      "difficulty": 3,
-      "tags": [
-        "billing",
-        "billing-conductor"
-      ],
-      "refs": [
-        "https://aws.amazon.com/aws-cost-management/aws-billing-conductor/"
-      ],
-      "source": "ai-draft",
-      "reviewStatus": "approved",
-      "generator": "claude-opus-5-5",
-      "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-4.2-08",
@@ -359,22 +316,22 @@
           "rationale": "Artifact provides compliance reports and agreements, not invoices."
         },
         {
-          "text": "AWS Trusted Advisor",
+          "text": "AWS Trusted Advisor cost optimization checks",
           "correct": false,
-          "rationale": "Trusted Advisor gives recommendations."
-        },
-        {
-          "text": "The Bills page of the AWS Billing and Cost Management console",
-          "correct": true,
-          "rationale": "The Billing console shows charges by service and provides invoices."
+          "rationale": "Trusted Advisor cost checks find ways to save, such as idle resources, but do not show bills."
         },
         {
           "text": "AWS Health Dashboard",
           "correct": false,
-          "rationale": "The Health Dashboard shows service events."
+          "rationale": "The Health Dashboard shows AWS events that affect your account."
+        },
+        {
+          "text": "The AWS Billing and Cost Management console",
+          "correct": true,
+          "rationale": "Its Bills page shows month-to-date charges by service and lets you download invoices."
         }
       ],
-      "explanation": "Billing and Cost Management is the console for bills, payments and cost tools.",
+      "explanation": "Charges and invoices are on the Bills page of the Billing and Cost Management console. AWS Artifact also offers downloads, but they are compliance documents, not bills.",
       "difficulty": 1,
       "tags": [
         "billing"
@@ -386,7 +343,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-4.2-10",
@@ -396,29 +353,29 @@
       "stem": "Which TWO tools help a company estimate or forecast its AWS costs? (Choose TWO.)",
       "options": [
         {
-          "text": "AWS Shield",
+          "text": "AWS License Manager",
           "correct": false,
-          "rationale": "Shield protects against DDoS attacks."
+          "rationale": "License Manager manages software licenses; it does not estimate or forecast AWS costs."
         },
         {
           "text": "AWS Cost Explorer",
           "correct": true,
-          "rationale": "Cost Explorer forecasts future costs from past usage."
+          "rationale": "Cost Explorer can forecast future costs from past usage."
         },
         {
-          "text": "Amazon Inspector",
+          "text": "Consolidated billing in AWS Organizations",
           "correct": false,
-          "rationale": "Inspector scans for vulnerabilities."
+          "rationale": "Consolidated billing combines accounts' charges into one bill; it does not estimate or forecast costs."
         },
         {
           "text": "AWS Pricing Calculator",
           "correct": true,
-          "rationale": "Pricing Calculator estimates planned costs."
+          "rationale": "Pricing Calculator estimates the cost of a planned workload."
         },
         {
-          "text": "AWS Artifact",
+          "text": "Cost allocation tags",
           "correct": false,
-          "rationale": "Artifact provides compliance reports."
+          "rationale": "Cost allocation tags group costs by your own categories; they do not predict them."
         }
       ],
       "explanation": "Estimate before building with the Pricing Calculator; forecast running workloads with Cost Explorer.",
@@ -430,13 +387,60 @@
       ],
       "refs": [
         "https://docs.aws.amazon.com/pricing-calculator/latest/userguide/what-is-pricing-calculator.html",
-        "https://aws.amazon.com/aws-cost-management/aws-cost-explorer/"
+        "https://aws.amazon.com/aws-cost-management/aws-cost-explorer/",
+        "https://aws.amazon.com/license-manager/",
+        "https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "clf-c02-4.2-11",
+      "domain": "d4",
+      "objective": "4.2",
+      "type": "single",
+      "stem": "A company on Basic Support has a question about a charge on its AWS bill. How can it get one-on-one help from AWS?",
+      "options": [
+        {
+          "text": "Upgrade to AWS Business Support+ to open a case",
+          "correct": false,
+          "rationale": "Account and billing support is free for every customer; a paid plan is needed for technical support, not billing questions."
+        },
+        {
+          "text": "Post the question publicly on AWS re:Post",
+          "correct": false,
+          "rationale": "re:Post is a public community forum, not a private channel for questions about your own bill."
+        },
+        {
+          "text": "Open a billing case in the AWS Support Center",
+          "correct": true,
+          "rationale": "Every customer can open an account and billing support case in the Support Center at no cost."
+        },
+        {
+          "text": "Report the charge to the AWS Trust and Safety team",
+          "correct": false,
+          "rationale": "Trust and Safety handles reports of abuse of AWS resources, not billing questions."
+        }
+      ],
+      "explanation": "Account and billing support is part of Basic Support, so the company can open a case in the Support Center without upgrading. Paid plans add technical support cases.",
+      "difficulty": 1,
+      "tags": [
+        "billing",
+        "support-center",
+        "basic-support"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-get-answers.html",
+        "https://docs.aws.amazon.com/awssupport/latest/user/aws-support-plans.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
     }
   ]
 }

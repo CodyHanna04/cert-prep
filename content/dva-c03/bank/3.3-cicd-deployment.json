@@ -161,7 +161,7 @@
           "rationale": "Concurrency limits do not route traffic between versions."
         }
       ],
-      "explanation": "Canary moves traffic in two increments, linear in equal steps, and all-at-once immediately.",
+      "explanation": "Ten percent first and the rest a few minutes later is a canary pattern, and listing the alarm lets CodeDeploy roll back automatically. All-at-once is the nearest distractor, but it moves all traffic in one step.",
       "difficulty": 3,
       "tags": [
         "codedeploy",
@@ -240,9 +240,9 @@
           "rationale": "Drift detection compares stacks to templates; it is not an approval."
         },
         {
-          "text": "Use a source action connected to the repository that starts the pipeline on each push",
+          "text": "Use a source action that starts the pipeline on each push",
           "correct": true,
-          "rationale": "A connection-based source action detects pushes and starts the pipeline."
+          "rationale": "A connection-based source action detects pushes to the repository and starts the pipeline."
         },
         {
           "text": "Schedule the pipeline to run every night with Amazon EventBridge Scheduler",
@@ -342,7 +342,7 @@
           "rationale": "A change set previews the changes an update will make before you run it."
         }
       ],
-      "explanation": "Change sets show the effect of an update, including replacements, before it happens.",
+      "explanation": "The clue is previewing a proposed update: a change set lists what will be added, changed or replaced before you run it. Drift detection is the nearest distractor, but it compares resources with the current template, not with an update.",
       "difficulty": 1,
       "tags": [
         "cloudformation",
@@ -361,31 +361,36 @@
       "id": "dva-c03-3.3-09",
       "domain": "d3",
       "objective": "3.3",
-      "type": "single",
-      "stem": "A network stack creates a VPC. A separate application stack must use that VPC's ID without hardcoding it. How should the developer share the value?",
+      "type": "multi",
+      "stem": "A network stack creates a VPC. A separate application stack in the same account and Region must use that VPC's ID without hardcoding it. Which combination of steps will meet these requirements? (Select TWO.)",
       "options": [
         {
-          "text": "Export it as an output of the network stack and use Fn::ImportValue",
-          "correct": true,
-          "rationale": "Exports share values between stacks in the same account and Region."
-        },
-        {
-          "text": "Copy the ID into the application template by hand",
+          "text": "Copy the VPC ID into the application template by hand",
           "correct": false,
           "rationale": "Hardcoded IDs break when the network stack changes."
         },
         {
-          "text": "Reference the network stack's VPC from the application stack with Fn::GetAtt",
-          "correct": false,
-          "rationale": "GetAtt reads attributes of resources in the same template."
+          "text": "In the application stack, import the value with Fn::ImportValue",
+          "correct": true,
+          "rationale": "Fn::ImportValue reads a value that another stack has exported."
         },
         {
-          "text": "Pass the ID through a Lambda environment variable",
+          "text": "In the application stack, read the VPC ID with Fn::GetAtt on the network stack",
+          "correct": false,
+          "rationale": "Fn::GetAtt reads attributes of resources in the same template."
+        },
+        {
+          "text": "Pass the VPC ID to the application stack through a Lambda environment variable",
           "correct": false,
           "rationale": "Environment variables configure functions, not templates."
+        },
+        {
+          "text": "In the network stack, output the VPC ID with an Export name",
+          "correct": true,
+          "rationale": "An exported output can be imported by other stacks in the same account and Region."
         }
       ],
-      "explanation": "Outputs with Export and Fn::ImportValue create cross-stack references.",
+      "explanation": "A cross-stack reference is an exported output in one stack plus Fn::ImportValue in the other. Fn::GetAtt is the nearest distractor, but it reads only resources in the same template.",
       "difficulty": 2,
       "tags": [
         "cloudformation",
@@ -409,9 +414,9 @@
       "stem": "A team wants to mark the exact commit that was released to production as version 2.3.0, so it can be found and redeployed later. What should the developer create?",
       "options": [
         {
-          "text": "A new branch for each file in the release",
+          "text": "A branch named release-2.3.0 created from that commit",
           "correct": false,
-          "rationale": "Branches track lines of work, not a single released commit."
+          "rationale": "A branch moves forward as new commits are added, so it does not pin one released commit."
         },
         {
           "text": "A Git tag on that commit",
@@ -429,7 +434,7 @@
           "rationale": "Pull requests propose changes; they do not label a commit."
         }
       ],
-      "explanation": "Use tags for releases and branches for ongoing lines of development.",
+      "explanation": "A tag is a fixed label on one commit, which suits releases. A branch is the nearest distractor, but it moves as work continues on it.",
       "difficulty": 1,
       "tags": [
         "source-control",

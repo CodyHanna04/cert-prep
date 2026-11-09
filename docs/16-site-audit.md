@@ -26,7 +26,7 @@ A walk through every page on the local dev build: desktop, phone width (375 px),
 6. **Auto-unflag** after three correct answers in a row, as a setting (F09).
 
 **Content**
-7. **CLF-C02:** 275 approved after this pass, above the 260 target. Next: more multiple-response questions (about 7% now; the exam is closer to 10–15%) and a second pass on the thinnest objectives.
+7. **CLF-C02:** 282 approved, reviewed against guide v1.3 (2026-11-08). Next: re-check the guide's revisions page before each content pass.
 8. **DVA-C03:** 123 approved questions and a `style.md` (2026-11-08). Next: grow each objective toward its target of about 19 to 26.
 
 **Polish**

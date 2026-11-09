@@ -24,7 +24,7 @@
           "rationale": "On-Demand compute is billed for the time it runs, so the cost varies with use."
         },
         {
-          "text": "Purchasing network switches before they are needed",
+          "text": "Purchasing network switches months before they are needed",
           "correct": false,
           "rationale": "Up-front equipment purchases are fixed costs."
         }
@@ -42,7 +42,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.4-02",
@@ -62,9 +62,9 @@
           "rationale": "Bring Your Own License software still needs licenses."
         },
         {
-          "text": "Staff time to design its own applications",
+          "text": "Staff time to design and build its own applications",
           "correct": false,
-          "rationale": "Application design remains the company's work."
+          "rationale": "Designing and building applications remains the company's work."
         },
         {
           "text": "Power and cooling for its own data center",
@@ -86,7 +86,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.4-03",
@@ -96,27 +96,27 @@
       "stem": "A company has existing software licenses that it wants to use on Amazon EC2. What is this licensing approach called?",
       "options": [
         {
-          "text": "Bring Your Own License (BYOL)",
-          "correct": true,
-          "rationale": "BYOL lets you use eligible licenses you already own on AWS."
-        },
-        {
           "text": "License included",
           "correct": false,
           "rationale": "License included means the license cost is part of the AWS price."
         },
         {
-          "text": "Reserved licensing",
+          "text": "An AWS Marketplace software subscription",
           "correct": false,
-          "rationale": "This is not an AWS licensing model."
+          "rationale": "Buying through AWS Marketplace gets new software; it does not reuse licenses the company already owns."
         },
         {
-          "text": "Spot licensing",
+          "text": "Bring Your Own License (BYOL)",
+          "correct": true,
+          "rationale": "BYOL lets you use eligible licenses you already own on AWS."
+        },
+        {
+          "text": "Reserved Instance pricing",
           "correct": false,
-          "rationale": "Spot refers to Spot Instances, a compute purchasing option, not licensing."
+          "rationale": "Reserved Instances are a compute pricing commitment, not a licensing approach."
         }
       ],
-      "explanation": "The two licensing strategies to know are BYOL (use your own eligible licenses) and license included (pay for the license through AWS).",
+      "explanation": "The clue is licenses the company already owns, which is BYOL. License included, the nearest alternative, means paying for the license through the AWS price.",
       "difficulty": 1,
       "tags": [
         "cloud-economics",
@@ -129,7 +129,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.4-04",
@@ -313,6 +313,11 @@
       "stem": "Which AWS service is a fully managed container orchestration service, so a company does not install and operate its own orchestration software?",
       "options": [
         {
+          "text": "Amazon Elastic Container Registry (Amazon ECR)",
+          "correct": false,
+          "rationale": "Amazon ECR stores container images; it does not run or orchestrate containers."
+        },
+        {
           "text": "Amazon Elastic Block Store (Amazon EBS)",
           "correct": false,
           "rationale": "Amazon EBS provides block storage volumes."
@@ -323,17 +328,12 @@
           "rationale": "Amazon ECS is a fully managed container orchestration service."
         },
         {
-          "text": "Amazon Route 53",
+          "text": "Amazon EC2",
           "correct": false,
-          "rationale": "Route 53 is a DNS service."
-        },
-        {
-          "text": "AWS Config",
-          "correct": false,
-          "rationale": "AWS Config records and evaluates resource configurations."
+          "rationale": "Amazon EC2 provides virtual servers; orchestration on EC2 means installing and operating the software yourself."
         }
       ],
-      "explanation": "Managed services like Amazon ECS remove the cost of running your own control plane software.",
+      "explanation": "The clue is container orchestration without running your own software, which is Amazon ECS. Amazon ECR, the nearest neighbor, stores the container images that ECS runs.",
       "difficulty": 1,
       "tags": [
         "cloud-economics",
@@ -341,13 +341,14 @@
         "ecs"
       ],
       "refs": [
-        "https://aws.amazon.com/ecs/"
+        "https://aws.amazon.com/ecs/",
+        "https://aws.amazon.com/ecr/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.4-09",
@@ -466,7 +467,7 @@
           "rationale": "Up-front hardware purchases are replaced by ongoing pay-as-you-go charges."
         },
         {
-          "text": "From software licensing to hardware purchases",
+          "text": "From software licensing to up-front hardware purchases",
           "correct": false,
           "rationale": "Cloud adoption reduces hardware purchases."
         }
@@ -484,7 +485,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.4-12",
@@ -499,22 +500,22 @@
           "rationale": "Artifact provides compliance reports and agreements."
         },
         {
-          "text": "AWS Cost Explorer",
-          "correct": false,
-          "rationale": "Cost Explorer analyzes spending."
-        },
-        {
-          "text": "AWS Config",
-          "correct": false,
-          "rationale": "AWS Config records resource configurations."
-        },
-        {
           "text": "AWS License Manager",
           "correct": true,
-          "rationale": "License Manager tracks license usage and enforces licensing rules."
+          "rationale": "License Manager tracks license use across AWS and on premises and can enforce licensing rules."
+        },
+        {
+          "text": "AWS Cost and Usage Reports",
+          "correct": false,
+          "rationale": "Cost and Usage Reports give detailed billing data; they do not track license use or enforce license rules."
+        },
+        {
+          "text": "AWS Service Catalog",
+          "correct": false,
+          "rationale": "Service Catalog offers a catalog of approved IT products that users can launch; it does not track license counts."
         }
       ],
-      "explanation": "License Manager helps with Bring Your Own License compliance.",
+      "explanation": "The clue is managing software licenses from vendors, including ones brought under BYOL. License Manager tracks license use and enforces limits, while Service Catalog controls which products users can launch.",
       "difficulty": 2,
       "tags": [
         "cloud-economics",
@@ -528,7 +529,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-1.4-13",
@@ -625,7 +626,7 @@
       "stem": "Which TWO costs belong in a total cost of ownership comparison between an on-premises data center and AWS? (Choose TWO.)",
       "options": [
         {
-          "text": "The price of the AWS Management Console",
+          "text": "A fee for each sign-in to the AWS Management Console",
           "correct": false,
           "rationale": "The console has no separate charge."
         },
@@ -635,35 +636,36 @@
           "rationale": "Hardware and facilities are major on-premises costs."
         },
         {
-          "text": "AWS certification exam fees",
+          "text": "A monthly subscription fee for Basic Support",
           "correct": false,
-          "rationale": "Exam fees are unrelated to infrastructure costs."
-        },
-        {
-          "text": "AWS Marketplace listing fees for sellers",
-          "correct": false,
-          "rationale": "Seller fees are unrelated to a customer's TCO."
+          "rationale": "Basic Support is included for all AWS customers."
         },
         {
           "text": "Staff time spent operating the infrastructure",
           "correct": true,
           "rationale": "Operations labor is part of total cost of ownership."
+        },
+        {
+          "text": "A charge for creating each new AWS account",
+          "correct": false,
+          "rationale": "Creating an AWS account has no charge; you pay for the resources you use."
         }
       ],
-      "explanation": "A fair comparison includes hardware, facilities, power, cooling, networking, licensing and the people who run it all.",
+      "explanation": "A fair comparison includes everything it takes to run on premises: hardware, facilities, power, cooling, networking, licensing and the people who run it all. The other options are charges that AWS does not make.",
       "difficulty": 2,
       "tags": [
         "cloud-economics",
         "tco"
       ],
       "refs": [
-        "https://aws.amazon.com/what-is/cloud-vs-on-premises/"
+        "https://aws.amazon.com/what-is/cloud-vs-on-premises/",
+        "https://aws.amazon.com/premiumsupport/plans/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     }
   ]
 }

@@ -11,38 +11,39 @@
         {
           "text": "Amazon Lex",
           "correct": false,
-          "rationale": "Lex builds conversational interfaces."
+          "rationale": "Lex builds chatbots and other conversational interfaces."
         },
         {
           "text": "Amazon SageMaker AI",
           "correct": true,
-          "rationale": "SageMaker provides tools to build, train and deploy ML models."
+          "rationale": "SageMaker AI provides tools to build, train and deploy your own ML models."
         },
         {
-          "text": "Amazon Kendra",
+          "text": "Amazon Rekognition",
           "correct": false,
-          "rationale": "Kendra is intelligent enterprise search."
+          "rationale": "Rekognition is a ready-made service for image and video analysis."
         },
         {
-          "text": "Amazon QuickSight",
+          "text": "AWS Elastic Beanstalk",
           "correct": false,
-          "rationale": "QuickSight builds business intelligence dashboards."
+          "rationale": "Elastic Beanstalk deploys and scales web applications, not ML models."
         }
       ],
-      "explanation": "SageMaker AI (called Amazon SageMaker in the exam guide; renamed in December 2024) is for building your own ML models; other AI services offer ready-made capabilities.",
+      "explanation": "The clue is building and training your own models: SageMaker AI is the ML platform, while Lex and Rekognition are ready-made AI services you use without training a model.",
       "difficulty": 1,
       "tags": [
         "ai-ml",
         "sagemaker"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/sagemaker/latest/dg/whatis.html"
+        "https://docs.aws.amazon.com/sagemaker/latest/dg/whatis.html",
+        "https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/Welcome.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.7-02",
@@ -52,14 +53,14 @@
       "stem": "Which service builds conversational interfaces, such as chatbots, that understand voice and text?",
       "options": [
         {
-          "text": "Amazon Kendra",
+          "text": "Amazon Polly",
           "correct": false,
-          "rationale": "Kendra searches documents."
+          "rationale": "Polly turns text into lifelike speech but does not understand what users say."
         },
         {
           "text": "Amazon SageMaker AI",
           "correct": false,
-          "rationale": "SageMaker is for building custom ML models."
+          "rationale": "SageMaker AI is for building custom ML models."
         },
         {
           "text": "Amazon Lex",
@@ -72,63 +73,21 @@
           "rationale": "Athena queries data in S3."
         }
       ],
-      "explanation": "Lex uses the same deep learning technology that powers Amazon Alexa.",
+      "explanation": "The clue is a chatbot that understands voice and text: Lex handles the conversation, while Polly only speaks text aloud.",
       "difficulty": 1,
       "tags": [
         "ai-ml",
         "lex"
       ],
       "refs": [
-        "https://aws.amazon.com/lex/"
+        "https://aws.amazon.com/lex/",
+        "https://aws.amazon.com/polly/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
-    },
-    {
-      "id": "clf-c02-3.7-03",
-      "domain": "d3",
-      "objective": "3.7",
-      "type": "single",
-      "stem": "Which service provides intelligent search across a company's documents and content repositories?",
-      "options": [
-        {
-          "text": "Amazon Lex",
-          "correct": false,
-          "rationale": "Lex builds chatbots."
-        },
-        {
-          "text": "Amazon Athena",
-          "correct": false,
-          "rationale": "Athena runs SQL on data in S3, not document search."
-        },
-        {
-          "text": "AWS Glue",
-          "correct": false,
-          "rationale": "Glue prepares data for analytics."
-        },
-        {
-          "text": "Amazon Kendra",
-          "correct": true,
-          "rationale": "Kendra is an intelligent enterprise search service."
-        }
-      ],
-      "explanation": "Kendra uses machine learning to return relevant answers from content in many sources. AWS has since closed Kendra to new customers, but the CLF-C02 exam guide still lists it.",
-      "difficulty": 2,
-      "tags": [
-        "ai-ml",
-        "kendra"
-      ],
-      "refs": [
-        "https://aws.amazon.com/kendra/"
-      ],
-      "source": "ai-draft",
-      "reviewStatus": "approved",
-      "generator": "claude-opus-5-5",
-      "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.7-04",
@@ -140,7 +99,7 @@
         {
           "text": "Amazon Rekognition",
           "correct": true,
-          "rationale": "Rekognition offers image and video analysis."
+          "rationale": "Rekognition offers ready-made image and video analysis."
         },
         {
           "text": "Amazon Polly",
@@ -153,25 +112,26 @@
           "rationale": "Transcribe converts speech to text."
         },
         {
-          "text": "Amazon Kendra",
+          "text": "Amazon SageMaker AI",
           "correct": false,
-          "rationale": "Kendra is document search."
+          "rationale": "SageMaker AI is for building and training your own ML models."
         }
       ],
-      "explanation": "Rekognition adds computer vision to applications without building ML models.",
+      "explanation": "The clue is analyzing images and video with a ready-made service: Rekognition does this without training a model, while SageMaker AI is for building your own models.",
       "difficulty": 1,
       "tags": [
         "ai-ml",
         "rekognition"
       ],
       "refs": [
-        "https://aws.amazon.com/rekognition/"
+        "https://aws.amazon.com/rekognition/",
+        "https://docs.aws.amazon.com/sagemaker/latest/dg/whatis.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.7-05",
@@ -239,25 +199,26 @@
           "rationale": "Transcribe uses automatic speech recognition to convert speech to text."
         },
         {
-          "text": "Amazon QuickSight",
+          "text": "Amazon Comprehend",
           "correct": false,
-          "rationale": "QuickSight builds dashboards."
+          "rationale": "Comprehend finds meaning in text that already exists; it does not turn audio into text."
         }
       ],
-      "explanation": "Transcribe is often used for call analytics, captions and meeting notes.",
+      "explanation": "The clue is turning speech into text: Transcribe does that, while Polly goes the other way and turns text into speech.",
       "difficulty": 1,
       "tags": [
         "ai-ml",
         "transcribe"
       ],
       "refs": [
-        "https://aws.amazon.com/transcribe/"
+        "https://aws.amazon.com/transcribe/",
+        "https://docs.aws.amazon.com/comprehend/latest/dg/what-is.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.7-07",
@@ -277,9 +238,9 @@
           "rationale": "Glue catalogs and transforms data; Athena can then query it."
         },
         {
-          "text": "Amazon QuickSight",
+          "text": "Amazon Quick",
           "correct": false,
-          "rationale": "QuickSight visualizes data."
+          "rationale": "Amazon Quick is an AI-powered service whose features include business intelligence dashboards."
         },
         {
           "text": "Amazon Athena",
@@ -287,20 +248,21 @@
           "rationale": "Athena is a serverless, interactive query service for data in S3."
         }
       ],
-      "explanation": "With Athena you pay for the data each query scans.",
+      "explanation": "The clue is SQL directly on S3 with nothing to load: Athena is a serverless query service, while Glue prepares and catalogs the data that Athena queries.",
       "difficulty": 1,
       "tags": [
         "analytics",
         "athena"
       ],
       "refs": [
-        "https://aws.amazon.com/athena/"
+        "https://aws.amazon.com/athena/",
+        "https://docs.aws.amazon.com/quick/latest/userguide/what-is.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.7-08",
@@ -325,9 +287,9 @@
           "rationale": "Glue runs data preparation and ETL jobs."
         },
         {
-          "text": "Amazon QuickSight",
+          "text": "Amazon Redshift",
           "correct": false,
-          "rationale": "QuickSight builds dashboards."
+          "rationale": "Redshift is a cloud data warehouse for analyzing stored data."
         }
       ],
       "explanation": "Kinesis is for data in motion; Athena is for data at rest in S3.",
@@ -338,13 +300,14 @@
         "streaming"
       ],
       "refs": [
-        "https://aws.amazon.com/kinesis/"
+        "https://aws.amazon.com/kinesis/",
+        "https://aws.amazon.com/redshift/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.7-09",
@@ -408,30 +371,32 @@
           "rationale": "Glue prepares data."
         },
         {
-          "text": "Amazon QuickSight",
+          "text": "Amazon Quick",
           "correct": true,
-          "rationale": "QuickSight is a business intelligence service for dashboards and reports."
+          "rationale": "Amazon Quick is an AI-powered service that includes business intelligence: interactive dashboards and visualizations."
         },
         {
           "text": "Amazon SageMaker AI",
           "correct": false,
-          "rationale": "SageMaker builds ML models."
+          "rationale": "SageMaker AI builds ML models."
         }
       ],
-      "explanation": "A common analytics path: Kinesis or Glue bring data in, Athena queries it, QuickSight visualizes it.",
+      "explanation": "The clue is dashboards for business users: Amazon Quick visualizes data, while Athena runs the queries that can feed those dashboards.",
       "difficulty": 1,
       "tags": [
         "analytics",
-        "quicksight"
+        "amazon-quick",
+        "business-intelligence"
       ],
       "refs": [
-        "https://aws.amazon.com/quicksight/"
+        "https://docs.aws.amazon.com/quick/latest/userguide/what-is.html",
+        "https://aws.amazon.com/quick/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.7-11",
@@ -451,9 +416,9 @@
           "rationale": "Rekognition is an AI service for image analysis."
         },
         {
-          "text": "Amazon QuickSight",
+          "text": "Amazon Quick",
           "correct": true,
-          "rationale": "QuickSight provides business intelligence dashboards."
+          "rationale": "Amazon Quick analyzes data and provides business intelligence dashboards."
         },
         {
           "text": "Amazon Polly",
@@ -466,22 +431,22 @@
           "rationale": "Athena queries data in S3 with SQL."
         }
       ],
-      "explanation": "Analytics services in scope include Athena, Kinesis, Glue, QuickSight, Redshift and EMR.",
+      "explanation": "Analytics services query, process or visualize data, such as Athena, Kinesis, Glue, Amazon Quick, Redshift and EMR; Lex, Rekognition and Polly are AI services that perform a single task.",
       "difficulty": 1,
       "tags": [
         "analytics",
         "athena",
-        "quicksight"
+        "amazon-quick"
       ],
       "refs": [
         "https://aws.amazon.com/athena/",
-        "https://aws.amazon.com/quicksight/"
+        "https://docs.aws.amazon.com/quick/latest/userguide/what-is.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-08"
     },
     {
       "id": "clf-c02-3.7-12",
@@ -611,6 +576,51 @@
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
       "lastVerified": "2026-11-02"
+    },
+    {
+      "id": "clf-c02-3.7-15",
+      "domain": "d3",
+      "objective": "3.7",
+      "type": "single",
+      "stem": "A developer wants a generative AI assistant in the AWS Management Console that answers questions about AWS and suggests code. Which service should the developer use?",
+      "options": [
+        {
+          "text": "Amazon Lex",
+          "correct": false,
+          "rationale": "Lex is for building your own chatbots, not a ready-made assistant for AWS work."
+        },
+        {
+          "text": "Amazon Comprehend",
+          "correct": false,
+          "rationale": "Comprehend finds insights such as sentiment and entities in text."
+        },
+        {
+          "text": "Amazon Q",
+          "correct": true,
+          "rationale": "Amazon Q is a generative AI-powered assistant that can answer questions about AWS and generate code."
+        },
+        {
+          "text": "Amazon SageMaker AI",
+          "correct": false,
+          "rationale": "SageMaker AI is for building, training and deploying your own ML models."
+        }
+      ],
+      "explanation": "The clue is a ready-made generative AI assistant for AWS work: Amazon Q answers questions and writes code, while Lex is a tool for building a chatbot of your own.",
+      "difficulty": 1,
+      "tags": [
+        "ai-ml",
+        "amazon-q",
+        "generative-ai"
+      ],
+      "refs": [
+        "https://aws.amazon.com/q/",
+        "https://aws.amazon.com/q/developer/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-08",
+      "lastVerified": "2026-11-08"
     }
   ]
 }

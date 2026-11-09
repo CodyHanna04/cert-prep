@@ -96,12 +96,12 @@
       "stem": "Deployments must always run the exact container image that passed testing, and nobody should be able to replace an image under an existing tag. Which actions will meet these requirements? (Select TWO.)",
       "options": [
         {
-          "text": "Turn off image scanning",
+          "text": "Turn on image scanning for the repository",
           "correct": false,
-          "rationale": "Scanning does not change tags and should stay on."
+          "rationale": "Scanning finds vulnerabilities; it does not stop a tag from being overwritten."
         },
         {
-          "text": "Tag each image with a unique value, such as the Git commit ID, and deploy that tag",
+          "text": "Tag each image with a unique value, such as the Git commit ID",
           "correct": true,
           "rationale": "A unique tag points to one specific build."
         },
@@ -116,7 +116,7 @@
           "rationale": "Immutable tags cannot be overwritten by a later push."
         },
         {
-          "text": "Deploy the latest tag in every environment",
+          "text": "Deploy the latest tag in every environment so they run the same build",
           "correct": false,
           "rationale": "latest moves with each push, so environments may run different, untested builds."
         }
@@ -297,7 +297,7 @@
           "rationale": "ECR stores container images, not runtime flags."
         }
       ],
-      "explanation": "AppConfig separates configuration changes from code deployments.",
+      "explanation": "The clues are no redeploy, a gradual rollout and alarm-based rollback, which AppConfig deployment strategies provide. Lambda environment variables are the nearest distractor, but changing one updates the function and is not gradual.",
       "difficulty": 2,
       "tags": [
         "appconfig",
@@ -403,39 +403,45 @@
       "id": "dva-c03-3.1-10",
       "domain": "d3",
       "objective": "3.1",
-      "type": "single",
-      "stem": "A REST API in Amazon API Gateway must be reachable only from inside the company's VPC. Which endpoint type should the developer use?",
+      "type": "multi",
+      "stem": "A REST API in Amazon API Gateway must be reachable only from inside the company's VPC. Which combination of steps will meet this requirement? (Select TWO.)",
       "options": [
         {
-          "text": "An edge-optimized API served through CloudFront edge locations",
+          "text": "Make the API private, with a resource policy that allows the VPC endpoint",
+          "correct": true,
+          "rationale": "A private API is inaccessible until its resource policy grants access to specific VPCs or VPC endpoints."
+        },
+        {
+          "text": "Create the API as an edge-optimized API served through CloudFront",
           "correct": false,
           "rationale": "Edge-optimized APIs are public and served through CloudFront locations."
         },
         {
-          "text": "A Regional API",
+          "text": "Create a gateway VPC endpoint for API Gateway and add it to the route tables",
           "correct": false,
-          "rationale": "Regional APIs are public endpoints in one Region."
+          "rationale": "Gateway endpoints exist only for Amazon S3 and DynamoDB; API Gateway uses interface endpoints."
         },
         {
-          "text": "A Regional API with a custom domain name",
+          "text": "Use a Regional API with a custom domain name",
           "correct": false,
-          "rationale": "A custom domain does not make the API private."
+          "rationale": "A custom domain does not make a public API private."
         },
         {
-          "text": "A private API, accessed through an interface VPC endpoint",
+          "text": "Create an interface VPC endpoint for API Gateway (execute-api) in the VPC",
           "correct": true,
-          "rationale": "Private APIs are reachable only through interface endpoints in a VPC."
+          "rationale": "The endpoint gives the VPC a private path to API Gateway through AWS PrivateLink."
         }
       ],
-      "explanation": "API Gateway endpoint types: edge-optimized and Regional are public; private is VPC-only.",
+      "explanation": "A private API is reached through an interface VPC endpoint for execute-api, and its resource policy must allow that endpoint or VPC. A gateway endpoint is the nearest distractor, but gateway endpoints exist only for Amazon S3 and DynamoDB.",
       "difficulty": 2,
       "tags": [
         "api-gateway",
         "private-api"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-endpoint-types.html",
-        "https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-private-apis.html"
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-private-apis.html",
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-private-api-create.html",
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-endpoint-types.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",

@@ -97,14 +97,14 @@
       "stem": "An application on Amazon EC2 instances must publish a custom metric for the number of items in an in-memory queue. Which approaches will publish it to CloudWatch? (Select TWO.)",
       "options": [
         {
-          "text": "Enable EC2 detailed monitoring",
+          "text": "Enable detailed monitoring on the EC2 instances that run the app",
           "correct": false,
           "rationale": "Detailed monitoring adds one-minute EC2 metrics, not application values."
         },
         {
-          "text": "Send the value to the CloudWatch agent, for example through StatsD",
+          "text": "Send the value to the CloudWatch agent through StatsD",
           "correct": true,
-          "rationale": "The agent collects custom metrics and publishes them to CloudWatch."
+          "rationale": "The agent collects custom metrics, for example through StatsD, and publishes them to CloudWatch."
         },
         {
           "text": "Change the X-Ray sampling rate",
@@ -112,7 +112,7 @@
           "rationale": "Sampling controls tracing, not metrics."
         },
         {
-          "text": "Call the PutMetricData API from the application through the AWS SDK",
+          "text": "Call PutMetricData from the application through the AWS SDK",
           "correct": true,
           "rationale": "PutMetricData publishes custom metric data points."
         },
@@ -143,38 +143,44 @@
       "id": "dva-c03-4.2-04",
       "domain": "d4",
       "objective": "4.2",
-      "type": "single",
-      "stem": "The team wants an email when a function's error count goes above 10 in five minutes. What should the developer set up?",
+      "type": "multi",
+      "stem": "A team wants an email when a Lambda function's error count goes above 10 in five minutes. Which combination of steps will meet this requirement? (Select TWO.)",
       "options": [
         {
-          "text": "A CloudWatch alarm on the Errors metric that notifies an SNS topic",
-          "correct": true,
-          "rationale": "The alarm changes state at the threshold and notifies the topic's email subscribers."
-        },
-        {
-          "text": "An X-Ray group with a filter expression for requests that have errors",
+          "text": "Create an X-Ray group with a filter expression for requests that have errors",
           "correct": false,
           "rationale": "Groups organize traces; they do not send email."
         },
         {
-          "text": "A CloudWatch Logs retention policy",
-          "correct": false,
-          "rationale": "Retention controls log storage."
+          "text": "Create a CloudWatch alarm on the Errors metric that notifies the topic",
+          "correct": true,
+          "rationale": "The alarm changes state when the threshold is crossed and sends a notification to the SNS topic."
         },
         {
-          "text": "An X-Ray sampling rule for failed requests",
+          "text": "Set a CloudWatch Logs retention policy on the function's log group",
+          "correct": false,
+          "rationale": "Retention controls how long logs are kept."
+        },
+        {
+          "text": "Create an Amazon SNS topic and confirm an email subscription to it",
+          "correct": true,
+          "rationale": "SNS delivers each notification to the confirmed email subscribers of the topic."
+        },
+        {
+          "text": "Add an X-Ray sampling rule that traces every failed request",
           "correct": false,
           "rationale": "Sampling rules decide which requests are traced; they do not send notifications."
         }
       ],
-      "explanation": "Alarms watch metrics and notify through SNS.",
+      "explanation": "Alarms watch a metric and act when they change state, and an SNS topic with an email subscription turns that into an email. X-Ray groups and sampling rules are the nearest distractors, but they organize traces and send nothing.",
       "difficulty": 1,
       "tags": [
         "cloudwatch-alarm",
         "sns"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html"
+        "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html",
+        "https://docs.aws.amazon.com/sns/latest/dg/sns-email-notifications.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
@@ -321,17 +327,17 @@
       "stem": "A developer wants end-to-end traces for requests that go through an API Gateway REST API, a Lambda function and DynamoDB. Which steps are needed? (Select TWO.)",
       "options": [
         {
-          "text": "Turn on CloudTrail data events for the table",
+          "text": "Turn on CloudTrail data events for the DynamoDB table and the function",
           "correct": false,
           "rationale": "CloudTrail records API calls for auditing, not traces."
         },
         {
-          "text": "Enable detailed monitoring on the API",
+          "text": "Enable detailed CloudWatch metrics on the API Gateway stage",
           "correct": false,
           "rationale": "Detailed metrics do not connect a request's path across services."
         },
         {
-          "text": "Turn on active tracing for the Lambda function and instrument its AWS SDK calls",
+          "text": "Turn on active tracing for the function and instrument its SDK calls",
           "correct": true,
           "rationale": "Lambda records its segment, and instrumentation records the DynamoDB calls."
         },

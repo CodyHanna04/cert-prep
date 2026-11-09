@@ -29,7 +29,7 @@
           "rationale": "The queue absorbs bursts and decouples the two services, so the inventory service works at its own pace."
         }
       ],
-      "explanation": "A queue between producer and consumer turns a tightly coupled synchronous call into loosely coupled asynchronous processing.",
+      "explanation": "The clues are a slow downstream service and orders that can wait, so put a queue between the services. A longer timeout is the tempting fix, but it keeps the call synchronous and still fails as the backlog grows.",
       "difficulty": 2,
       "tags": [
         "decoupling",
@@ -117,7 +117,7 @@
           "rationale": "Switching Regions does not address throttling and leaves the data split across tables."
         }
       ],
-      "explanation": "AWS SDKs retry throttling errors with exponential backoff by default; custom retry code should follow the same pattern.",
+      "explanation": "Throttling errors are temporary, so retry them, but spread the retries out with exponential backoff and jitter, as the AWS SDKs do by default. Immediate retries are the trap: they add load while the table is already throttling.",
       "difficulty": 2,
       "tags": [
         "retries",
@@ -137,31 +137,36 @@
       "id": "dva-c03-1.1-04",
       "domain": "d1",
       "objective": "1.1",
-      "type": "single",
-      "stem": "A developer wants Amazon API Gateway to reject POST requests whose JSON body is missing required fields, before the backend is invoked. What should the developer configure?",
+      "type": "multi",
+      "stem": "A developer wants Amazon API Gateway to reject POST requests whose JSON body is missing required fields, before the backend is invoked. Which combination of steps will meet this requirement? (Select TWO.)",
       "options": [
         {
-          "text": "A Lambda authorizer that inspects the request body and denies requests with missing fields",
+          "text": "Add a Lambda authorizer that checks the body and denies requests with missing fields",
           "correct": false,
           "rationale": "Lambda authorizers decide whether a caller is allowed, and they do not receive the request body."
         },
         {
-          "text": "A usage plan with an API key",
+          "text": "Create a model whose JSON schema marks the fields as required",
+          "correct": true,
+          "rationale": "The model describes the expected body as a JSON schema, including which fields are required."
+        },
+        {
+          "text": "Attach a usage plan and an API key to the method",
           "correct": false,
           "rationale": "Usage plans throttle and meter clients; they do not validate payloads."
         },
         {
-          "text": "A request validator on the method, with a model that defines the required fields",
-          "correct": true,
-          "rationale": "API Gateway checks the body against the model's JSON schema and returns 400 Bad Request when it does not match."
-        },
-        {
-          "text": "A stage variable that lists the required fields",
+          "text": "Add a stage variable that lists the required fields",
           "correct": false,
           "rationale": "Stage variables are name-value settings for a stage, not validation rules."
+        },
+        {
+          "text": "Turn on a request validator for the method body that uses the model",
+          "correct": true,
+          "rationale": "API Gateway then checks the body against the model and returns 400 Bad Request when it does not match."
         }
       ],
-      "explanation": "Request validation keeps malformed requests from ever reaching the integration.",
+      "explanation": "The clue is rejecting bad bodies before the backend runs: a model defines the required fields and a request validator enforces it in API Gateway. A Lambda authorizer is the nearest distractor, but it decides who may call, not what the body contains.",
       "difficulty": 2,
       "tags": [
         "api-gateway",
@@ -325,7 +330,7 @@
           "rationale": "Caching has nothing to do with passing the body to the integration."
         },
         {
-          "text": "The body is a JSON string and must be parsed before its fields are read",
+          "text": "The body arrives as a JSON string that must be parsed first",
           "correct": true,
           "rationale": "In the proxy event, body is a string, so the code must deserialize it first."
         },
@@ -364,7 +369,7 @@
           "rationale": "Each message is processed by only one consumer, so the applications would split the events."
         },
         {
-          "text": "Send the S3 event notification to an Amazon SNS topic, and subscribe an Amazon SQS queue for each application",
+          "text": "Publish the event to an Amazon SNS topic with one Amazon SQS queue per application",
           "correct": true,
           "rationale": "SNS fans the event out so each queue gets its own copy."
         },
@@ -379,7 +384,7 @@
           "rationale": "A FIFO queue still delivers each message to a single consumer."
         },
         {
-          "text": "Enable Amazon EventBridge for the bucket, and create a rule that targets both applications",
+          "text": "Turn on Amazon EventBridge for the bucket, with a rule that targets both applications",
           "correct": true,
           "rationale": "EventBridge can route the same S3 event to several targets."
         }
@@ -431,7 +436,7 @@
           "rationale": "Converse gives a consistent request and response format across the models that support it."
         }
       ],
-      "explanation": "Converse lets code send messages the same way regardless of which supported model handles them.",
+      "explanation": "The clue is switching models without rewriting request code: Converse uses one message format across the models that support it. InvokeModel is the nearest distractor, but its request body is specific to each model.",
       "difficulty": 2,
       "tags": [
         "bedrock",
