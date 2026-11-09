@@ -13,6 +13,7 @@ import {
   EmptyState,
   LinkButton,
   Meter,
+  OutcomeBadge,
   PageHeader,
   STATUS_META,
   pct,
@@ -153,14 +154,15 @@ export default async function DashboardPage() {
                     {exam.code} · target {exam.readinessTargetPct}%
                   </p>
                   <div className="mt-2 flex flex-wrap gap-2">
-                    {r.available ? (
+                    <OutcomeBadge exam={exam} />
+                    {exam.outcome ? null : r.available ? (
                       <Badge tone={r.meetsTarget ? "ok" : "warn"}>
                         {r.meetsTarget ? "At or above target" : "Below target"}
                       </Badge>
                     ) : (
                       <Badge tone="idle">Building a baseline</Badge>
                     )}
-                    {days != null && (
+                    {days != null && !exam.outcome && (
                       <Badge tone={days <= 14 ? "warn" : "info"}>
                         {days < 0
                           ? "Exam date passed"

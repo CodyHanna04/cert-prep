@@ -5,7 +5,7 @@ import { listPacks } from "@/lib/content/packs.js";
 import { readPackBank } from "@/lib/content/bank.js";
 import { enrollAction, openCourseAction } from "@/app/actions/exam.js";
 import { DomainRing } from "@/components/DomainRing.js";
-import { Badge, Button, PageHeader } from "@/components/ui/index.js";
+import { Badge, Button, OutcomeBadge, PageHeader } from "@/components/ui/index.js";
 
 export const metadata = { title: "Courses" };
 
@@ -112,7 +112,8 @@ export default async function CoursesPage() {
                   Blueprint: {p.source.title}, retrieved {p.source.retrievedOn}.
                 </p>
                 <div className="flex items-center gap-3">
-                  {state === "studying" && <Badge tone="ok">Studying</Badge>}
+                  {state === "studying" &&
+                    (exam.outcome ? <OutcomeBadge exam={exam} /> : <Badge tone="ok">Studying</Badge>)}
                   {state === "paused" && <Badge tone="idle">Paused</Badge>}
                   {state === "studying" ? (
                     <form action={openCourseAction}>

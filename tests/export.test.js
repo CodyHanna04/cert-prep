@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { setupTestDb } from "./helpers/db.js";
-import { createExamFromPack, getExam } from "../lib/db/exams.js";
+import { createExamFromPack, getExam, setExamOutcome } from "../lib/db/exams.js";
 import { commitImport, existingForImport, getPool, toggleMark, setNote, getNote } from "../lib/db/questions.js";
 import { createSession, finishSession, recordResponse, listSessions } from "../lib/db/sessions.js";
 import { exportUserData, importUserData } from "../lib/db/export.js";
@@ -17,9 +17,10 @@ beforeAll(async () => {
   t = await setupTestDb();
   a = await t.createUser("exporter");
   b = await t.createUser("importer");
-  // A has an exam, questions, a flag, a note and a finished session.
+  // A has an exam (marked passed), questions, a flag, a note and a finished session.
   await t.withUser(a, async (db) => {
     const examId = await createExamFromPack(db, a, pack);
+    await setExamOutcome(db, examId, { outcome: "passed", date: "2026-11-09", score: 812 });
     const exam = await getExam(db, examId);
     const v = validateImport(fixture, { ...exam, existing: await existingForImport(db, examId) });
     await commitImport(db, a, exam, v.questions.map((q) => q.normalized));
@@ -38,7 +39,7 @@ describe("export and import", () => {
   it("export contains no ids and round-trips through import for a different user", async () => {
     const data = await t.withUser(a, (db) => exportUserData(db));
     expect(JSON.stringify(data)).not.toMatch(/"id"\s*:\s*"[0-9a-f]{8}-/);
-    expect(data.exams[0]).toMatchObject({ code: "CLF-C02" });
+    expect(data.exams[0]).toMatchObject({ code: "CLF-C02", outcome: "passed", outcomeDate: "2026-11-09", outcomeScore: 812 });
     expect(data.exams[0].questions).toHaveLength(5);
     expect(data.exams[0].sessions[0].responses).toHaveLength(1);
 

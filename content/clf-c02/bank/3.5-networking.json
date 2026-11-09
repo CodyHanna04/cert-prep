@@ -290,12 +290,12 @@
           "rationale": "A NAT gateway provides outbound internet access for private subnets."
         },
         {
-          "text": "On-premises customer gateway",
+          "text": "On-premises customer gateway device",
           "correct": false,
-          "rationale": "The customer gateway represents the company's VPN device on the on-premises side."
+          "rationale": "A customer gateway device is the physical device or software application on the company's side of the VPN connection."
         }
       ],
-      "explanation": "The clue is the AWS side of a VPN: the virtual private gateway is attached to the VPC, while the customer gateway stands for the device in the company's data center.",
+      "explanation": "The clue is the AWS side of a VPN: the virtual private gateway is attached to the VPC, while the customer gateway device sits on the company's side of the connection.",
       "difficulty": 2,
       "tags": [
         "networking",
@@ -308,7 +308,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.5-08",
@@ -345,13 +345,14 @@
         "nacl"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html"
+        "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html",
+        "https://docs.aws.amazon.com/vpc/latest/userguide/infrastructure-security.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.5-09",
@@ -368,7 +369,7 @@
         {
           "text": "AWS Client VPN",
           "correct": false,
-          "rationale": "Client VPN connects users over the internet."
+          "rationale": "Client VPN lets remote users connect from any location through encrypted TLS connections rather than a dedicated private link."
         },
         {
           "text": "A public HTTPS service endpoint",
@@ -388,13 +389,16 @@
         "direct-connect"
       ],
       "refs": [
-        "https://aws.amazon.com/directconnect/"
+        "https://aws.amazon.com/directconnect/",
+        "https://docs.aws.amazon.com/whitepapers/latest/aws-vpc-connectivity-options/aws-site-to-site-vpn.html",
+        "https://docs.aws.amazon.com/whitepapers/latest/aws-vpc-connectivity-options/aws-direct-connect.html",
+        "https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/what-is.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.5-10",

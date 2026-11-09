@@ -36,13 +36,14 @@
         "variable-cost"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/whitepapers/latest/how-aws-pricing-works/key-principles.html"
+        "https://aws.amazon.com/what-is-cloud-computing/",
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-on-demand-instances.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-1.4-02",
@@ -79,14 +80,14 @@
         "tco"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/six-advantages-of-cloud-computing.html",
-        "https://docs.aws.amazon.com/whitepapers/latest/how-aws-pricing-works/key-principles.html"
+        "https://aws.amazon.com/what-is/cloud-vs-on-premises/",
+        "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/six-advantages-of-cloud-computing.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-1.4-03",
@@ -156,7 +157,7 @@
         {
           "text": "The license requires the instance to run on a Dedicated Host",
           "correct": false,
-          "rationale": "License-included instances run on shared tenancy too."
+          "rationale": "Dedicated Hosts are needed for some bring-your-own-license cases; with license included, the license is bundled into the instance price."
         }
       ],
       "explanation": "License included is convenient when you have no existing licenses; BYOL can lower costs when you already own eligible licenses.",
@@ -172,7 +173,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-1.4-05",
@@ -479,13 +480,14 @@
         "capex-opex"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/whitepapers/latest/how-aws-pricing-works/key-principles.html"
+        "https://aws.amazon.com/what-is/cloud-vs-on-premises/",
+        "https://aws.amazon.com/what-is-cloud-computing/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-1.4-12",
@@ -610,13 +612,14 @@
         "fixed-cost"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/whitepapers/latest/how-aws-pricing-works/key-principles.html"
+        "https://aws.amazon.com/what-is-cloud-computing/",
+        "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/six-advantages-of-cloud-computing.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-1.4-15",
@@ -651,7 +654,7 @@
           "rationale": "Creating an AWS account has no charge; you pay for the resources you use."
         }
       ],
-      "explanation": "A fair comparison includes everything it takes to run on premises: hardware, facilities, power, cooling, networking, licensing and the people who run it all. The other options are charges that AWS does not make.",
+      "explanation": "A fair comparison includes everything it takes to run on premises: hardware, software licenses, facilities, power, cooling and the staff who run it all. The other options are charges that AWS does not make.",
       "difficulty": 2,
       "tags": [
         "cloud-economics",
@@ -659,13 +662,14 @@
       ],
       "refs": [
         "https://aws.amazon.com/what-is/cloud-vs-on-premises/",
-        "https://aws.amazon.com/premiumsupport/plans/"
+        "https://aws.amazon.com/premiumsupport/plans/",
+        "https://aws.amazon.com/pricing/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     }
   ]
 }

@@ -80,13 +80,14 @@
         "regions"
       ],
       "refs": [
-        "https://aws.amazon.com/about-aws/global-infrastructure/regions_az/"
+        "https://aws.amazon.com/about-aws/global-infrastructure/regions_az/",
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.2-03",
@@ -167,13 +168,14 @@
         "regions"
       ],
       "refs": [
-        "https://aws.amazon.com/about-aws/global-infrastructure/regions_az/"
+        "https://aws.amazon.com/about-aws/global-infrastructure/regions_az/",
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.2-05",
@@ -211,13 +213,15 @@
         "regions"
       ],
       "refs": [
-        "https://aws.amazon.com/about-aws/global-infrastructure/regions_az/"
+        "https://aws.amazon.com/about-aws/global-infrastructure/regions_az/",
+        "https://aws.amazon.com/compliance/data-privacy-faq/",
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.2-06",
@@ -391,13 +395,14 @@
         "disaster-recovery"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication.html"
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication.html",
+        "https://aws.amazon.com/compliance/data-privacy-faq/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.2-12",
@@ -435,13 +440,13 @@
         "latency"
       ],
       "refs": [
-        "https://aws.amazon.com/blogs/architecture/what-to-consider-when-selecting-a-region-for-your-workloads/"
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-08",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.2-13",

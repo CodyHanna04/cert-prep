@@ -4,7 +4,7 @@ import { withUser } from "@/lib/db/index.js";
 import { getExamProgress } from "@/lib/db/progress.js";
 import { countsByObjective } from "@/lib/db/questions.js";
 import { activityByDay, getOpenSession, listSessions, mockHistory } from "@/lib/db/sessions.js";
-import { appTimeZone, indexExam, daysUntil, fmtDateTime } from "@/lib/app/view.js";
+import { appTimeZone, indexExam, daysUntil, fmtDateTime, outcomeLabel } from "@/lib/app/view.js";
 import { DomainRing } from "@/components/DomainRing.js";
 import {
   Badge,
@@ -88,7 +88,7 @@ export default async function CourseOverviewPage() {
     <>
       <PageHeader
         title={exam.name}
-        subtitle={`${exam.code} · readiness target ${exam.readinessTargetPct}%${days != null ? ` · exam in ${days} day${days === 1 ? "" : "s"}` : ""}`}
+        subtitle={`${exam.code} · readiness target ${exam.readinessTargetPct}%${exam.outcome ? ` · ${outcomeLabel(exam)}` : days != null ? ` · exam in ${days} day${days === 1 ? "" : "s"}` : ""}`}
         actions={
           next && (
             <LinkButton href={next.href} variant="primary">

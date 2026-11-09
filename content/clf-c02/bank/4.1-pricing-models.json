@@ -37,14 +37,15 @@
         "ec2"
       ],
       "refs": [
-        "https://aws.amazon.com/ec2/pricing/",
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-on-demand-instances.html",
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html",
         "https://docs.aws.amazon.com/savingsplans/latest/userguide/plan-types.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-4.1-02",
@@ -82,13 +83,14 @@
         "ec2"
       ],
       "refs": [
-        "https://aws.amazon.com/ec2/spot/"
+        "https://aws.amazon.com/ec2/spot/",
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-4.1-03",
@@ -344,13 +346,14 @@
         "data-transfer"
       ],
       "refs": [
-        "https://aws.amazon.com/blogs/architecture/overview-of-data-transfer-costs-for-common-architectures/"
+        "https://docs.aws.amazon.com/cur/latest/userguide/cur-data-transfers-charges.html",
+        "https://aws.amazon.com/s3/pricing/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-4.1-09",
@@ -370,31 +373,31 @@
           "rationale": "Data transfer across Regions is charged."
         },
         {
-          "text": "Data moved between Amazon EC2 and Amazon S3 in the same Region",
+          "text": "Data read from Amazon S3 by Amazon EC2 within the same Region",
           "correct": false,
-          "rationale": "Data transfer between Amazon S3 and other AWS services in the same Region is not charged."
+          "rationale": "Data transferred from an S3 bucket to an AWS service in the same Region is not charged."
         },
         {
-          "text": "Data moved between two instances in the same Availability Zone",
+          "text": "Data sent from Amazon S3 to Amazon CloudFront",
           "correct": false,
-          "rationale": "Data transfer within the same Availability Zone is free."
+          "rationale": "Data transferred out from Amazon S3 to Amazon CloudFront is not charged."
         }
       ],
-      "explanation": "The clue is crossing a Region boundary, which is billed. Data coming in from the internet, and data that stays inside one Region between S3 and EC2 or inside one Availability Zone, has no transfer charge.",
+      "explanation": "The clue is crossing a Region boundary: the source Region charges for data sent to another Region. Data coming in from the internet, data that S3 sends to another AWS service in the same Region, and data that S3 sends to CloudFront have no transfer charge.",
       "difficulty": 2,
       "tags": [
         "pricing",
         "data-transfer"
       ],
       "refs": [
-        "https://aws.amazon.com/blogs/architecture/overview-of-data-transfer-costs-for-common-architectures/",
+        "https://docs.aws.amazon.com/cur/latest/userguide/cur-data-transfers-charges.html",
         "https://aws.amazon.com/s3/pricing/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-4.1-10",
@@ -504,7 +507,7 @@
         {
           "text": "Spot Instances",
           "correct": false,
-          "rationale": "Spot Instances use spare capacity on shared hardware."
+          "rationale": "Spot Instances are a way to pay less for spare EC2 capacity; they are not the tenancy option that gives single-tenant hardware."
         },
         {
           "text": "Dedicated Instances",
@@ -525,13 +528,14 @@
       ],
       "refs": [
         "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html",
-        "https://aws.amazon.com/ec2/dedicated-hosts/"
+        "https://aws.amazon.com/ec2/dedicated-hosts/",
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     }
   ]
 }

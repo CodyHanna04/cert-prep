@@ -24,9 +24,9 @@
           "rationale": "Access permissions are set by the customer, so they are security in the cloud."
         },
         {
-          "text": "Deciding which objects in a bucket are encrypted",
+          "text": "Choosing the encryption keys for objects in a bucket",
           "correct": false,
-          "rationale": "Encryption choices for stored data belong to the customer."
+          "rationale": "Amazon S3 encrypts new objects by default, and the customer chooses the encryption type and keys, such as SSE-KMS, so this is security in the cloud."
         }
       ],
       "explanation": "AWS owns security of the cloud (the infrastructure); the customer owns security in the cloud (what they build and store on it).",
@@ -35,13 +35,14 @@
         "shared-responsibility"
       ],
       "refs": [
-        "https://aws.amazon.com/compliance/shared-responsibility-model/"
+        "https://aws.amazon.com/compliance/shared-responsibility-model/",
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingEncryption.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-sonnet-5-5",
       "generatedAt": "2026-11-01",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-2.1-02",
@@ -110,9 +111,9 @@
           "rationale": "Access permissions are applied by the customer with IAM."
         },
         {
-          "text": "Choosing whether to encrypt data in a DynamoDB table",
+          "text": "Choosing which key encrypts a DynamoDB table",
           "correct": false,
-          "rationale": "Encryption options for stored data are a customer decision."
+          "rationale": "DynamoDB encrypts all data at rest, and the customer chooses which AWS KMS key type protects each table."
         }
       ],
       "explanation": "AWS operates and controls everything from the host operating system and virtualization layer down to the physical security of the facilities.",
@@ -122,13 +123,14 @@
         "physical-security"
       ],
       "refs": [
-        "https://aws.amazon.com/compliance/shared-responsibility-model/"
+        "https://aws.amazon.com/compliance/shared-responsibility-model/",
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/EncryptionAtRest.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-sonnet-5-5",
       "generatedAt": "2026-11-01",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-2.1-04",
@@ -476,13 +478,14 @@
       ],
       "refs": [
         "https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html",
-        "https://aws.amazon.com/compliance/shared-responsibility-model/"
+        "https://aws.amazon.com/compliance/shared-responsibility-model/",
+        "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-2.1-12",
@@ -693,13 +696,14 @@
         "encryption"
       ],
       "refs": [
-        "https://aws.amazon.com/compliance/shared-responsibility-model/"
+        "https://aws.amazon.com/compliance/shared-responsibility-model/",
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingEncryption.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-2.1-17",

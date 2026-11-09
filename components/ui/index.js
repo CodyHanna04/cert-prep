@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "./Button.js";
 import { buttonClass } from "./styles.js";
+import { outcomeLabel } from "../../lib/app/view.js";
 
 export { Button, buttonClass };
 
@@ -78,6 +79,13 @@ export function Badge({ tone = "idle", children }) {
 export function StatusBadge({ status }) {
   const m = STATUS_META[status] ?? STATUS_META["not-started"];
   return <Badge tone={m.tone}>{m.label}</Badge>;
+}
+
+/** Passed or finished, with the date and score when known. Renders nothing for a course still in progress. */
+export function OutcomeBadge({ exam }) {
+  const label = outcomeLabel(exam);
+  if (!label) return null;
+  return <Badge tone={exam.outcome === "passed" ? "ok" : "info"}>{label}</Badge>;
 }
 
 export function Meter({ value, max = 100, label, tone = "accent" }) {

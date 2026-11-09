@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import { readFileSync } from "node:fs";
 import { requireUser } from "@/lib/auth/index.js";
 import { withUser } from "@/lib/db/index.js";
-import { enrollInPack, getExam, updateExamSettings, archiveExam } from "@/lib/db/exams.js";
+import { enrollInPack, getExam, updateExamSettings, archiveExam, setExamOutcome, OUTCOMES } from "@/lib/db/exams.js";
 import { setPrefs } from "@/lib/db/prefs.js";
 import { EXAM_COOKIE, THEME_COOKIE, THEMES } from "@/lib/app/context.js";
 import { listPacks, packPath } from "@/lib/content/packs.js";
@@ -62,6 +62,21 @@ export async function updateExamSettingsAction(formData) {
     updateExamSettings(db, examId, {
       readinessTargetPct: formData.get("readinessTargetPct"),
       examDate: formData.get("examDate"),
+    }),
+  );
+  revalidatePath("/", "layout");
+}
+
+/** Marks the course passed or finished (date and scaled score optional); an empty outcome clears it. */
+export async function setExamOutcomeAction(formData) {
+  const user = await requireUser();
+  const raw = String(formData.get("outcome") ?? "");
+  const outcome = OUTCOMES.includes(raw) ? raw : null;
+  await withUser(user.id, (db) =>
+    setExamOutcome(db, String(formData.get("examId")), {
+      outcome,
+      date: String(formData.get("outcomeDate") ?? ""),
+      score: String(formData.get("outcomeScore") ?? ""),
     }),
   );
   revalidatePath("/", "layout");

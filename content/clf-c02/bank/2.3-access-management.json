@@ -59,7 +59,7 @@
         {
           "text": "Share the root password with the team so anyone can sign in",
           "correct": false,
-          "rationale": "Root credentials should never be shared."
+          "rationale": "AWS advises against sharing root credentials with anyone who does not have a strict business need for the root user."
         },
         {
           "text": "Create root user access keys for daily automation scripts",
@@ -81,13 +81,14 @@
       ],
       "refs": [
         "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
-        "https://docs.aws.amazon.com/IAM/latest/UserGuide/root-user-tasks.html"
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/root-user-tasks.html",
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/root-user-best-practices.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-2.3-03",
@@ -468,7 +469,7 @@
         {
           "text": "A second factor, like a device code, besides the password",
           "correct": true,
-          "rationale": "MFA requires something you have as well as something you know."
+          "rationale": "MFA requires a response from an MFA device, such as a passkey, security key or authenticator app code, in addition to the sign-in credentials."
         }
       ],
       "explanation": "AWS recommends MFA for the root user and for IAM users.",
@@ -484,7 +485,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-2.3-12",
@@ -550,7 +551,7 @@
         {
           "text": "Give employees the root user password",
           "correct": false,
-          "rationale": "Root credentials must never be shared."
+          "rationale": "AWS advises against sharing root credentials, and the root user is not meant for everyday access."
         },
         {
           "text": "Email each employee a set of access keys",
@@ -565,13 +566,14 @@
         "federation"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers.html"
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers.html",
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/root-user-best-practices.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-2.3-14",
@@ -814,17 +816,17 @@
         {
           "text": "Share its password with every administrator",
           "correct": false,
-          "rationale": "Root credentials should never be shared."
+          "rationale": "AWS advises against sharing root credentials with anyone who does not have a strict business need."
         },
         {
           "text": "Remove the account password policy",
           "correct": false,
-          "rationale": "Password policies apply to IAM users and help security."
+          "rationale": "The account password policy applies to IAM users, not the root user, so removing it does nothing to protect the root user."
         },
         {
-          "text": "Do not create access keys for the root user",
+          "text": "Avoid creating root user access keys",
           "correct": true,
-          "rationale": "Root access keys give full, long-term programmatic access."
+          "rationale": "AWS strongly recommends not creating root user access keys, because the root user has full access to every service and resource in the account."
         }
       ],
       "explanation": "Keep the root user for the few tasks that require it.",
@@ -834,13 +836,14 @@
         "root-user"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/IAM/latest/UserGuide/root-user-best-practices.html"
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/root-user-best-practices.html",
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     }
   ]
 }

@@ -19,7 +19,7 @@
           "rationale": "Global deployment is about reaching users in more Regions, not about capacity planning."
         },
         {
-          "text": "Stop spending money running data centers",
+          "text": "Stop spending money running and maintaining data centers",
           "correct": false,
           "rationale": "This is about operating facilities, not about sizing capacity."
         },
@@ -42,7 +42,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-1.1-02",
@@ -209,13 +209,14 @@
         "availability-zones"
       ],
       "refs": [
-        "https://aws.amazon.com/about-aws/global-infrastructure/"
+        "https://aws.amazon.com/about-aws/global-infrastructure/regions_az/",
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-1.1-06",
@@ -225,7 +226,7 @@
       "stem": "Developers can now launch a new test environment in minutes instead of waiting weeks for hardware. Which cloud benefit does this describe?",
       "options": [
         {
-          "text": "Increased speed and agility",
+          "text": "Increase speed and agility",
           "correct": true,
           "rationale": "Resources are a click away, so the time to make them available drops from weeks to minutes."
         },
@@ -245,7 +246,7 @@
           "rationale": "This advantage is about capacity planning rather than how fast teams can experiment."
         }
       ],
-      "explanation": "Increased speed and agility: new IT resources are only a click away, which lowers the cost and time of experimentation.",
+      "explanation": "Increase speed and agility: new IT resources are only a click away, which lowers the cost and time of experimentation.",
       "difficulty": 1,
       "tags": [
         "cloud-benefits",
@@ -258,7 +259,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-1.1-07",
@@ -410,7 +411,7 @@
         {
           "text": "Unlimited free compute for the first year",
           "correct": false,
-          "rationale": "The AWS Free Tier is limited; compute is not unlimited or free."
+          "rationale": "The AWS Free Tier gives limited credits and free usage within monthly limits; compute is not unlimited or free."
         },
         {
           "text": "Pay-as-you-go pricing for the resources used",
@@ -429,13 +430,14 @@
         "cloud-benefits"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/six-advantages-of-cloud-computing.html"
+        "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/six-advantages-of-cloud-computing.html",
+        "https://aws.amazon.com/free/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-1.1-11",
@@ -616,12 +618,12 @@
       "domain": "d1",
       "objective": "1.1",
       "type": "single",
-      "stem": "AWS has reduced its prices many times as its customer base has grown. Which advantage of cloud computing explains this?",
+      "stem": "A finance team learns that AWS can offer a lower variable cost than the company could get on its own, because usage from many customers is combined. Which advantage of cloud computing explains this?",
       "options": [
         {
           "text": "Stop spending money running and maintaining data centers",
           "correct": false,
-          "rationale": "This advantage is about AWS taking over facility work, not about why prices fall."
+          "rationale": "This advantage is about AWS taking over facility work, not about why AWS can charge a lower variable cost."
         },
         {
           "text": "Stop guessing capacity",
@@ -639,7 +641,7 @@
           "rationale": "Higher aggregate usage lets AWS lower its costs and pass the savings on to customers."
         }
       ],
-      "explanation": "The clue is lower prices as the customer base grows: aggregated usage gives AWS economies of scale, which become lower pay-as-you-go prices. Not running data centers saves you facility work but does not explain AWS price cuts.",
+      "explanation": "The clue is combined usage from many customers: aggregated usage gives AWS economies of scale, which become lower pay-as-you-go prices. Not running data centers saves you facility work but does not explain the lower price.",
       "difficulty": 1,
       "tags": [
         "cloud-benefits",
@@ -652,7 +654,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-1.1-16",

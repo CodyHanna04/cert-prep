@@ -229,7 +229,7 @@
       "domain": "d4",
       "objective": "4.3",
       "type": "single",
-      "stem": "Which AWS-managed community lets customers ask technical questions and get answers from the community and AWS experts?",
+      "stem": "Which community-driven question-and-answer service lets customers ask technical questions about AWS and get answers from the community, including AWS experts?",
       "options": [
         {
           "text": "AWS re:Post",
@@ -259,13 +259,14 @@
         "repost"
       ],
       "refs": [
-        "https://repost.aws/"
+        "https://aws.amazon.com/about-aws/whats-new/2021/12/aws-repost-community-question-answer-service/",
+        "https://aws.amazon.com/about-aws/whats-new/2023/03/aws-re-post-includes-knowledge-center-articles/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-4.3-07",
@@ -295,20 +296,21 @@
           "rationale": "The Health Dashboard shows AWS events that affect your account, not abuse reports."
         }
       ],
-      "explanation": "Abuse such as spam, port scanning or malware hosting is reported to AWS Trust and Safety.",
+      "explanation": "Abuse of AWS resources, such as email spam or malware distribution, is reported to the AWS Trust and Safety team. AWS Support and the documentation feedback forms do not handle abuse reports.",
       "difficulty": 2,
       "tags": [
         "support",
         "trust-and-safety"
       ],
       "refs": [
-        "https://repost.aws/knowledge-center/report-aws-abuse"
+        "https://docs.aws.amazon.com/ses/latest/dg/security.html",
+        "https://aws.amazon.com/premiumsupport/knowledge-center/report-aws-abuse/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-4.3-08",
@@ -330,7 +332,7 @@
         {
           "text": "AWS Professional Services",
           "correct": true,
-          "rationale": "Professional Services is a global team of experts that supplements customer teams."
+          "rationale": "AWS Professional Services is a global team of experts that helps customers achieve specific outcomes on AWS."
         },
         {
           "text": "AWS Artifact",
@@ -345,13 +347,14 @@
         "professional-services"
       ],
       "refs": [
-        "https://aws.amazon.com/professional-services/"
+        "https://aws.amazon.com/professional-services/",
+        "https://docs.aws.amazon.com/whitepapers/latest/overview-aws-cloud-adoption-framework/introduction.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-4.3-09",
@@ -389,13 +392,14 @@
         "partners"
       ],
       "refs": [
-        "https://aws.amazon.com/partners/"
+        "https://aws.amazon.com/partners/",
+        "https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02-domain4.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-4.3-10",
@@ -450,7 +454,7 @@
         {
           "text": "Data sovereignty",
           "correct": false,
-          "rationale": "Data residency is not a Trusted Advisor category."
+          "rationale": "Data sovereignty is not a Trusted Advisor category."
         },
         {
           "text": "Machine learning",
@@ -480,13 +484,14 @@
         "trusted-advisor"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/awssupport/latest/user/trusted-advisor-check-reference.html"
+        "https://docs.aws.amazon.com/awssupport/latest/user/trusted-advisor-check-reference.html",
+        "https://aws.amazon.com/premiumsupport/technology/trusted-advisor/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-4.3-12",
@@ -574,13 +579,14 @@
         "https://aws.amazon.com/partners/",
         "https://aws.amazon.com/servicecatalog/",
         "https://aws.amazon.com/license-manager/",
-        "https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/getting-viewing-bill.html"
+        "https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/getting-viewing-bill.html",
+        "https://docs.aws.amazon.com/marketplace/latest/buyerguide/what-is-marketplace.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-08",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-4.3-14",

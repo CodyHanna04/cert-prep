@@ -36,13 +36,14 @@
         "migration"
       ],
       "refs": [
-        "https://aws.amazon.com/cloud-adoption-framework/"
+        "https://aws.amazon.com/cloud-adoption-framework/",
+        "https://docs.aws.amazon.com/whitepapers/latest/overview-aws-cloud-adoption-framework/foundational-capabilities.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-1.3-02",
@@ -78,13 +79,14 @@
         "caf"
       ],
       "refs": [
-        "https://aws.amazon.com/cloud-adoption-framework/"
+        "https://aws.amazon.com/cloud-adoption-framework/",
+        "https://docs.aws.amazon.com/whitepapers/latest/overview-aws-cloud-adoption-framework/accelerating-business-outcomes.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-1.3-03",
@@ -120,13 +122,14 @@
         "caf"
       ],
       "refs": [
-        "https://aws.amazon.com/cloud-adoption-framework/"
+        "https://aws.amazon.com/cloud-adoption-framework/",
+        "https://docs.aws.amazon.com/whitepapers/latest/overview-aws-cloud-adoption-framework/foundational-capabilities.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-1.3-04",
@@ -162,13 +165,14 @@
         "caf"
       ],
       "refs": [
-        "https://aws.amazon.com/cloud-adoption-framework/"
+        "https://aws.amazon.com/cloud-adoption-framework/",
+        "https://docs.aws.amazon.com/whitepapers/latest/overview-aws-cloud-adoption-framework/operations-perspective.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-1.3-05",
@@ -228,7 +232,7 @@
         {
           "text": "Relocate",
           "correct": false,
-          "rationale": "Relocating moves infrastructure, such as VMware workloads, to the cloud without new hardware or application changes."
+          "rationale": "Relocating transfers servers from an on-premises platform to a cloud version of the same platform, without new hardware or rewritten applications."
         },
         {
           "text": "Repurchase",
@@ -254,7 +258,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-1.3-07",
@@ -593,20 +597,20 @@
           "rationale": "Business covers aligning cloud investments with business outcomes."
         }
       ],
-      "explanation": "Business, People and Governance are business-focused perspectives; Platform, Security and Operations are technical.",
+      "explanation": "The clue is building an enterprise-grade, scalable cloud platform and modernizing existing workloads, which is the Platform perspective. Governance, a close distractor, orchestrates cloud initiatives and manages risk rather than building the platform.",
       "difficulty": 2,
       "tags": [
         "caf"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/whitepapers/latest/overview-aws-cloud-adoption-framework/platform-perspective.html",
-        "https://aws.amazon.com/cloud-adoption-framework/"
+        "https://docs.aws.amazon.com/whitepapers/latest/overview-aws-cloud-adoption-framework/foundational-capabilities.html",
+        "https://docs.aws.amazon.com/whitepapers/latest/overview-aws-cloud-adoption-framework/platform-perspective.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-1.3-16",
@@ -687,13 +691,14 @@
         "esg"
       ],
       "refs": [
-        "https://aws.amazon.com/cloud-adoption-framework/"
+        "https://aws.amazon.com/cloud-adoption-framework/",
+        "https://docs.aws.amazon.com/whitepapers/latest/overview-aws-cloud-adoption-framework/accelerating-business-outcomes.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-08",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     }
   ]
 }

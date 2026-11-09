@@ -79,13 +79,14 @@
         "sns"
       ],
       "refs": [
-        "https://aws.amazon.com/sns/"
+        "https://aws.amazon.com/sns/",
+        "https://docs.aws.amazon.com/sns/latest/dg/welcome.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.8-03",
@@ -122,13 +123,14 @@
         "eventbridge"
       ],
       "refs": [
-        "https://aws.amazon.com/eventbridge/"
+        "https://aws.amazon.com/eventbridge/",
+        "https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.8-04",
@@ -166,13 +168,14 @@
       ],
       "refs": [
         "https://aws.amazon.com/ses/",
-        "https://aws.amazon.com/sns/"
+        "https://aws.amazon.com/sns/",
+        "https://docs.aws.amazon.com/ses/latest/dg/Welcome.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.8-05",
@@ -194,7 +197,7 @@
         {
           "text": "Amazon Connect",
           "correct": true,
-          "rationale": "Connect is an omnichannel cloud contact center."
+          "rationale": "Connect is a cloud contact center service that connects customers with agents over voice, chat and other channels."
         },
         {
           "text": "Amazon WorkSpaces",
@@ -209,13 +212,14 @@
         "connect"
       ],
       "refs": [
-        "https://aws.amazon.com/connect/"
+        "https://aws.amazon.com/connect/",
+        "https://docs.aws.amazon.com/connect/latest/adminguide/what-is-amazon-connect.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.8-06",

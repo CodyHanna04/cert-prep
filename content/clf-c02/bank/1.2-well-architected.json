@@ -6,12 +6,12 @@
       "domain": "d1",
       "objective": "1.2",
       "type": "single",
-      "stem": "Which pillar of the AWS Well-Architected Framework focuses on running and monitoring systems and continually improving processes and procedures?",
+      "stem": "Which pillar of the AWS Well-Architected Framework contains best practices for organizing teams, operating workloads at scale and evolving them over time?",
       "options": [
         {
           "text": "Operational excellence",
           "correct": true,
-          "rationale": "Operational excellence covers running and monitoring systems and improving processes over time."
+          "rationale": "Operational excellence contains best practices for organizing your team, designing your workload, operating it at scale and evolving it over time."
         },
         {
           "text": "Reliability",
@@ -29,20 +29,21 @@
           "rationale": "Sustainability is about reducing environmental impact."
         }
       ],
-      "explanation": "The six pillars are operational excellence, security, reliability, performance efficiency, cost optimization and sustainability. Operations and continuous improvement belong to operational excellence.",
+      "explanation": "The six pillars are operational excellence, security, reliability, performance efficiency, cost optimization and sustainability. Organizing teams and running and evolving workloads belong to operational excellence.",
       "difficulty": 1,
       "tags": [
         "well-architected",
         "operational-excellence"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/wellarchitected/latest/framework/operational-excellence.html"
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/operational-excellence.html",
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/oe-design-principles.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-1.2-02",
@@ -72,20 +73,21 @@
           "rationale": "Cost optimization is about avoiding unnecessary cost."
         }
       ],
-      "explanation": "Reliability includes distributed system design, recovery planning and adapting to changing requirements.",
+      "explanation": "Reliability covers a workload performing its intended function correctly and consistently. Its design principles include automatically recovering from failure and testing recovery procedures.",
       "difficulty": 1,
       "tags": [
         "well-architected",
         "reliability"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/wellarchitected/latest/framework/reliability.html"
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/reliability.html",
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/rel-dp.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-1.2-03",
@@ -107,7 +109,7 @@
         {
           "text": "Security",
           "correct": true,
-          "rationale": "The security pillar covers confidentiality and integrity of data, managing user permissions, and detecting security events."
+          "rationale": "The security pillar covers protecting data, systems and assets, with design principles such as a strong identity foundation and traceability."
         },
         {
           "text": "Performance efficiency",
@@ -129,7 +131,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-1.2-04",

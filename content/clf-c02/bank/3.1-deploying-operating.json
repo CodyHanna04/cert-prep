@@ -80,13 +80,13 @@
         "api"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/sdkref/latest/guide/overview.html"
+        "https://aws.amazon.com/what-is/sdk/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.1-03",
@@ -232,14 +232,14 @@
           "rationale": "A hybrid deployment connects on-premises infrastructure with cloud resources."
         },
         {
-          "text": "Cloud (all-in)",
+          "text": "Cloud",
           "correct": false,
-          "rationale": "An all-in cloud deployment runs everything in the cloud."
+          "rationale": "A cloud deployment runs all parts of the application in the cloud."
         },
         {
-          "text": "On-premises (private cloud)",
+          "text": "On-premises",
           "correct": false,
-          "rationale": "On-premises deployments run everything in the company's own data center."
+          "rationale": "An on-premises deployment runs resources in the company's own data center using virtualization and resource management tools."
         },
         {
           "text": "Multi-Region",
@@ -247,7 +247,7 @@
           "rationale": "Multi-Region describes where cloud workloads run, not the deployment model."
         }
       ],
-      "explanation": "The three deployment models are cloud, hybrid and on-premises (also called private cloud).",
+      "explanation": "The clue is linking the company's own data center to AWS: a hybrid deployment connects cloud resources with on-premises infrastructure, while cloud and on-premises deployments each keep everything in one place.",
       "difficulty": 1,
       "tags": [
         "deployment-models",
@@ -260,7 +260,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.1-07",
@@ -285,12 +285,12 @@
           "rationale": "On-premises means running in the company's own data center."
         },
         {
-          "text": "Colocation",
+          "text": "Multi-Region",
           "correct": false,
-          "rationale": "Colocation is renting space in a third-party data center for your own hardware."
+          "rationale": "Multi-Region describes where cloud workloads run, not a deployment model."
         }
       ],
-      "explanation": "Cloud deployments can be built entirely on cloud-native services or migrated from existing infrastructure.",
+      "explanation": "The clue is that everything runs on AWS with no data center: a cloud deployment runs all parts of the application in the cloud, while a hybrid deployment connects cloud resources to on-premises infrastructure.",
       "difficulty": 1,
       "tags": [
         "deployment-models"
@@ -302,7 +302,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.1-08",
@@ -339,13 +339,14 @@
         "vpn"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html"
+        "https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html",
+        "https://docs.aws.amazon.com/whitepapers/latest/aws-vpc-connectivity-options/aws-site-to-site-vpn.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.1-09",
@@ -382,13 +383,14 @@
         "direct-connect"
       ],
       "refs": [
-        "https://aws.amazon.com/directconnect/"
+        "https://aws.amazon.com/directconnect/",
+        "https://docs.aws.amazon.com/whitepapers/latest/aws-vpc-connectivity-options/aws-direct-connect.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.1-10",
@@ -432,13 +434,13 @@
       ],
       "refs": [
         "https://aws.amazon.com/cli/",
-        "https://docs.aws.amazon.com/sdkref/latest/guide/overview.html"
+        "https://aws.amazon.com/what-is/sdk/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.1-11",
@@ -511,7 +513,7 @@
           "rationale": "EBS is block storage."
         }
       ],
-      "explanation": "Elastic Beanstalk is a platform-as-a-service style way to run web applications on AWS.",
+      "explanation": "The clue is uploading code while AWS handles the rest: Elastic Beanstalk provisions the instances, load balancing, health monitoring and scaling, while CloudFormation creates the resources that a template describes.",
       "difficulty": 2,
       "tags": [
         "deployment",
@@ -524,7 +526,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.1-14",

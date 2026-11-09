@@ -16,7 +16,7 @@
         {
           "text": "Compute optimized",
           "correct": true,
-          "rationale": "Compute optimized instances suit compute-bound workloads such as batch processing and scientific modeling."
+          "rationale": "Compute optimized instances suit compute-bound workloads such as batch processing and media transcoding."
         },
         {
           "text": "Memory optimized",
@@ -29,7 +29,7 @@
           "rationale": "Accelerated computing instances use hardware accelerators such as GPUs."
         }
       ],
-      "explanation": "EC2 instance families: general purpose, compute optimized, memory optimized, accelerated computing, storage optimized and HPC optimized.",
+      "explanation": "EC2 instance categories: general purpose, compute optimized, memory optimized, accelerated computing, storage optimized and HPC optimized.",
       "difficulty": 1,
       "tags": [
         "ec2",
@@ -42,7 +42,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.3-02",
@@ -115,7 +115,7 @@
           "rationale": "Storage optimized instances are built for high, sequential read and write access to large data sets on local storage."
         }
       ],
-      "explanation": "The clue is heavy access to local storage; storage optimized instances suit data warehousing and log processing, while memory optimized suits large in-memory data sets.",
+      "explanation": "The clue is heavy access to local storage: storage optimized instances suit workloads such as high-throughput databases and data processing, while memory optimized instances suit large in-memory data sets.",
       "difficulty": 2,
       "tags": [
         "ec2",
@@ -128,7 +128,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.3-04",
@@ -165,13 +165,14 @@
         "lambda"
       ],
       "refs": [
-        "https://aws.amazon.com/lambda/"
+        "https://aws.amazon.com/lambda/",
+        "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.3-05",
@@ -339,13 +340,14 @@
         "elb"
       ],
       "refs": [
-        "https://aws.amazon.com/elasticloadbalancing/"
+        "https://aws.amazon.com/elasticloadbalancing/",
+        "https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/what-is-load-balancing.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.3-09",

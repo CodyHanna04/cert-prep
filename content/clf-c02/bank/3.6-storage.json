@@ -168,13 +168,14 @@
         "file-storage"
       ],
       "refs": [
-        "https://aws.amazon.com/efs/"
+        "https://aws.amazon.com/efs/",
+        "https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.6-05",
@@ -212,13 +213,15 @@
         "file-storage"
       ],
       "refs": [
-        "https://aws.amazon.com/fsx/windows/"
+        "https://aws.amazon.com/fsx/windows/",
+        "https://docs.aws.amazon.com/fsx/latest/WindowsGuide/what-is.html",
+        "https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.6-06",
@@ -235,7 +238,7 @@
         {
           "text": "AWS Storage Gateway",
           "correct": true,
-          "rationale": "Storage Gateway is a hybrid cloud storage service with local caching."
+          "rationale": "Storage Gateway gives on-premises applications access to cloud storage and keeps frequently used data in a local cache."
         },
         {
           "text": "Amazon Elastic File System (Amazon EFS)",
@@ -256,13 +259,14 @@
         "hybrid"
       ],
       "refs": [
-        "https://aws.amazon.com/storagegateway/"
+        "https://aws.amazon.com/storagegateway/",
+        "https://docs.aws.amazon.com/storagegateway/latest/vgw/WhatIsStorageGateway.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.6-07",

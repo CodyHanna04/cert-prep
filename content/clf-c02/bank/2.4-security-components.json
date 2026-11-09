@@ -99,7 +99,7 @@
         {
           "text": "Individual instance",
           "correct": false,
-          "rationale": "Instance-level filtering is done by security groups; mixing the two up is the most common mistake."
+          "rationale": "Instance-level filtering is done by security groups, which are attached to each instance."
         },
         {
           "text": "Entire VPC",
@@ -130,7 +130,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-2.4-04",
@@ -203,20 +203,21 @@
           "rationale": "Trusted Advisor checks your account against best practices."
         }
       ],
-      "explanation": "AWS Marketplace offers third-party security solutions from AWS Partners that integrate with AWS services.",
+      "explanation": "The clue is third-party software to buy: AWS Marketplace is a curated digital catalog of third-party software, data and services, and security is one of its main categories. Security Hub is the nearest neighbor; it collects security findings but does not sell software.",
       "difficulty": 1,
       "tags": [
         "security-resources",
         "marketplace"
       ],
       "refs": [
+        "https://docs.aws.amazon.com/marketplace/latest/buyerguide/what-is-marketplace.html",
         "https://aws.amazon.com/marketplace"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-2.4-06",
@@ -267,7 +268,7 @@
       "domain": "d2",
       "objective": "2.4",
       "type": "single",
-      "stem": "Where can a customer find articles answering common AWS questions, written by AWS Support engineers?",
+      "stem": "Where can a customer find articles that answer common questions about using AWS services?",
       "options": [
         {
           "text": "AWS Artifact",
@@ -282,7 +283,7 @@
         {
           "text": "AWS Knowledge Center",
           "correct": true,
-          "rationale": "The Knowledge Center, part of AWS re:Post, answers frequently asked questions from AWS customers."
+          "rationale": "The Knowledge Center, on AWS re:Post, publishes articles that answer common AWS questions, such as how to secure an account."
         },
         {
           "text": "AWS Prescriptive Guidance",
@@ -290,7 +291,7 @@
           "rationale": "Prescriptive Guidance offers guides and patterns from AWS experts for cloud projects, not answers to common support questions."
         }
       ],
-      "explanation": "The clue is short answers to common questions from AWS Support: the Knowledge Center on AWS re:Post. Prescriptive Guidance is longer planning and implementation guidance for cloud adoption projects.",
+      "explanation": "The clue is short articles that answer common questions: the AWS Knowledge Center on AWS re:Post. Prescriptive Guidance is longer planning and implementation guidance for cloud adoption projects.",
       "difficulty": 1,
       "tags": [
         "security-resources",
@@ -298,13 +299,14 @@
       ],
       "refs": [
         "https://repost.aws/knowledge-center",
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html",
         "https://aws.amazon.com/prescriptive-guidance/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-2.4-08",

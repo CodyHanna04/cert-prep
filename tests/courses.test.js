@@ -1,7 +1,14 @@
 import { readFileSync } from "node:fs";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { setupTestDb } from "./helpers/db.js";
-import { archiveExam, enrollInPack, getExam, listExams, listPausedExams } from "../lib/db/exams.js";
+import {
+  archiveExam,
+  enrollInPack,
+  getExam,
+  listExams,
+  listPausedExams,
+  setExamOutcome,
+} from "../lib/db/exams.js";
 import { listPacks } from "../lib/content/packs.js";
 
 /** Starting, pausing and resuming courses: the paths behind the Courses page. */
@@ -57,6 +64,38 @@ describe("enrollInPack", () => {
   it("one learner's courses never show up for another", async () => {
     expect(await t.withUser(other, (db) => listExams(db))).toHaveLength(0);
     expect(await t.withUser(other, (db) => listPausedExams(db))).toHaveLength(0);
+  });
+});
+
+describe("setExamOutcome", () => {
+  it("marks a course passed with a date and score, and clearing it resets all three", async () => {
+    const id = await t.withUser(user, (db) => enrollInPack(db, user, clf));
+    await t.withUser(user, (db) => setExamOutcome(db, id, { outcome: "passed", date: "2026-11-09", score: "812" }));
+    let exam = await t.withUser(user, (db) => getExam(db, id));
+    expect([exam.outcome, exam.outcomeDate, exam.outcomeScore]).toEqual(["passed", "2026-11-09", 812]);
+
+    await t.withUser(user, (db) => setExamOutcome(db, id, { outcome: null }));
+    exam = await t.withUser(user, (db) => getExam(db, id));
+    expect([exam.outcome, exam.outcomeDate, exam.outcomeScore]).toEqual([null, null, null]);
+  });
+
+  it("keeps a score for a pass only, and rejects bad values", async () => {
+    const id = await t.withUser(user, (db) => enrollInPack(db, user, clf));
+    await t.withUser(user, (db) => setExamOutcome(db, id, { outcome: "finished", date: "", score: "700" }));
+    const exam = await t.withUser(user, (db) => getExam(db, id));
+    expect([exam.outcome, exam.outcomeDate, exam.outcomeScore]).toEqual(["finished", null, null]);
+
+    await expect(t.withUser(user, (db) => setExamOutcome(db, id, { outcome: "failed" }))).rejects.toThrow();
+    await expect(
+      t.withUser(user, (db) => setExamOutcome(db, id, { outcome: "passed", score: "1200" })),
+    ).rejects.toThrow();
+  });
+
+  it("cannot change another learner's course", async () => {
+    const id = await t.withUser(user, (db) => enrollInPack(db, user, clf));
+    await t.withUser(user, (db) => setExamOutcome(db, id, { outcome: null }));
+    await t.withUser(other, (db) => setExamOutcome(db, id, { outcome: "passed" }));
+    expect((await t.withUser(user, (db) => getExam(db, id))).outcome).toBeNull();
   });
 });
 

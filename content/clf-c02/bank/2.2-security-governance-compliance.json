@@ -11,7 +11,7 @@
         {
           "text": "AWS Security Hub",
           "correct": false,
-          "rationale": "Security Hub checks your own accounts against security standards; it does not provide AWS's audit reports."
+          "rationale": "Security Hub brings together and prioritizes security findings about your own accounts; it does not provide AWS's audit reports."
         },
         {
           "text": "AWS Config",
@@ -37,13 +37,13 @@
       ],
       "refs": [
         "https://docs.aws.amazon.com/artifact/latest/ug/what-is-aws-artifact.html",
-        "https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html"
+        "https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub-v2.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-2.2-02",
@@ -161,7 +161,7 @@
           "rationale": "Trusted Advisor checks against AWS best practices, not custom configuration rules."
         }
       ],
-      "explanation": "AWS Config is used for auditing and compliance of resource configurations, for example detecting an S3 bucket that became public.",
+      "explanation": "The clue is evaluating configurations against rules: AWS Config records how each resource is configured over time and flags resources that break a Config rule as noncompliant. CloudTrail is the nearest neighbor; it records who made each API call.",
       "difficulty": 2,
       "tags": [
         "governance",
@@ -169,13 +169,14 @@
         "auditing"
       ],
       "refs": [
-        "https://aws.amazon.com/config/"
+        "https://aws.amazon.com/config/",
+        "https://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-2.2-05",
@@ -357,7 +358,7 @@
       "domain": "d2",
       "objective": "2.2",
       "type": "single",
-      "stem": "Which service gives a central view of security findings from services such as Amazon GuardDuty and Amazon Inspector and checks accounts against security best practices?",
+      "stem": "Which service gives a central, prioritized view of security findings from services such as Amazon GuardDuty, Amazon Inspector and Amazon Macie?",
       "options": [
         {
           "text": "AWS Artifact",
@@ -372,7 +373,7 @@
         {
           "text": "AWS Security Hub",
           "correct": true,
-          "rationale": "Security Hub aggregates findings across services and accounts and runs automated best-practice checks."
+          "rationale": "Security Hub correlates findings from GuardDuty, Inspector, Macie and posture-management checks, and prioritizes the most critical issues."
         },
         {
           "text": "AWS Organizations",
@@ -380,20 +381,20 @@
           "rationale": "Organizations manages multiple accounts centrally."
         }
       ],
-      "explanation": "Security Hub is the place to see and prioritize security findings across your AWS environment.",
+      "explanation": "The clue is one central view of findings from several security services: AWS Security Hub brings them together and prioritizes them. CloudWatch also gives a central view, but of metrics and logs, not security findings.",
       "difficulty": 2,
       "tags": [
         "security-services",
         "security-hub"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html"
+        "https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub-v2.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-2.2-10",
@@ -436,13 +437,14 @@
       ],
       "refs": [
         "https://aws.amazon.com/kms/",
-        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingEncryption.html"
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingEncryption.html",
+        "https://docs.aws.amazon.com/kms/latest/developerguide/service-integration.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-2.2-11",
@@ -637,7 +639,7 @@
         {
           "text": "AWS Key Management Service (AWS KMS)",
           "correct": true,
-          "rationale": "AWS KMS creates and manages keys and integrates with most AWS services."
+          "rationale": "AWS KMS creates and controls encryption keys, and AWS services such as Amazon S3, Amazon EBS and Amazon RDS use them to encrypt data."
         },
         {
           "text": "AWS Identity and Access Management (IAM)",
@@ -652,13 +654,14 @@
         "kms"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/kms/latest/developerguide/overview.html"
+        "https://docs.aws.amazon.com/kms/latest/developerguide/overview.html",
+        "https://docs.aws.amazon.com/kms/latest/developerguide/service-integration.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-2.2-16",
@@ -768,7 +771,7 @@
         {
           "text": "That AWS will certify the company's own application",
           "correct": false,
-          "rationale": "AWS certifies its infrastructure, not customer applications."
+          "rationale": "Third-party audits cover AWS's own infrastructure and services; each customer is responsible for demonstrating the compliance of its own workloads."
         },
         {
           "text": "That AWS Shield Advanced is turned on",
@@ -782,13 +785,14 @@
         "compliance"
       ],
       "refs": [
-        "https://aws.amazon.com/compliance/services-in-scope/"
+        "https://aws.amazon.com/compliance/services-in-scope/",
+        "https://docs.aws.amazon.com/artifact/latest/ug/what-is-aws-artifact.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-2.2-19",

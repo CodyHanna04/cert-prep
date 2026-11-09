@@ -51,7 +51,7 @@
       "domain": "d3",
       "objective": "3.4",
       "type": "single",
-      "stem": "Which relational database is built for the cloud and is compatible with MySQL and PostgreSQL?",
+      "stem": "Which fully managed relational database engine is compatible with MySQL and PostgreSQL?",
       "options": [
         {
           "text": "Amazon DynamoDB",
@@ -71,7 +71,7 @@
         {
           "text": "Amazon Aurora",
           "correct": true,
-          "rationale": "Aurora is a MySQL- and PostgreSQL-compatible relational database built for the cloud."
+          "rationale": "Aurora is a fully managed relational database engine that is compatible with MySQL and PostgreSQL."
         }
       ],
       "explanation": "The clue is a relational database compatible with MySQL and PostgreSQL: that is Aurora, while DynamoDB, DocumentDB and Neptune are non-relational.",
@@ -83,13 +83,14 @@
       ],
       "refs": [
         "https://aws.amazon.com/rds/aurora/",
-        "https://aws.amazon.com/documentdb/"
+        "https://aws.amazon.com/documentdb/",
+        "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.4-03",
@@ -127,13 +128,14 @@
         "nosql"
       ],
       "refs": [
-        "https://aws.amazon.com/dynamodb/"
+        "https://aws.amazon.com/dynamodb/",
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.4-04",
@@ -171,13 +173,14 @@
         "in-memory"
       ],
       "refs": [
-        "https://aws.amazon.com/elasticache/"
+        "https://aws.amazon.com/elasticache/",
+        "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/WhatIs.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.4-05",
@@ -307,13 +310,14 @@
         "analytics"
       ],
       "refs": [
-        "https://aws.amazon.com/redshift/"
+        "https://aws.amazon.com/redshift/",
+        "https://docs.aws.amazon.com/redshift/latest/mgmt/welcome.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.4-08",
@@ -325,7 +329,7 @@
         {
           "text": "Read replicas",
           "correct": false,
-          "rationale": "Read replicas scale reads; failover to them is not automatic in standard RDS."
+          "rationale": "Read replicas are asynchronous copies that scale read traffic; promoting one to a standalone instance is a step you take yourself."
         },
         {
           "text": "Multi-AZ deployment",
@@ -352,13 +356,14 @@
         "high-availability"
       ],
       "refs": [
-        "https://aws.amazon.com/rds/features/multi-az/"
+        "https://aws.amazon.com/rds/features/multi-az/",
+        "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.4-09",
@@ -461,7 +466,7 @@
       "domain": "d3",
       "objective": "3.4",
       "type": "single",
-      "stem": "Which database service is built for highly connected data, such as social networks and recommendation engines?",
+      "stem": "Which database service is built for highly connected data, such as recommendation engines and fraud detection?",
       "options": [
         {
           "text": "Amazon Redshift",
@@ -498,7 +503,7 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.4-12",

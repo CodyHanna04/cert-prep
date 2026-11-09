@@ -301,13 +301,14 @@
       ],
       "refs": [
         "https://aws.amazon.com/kinesis/",
-        "https://aws.amazon.com/redshift/"
+        "https://aws.amazon.com/redshift/",
+        "https://docs.aws.amazon.com/streams/latest/dev/introduction.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.7-09",
@@ -519,20 +520,21 @@
           "rationale": "Transcribe converts speech to text."
         }
       ],
-      "explanation": "Textract is often combined with Comprehend to process documents end to end.",
+      "explanation": "The clue is scanned documents with forms and tables: Textract pulls text and structured data out of documents, while Comprehend analyzes the meaning of text that already exists.",
       "difficulty": 2,
       "tags": [
         "ai-ml",
         "textract"
       ],
       "refs": [
-        "https://docs.aws.amazon.com/textract/latest/dg/what-is.html"
+        "https://docs.aws.amazon.com/textract/latest/dg/what-is.html",
+        "https://aws.amazon.com/textract/"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.7-14",
@@ -559,10 +561,10 @@
         {
           "text": "Amazon Translate",
           "correct": true,
-          "rationale": "Translate is a neural machine translation service."
+          "rationale": "Translate uses machine learning to translate text between languages on demand."
         }
       ],
-      "explanation": "Translate is used to localize content and support multilingual users.",
+      "explanation": "The clue is changing text from one language to another: Translate does that, while Transcribe turns speech into text and Polly turns text into speech.",
       "difficulty": 1,
       "tags": [
         "ai-ml",
@@ -575,14 +577,14 @@
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-02",
-      "lastVerified": "2026-11-02"
+      "lastVerified": "2026-11-09"
     },
     {
       "id": "clf-c02-3.7-15",
       "domain": "d3",
       "objective": "3.7",
       "type": "single",
-      "stem": "A developer wants a generative AI assistant in the AWS Management Console that answers questions about AWS and suggests code. Which service should the developer use?",
+      "stem": "A developer wants a generative AI assistant in the code editor (IDE) that answers questions about AWS and suggests code. Which service should the developer use?",
       "options": [
         {
           "text": "Amazon Lex",
@@ -590,14 +592,14 @@
           "rationale": "Lex is for building your own chatbots, not a ready-made assistant for AWS work."
         },
         {
-          "text": "Amazon Comprehend",
+          "text": "Amazon Bedrock",
           "correct": false,
-          "rationale": "Comprehend finds insights such as sentiment and entities in text."
+          "rationale": "Bedrock gives access to foundation models for building your own generative AI applications; it is not a ready-made assistant for AWS work."
         },
         {
-          "text": "Amazon Q",
+          "text": "Amazon Q Developer",
           "correct": true,
-          "rationale": "Amazon Q is a generative AI-powered assistant that can answer questions about AWS and generate code."
+          "rationale": "Amazon Q Developer is a generative AI-powered assistant that answers questions about AWS and generates code in the IDE and on the command line."
         },
         {
           "text": "Amazon SageMaker AI",
@@ -605,22 +607,118 @@
           "rationale": "SageMaker AI is for building, training and deploying your own ML models."
         }
       ],
-      "explanation": "The clue is a ready-made generative AI assistant for AWS work: Amazon Q answers questions and writes code, while Lex is a tool for building a chatbot of your own.",
+      "explanation": "The clue is a ready-made generative AI assistant for AWS work: Amazon Q Developer answers questions and writes code, while Lex and Bedrock are services for building chatbots or generative AI applications of your own.",
       "difficulty": 1,
       "tags": [
         "ai-ml",
         "amazon-q",
-        "generative-ai"
+        "generative-ai",
+        "bedrock"
       ],
       "refs": [
+        "https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/what-is.html",
+        "https://aws.amazon.com/q/developer/",
         "https://aws.amazon.com/q/",
-        "https://aws.amazon.com/q/developer/"
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html"
       ],
       "source": "ai-draft",
       "reviewStatus": "approved",
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-08",
-      "lastVerified": "2026-11-08"
+      "lastVerified": "2026-11-09"
+    },
+    {
+      "id": "clf-c02-3.7-16",
+      "domain": "d3",
+      "objective": "3.7",
+      "type": "single",
+      "stem": "A company wants to add generative AI features to its application by calling foundation models from leading AI companies through an API. It does not want to train a model or manage infrastructure. Which service should it use?",
+      "options": [
+        {
+          "text": "Amazon SageMaker AI",
+          "correct": false,
+          "rationale": "SageMaker AI provides tools and managed infrastructure to build, train and deploy your own ML models."
+        },
+        {
+          "text": "Amazon Q",
+          "correct": false,
+          "rationale": "Amazon Q is a ready-made generative AI assistant, not a service for building your own applications on foundation models."
+        },
+        {
+          "text": "Amazon Bedrock",
+          "correct": true,
+          "rationale": "Bedrock is a fully managed, serverless service that offers foundation models through a single API for building generative AI applications."
+        },
+        {
+          "text": "Amazon Lex",
+          "correct": false,
+          "rationale": "Lex builds chatbots and other conversational interfaces that use voice and text."
+        }
+      ],
+      "explanation": "The clue is calling existing foundation models through an API with no training or infrastructure: Bedrock offers foundation models as a serverless service, while SageMaker AI is where you build, train and deploy your own models.",
+      "difficulty": 1,
+      "tags": [
+        "ai-ml",
+        "bedrock",
+        "generative-ai"
+      ],
+      "refs": [
+        "https://aws.amazon.com/bedrock/",
+        "https://aws.amazon.com/bedrock/faqs/",
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html",
+        "https://docs.aws.amazon.com/sagemaker/latest/dg/whatis.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-09",
+      "lastVerified": "2026-11-09"
+    },
+    {
+      "id": "clf-c02-3.7-17",
+      "domain": "d3",
+      "objective": "3.7",
+      "type": "single",
+      "stem": "Which statement correctly describes how Amazon SageMaker AI differs from Amazon Bedrock?",
+      "options": [
+        {
+          "text": "SageMaker AI requires no model training or deployment work",
+          "correct": false,
+          "rationale": "That describes Bedrock more closely: Bedrock is serverless and offers foundation models through a single API, while SageMaker AI is where you build, train and deploy models."
+        },
+        {
+          "text": "SageMaker AI is a generative AI assistant for answering AWS questions",
+          "correct": false,
+          "rationale": "A ready-made generative AI assistant for AWS questions describes Amazon Q."
+        },
+        {
+          "text": "SageMaker AI is a business intelligence service for building dashboards",
+          "correct": false,
+          "rationale": "Business intelligence dashboards describe Amazon Quick."
+        },
+        {
+          "text": "SageMaker AI is for building and training your own models",
+          "correct": true,
+          "rationale": "SageMaker AI provides tools and managed infrastructure to build, train and deploy your own ML models, while Bedrock offers ready-made foundation models through an API."
+        }
+      ],
+      "explanation": "The clue is your own models: SageMaker AI is the platform to build, train and deploy ML models, while Bedrock is a serverless way to use existing foundation models through an API.",
+      "difficulty": 2,
+      "tags": [
+        "ai-ml",
+        "sagemaker",
+        "bedrock"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/sagemaker/latest/dg/whatis.html",
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html",
+        "https://aws.amazon.com/bedrock/faqs/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-09",
+      "lastVerified": "2026-11-09"
     }
   ]
 }
