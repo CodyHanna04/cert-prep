@@ -1,4 +1,4 @@
-# 13 — Build status (updated 2026-11-02)
+# 13 — Build status (updated 2026-11-10)
 
 What exists in the repository now, how to run it, what the build settled, and what is still open. Written after the first build pass; the planning docs (01–12) remain the source for intent.
 
@@ -134,6 +134,53 @@ Changes made from the first round of feedback:
   - Lint passes with 0 errors and 0 warnings.
   - The 139 tests pass (run on the homelab LXC).
 
+## Revision 9 (study features, CSP and a full DVA-C03 bank, 2026-11-10)
+
+- **Mock exam flags survive a refresh.**
+  - Flags are saved on the session (`session.config.reviewFlags`) through `setMockFlagAction` and `setReviewFlag`, which work only while the mock is open.
+  - The results page's Flagged filter includes them.
+  - A hydration warning from the mock countdown is silenced on the timer element.
+- **Trends on History** (T-076), weekly over the last 8 weeks:
+  - accuracy per domain, as sparklines on one shared range fitted to the data, with the target line, latest week, change and answer count;
+  - the time-per-question distribution;
+  - the median time per week.
+
+  Data comes from `answersSinceWeek`, and the helpers live in `lib/domain/trend.js` (`weekStarts`, `weeklyAccuracy`, `timeDistribution`, `median`). The charts are in `components/Trend.js` (`Sparkline`, `BarStrip`): server-rendered, one series each, with a tooltip on hover or keyboard focus for every period.
+- **Objective detail:** "Attempts over time" shows weekly accuracy for the objective over the last 8 weeks.
+- **Dashboard activity chart:** a weekday letter under each bar, the start date and Today, and a tooltip for each day.
+- **New question form** (T-025): Library → New question, and "Write a question" on objective pages.
+  - It reuses `QuestionEditor` and follows the exam's profile (CLF-C02: exactly 4 options for one answer, at least 5 for several).
+  - `createQuestionAction` runs the import checks, including duplicates and out-of-scope terms.
+  - A question can go straight into practice or into Drafts.
+- **Polish:**
+  - Sign out sits in the Devices card.
+  - `/library/import/format` explains the file format, with an example built from the course's own domain and objective codes, and the import page links to it.
+  - The top bar's account link is marked on Account (`AccountLink`).
+- **Content Security Policy with nonces:**
+  - `proxy.js` creates a nonce per request (`lib/app/csp.js`) and sends `script-src 'self' 'nonce-…' 'strict-dynamic'`, with everything else same-origin, `object-src 'none'` and `frame-ancestors 'none'`.
+  - Next.js reads the nonce from the request header. Every route renders per request because the root layout reads the theme cookie.
+  - The static CSP in `next.config.mjs` was removed.
+  - Checked in headless Chromium on the homelab:
+    - no CSP violations on 23 signed-in pages (dev build) or on the production sign-in and 404 pages;
+    - every page hydrated;
+    - every production script carried the nonce.
+- **DVA-C03 is at its coverage target on every objective: 263 questions, 44 of them multiple-response.**
+  - Before drafting, the guide was checked; it has no revisions since publication.
+  - 140 new questions, drafted from the guide's skills and avoiding topics already in the bank.
+  - **Blind checks:** a separate session answered all 140 with no key, and every answer matched. The 7 questions changed after review were checked again, and all matched.
+  - **Source checks:** three reviewers checked every question against official pages only: no wrong keys. 40 questions were corrected:
+    - weak or moved refs, such as Lambda's advanced-logging page, the API Gateway quotas page, a stub Bedrock Converse page and a removed S3 whitepaper page;
+    - rationales that claimed more than the source says;
+    - a made-up npm flag;
+    - an X-Ray setting that does not exist;
+    - EventBridge targets retry by default, so the second step is now the dead-letter queue's queue policy;
+    - Parameter Store's guidance to keep API keys in Secrets Manager (that question now uses a license key);
+    - SSE-C being blocked by default on new buckets since April 2026;
+    - the Converse `guardContent` premise.
+  - **Terms to watch:** the Lambda guide now calls standard functions "Event Functions". The exam guide still says Lambda functions, so the questions keep that.
+- **CLF-C02 is still on guide v1.3** (revisions page checked 2026-11-10). Every objective is at or above its target. The revisions page also lists retired services dropped from the out-of-scope list (Elastic Transcoder, MediaStore, Lookout for Metrics and others). None appear in questions, and the lint keeps blocking them.
+- **Tests:** new unit tests for the trend helpers and the CSP, plus DB tests for mock review flags and trend data.
+
 ## Run it
 
 ```bash
@@ -191,10 +238,10 @@ First real account (no public sign-up): `npm run user:create -- "Your Name"` pri
 
 ## Not built yet
 
-- T-012 domain/objective editor, T-013 theme lab and design notes, T-076 trends, "create exam manually", "new question" form, pack-reload diff (part of T-011).
+- T-012 domain/objective editor, T-013 theme lab and design notes, "create exam manually", pack-reload diff (part of T-011).
 - T-081 browser end-to-end test (the data-layer golden path is tested; the UI was exercised by hand).
-- T-082 remainder: adapt and install `docker/nginx-study.conf.example` (untested draft), the Namecheap record, certificates, scheduled `pg_dump` and a restore drill. T-083 remainder: CSP with nonces, nginx rate limits, the pre-exposure checklist run-through.
-- Content: the CLF-C02 shared bank has 282 approved questions (27 multiple-response) on guide v1.3, above the 260 coverage target; every objective is practice-ready. DVA-C03 has 123 approved questions (27 multiple-response, 10 or 11 per objective) toward its 260 target.
+- T-082 remainder: adapt and install `docker/nginx-study.conf.example` (untested draft), the Namecheap record, certificates, scheduled `pg_dump` and a restore drill. T-083 remainder: nginx rate limits, the pre-exposure checklist run-through.
+- Content: the CLF-C02 shared bank has 284 approved questions on guide v1.3, above the 260 coverage target. DVA-C03 has 263 approved questions (44 multiple-response), at its target on every objective.
 
 ## Findings that changed the plan
 
