@@ -493,6 +493,455 @@
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-08",
       "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-3.3-12",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "single",
+      "stem": "A team deploys Lambda function versions with AWS CodeDeploy. Before any traffic shifts to a new version, a test function must call it and confirm it works, and the deployment must stop if the test fails. Where should the developer configure the test function?",
+      "options": [
+        {
+          "text": "As an AfterAllowTraffic hook in the AppSpec file",
+          "correct": false,
+          "rationale": "That hook runs after traffic has already moved to the new version."
+        },
+        {
+          "text": "As a BeforeAllowTraffic hook in the AppSpec file",
+          "correct": true,
+          "rationale": "CodeDeploy runs the hook before shifting traffic, and a failed hook stops the deployment."
+        },
+        {
+          "text": "As an on-failure destination on the new version",
+          "correct": false,
+          "rationale": "Destinations route asynchronous invocation results; they do not gate deployments."
+        },
+        {
+          "text": "As a CloudWatch alarm action on the new version's Errors metric",
+          "correct": false,
+          "rationale": "An alarm reacts to errors from live traffic, after traffic has shifted."
+        }
+      ],
+      "explanation": "For Lambda deployments, AppSpec hooks run validation functions before and after traffic shifts.",
+      "difficulty": 3,
+      "tags": [
+        "codedeploy",
+        "lambda",
+        "appspec-hooks"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-3.3-13",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "single",
+      "stem": "An AWS CodeDeploy in-place deployment to EC2 instances must run a smoke test script after the new version of the application has started. A failed test must fail the deployment. Which lifecycle event hook should run the script?",
+      "options": [
+        {
+          "text": "BeforeInstall",
+          "correct": false,
+          "rationale": "This runs before the new files are installed, so there is nothing new to test yet."
+        },
+        {
+          "text": "ApplicationStop",
+          "correct": false,
+          "rationale": "This runs at the start of a deployment to stop the old version of the application."
+        },
+        {
+          "text": "ValidateService",
+          "correct": true,
+          "rationale": "ValidateService runs last, after ApplicationStart, and is meant for checking that the deployment succeeded."
+        },
+        {
+          "text": "DownloadBundle",
+          "correct": false,
+          "rationale": "This event is reserved for the CodeDeploy agent and cannot run scripts."
+        }
+      ],
+      "explanation": "EC2 AppSpec hooks run in order: ApplicationStop, BeforeInstall, AfterInstall, ApplicationStart, ValidateService.",
+      "difficulty": 3,
+      "tags": [
+        "codedeploy",
+        "ec2",
+        "appspec-hooks"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-3.3-14",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "single",
+      "stem": "An AWS CodeDeploy deployment group deploys to EC2 instances. If a CloudWatch alarm on application errors goes into ALARM during a deployment, the previous version must be redeployed automatically. What should the developer configure on the deployment group?",
+      "options": [
+        {
+          "text": "CloudFormation rollback triggers on the stack that holds the instances",
+          "correct": false,
+          "rationale": "Rollback triggers apply to stack updates, not to CodeDeploy application deployments."
+        },
+        {
+          "text": "An Amazon SNS topic that emails the team when the deployment fails",
+          "correct": false,
+          "rationale": "A notification does not roll anything back."
+        },
+        {
+          "text": "A larger minimum healthy hosts value for the deployment group",
+          "correct": false,
+          "rationale": "This controls how many instances stay in service during a deployment, not rollback."
+        },
+        {
+          "text": "The alarm, plus automatic rollback when an alarm threshold is met",
+          "correct": true,
+          "rationale": "CodeDeploy watches the listed alarms and rolls back to the last good revision when one goes into ALARM."
+        }
+      ],
+      "explanation": "CodeDeploy deployment groups support automatic rollback on deployment failure or on CloudWatch alarms.",
+      "difficulty": 2,
+      "tags": [
+        "codedeploy",
+        "rollback",
+        "cloudwatch-alarms"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/codedeploy/latest/userguide/deployments-rollback-and-redeploy.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-3.3-15",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "single",
+      "stem": "In AWS CodePipeline, a CodeBuild action compiles an application, but the deploy action that follows receives no files to deploy. What should the developer fix?",
+      "options": [
+        {
+          "text": "Add an artifacts section to the buildspec that lists the output files",
+          "correct": true,
+          "rationale": "CodeBuild uploads only the files named in the artifacts section as the action's output artifact."
+        },
+        {
+          "text": "Give the deploy action a longer timeout",
+          "correct": false,
+          "rationale": "The deploy action has nothing to wait for; the build produced no artifact."
+        },
+        {
+          "text": "Add a cache section to the buildspec",
+          "correct": false,
+          "rationale": "The cache speeds up later builds; it is not passed to the next action."
+        },
+        {
+          "text": "Write the build output to the build container's /tmp folder",
+          "correct": false,
+          "rationale": "Files in the build container are discarded unless listed as artifacts."
+        }
+      ],
+      "explanation": "The buildspec artifacts section defines what a CodeBuild action hands to later pipeline actions.",
+      "difficulty": 2,
+      "tags": [
+        "codebuild",
+        "buildspec",
+        "codepipeline"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-3.3-16",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "single",
+      "stem": "A developer pushed a new image tag, v2, to Amazon ECR. The Amazon ECS service still runs the v1 image. The task definition refers to images by version tag. What should the developer do to deploy v2?",
+      "options": [
+        {
+          "text": "Restart the ECS container agent on the cluster's instances",
+          "correct": false,
+          "rationale": "The agent restart does not change which image the service's task definition names."
+        },
+        {
+          "text": "Register a task definition revision with the v2 image and update the service",
+          "correct": true,
+          "rationale": "A service runs a specific task definition revision; a new revision with the new image triggers a deployment."
+        },
+        {
+          "text": "Delete the v1 image from Amazon ECR so that ECS has to pull v2",
+          "correct": false,
+          "rationale": "Running tasks keep running, and new tasks fail because the image is gone."
+        },
+        {
+          "text": "Increase the service's desired count so that new tasks start",
+          "correct": false,
+          "rationale": "New tasks still use the same task definition and image."
+        }
+      ],
+      "explanation": "ECS deploys new images through a new task definition revision and a service update.",
+      "difficulty": 2,
+      "tags": [
+        "ecs",
+        "task-definition",
+        "deployment"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html",
+        "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service-console-v2.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-3.3-17",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "single",
+      "stem": "An application runs as a Kubernetes Deployment on Amazon EKS. The team wants to release a new image version without downtime, replacing pods a few at a time and only sending traffic to new pods once they are ready. What should the developer do?",
+      "options": [
+        {
+          "text": "Delete the existing pods so that Kubernetes recreates them with the new image",
+          "correct": false,
+          "rationale": "Deleting pods by hand causes downtime and does not change the Deployment's image."
+        },
+        {
+          "text": "Use the Recreate strategy so that every pod restarts at the same time",
+          "correct": false,
+          "rationale": "Recreate stops every old pod before starting new ones, which causes downtime."
+        },
+        {
+          "text": "Change the image with a RollingUpdate strategy and a readiness probe",
+          "correct": true,
+          "rationale": "Kubernetes replaces pods gradually and routes traffic only to pods that pass the readiness probe."
+        },
+        {
+          "text": "Scale the Deployment to zero, change the image, and scale it back up",
+          "correct": false,
+          "rationale": "Scaling to zero takes the application offline."
+        }
+      ],
+      "explanation": "Rolling updates with readiness probes give zero-downtime releases on Kubernetes.",
+      "difficulty": 3,
+      "tags": [
+        "eks",
+        "kubernetes",
+        "rolling-update"
+      ],
+      "refs": [
+        "https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/",
+        "https://kubernetes.io/docs/concepts/workloads/controllers/deployment/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-3.3-18",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "single",
+      "stem": "A CloudFormation stack update failed, and the rollback also failed, leaving the stack in UPDATE_ROLLBACK_FAILED. A resource that the rollback could not restore was changed outside CloudFormation. What should the developer do to make the stack usable again?",
+      "options": [
+        {
+          "text": "Delete the stack and every resource in it, then redeploy from scratch",
+          "correct": false,
+          "rationale": "Deleting the stack is drastic and can destroy data; continuing the rollback is the intended recovery."
+        },
+        {
+          "text": "Run a new stack update with the original template",
+          "correct": false,
+          "rationale": "Updates are not allowed while the stack is in UPDATE_ROLLBACK_FAILED."
+        },
+        {
+          "text": "Create a change set that reverts the failed update",
+          "correct": false,
+          "rationale": "Change sets cannot be run while the stack is in this state."
+        },
+        {
+          "text": "Fix the resource or skip it, and then continue rolling back the update",
+          "correct": true,
+          "rationale": "ContinueUpdateRollback retries the rollback, optionally skipping resources that cannot be rolled back."
+        }
+      ],
+      "explanation": "A stack in UPDATE_ROLLBACK_FAILED is recovered with ContinueUpdateRollback.",
+      "difficulty": 4,
+      "tags": [
+        "cloudformation",
+        "rollback",
+        "troubleshooting"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-3.3-19",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "single",
+      "stem": "An AWS CodePipeline pipeline deploys the same CloudFormation template to a staging stage and a production stage. Each environment needs different parameter values, such as instance sizes. How should the developer supply them?",
+      "options": [
+        {
+          "text": "Give each deploy action its own parameter overrides",
+          "correct": true,
+          "rationale": "Each CloudFormation deploy action can take environment-specific parameter values."
+        },
+        {
+          "text": "Keep a separate template for each environment with the values hardcoded",
+          "correct": false,
+          "rationale": "Duplicated templates drift apart; parameters keep one template for both."
+        },
+        {
+          "text": "Edit the parameter values in the console after each deployment",
+          "correct": false,
+          "rationale": "Manual edits are slow and lost on the next deployment."
+        },
+        {
+          "text": "Store the values as tags on the pipeline and read them in the template",
+          "correct": false,
+          "rationale": "Templates cannot read pipeline tags."
+        }
+      ],
+      "explanation": "CloudFormation actions in CodePipeline accept template configuration files and parameter overrides per stage.",
+      "difficulty": 3,
+      "tags": [
+        "codepipeline",
+        "cloudformation",
+        "parameters"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-cfn-artifacts.html",
+        "https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CloudFormation.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-3.3-20",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "single",
+      "stem": "A team publishes a new version of a Lambda layer that fixes a bug in a shared library. The functions that use the layer still show the bug. What is the reason?",
+      "options": [
+        {
+          "text": "Lambda caches layers for 24 hours after a new version is published",
+          "correct": false,
+          "rationale": "There is no such cache; functions use the version they reference."
+        },
+        {
+          "text": "Functions keep using the layer version they were configured with",
+          "correct": true,
+          "rationale": "Layer versions are immutable, and functions refer to a specific version."
+        },
+        {
+          "text": "A new layer version applies to function versions published after it",
+          "correct": false,
+          "rationale": "Function versions do not pick up new layer versions on their own either."
+        },
+        {
+          "text": "The new layer version must be published in every Region first",
+          "correct": false,
+          "rationale": "Layers are Regional, but the functions here are using an old version, not a missing one."
+        }
+      ],
+      "explanation": "Updating a layer means publishing a new version and updating each function to use it.",
+      "difficulty": 2,
+      "tags": [
+        "lambda",
+        "layers",
+        "versions"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/chapter-layers.html",
+        "https://docs.aws.amazon.com/lambda/latest/dg/adding-layers.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-3.3-21",
+      "domain": "d3",
+      "objective": "3.3",
+      "type": "multi",
+      "stem": "After a release, a Lambda function's new version has a bug. The team wants to be able to return to the previous version within seconds, without redeploying code. Which combination of practices will allow this? (Select TWO.)",
+      "options": [
+        {
+          "text": "Upload the previous .zip file again and publish it as a new version",
+          "correct": false,
+          "rationale": "This works but is a redeployment, which the team wants to avoid."
+        },
+        {
+          "text": "Update the alias to point back to the previous version",
+          "correct": true,
+          "rationale": "Moving the alias changes which version runs, immediately, with no new deployment."
+        },
+        {
+          "text": "Delete the buggy version so that Lambda falls back automatically",
+          "correct": false,
+          "rationale": "Lambda does not fall back on its own when a version is deleted."
+        },
+        {
+          "text": "Have callers invoke the function through an alias instead of a version number",
+          "correct": true,
+          "rationale": "Callers keep the same alias ARN while the alias moves between versions."
+        },
+        {
+          "text": "Have callers invoke $LATEST so that they get the newest code",
+          "correct": false,
+          "rationale": "$LATEST holds the buggy code; there is nothing to switch back to."
+        }
+      ],
+      "explanation": "Aliases decouple callers from versions, so a rollback is just moving the alias.",
+      "difficulty": 2,
+      "tags": [
+        "lambda",
+        "alias",
+        "rollback"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
     }
   ]
 }

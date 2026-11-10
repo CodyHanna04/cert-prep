@@ -450,6 +450,405 @@
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-08",
       "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-4.3-11",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "single",
+      "stem": "A Java Lambda function has slow cold starts because its framework takes several seconds to initialize. Traffic is unpredictable, and the team does not want to pay for idle pre-initialized environments. What should the developer turn on?",
+      "options": [
+        {
+          "text": "Provisioned concurrency on the function's alias",
+          "correct": false,
+          "rationale": "Provisioned concurrency keeps environments ready and is billed while they wait, which the team wants to avoid."
+        },
+        {
+          "text": "A larger ephemeral storage setting for /tmp",
+          "correct": false,
+          "rationale": "/tmp size does not affect framework initialization time."
+        },
+        {
+          "text": "Reserved concurrency set to the expected peak",
+          "correct": false,
+          "rationale": "Reserved concurrency caps and guarantees concurrency; it does not pre-initialize environments."
+        },
+        {
+          "text": "Lambda SnapStart on the function",
+          "correct": true,
+          "rationale": "SnapStart restores new environments from a cached snapshot of initialized state, which shortens cold starts."
+        }
+      ],
+      "explanation": "SnapStart cuts cold-start initialization time. For Java runtimes it has no additional cost, and there are no idle pre-initialized environments to pay for.",
+      "difficulty": 3,
+      "tags": [
+        "lambda",
+        "snapstart",
+        "cold-start"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-4.3-12",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "single",
+      "stem": "A Lambda function processes an Amazon SQS queue one message per invocation. Message volume is high, and the per-invocation overhead makes processing slow and costly. A short delay before processing is acceptable. What should the developer change on the event source mapping?",
+      "options": [
+        {
+          "text": "Raise the batch size and set a batching window",
+          "correct": true,
+          "rationale": "Larger batches, gathered over a short window, process more messages per invocation."
+        },
+        {
+          "text": "Lower the queue's visibility timeout",
+          "correct": false,
+          "rationale": "This controls when unprocessed messages reappear, not how many each invocation handles."
+        },
+        {
+          "text": "Set the maximum concurrency to 2",
+          "correct": false,
+          "rationale": "Limiting concurrency slows processing further."
+        },
+        {
+          "text": "Turn on long polling with a 20-second wait time",
+          "correct": false,
+          "rationale": "Lambda's event source mapping already polls the queue; this does not batch invocations."
+        }
+      ],
+      "explanation": "Batch size and the batching window trade a little latency for far fewer invocations.",
+      "difficulty": 2,
+      "tags": [
+        "lambda",
+        "sqs",
+        "batching"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-4.3-13",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "single",
+      "stem": "A Node.js service on EC2 makes thousands of DynamoDB calls a minute through the AWS SDK. Profiling shows that a lot of time goes to setting up new TLS connections. What should the developer do?",
+      "options": [
+        {
+          "text": "Create a new SDK client for every request",
+          "correct": false,
+          "rationale": "That is the cause: each new client sets up new connections."
+        },
+        {
+          "text": "Reuse one SDK client with HTTP keep-alive",
+          "correct": true,
+          "rationale": "Reusing a client and its connection pool avoids a new TLS handshake for each call."
+        },
+        {
+          "text": "Switch every DynamoDB call to strongly consistent reads",
+          "correct": false,
+          "rationale": "Consistency does not affect connection setup."
+        },
+        {
+          "text": "Add a sleep between calls so connections can close cleanly",
+          "correct": false,
+          "rationale": "Waiting adds latency and does not reuse connections."
+        }
+      ],
+      "explanation": "Reuse SDK clients and keep connections alive to avoid repeated connection setup.",
+      "difficulty": 3,
+      "tags": [
+        "sdk",
+        "connection-reuse",
+        "performance"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/node-reusing-connections.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-4.3-14",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "single",
+      "stem": "A new application's DynamoDB table gets unpredictable traffic: near zero most of the day, with sudden spikes. Requests are throttled during spikes, and capacity sits unused the rest of the time. What should the developer change?",
+      "options": [
+        {
+          "text": "Provision write capacity for the highest spike around the clock",
+          "correct": false,
+          "rationale": "This avoids throttling but pays for unused capacity most of the day."
+        },
+        {
+          "text": "Add a global secondary index to spread the traffic",
+          "correct": false,
+          "rationale": "Indexes serve other access patterns; they do not add capacity to the table."
+        },
+        {
+          "text": "Switch the table to on-demand capacity mode",
+          "correct": true,
+          "rationale": "On-demand mode serves traffic as it arrives and bills per request, with no capacity to plan."
+        },
+        {
+          "text": "Turn on DynamoDB Streams for the table",
+          "correct": false,
+          "rationale": "Streams record changes; they do not affect capacity."
+        }
+      ],
+      "explanation": "On-demand capacity suits unpredictable or spiky workloads.",
+      "difficulty": 2,
+      "tags": [
+        "dynamodb",
+        "capacity-mode"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/capacity-mode.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-4.3-15",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "single",
+      "stem": "A team wants better price-performance for its Python Lambda functions. The functions use only pure-Python libraries. What change should the developer consider first?",
+      "options": [
+        {
+          "text": "Raise every function's memory to the maximum",
+          "correct": false,
+          "rationale": "More memory raises cost and helps only CPU- or memory-bound functions."
+        },
+        {
+          "text": "Move every function into a VPC",
+          "correct": false,
+          "rationale": "VPC placement is for private resource access, not price-performance."
+        },
+        {
+          "text": "Turn on provisioned concurrency for every function",
+          "correct": false,
+          "rationale": "Provisioned concurrency adds cost to reduce cold starts; it does not improve price-performance."
+        },
+        {
+          "text": "Switch the functions' architecture to arm64 (AWS Graviton)",
+          "correct": true,
+          "rationale": "arm64 functions typically offer better price-performance, and pure-Python code runs without changes."
+        }
+      ],
+      "explanation": "Graviton (arm64) is a common, low-effort price-performance improvement for Lambda.",
+      "difficulty": 2,
+      "tags": [
+        "lambda",
+        "graviton",
+        "cost"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-4.3-16",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "single",
+      "stem": "An application uploads 5 GB video files to Amazon S3 with a single PUT request. Uploads are slow, and a network error near the end means starting over. What should the developer do?",
+      "options": [
+        {
+          "text": "Use multipart upload, sending parts in parallel and retrying failed parts",
+          "correct": true,
+          "rationale": "Parts upload in parallel, and only a failed part is retried, not the whole file."
+        },
+        {
+          "text": "Compress each video into a ZIP archive before uploading",
+          "correct": false,
+          "rationale": "Video is already compressed, and the upload would still be one large request."
+        },
+        {
+          "text": "Turn on S3 Versioning on the bucket",
+          "correct": false,
+          "rationale": "Versioning keeps object versions; it does not speed up or resume uploads."
+        },
+        {
+          "text": "Upload each file to an Amazon EBS volume first",
+          "correct": false,
+          "rationale": "This adds a step and does not fix how the file reaches S3."
+        }
+      ],
+      "explanation": "Multipart upload improves throughput and resilience for large objects.",
+      "difficulty": 2,
+      "tags": [
+        "s3",
+        "multipart-upload"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-4.3-17",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "single",
+      "stem": "A REST API in Amazon API Gateway has high p99 latency. The developer must find out whether the time is spent in API Gateway itself or in the backend integration. Which CloudWatch metrics should the developer compare?",
+      "options": [
+        {
+          "text": "4XXError and 5XXError",
+          "correct": false,
+          "rationale": "Error counts show failures, not where time is spent."
+        },
+        {
+          "text": "Latency and IntegrationLatency",
+          "correct": true,
+          "rationale": "IntegrationLatency is the backend's time; Latency is the full request, so the gap is API Gateway's own overhead."
+        },
+        {
+          "text": "Count and CacheHitCount",
+          "correct": false,
+          "rationale": "These show request volume and cache use, not timing."
+        },
+        {
+          "text": "The Lambda function's Invocations and Throttles",
+          "correct": false,
+          "rationale": "These show how often the function ran and was throttled, not latency."
+        }
+      ],
+      "explanation": "Comparing Latency with IntegrationLatency separates API Gateway overhead from backend time.",
+      "difficulty": 3,
+      "tags": [
+        "api-gateway",
+        "cloudwatch",
+        "latency"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-metrics-and-dimensions.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-4.3-18",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "single",
+      "stem": "A team runs an AWS Step Functions workflow millions of times a day to process events. Each run lasts a few seconds and can safely be repeated. Workflow costs are high. What should the developer change?",
+      "options": [
+        {
+          "text": "Add more Wait states so that runs spread out over time",
+          "correct": false,
+          "rationale": "Waiting does not change the per-run cost model."
+        },
+        {
+          "text": "Split each workflow into two Standard workflows",
+          "correct": false,
+          "rationale": "This doubles the number of Standard executions."
+        },
+        {
+          "text": "Use an Express workflow instead of a Standard workflow",
+          "correct": true,
+          "rationale": "Express workflows are designed for high-volume, short-duration workloads and are priced for them."
+        },
+        {
+          "text": "Run the workflow from an EC2 instance instead of from Lambda",
+          "correct": false,
+          "rationale": "Where the start call comes from does not change workflow costs."
+        }
+      ],
+      "explanation": "Choose Express workflows for high-volume, short, idempotent work; Standard for long-running, exactly-once workflows.",
+      "difficulty": 3,
+      "tags": [
+        "step-functions",
+        "express-workflows",
+        "cost"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/step-functions/latest/dg/choosing-workflow-type.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-4.3-19",
+      "domain": "d4",
+      "objective": "4.3",
+      "type": "multi",
+      "stem": "A CloudFront distribution in front of an API serves product pages that rarely change, but its cache hit ratio is low and most requests reach the origin. Which changes will raise the cache hit ratio? (Select TWO.)",
+      "options": [
+        {
+          "text": "Use a CachingDisabled cache policy for the product pages",
+          "correct": false,
+          "rationale": "Disabling caching sends every request to the origin."
+        },
+        {
+          "text": "Remove unneeded headers, cookies and query strings from the cache key",
+          "correct": true,
+          "rationale": "Every value in the cache key splits the cache; keeping only what changes the response raises the hit ratio."
+        },
+        {
+          "text": "Add the User-Agent header to the cache key",
+          "correct": false,
+          "rationale": "User-Agent varies widely, so it splits the cache further."
+        },
+        {
+          "text": "Turn on origin access control for the API origin",
+          "correct": false,
+          "rationale": "Origin access control restricts direct access to supported AWS origins; it does not change the cache key or TTLs."
+        },
+        {
+          "text": "Have the origin send Cache-Control max-age values that suit the content",
+          "correct": true,
+          "rationale": "Longer, appropriate TTLs keep objects in the cache longer."
+        }
+      ],
+      "explanation": "A smaller cache key and suitable TTLs raise the CloudFront cache hit ratio.",
+      "difficulty": 3,
+      "tags": [
+        "cloudfront",
+        "caching"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cache-hit-ratio.html",
+        "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
     }
   ]
 }

@@ -494,6 +494,677 @@
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-08",
       "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-1.1-12",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "An order service publishes OrderPlaced and OrderCancelled events. New services that react to these events keep being added, and the team does not want to change the order service each time. What should the developer do?",
+      "options": [
+        {
+          "text": "Have the order service call each consuming service's HTTP endpoint directly after every order is placed",
+          "correct": false,
+          "rationale": "This couples the order service to every consumer; each new consumer needs a code change."
+        },
+        {
+          "text": "Send the events to one Amazon SQS queue that every consuming service polls",
+          "correct": false,
+          "rationale": "Each SQS message is processed by only one consumer, so the services would not each receive every event."
+        },
+        {
+          "text": "Write the events to a shared database table that each consuming service scans on a schedule",
+          "correct": false,
+          "rationale": "Polling a shared table couples services to one schema and adds delay and read cost."
+        },
+        {
+          "text": "Publish the events to an Amazon EventBridge event bus, with one rule per consuming service",
+          "correct": true,
+          "rationale": "Producers and consumers stay independent: a new consumer adds a rule without any change to the order service."
+        }
+      ],
+      "explanation": "An event bus with rules decouples producers from consumers: each consumer subscribes with its own event pattern.",
+      "difficulty": 2,
+      "tags": [
+        "eventbridge",
+        "decoupling"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-rules.html",
+        "https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.1-13",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "An order workflow runs four Lambda functions in sequence. A failed step must be retried a few times, and if it still fails, a compensation function must undo the earlier steps. The developer wants this logic outside the function code. Which solution will meet these requirements?",
+      "options": [
+        {
+          "text": "An AWS Step Functions state machine with Retry and Catch fields on its task states",
+          "correct": true,
+          "rationale": "Retry and Catch handle retries and route failures to a compensation state without custom code in the functions."
+        },
+        {
+          "text": "A first Lambda function that invokes the others synchronously and handles errors itself",
+          "correct": false,
+          "rationale": "That keeps the orchestration and error handling inside function code, and the first function pays for the whole wait."
+        },
+        {
+          "text": "An Amazon SNS topic that each function publishes to when it finishes",
+          "correct": false,
+          "rationale": "SNS fans out messages but has no notion of steps, retries per step or compensation."
+        },
+        {
+          "text": "An Amazon EventBridge scheduled rule that runs each function a few minutes apart",
+          "correct": false,
+          "rationale": "A schedule does not pass results between steps or react to failures."
+        }
+      ],
+      "explanation": "Step Functions orchestrates multi-step workflows and handles errors declaratively with Retry and Catch.",
+      "difficulty": 2,
+      "tags": [
+        "step-functions",
+        "error-handling"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/step-functions/latest/dg/concepts-error-handling.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.1-14",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "multi",
+      "stem": "Transactions for the same bank account must be processed in the order they were sent, while transactions for different accounts are processed in parallel. Which combination of steps will meet these requirements? (Select TWO.)",
+      "options": [
+        {
+          "text": "Set the queue's visibility timeout to 0 seconds",
+          "correct": false,
+          "rationale": "This makes messages visible again immediately and causes duplicate processing; it does nothing for order."
+        },
+        {
+          "text": "Set the message group ID to the account ID",
+          "correct": true,
+          "rationale": "Messages for one account stay in order, and different accounts form different groups that can be processed in parallel."
+        },
+        {
+          "text": "Use the same message group ID for every message",
+          "correct": false,
+          "rationale": "One group forces every transaction into a single ordered stream, so nothing runs in parallel."
+        },
+        {
+          "text": "Use an Amazon SQS FIFO queue",
+          "correct": true,
+          "rationale": "FIFO queues keep order within a message group."
+        },
+        {
+          "text": "Use an Amazon SQS standard queue with a delivery delay",
+          "correct": false,
+          "rationale": "Standard queues do not guarantee order, and a delay does not create one."
+        }
+      ],
+      "explanation": "In a FIFO queue, ordering is per message group, so the group ID decides what is ordered and what can run in parallel.",
+      "difficulty": 3,
+      "tags": [
+        "sqs",
+        "fifo"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-fifo-queues.html",
+        "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues-understanding-logic.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.1-15",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "A script lists the objects in an Amazon S3 bucket by calling ListObjectsV2 once. The bucket has 25,000 objects, but the script processes only the first 1,000. How should the developer fix the script?",
+      "options": [
+        {
+          "text": "Set MaxKeys to 25000 so that every key comes back in a single response",
+          "correct": false,
+          "rationale": "MaxKeys can lower the page size but cannot raise it above 1,000 keys per response."
+        },
+        {
+          "text": "Follow the continuation token in each response, or use the SDK's paginator",
+          "correct": true,
+          "rationale": "Each response returns at most 1,000 keys; the continuation token or a paginator fetches the rest."
+        },
+        {
+          "text": "Switch to the older ListObjects API",
+          "correct": false,
+          "rationale": "It is paginated the same way and is not recommended for new code."
+        },
+        {
+          "text": "Retry the call with exponential backoff until every key is returned",
+          "correct": false,
+          "rationale": "Nothing failed; the response is one page of results, so retrying returns the same page."
+        }
+      ],
+      "explanation": "List APIs return results in pages. Code must follow the continuation token, or use an SDK paginator that does it for you.",
+      "difficulty": 2,
+      "tags": [
+        "s3",
+        "sdk",
+        "pagination"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html",
+        "https://docs.aws.amazon.com/boto3/latest/guide/paginators.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.1-16",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "A product page calls a recommendation service. When that service is slow or down, the whole page fails to load. The page must still load, even if it shows no recommendations. What should the developer do?",
+      "options": [
+        {
+          "text": "Retry the call to the recommendation service until it responds successfully",
+          "correct": false,
+          "rationale": "Waiting on a failing dependency makes the page slower and can add load to the struggling service."
+        },
+        {
+          "text": "Increase the page's timeout so that the recommendation call has more time to finish",
+          "correct": false,
+          "rationale": "A longer wait makes users wait longer and still fails when the service is down."
+        },
+        {
+          "text": "Use a short timeout, and show default or cached content if the call fails",
+          "correct": true,
+          "rationale": "This is graceful degradation: the page keeps working without the optional dependency."
+        },
+        {
+          "text": "Return an error page that asks the user to try again later",
+          "correct": false,
+          "rationale": "That is the current failure; the requirement is that the page still loads."
+        }
+      ],
+      "explanation": "A soft dependency should not take down the caller. Use timeouts and fall back to a reduced experience.",
+      "difficulty": 2,
+      "tags": [
+        "resilience",
+        "graceful-degradation"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_mitigate_interaction_failure_graceful_degradation.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.1-17",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "A worker processes payment messages from an Amazon SQS standard queue. Occasionally a customer is charged twice for one payment message. What should the developer do?",
+      "options": [
+        {
+          "text": "Increase the queue's message retention period so that duplicate messages expire sooner",
+          "correct": false,
+          "rationale": "Retention controls how long unprocessed messages are kept, not whether they are delivered more than once."
+        },
+        {
+          "text": "Delete each message before charging the customer",
+          "correct": false,
+          "rationale": "If processing then fails, the payment is lost."
+        },
+        {
+          "text": "Lower the number of messages received per call to 1",
+          "correct": false,
+          "rationale": "Batch size does not change at-least-once delivery."
+        },
+        {
+          "text": "Record each payment ID with a conditional write, and skip IDs that are already recorded",
+          "correct": true,
+          "rationale": "Standard queues deliver at least once, so the consumer must make a repeated message harmless."
+        }
+      ],
+      "explanation": "Design consumers of at-least-once delivery to be idempotent, for example with a DynamoDB conditional write on a unique ID.",
+      "difficulty": 3,
+      "tags": [
+        "sqs",
+        "idempotency",
+        "dynamodb"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/standard-queues-at-least-once-delivery.html",
+        "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_prevent_interaction_failure_idempotent.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.1-18",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "A REST API in Amazon API Gateway uses a Lambda non-proxy (custom) integration. When the function throws a validation error, clients receive HTTP 200 with the error message in the body. Clients must receive HTTP 400 instead. What should the developer configure?",
+      "options": [
+        {
+          "text": "A 400 method response, and an integration response whose regex matches the error message",
+          "correct": true,
+          "rationale": "In a non-proxy integration, API Gateway maps Lambda errors to status codes by matching the error message."
+        },
+        {
+          "text": "Return an object whose statusCode field is 400 from the function, as proxy integrations expect",
+          "correct": false,
+          "rationale": "That shape is for proxy integrations; a non-proxy integration passes it through as a 200 body."
+        },
+        {
+          "text": "A request validator on the method",
+          "correct": false,
+          "rationale": "Request validators check incoming requests; they do not map backend errors to status codes."
+        },
+        {
+          "text": "A gateway response for the DEFAULT_4XX type",
+          "correct": false,
+          "rationale": "Gateway responses customize errors that API Gateway itself generates, not errors returned by the integration."
+        }
+      ],
+      "explanation": "With a custom Lambda integration, error mapping is done in the integration responses, keyed on the error message.",
+      "difficulty": 4,
+      "tags": [
+        "api-gateway",
+        "lambda",
+        "error-handling"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/handle-errors-in-lambda-integration.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.1-19",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "Five consumer applications read the same Amazon Kinesis data stream. They compete for each shard's read throughput, and their reads are getting throttled. Each application needs its own read throughput. What should the developer use?",
+      "options": [
+        {
+          "text": "A larger batch size in each GetRecords call",
+          "correct": false,
+          "rationale": "Bigger batches still share the shard's read limit."
+        },
+        {
+          "text": "Enhanced fan-out consumers",
+          "correct": true,
+          "rationale": "Each registered consumer gets its own dedicated read throughput per shard, pushed over HTTP/2."
+        },
+        {
+          "text": "One Amazon SQS queue per application, filled by the producer",
+          "correct": false,
+          "rationale": "This rebuilds fan-out by hand and loses Kinesis replay and ordering features."
+        },
+        {
+          "text": "A longer data retention period on the stream",
+          "correct": false,
+          "rationale": "Retention controls how long records are kept, not read throughput."
+        }
+      ],
+      "explanation": "Shared-throughput consumers split each shard's read capacity; enhanced fan-out gives every consumer its own.",
+      "difficulty": 3,
+      "tags": [
+        "kinesis",
+        "streaming"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/streams/latest/dev/enhanced-consumers.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.1-20",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "Code that uses the low-level DynamoDB client reads items as nested objects such as {\"S\": \"Alice\"} and {\"N\": \"42\"}. The developer wants to work with plain strings and numbers instead. What should the developer do?",
+      "options": [
+        {
+          "text": "Store every attribute as a string so that values are returned unwrapped",
+          "correct": false,
+          "rationale": "This loses number and set types and does not change the response format of the low-level client."
+        },
+        {
+          "text": "Use a Scan instead of GetItem",
+          "correct": false,
+          "rationale": "Every low-level read returns the same typed format."
+        },
+        {
+          "text": "Use the SDK's document client or a type deserializer to convert values",
+          "correct": true,
+          "rationale": "These helpers serialize and deserialize attribute values so code works with ordinary objects."
+        },
+        {
+          "text": "Enable DynamoDB Streams with the NEW_IMAGE view",
+          "correct": false,
+          "rationale": "Streams also use the typed format and do not change how reads are returned."
+        }
+      ],
+      "explanation": "The low-level API uses typed attribute values; SDK document clients and deserializers convert them to native types.",
+      "difficulty": 2,
+      "tags": [
+        "dynamodb",
+        "sdk",
+        "serialization"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html",
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.SDKs.Interfaces.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.1-21",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "A team uses Kiro. The agent keeps writing code that ignores the team's naming conventions and preferred libraries, so developers repeat the same instructions in every chat. How should the team give the agent this guidance once?",
+      "options": [
+        {
+          "text": "Paste the conventions at the start of every chat session",
+          "correct": false,
+          "rationale": "This is the repetition the team wants to avoid."
+        },
+        {
+          "text": "Create an agent hook that runs on every file save",
+          "correct": false,
+          "rationale": "Hooks automate actions on events; they are not the place to store standing guidance."
+        },
+        {
+          "text": "Write the conventions as comments at the top of every source file",
+          "correct": false,
+          "rationale": "Comments scattered through files are not a reliable or maintainable way to guide the agent."
+        },
+        {
+          "text": "Add steering files to the project that describe the conventions",
+          "correct": true,
+          "rationale": "Steering files give the agent persistent project knowledge, so it follows the conventions without repeated instructions."
+        }
+      ],
+      "explanation": "Kiro steering files hold persistent guidance such as conventions and preferred libraries.",
+      "difficulty": 2,
+      "tags": [
+        "kiro",
+        "ai-assisted-development"
+      ],
+      "refs": [
+        "https://kiro.dev/docs/steering/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.1-22",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "A chat application calls a foundation model through Amazon Bedrock with the Converse API. Users wait several seconds and then see the whole answer at once. They want to see the text appear as it is generated. What should the developer do?",
+      "options": [
+        {
+          "text": "Call ConverseStream and render each text chunk as it arrives",
+          "correct": true,
+          "rationale": "ConverseStream returns the response as a stream of events, so the app can display partial text."
+        },
+        {
+          "text": "Lower the maximum number of tokens in the request",
+          "correct": false,
+          "rationale": "Shorter answers arrive sooner, but they are still returned all at once and may be cut off."
+        },
+        {
+          "text": "Call the Converse API asynchronously from a Lambda function",
+          "correct": false,
+          "rationale": "The response is still returned in one piece."
+        },
+        {
+          "text": "Cache the model's answers in Amazon ElastiCache and serve repeat questions from it",
+          "correct": false,
+          "rationale": "Caching helps only repeated questions and does not stream new answers."
+        }
+      ],
+      "explanation": "Use the streaming variant of the Bedrock API to show output as it is generated.",
+      "difficulty": 2,
+      "tags": [
+        "bedrock",
+        "streaming"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html",
+        "https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.1-23",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "multi",
+      "stem": "An Amazon EventBridge rule sends events to a Lambda function. Sometimes the function is unavailable, and some events are never processed. Events that cannot be delivered must be kept for later reprocessing. Which combination of steps will meet these requirements? (Select TWO.)",
+      "options": [
+        {
+          "text": "Add a queue policy that lets EventBridge send messages to the dead-letter queue",
+          "correct": true,
+          "rationale": "EventBridge needs permission to send to the queue. The console adds it, but API and infrastructure-as-code setups must add it themselves."
+        },
+        {
+          "text": "Archive the event bus and replay every event each hour",
+          "correct": false,
+          "rationale": "Replaying everything reprocesses events that already succeeded."
+        },
+        {
+          "text": "Add a second rule with the same pattern that targets the same function",
+          "correct": false,
+          "rationale": "Both rules would fail in the same way, and successful events would be processed twice."
+        },
+        {
+          "text": "Configure an Amazon SQS dead-letter queue on the rule's target",
+          "correct": true,
+          "rationale": "Events that still cannot be delivered after retries are sent to the queue instead of being dropped."
+        },
+        {
+          "text": "Increase the Lambda function's timeout",
+          "correct": false,
+          "rationale": "A longer timeout does not help when the target is unavailable."
+        }
+      ],
+      "explanation": "Targets retry by default. An SQS dead-letter queue, with a queue policy that lets EventBridge send to it, keeps events that still cannot be delivered.",
+      "difficulty": 3,
+      "tags": [
+        "eventbridge",
+        "dlq",
+        "retry"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-rule-dlq.html",
+        "https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-rule-retry-policy.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.1-24",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "A chat application must push new messages from the backend to connected browsers as soon as they arrive, without the browsers polling. Which Amazon API Gateway API type should the developer use?",
+      "options": [
+        {
+          "text": "A REST API with caching turned on for the messages resource",
+          "correct": false,
+          "rationale": "Caching serves repeated requests faster, but clients still have to ask for new messages."
+        },
+        {
+          "text": "A WebSocket API",
+          "correct": true,
+          "rationale": "WebSocket APIs keep a two-way connection open, so the backend can send messages to clients at any time."
+        },
+        {
+          "text": "An HTTP API with a Lambda proxy integration on each route",
+          "correct": false,
+          "rationale": "HTTP APIs answer requests; the server cannot push messages without a request."
+        },
+        {
+          "text": "A private REST API reached through an interface VPC endpoint",
+          "correct": false,
+          "rationale": "Private APIs limit where calls come from; they still follow request and response."
+        }
+      ],
+      "explanation": "WebSocket APIs support server-to-client messages over a persistent connection.",
+      "difficulty": 2,
+      "tags": [
+        "api-gateway",
+        "websocket"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.1-25",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "An application must read a 20 GB object from Amazon S3 as fast as possible, using several worker threads at the same time. How should the code read the object?",
+      "options": [
+        {
+          "text": "Call GetObject once and wait for the whole body before processing",
+          "correct": false,
+          "rationale": "A single request downloads the object serially, which is the slow path."
+        },
+        {
+          "text": "Copy the object to an EBS volume first with an S3 Lifecycle rule",
+          "correct": false,
+          "rationale": "Lifecycle rules change storage classes or expire objects; they do not copy to EBS."
+        },
+        {
+          "text": "Fetch byte ranges of the object in parallel",
+          "correct": true,
+          "rationale": "Byte-range fetches let each worker download its own part of the object at the same time."
+        },
+        {
+          "text": "Turn on S3 Versioning so that several versions can be read in parallel",
+          "correct": false,
+          "rationale": "Versions are separate copies over time, not parts of one object to read in parallel."
+        }
+      ],
+      "explanation": "Parallel byte-range GETs give higher total throughput than one whole-object request, and smaller ranges make retries faster when a request is interrupted.",
+      "difficulty": 3,
+      "tags": [
+        "s3",
+        "byte-range",
+        "performance"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/optimizing-performance-guidelines.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.1-26",
+      "domain": "d1",
+      "objective": "1.1",
+      "type": "single",
+      "stem": "Clickstream events must be kept in order per user, read by three different applications, and replayable from the last 24 hours when an application has a bug. Which service fits these requirements?",
+      "options": [
+        {
+          "text": "An Amazon SQS standard queue",
+          "correct": false,
+          "rationale": "Ordering is best-effort, and each message is processed by one consumer and then deleted."
+        },
+        {
+          "text": "An Amazon SNS standard topic",
+          "correct": false,
+          "rationale": "SNS pushes each message once to subscribers and does not keep it for replay."
+        },
+        {
+          "text": "An Amazon SQS FIFO queue with one message group per user",
+          "correct": false,
+          "rationale": "FIFO keeps order, but a deleted message cannot be replayed, and each message goes to one consumer."
+        },
+        {
+          "text": "Amazon Kinesis Data Streams",
+          "correct": true,
+          "rationale": "Records stay in order per partition key, many consumers can read the same stream, and records can be reread within the retention period."
+        }
+      ],
+      "explanation": "Choose a stream over a queue when several consumers need the same ordered records and replay.",
+      "difficulty": 3,
+      "tags": [
+        "kinesis",
+        "streaming",
+        "sqs"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/streams/latest/dev/introduction.html",
+        "https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html",
+        "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
     }
   ]
 }

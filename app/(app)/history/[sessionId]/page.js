@@ -4,7 +4,7 @@ import { getAppContext } from "@/lib/app/context.js";
 import { withUser } from "@/lib/db/index.js";
 import { getExam } from "@/lib/db/exams.js";
 import { getQuestionsByIds } from "@/lib/db/questions.js";
-import { getResponses, getSession, sessionScore } from "@/lib/db/sessions.js";
+import { getResponses, getSession, reviewFlags, sessionScore } from "@/lib/db/sessions.js";
 import { isUuid } from "@/lib/app/feedback.js";
 import { fmtDateTime, indexExam } from "@/lib/app/view.js";
 import { fmtDuration, isSlow, timeStats } from "@/lib/domain/timing.js";
@@ -41,7 +41,9 @@ export default async function SessionResultsPage({ params, searchParams }) {
       sessionScore(db, session, exam),
       db.query("SELECT question_id FROM question_mark WHERE kind = 'flag' AND question_id = ANY($1::uuid[])", [session.questionIds]),
     ]);
-    return { session, exam, questions, responses, score, flagged: new Set(flags.rows.map((r) => r.question_id)) };
+    // Flagged here means flagged in the library, or flagged for review during this mock exam.
+    const flagged = new Set([...flags.rows.map((r) => r.question_id), ...reviewFlags(session)]);
+    return { session, exam, questions, responses, score, flagged };
   });
   if (!data) notFound();
   const { session, exam, questions, responses, score, flagged } = data;

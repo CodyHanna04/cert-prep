@@ -449,6 +449,455 @@
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-08",
       "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-4.1-11",
+      "domain": "d4",
+      "objective": "4.1",
+      "type": "single",
+      "stem": "A REST API in Amazon API Gateway invokes a Lambda function synchronously. The function sometimes runs for about 40 seconds, and on those requests clients receive HTTP 504 even though the function finishes successfully. What is the cause?",
+      "options": [
+        {
+          "text": "The function's own timeout is set lower than 40 seconds",
+          "correct": false,
+          "rationale": "The function finishes successfully, so its timeout is not being hit."
+        },
+        {
+          "text": "The function runs longer than the API's integration timeout",
+          "correct": true,
+          "rationale": "API Gateway stops waiting at its integration timeout and returns 504, whatever the function does afterward."
+        },
+        {
+          "text": "The function's reserved concurrency is set too low for the traffic",
+          "correct": false,
+          "rationale": "Throttled invocations are rejected right away; they do not make the client wait about 40 seconds before failing."
+        },
+        {
+          "text": "The API's stage has caching turned on for the method",
+          "correct": false,
+          "rationale": "Caching returns stored responses faster; it does not cause timeouts."
+        }
+      ],
+      "explanation": "A 504 from API Gateway after a long wait points to the integration timeout. Make long work asynchronous or faster.",
+      "difficulty": 3,
+      "tags": [
+        "api-gateway",
+        "lambda",
+        "timeouts"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-execution-service-limits-table.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-4.1-12",
+      "domain": "d4",
+      "objective": "4.1",
+      "type": "single",
+      "stem": "A Lambda function was moved into private subnets of a VPC so that it can reach an Amazon RDS database. Since then, its calls to DynamoDB hang until the function times out. The VPC has no NAT gateway. What should the developer do?",
+      "options": [
+        {
+          "text": "Give the execution role more DynamoDB permissions",
+          "correct": false,
+          "rationale": "A permissions problem returns AccessDenied quickly; a hang points to no network route."
+        },
+        {
+          "text": "Increase the function's timeout so the DynamoDB calls can finish",
+          "correct": false,
+          "rationale": "The calls hang because there is no route; more time does not create one."
+        },
+        {
+          "text": "Add a gateway VPC endpoint for DynamoDB",
+          "correct": true,
+          "rationale": "The endpoint gives the private subnets a route to DynamoDB without internet access."
+        },
+        {
+          "text": "Move the DynamoDB table into the same VPC as the function",
+          "correct": false,
+          "rationale": "DynamoDB tables are not placed in VPCs; they are reached through endpoints."
+        }
+      ],
+      "explanation": "A function in private subnets needs a VPC endpoint or a NAT gateway to reach AWS service endpoints.",
+      "difficulty": 3,
+      "tags": [
+        "lambda",
+        "vpc",
+        "dynamodb",
+        "vpc-endpoints"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints-ddb.html",
+        "https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc-internet.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-4.1-13",
+      "domain": "d4",
+      "objective": "4.1",
+      "type": "single",
+      "stem": "A developer wants to find the 10 slowest invocations of a Lambda function in the last day by using CloudWatch Logs Insights on the function's log group. Which query does this?",
+      "options": [
+        {
+          "text": "fields @message | sort @timestamp desc | limit 10",
+          "correct": false,
+          "rationale": "This returns the 10 most recent log lines, not the slowest invocations."
+        },
+        {
+          "text": "filter @message like /ERROR/ | stats count(*) by bin(1h)",
+          "correct": false,
+          "rationale": "This counts errors per hour; it does not look at duration."
+        },
+        {
+          "text": "stats avg(@duration) by @logStream | limit 10",
+          "correct": false,
+          "rationale": "Averages per log stream hide the individual slowest invocations."
+        },
+        {
+          "text": "filter @type = \"REPORT\" | sort @duration desc | limit 10",
+          "correct": true,
+          "rationale": "REPORT lines carry each invocation's @duration, so sorting them descending and limiting to 10 gives the slowest."
+        }
+      ],
+      "explanation": "Lambda REPORT log lines include @duration, @billedDuration and @maxMemoryUsed, which Logs Insights can sort and aggregate.",
+      "difficulty": 3,
+      "tags": [
+        "cloudwatch-logs-insights",
+        "lambda"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html",
+        "https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax-examples.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-4.1-14",
+      "domain": "d4",
+      "objective": "4.1",
+      "type": "single",
+      "stem": "Some invocations of a Lambda function take 3 seconds, while most take 100 ms. The slow invocations' REPORT log lines include an Init Duration value of about 2.8 seconds. What is the most likely cause?",
+      "options": [
+        {
+          "text": "Cold starts with slow initialization code",
+          "correct": true,
+          "rationale": "Init Duration appears only when a new execution environment starts and runs the initialization code."
+        },
+        {
+          "text": "The function is being throttled by its reserved concurrency",
+          "correct": false,
+          "rationale": "Throttled requests are rejected; they do not report an Init Duration."
+        },
+        {
+          "text": "The handler is slow to query its database on those requests",
+          "correct": false,
+          "rationale": "Handler time is in Duration, not in Init Duration."
+        },
+        {
+          "text": "The function's timeout is too low for the slow requests",
+          "correct": false,
+          "rationale": "The invocations finish; a timeout would end them with an error."
+        }
+      ],
+      "explanation": "Init Duration in a REPORT line marks a cold start and measures the initialization phase.",
+      "difficulty": 3,
+      "tags": [
+        "lambda",
+        "cold-start",
+        "logs"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtime-environment.html",
+        "https://docs.aws.amazon.com/lambda/latest/dg/python-logging.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-4.1-15",
+      "domain": "d4",
+      "objective": "4.1",
+      "type": "multi",
+      "stem": "New Amazon ECS tasks on AWS Fargate in private subnets fail to start with a CannotPullContainerError for an image in Amazon ECR. Which issues could cause this? (Select TWO.)",
+      "options": [
+        {
+          "text": "The service's desired count is higher than the number of subnets",
+          "correct": false,
+          "rationale": "Several tasks can run in each subnet; the count does not block image pulls."
+        },
+        {
+          "text": "The task execution role lacks permission to pull images from Amazon ECR",
+          "correct": true,
+          "rationale": "The execution role is what ECS uses to authenticate to ECR and pull the image."
+        },
+        {
+          "text": "The task role lacks permission to read from the application's S3 bucket",
+          "correct": false,
+          "rationale": "The task role is used by the application after the container starts, not to pull the image."
+        },
+        {
+          "text": "The container's health check path returns HTTP 404",
+          "correct": false,
+          "rationale": "Health checks run after the container starts; this task never got its image."
+        },
+        {
+          "text": "The subnets have no route to ECR, through a NAT gateway or VPC endpoints",
+          "correct": true,
+          "rationale": "Without a network path to ECR and S3, the image layers cannot be downloaded."
+        }
+      ],
+      "explanation": "CannotPullContainerError usually means missing execution role permissions or no network path to the registry.",
+      "difficulty": 3,
+      "tags": [
+        "ecs",
+        "ecr",
+        "fargate",
+        "troubleshooting"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_cannot_pull_image.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-4.1-16",
+      "domain": "d4",
+      "objective": "4.1",
+      "type": "single",
+      "stem": "An AWS CodeBuild project fails immediately with an error that it cannot find the build specification file. The repository has the file at config/buildspec.yml. What should the developer do?",
+      "options": [
+        {
+          "text": "Give the CodeBuild service role permission to read the repository",
+          "correct": false,
+          "rationale": "A permission problem would fail when downloading the source, with a different error."
+        },
+        {
+          "text": "Set the buildspec path on the project to config/buildspec.yml",
+          "correct": true,
+          "rationale": "By default CodeBuild looks for buildspec.yml in the root of the source; another path must be set on the project."
+        },
+        {
+          "text": "Rename the file to buildspec.json in the same folder",
+          "correct": false,
+          "rationale": "The file is still not where CodeBuild looks for it."
+        },
+        {
+          "text": "Use a larger compute type for the build environment",
+          "correct": false,
+          "rationale": "Compute size does not affect where CodeBuild looks for the buildspec."
+        }
+      ],
+      "explanation": "CodeBuild reads buildspec.yml from the source root unless the project names another path.",
+      "difficulty": 1,
+      "tags": [
+        "codebuild",
+        "buildspec",
+        "troubleshooting"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-4.1-17",
+      "domain": "d4",
+      "objective": "4.1",
+      "type": "single",
+      "stem": "Because of a bug, thousands of messages ended up in an Amazon SQS dead-letter queue. The bug is now fixed and deployed. The messages must be processed by the original consumer. What is the simplest way to do this?",
+      "options": [
+        {
+          "text": "Point the consumer at the dead-letter queue and delete the source queue",
+          "correct": false,
+          "rationale": "Deleting the source queue loses new messages and breaks producers."
+        },
+        {
+          "text": "Increase the source queue's maxReceiveCount and wait",
+          "correct": false,
+          "rationale": "This affects future failures; messages already in the DLQ stay there."
+        },
+        {
+          "text": "Redrive the messages from the DLQ to the source queue",
+          "correct": true,
+          "rationale": "Redrive moves messages from the DLQ back to their source queue (or another queue) for processing."
+        },
+        {
+          "text": "Purge the dead-letter queue so that SQS sends the messages again",
+          "correct": false,
+          "rationale": "Purging deletes the messages permanently."
+        }
+      ],
+      "explanation": "SQS DLQ redrive returns messages to their source queue after the cause is fixed.",
+      "difficulty": 2,
+      "tags": [
+        "sqs",
+        "dlq",
+        "redrive"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-dead-letter-queue-redrive.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-4.1-18",
+      "domain": "d4",
+      "objective": "4.1",
+      "type": "single",
+      "stem": "A Lambda function processes records from an Amazon Kinesis data stream. Its IteratorAge metric keeps growing during business hours, and there are no errors. What does this indicate?",
+      "options": [
+        {
+          "text": "The stream's retention period is too short for the records",
+          "correct": false,
+          "rationale": "Retention decides how long records are kept, not how fast they are read."
+        },
+        {
+          "text": "Records are failing and being retried in a loop",
+          "correct": false,
+          "rationale": "There are no errors, so this is not a retry loop."
+        },
+        {
+          "text": "The producers are sending duplicate records to the stream",
+          "correct": false,
+          "rationale": "Duplicates would not by themselves raise IteratorAge steadily."
+        },
+        {
+          "text": "The function is falling behind the incoming stream",
+          "correct": true,
+          "rationale": "IteratorAge is the age of the last record in each batch sent to the function; a rising value means the consumer is falling behind."
+        }
+      ],
+      "explanation": "A growing IteratorAge on a stream source means the consumer needs more throughput, such as a higher parallelization factor or larger batches.",
+      "difficulty": 3,
+      "tags": [
+        "lambda",
+        "kinesis",
+        "metrics"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html",
+        "https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-4.1-19",
+      "domain": "d4",
+      "objective": "4.1",
+      "type": "single",
+      "stem": "Calls to a new path in a REST API in Amazon API Gateway return HTTP 403 with the message \"Missing Authentication Token.\" The API does not use any authorization. What is the most likely cause?",
+      "options": [
+        {
+          "text": "The path or method is not deployed to the stage",
+          "correct": true,
+          "rationale": "API Gateway returns this 403 when a request does not match a deployed resource and method."
+        },
+        {
+          "text": "The caller must add an AWS access key to every request",
+          "correct": false,
+          "rationale": "The API uses no authorization, so no credentials are needed."
+        },
+        {
+          "text": "The Lambda function's execution role is missing a permission",
+          "correct": false,
+          "rationale": "An execution role problem appears as an error from the function, not this message."
+        },
+        {
+          "text": "The API's usage plan has reached its daily quota of requests",
+          "correct": false,
+          "rationale": "Quota limits return 429 Too Many Requests."
+        }
+      ],
+      "explanation": "\"Missing Authentication Token\" usually means a wrong path or method, or a change that was not deployed to the stage.",
+      "difficulty": 2,
+      "tags": [
+        "api-gateway",
+        "troubleshooting"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/supported-gateway-response-types.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-4.1-20",
+      "domain": "d4",
+      "objective": "4.1",
+      "type": "single",
+      "stem": "A browser app on https://app.example.com calls a REST API in Amazon API Gateway that uses Lambda proxy integrations. The browser blocks the responses with a CORS error that no Access-Control-Allow-Origin header is present. CORS is already enabled on the API's resources. What else must the developer do?",
+      "options": [
+        {
+          "text": "Add app.example.com to the API's resource policy",
+          "correct": false,
+          "rationale": "Resource policies control who may call the API, not browser CORS headers."
+        },
+        {
+          "text": "Return the CORS headers in the Lambda function's responses",
+          "correct": true,
+          "rationale": "With proxy integrations, the function's response is passed through, so the function must add the CORS headers."
+        },
+        {
+          "text": "Turn on API caching for the stage that the browser app calls",
+          "correct": false,
+          "rationale": "Caching does not add response headers."
+        },
+        {
+          "text": "Change the API to use IAM authorization for its methods",
+          "correct": false,
+          "rationale": "Authorization does not add CORS headers and would require signed requests."
+        }
+      ],
+      "explanation": "Enabling CORS covers the OPTIONS preflight, but proxy integrations must return CORS headers from the backend.",
+      "difficulty": 3,
+      "tags": [
+        "api-gateway",
+        "cors",
+        "lambda"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-cors.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
     }
   ]
 }

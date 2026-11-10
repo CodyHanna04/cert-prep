@@ -68,8 +68,9 @@ export default async function LibraryPage({ searchParams }) {
             <a href="/library/export" className={buttonClass("secondary")}>
               Export approved
             </a>
-            <LinkButton href="/library/import" variant="primary">
-              Import
+            <LinkButton href="/library/import">Import</LinkButton>
+            <LinkButton href="/library/questions/new" variant="primary">
+              New question
             </LinkButton>
           </>
         }

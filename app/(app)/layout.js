@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getAppContext } from "@/lib/app/context.js";
-import { Nav } from "@/components/Nav.js";
+import { AccountLink, Nav } from "@/components/Nav.js";
 import { CourseBar } from "@/components/CourseBar.js";
 import { DomainRing } from "@/components/DomainRing.js";
 
@@ -25,9 +25,7 @@ export default async function AppLayout({ children }) {
           <div className="flex-1">
             <Nav />
           </div>
-          <Link href="/account" className="text-sm text-muted hover:text-text">
-            {user.name}
-          </Link>
+          <AccountLink name={user.name} />
         </div>
       </header>
       <CourseBar course={exam ? { code: exam.code, name: exam.name } : null} />

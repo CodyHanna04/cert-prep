@@ -450,6 +450,720 @@
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-08",
       "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-1.2-11",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "multi",
+      "stem": "A Lambda function processes records from an Amazon Kinesis data stream. One malformed record makes the function fail, and the shard stops making progress while Lambda retries the same batch. Which combination of event source mapping settings will fix this? (Select TWO.)",
+      "options": [
+        {
+          "text": "Turn on splitting the batch when the function returns an error",
+          "correct": true,
+          "rationale": "Bisecting the batch isolates the bad record so the good records can be processed."
+        },
+        {
+          "text": "Increase the batch size",
+          "correct": false,
+          "rationale": "A bigger batch still contains the bad record and still fails."
+        },
+        {
+          "text": "Increase the parallelization factor",
+          "correct": false,
+          "rationale": "More concurrent batches per shard do not get past a record that always fails."
+        },
+        {
+          "text": "Limit the retry attempts and send failed records to an on-failure destination",
+          "correct": true,
+          "rationale": "After the limit, Lambda records the failure and moves on instead of blocking the shard."
+        },
+        {
+          "text": "Add a dead-letter queue to the function's asynchronous invocation settings",
+          "correct": false,
+          "rationale": "Stream event source mappings do not use the function's asynchronous DLQ; they use their own on-failure destination."
+        }
+      ],
+      "explanation": "For stream sources, bisect on error, a retry limit or maximum record age, and an on-failure destination keep a poison record from blocking the shard.",
+      "difficulty": 4,
+      "tags": [
+        "lambda",
+        "kinesis",
+        "event-source-mapping"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html",
+        "https://docs.aws.amazon.com/lambda/latest/dg/kinesis-on-failure-destination.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.2-12",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "A company wants every Lambda function to send its logs to a third-party monitoring service. The team does not want to change any function code. What should the developer add to the functions?",
+      "options": [
+        {
+          "text": "A Lambda extension, added as a layer, that uses the Telemetry API",
+          "correct": true,
+          "rationale": "Extensions run alongside the function and can receive its logs and telemetry without code changes."
+        },
+        {
+          "text": "A logging library in each function that sends log lines over HTTPS",
+          "correct": false,
+          "rationale": "That requires a code change in every function."
+        },
+        {
+          "text": "A larger memory setting so that logs are flushed to the service faster",
+          "correct": false,
+          "rationale": "Memory does not route logs anywhere."
+        },
+        {
+          "text": "An environment variable that holds the monitoring service's URL",
+          "correct": false,
+          "rationale": "A variable alone does nothing unless code or an extension reads it."
+        }
+      ],
+      "explanation": "Lambda extensions, delivered as layers, integrate monitoring and security tools without changing function code.",
+      "difficulty": 3,
+      "tags": [
+        "lambda",
+        "extensions",
+        "layers"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/lambda-extensions.html",
+        "https://docs.aws.amazon.com/lambda/latest/dg/telemetry-api.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.2-13",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "A Lambda function downloads a 3 GB file to /tmp to process it, and fails with a \"No space left on device\" error. What should the developer change?",
+      "options": [
+        {
+          "text": "Increase the function's memory setting",
+          "correct": false,
+          "rationale": "Memory and /tmp storage are configured separately."
+        },
+        {
+          "text": "Increase the function's ephemeral storage",
+          "correct": true,
+          "rationale": "The /tmp size is configurable, so the file fits."
+        },
+        {
+          "text": "Increase the function's timeout",
+          "correct": false,
+          "rationale": "The error is about disk space, not time."
+        },
+        {
+          "text": "Add a Lambda layer that contains the large file",
+          "correct": false,
+          "rationale": "Layers are read-only, deployment-time content and count against a deployment size limit; they are not scratch space."
+        }
+      ],
+      "explanation": "Ephemeral storage (/tmp) has its own setting, separate from memory.",
+      "difficulty": 2,
+      "tags": [
+        "lambda",
+        "ephemeral-storage"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/configuration-ephemeral-storage.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.2-14",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "A developer renamed a Node.js Lambda function's file from index.js to app.js and redeployed. Every invocation now fails with Runtime.HandlerNotFound. What should the developer change?",
+      "options": [
+        {
+          "text": "The function's runtime to a newer Node.js version",
+          "correct": false,
+          "rationale": "The runtime is fine; Lambda cannot find the handler at the configured location."
+        },
+        {
+          "text": "The execution role, to allow lambda:InvokeFunction",
+          "correct": false,
+          "rationale": "The error is about locating code, not permissions."
+        },
+        {
+          "text": "The function's handler setting, to app.handler",
+          "correct": true,
+          "rationale": "The handler setting names the file and exported function that Lambda calls."
+        },
+        {
+          "text": "The function's memory setting",
+          "correct": false,
+          "rationale": "Memory does not affect where Lambda looks for the handler."
+        }
+      ],
+      "explanation": "The handler setting must match the file name and exported function name.",
+      "difficulty": 1,
+      "tags": [
+        "lambda",
+        "handler"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/nodejs-handler.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.2-15",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "A Lambda function is invoked asynchronously. After each successful invocation, its result must be sent to an Amazon EventBridge event bus, without adding code to the function. What should the developer configure?",
+      "options": [
+        {
+          "text": "A dead-letter queue that points to the event bus",
+          "correct": false,
+          "rationale": "A DLQ receives only failed events, and only SQS queues or SNS topics."
+        },
+        {
+          "text": "Reserved concurrency of 1",
+          "correct": false,
+          "rationale": "Concurrency does not route results."
+        },
+        {
+          "text": "An event source mapping from the event bus",
+          "correct": false,
+          "rationale": "That would make the bus a source of invocations, not a target for results."
+        },
+        {
+          "text": "An on-success destination for the event bus",
+          "correct": true,
+          "rationale": "Destinations send the invocation record, including the result, to the target after success or failure."
+        }
+      ],
+      "explanation": "For asynchronous invocations, destinations route success and failure records to SQS, SNS, Lambda or EventBridge.",
+      "difficulty": 2,
+      "tags": [
+        "lambda",
+        "destinations"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.2-16",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "A Lambda function processes messages from an Amazon SQS queue and writes to a third-party API that allows only a few calls at a time. The same function is also invoked directly by other callers, which must not be limited. What should the developer configure?",
+      "options": [
+        {
+          "text": "Maximum concurrency on the SQS event source mapping",
+          "correct": true,
+          "rationale": "This caps how many concurrent invocations the queue can drive, without limiting other callers."
+        },
+        {
+          "text": "Reserved concurrency on the function, set to a low value",
+          "correct": false,
+          "rationale": "Reserved concurrency caps every caller of the function, including the direct callers."
+        },
+        {
+          "text": "A longer visibility timeout on the queue",
+          "correct": false,
+          "rationale": "That changes when failed messages reappear, not how many run at once."
+        },
+        {
+          "text": "A delivery delay on the queue",
+          "correct": false,
+          "rationale": "Delaying messages does not cap how many are processed at the same time."
+        }
+      ],
+      "explanation": "Maximum concurrency on an SQS event source limits that source alone; reserved concurrency limits the whole function.",
+      "difficulty": 3,
+      "tags": [
+        "lambda",
+        "sqs",
+        "concurrency"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/services-sqs-scaling.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.2-17",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "An application uses the AWS SDK to invoke a Lambda function that sends a welcome email. The application does not need the result and should not wait for the email to be sent. How should it invoke the function?",
+      "options": [
+        {
+          "text": "With the invocation type set to RequestResponse",
+          "correct": false,
+          "rationale": "This is a synchronous call that waits for the function to finish."
+        },
+        {
+          "text": "With the invocation type set to Event",
+          "correct": true,
+          "rationale": "Lambda queues the event and returns immediately; the function runs asynchronously."
+        },
+        {
+          "text": "With the invocation type set to DryRun",
+          "correct": false,
+          "rationale": "DryRun only checks that the caller is allowed to invoke the function; the function does not run."
+        },
+        {
+          "text": "Through a Lambda function URL",
+          "correct": false,
+          "rationale": "A function URL invokes the function synchronously."
+        }
+      ],
+      "explanation": "InvocationType Event makes an asynchronous invocation; RequestResponse waits for the result.",
+      "difficulty": 1,
+      "tags": [
+        "lambda",
+        "async-invocation"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html",
+        "https://docs.aws.amazon.com/lambda/latest/api/API_Invoke.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.2-18",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "multi",
+      "stem": "A Lambda function is triggered when images are uploaded to an Amazon S3 bucket. It writes a resized copy of each image back to the same bucket, and the number of invocations keeps growing. Which changes will stop this loop? (Select TWO.)",
+      "options": [
+        {
+          "text": "Increase the function's reserved concurrency",
+          "correct": false,
+          "rationale": "More concurrency lets the loop grow faster."
+        },
+        {
+          "text": "Increase the function's timeout",
+          "correct": false,
+          "rationale": "The loop comes from new events, not from slow invocations."
+        },
+        {
+          "text": "Limit the trigger to an uploads/ prefix and write resized images under another prefix",
+          "correct": true,
+          "rationale": "The function's own writes no longer match the event notification's filter."
+        },
+        {
+          "text": "Add a dead-letter queue to the function",
+          "correct": false,
+          "rationale": "The invocations do not fail, so nothing goes to the DLQ."
+        },
+        {
+          "text": "Write the resized images to a different bucket",
+          "correct": true,
+          "rationale": "Writes no longer land where the trigger listens."
+        }
+      ],
+      "explanation": "A function that writes to the location that triggers it creates a recursive loop. Use a separate bucket or non-overlapping prefixes.",
+      "difficulty": 2,
+      "tags": [
+        "lambda",
+        "s3",
+        "recursion"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/with-s3.html",
+        "https://docs.aws.amazon.com/lambda/latest/dg/invocation-recursion.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.2-19",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "A Lambda function reads a DynamoDB stream but must act only on newly inserted items. It currently runs for every insert, update and delete, and returns early for most of them. How can the developer stop the unneeded invocations?",
+      "options": [
+        {
+          "text": "Change the stream's view type from NEW_AND_OLD_IMAGES to KEYS_ONLY",
+          "correct": false,
+          "rationale": "The view type changes what each record contains, not which records invoke the function."
+        },
+        {
+          "text": "An if statement at the start of the handler",
+          "correct": false,
+          "rationale": "The function would still be invoked, and billed, for every record."
+        },
+        {
+          "text": "A filter on the event source mapping that matches INSERT events",
+          "correct": true,
+          "rationale": "Event filtering drops records that do not match before the function is invoked."
+        },
+        {
+          "text": "A batch size of 1 on the event source mapping",
+          "correct": false,
+          "rationale": "Smaller batches mean more invocations, not fewer."
+        }
+      ],
+      "explanation": "Event source mappings can filter records, so the function is invoked only for records that match.",
+      "difficulty": 2,
+      "tags": [
+        "lambda",
+        "dynamodb-streams",
+        "event-filtering"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.2-20",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "A Lambda function is invoked asynchronously to send time-sensitive alerts. When the function is throttled, Lambda keeps retrying events for hours, and stale alerts go out late. Events older than 10 minutes should be discarded. What should the developer configure?",
+      "options": [
+        {
+          "text": "The function's timeout, set to 10 minutes so that old events expire",
+          "correct": false,
+          "rationale": "The timeout limits how long one invocation runs, not how long an event waits in the queue."
+        },
+        {
+          "text": "Reserved concurrency of 0",
+          "correct": false,
+          "rationale": "That throttles every invocation."
+        },
+        {
+          "text": "A visibility timeout of 10 minutes",
+          "correct": false,
+          "rationale": "Visibility timeout is an Amazon SQS setting, not part of asynchronous invocation."
+        },
+        {
+          "text": "The maximum event age in the asynchronous invocation settings",
+          "correct": true,
+          "rationale": "Lambda discards events that wait longer than this age, or sends them to a configured destination."
+        }
+      ],
+      "explanation": "Asynchronous invocation settings include the retry attempts and the maximum age of an event.",
+      "difficulty": 3,
+      "tags": [
+        "lambda",
+        "async-invocation",
+        "retry"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-configuring.html",
+        "https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-error-handling.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.2-21",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "A payment-processing Lambda function is sometimes throttled when other functions in the same account and Region use up the available concurrency. The payment function must always be able to scale to 100 concurrent executions. What should the developer configure?",
+      "options": [
+        {
+          "text": "Reserved concurrency of 100 on the payment function",
+          "correct": true,
+          "rationale": "Reserved concurrency sets aside that much of the account's concurrency for the function, so other functions cannot use it."
+        },
+        {
+          "text": "Provisioned concurrency of 100 on the other functions",
+          "correct": false,
+          "rationale": "This makes the other functions use more of the pool, not less."
+        },
+        {
+          "text": "A longer timeout on the payment function",
+          "correct": false,
+          "rationale": "The timeout limits how long one invocation runs; it does not set aside capacity."
+        },
+        {
+          "text": "A dead-letter queue on the payment function",
+          "correct": false,
+          "rationale": "A DLQ keeps failed asynchronous events; it does not prevent throttling."
+        }
+      ],
+      "explanation": "Reserved concurrency both guarantees and caps a function's share of the account's concurrency.",
+      "difficulty": 2,
+      "tags": [
+        "lambda",
+        "concurrency"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.2-22",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "A team packages a Lambda function as a container image built from its own base image instead of an AWS base image. The image builds and pushes, but invocations fail because Lambda cannot talk to the function. What must the image include?",
+      "options": [
+        {
+          "text": "An EXPOSE instruction for port 8080 in the Dockerfile",
+          "correct": false,
+          "rationale": "Lambda does not reach functions through an exposed port."
+        },
+        {
+          "text": "The Lambda runtime interface client",
+          "correct": true,
+          "rationale": "Images not built on an AWS base image must add the runtime interface client so Lambda can pass events to the code."
+        },
+        {
+          "text": "The AWS CLI, installed in the image's final layer",
+          "correct": false,
+          "rationale": "The CLI is not how Lambda delivers events to the code."
+        },
+        {
+          "text": "A HEALTHCHECK instruction that calls the handler",
+          "correct": false,
+          "rationale": "Lambda does not use Docker health checks to invoke functions."
+        }
+      ],
+      "explanation": "Custom images need the runtime interface client; AWS base images already include it.",
+      "difficulty": 3,
+      "tags": [
+        "lambda",
+        "container-image"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/images-create.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.2-23",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "An API Gateway REST API has the resource /orders/{orderId} with a Lambda proxy integration. Where does the function find the value of orderId in the event?",
+      "options": [
+        {
+          "text": "In event.queryStringParameters.orderId",
+          "correct": false,
+          "rationale": "That map holds query string values, such as ?orderId=1, not path segments."
+        },
+        {
+          "text": "In event.body, parsed as JSON",
+          "correct": false,
+          "rationale": "The body holds the request payload, not the path."
+        },
+        {
+          "text": "In event.pathParameters.orderId",
+          "correct": true,
+          "rationale": "Proxy integrations pass path parameters to the function in the pathParameters map."
+        },
+        {
+          "text": "In the function's environment variables",
+          "correct": false,
+          "rationale": "Environment variables are set per function, not per request."
+        }
+      ],
+      "explanation": "The proxy event includes the path, path parameters, query string parameters, headers and body.",
+      "difficulty": 1,
+      "tags": [
+        "lambda",
+        "api-gateway",
+        "proxy-integration"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.2-24",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "A developer adds a Lambda event source mapping to an existing DynamoDB stream. The function must also process the records that are already in the stream, not only new ones. Which starting position should the developer choose?",
+      "options": [
+        {
+          "text": "LATEST",
+          "correct": false,
+          "rationale": "LATEST starts with records written after the mapping is created, so existing records are skipped."
+        },
+        {
+          "text": "AT_TIMESTAMP set to the current time",
+          "correct": false,
+          "rationale": "AT_TIMESTAMP is not supported for DynamoDB Streams event sources; it applies to sources such as Kinesis."
+        },
+        {
+          "text": "A batch size of 1",
+          "correct": false,
+          "rationale": "Batch size controls how many records each invocation gets, not where reading starts."
+        },
+        {
+          "text": "TRIM_HORIZON",
+          "correct": true,
+          "rationale": "TRIM_HORIZON starts from the oldest record still available in the stream."
+        }
+      ],
+      "explanation": "For stream sources, TRIM_HORIZON reads from the oldest available record and LATEST from new records.",
+      "difficulty": 2,
+      "tags": [
+        "lambda",
+        "dynamodb-streams",
+        "event-source-mapping"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html",
+        "https://docs.aws.amazon.com/lambda/latest/api/API_CreateEventSourceMapping.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.2-25",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "A Lambda function appends each request's items to a list that is declared outside the handler. Users sometimes see items from other users' requests in their responses. What is the cause?",
+      "options": [
+        {
+          "text": "Reused execution environments keep the list between invocations",
+          "correct": true,
+          "rationale": "Code outside the handler runs once per environment, and its variables persist across the invocations it serves."
+        },
+        {
+          "text": "Lambda runs several requests in the same invocation at once",
+          "correct": false,
+          "rationale": "Each invocation handles one event; the leak comes from reused global state."
+        },
+        {
+          "text": "The function's memory setting is too low for the list",
+          "correct": false,
+          "rationale": "Low memory causes errors, not data from other requests."
+        },
+        {
+          "text": "The list is written to the shared /tmp folder of the Region",
+          "correct": false,
+          "rationale": "Variables live in memory, and /tmp belongs to one execution environment."
+        }
+      ],
+      "explanation": "Initialize per-request data inside the handler. Reuse globals only for things such as SDK clients and connections.",
+      "difficulty": 3,
+      "tags": [
+        "lambda",
+        "execution-environment"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtime-environment.html",
+        "https://docs.aws.amazon.com/lambda/latest/dg/best-practices.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.2-26",
+      "domain": "d1",
+      "objective": "1.2",
+      "type": "single",
+      "stem": "Other services in the company's AWS accounts need to call a single Lambda function over HTTPS. The team wants the simplest setup, and callers will sign requests with their IAM credentials. What should the developer configure?",
+      "options": [
+        {
+          "text": "A function URL with the NONE auth type",
+          "correct": false,
+          "rationale": "NONE lets anyone with the URL call the function without signing."
+        },
+        {
+          "text": "A function URL with the AWS_IAM auth type",
+          "correct": true,
+          "rationale": "A function URL gives the function its own HTTPS endpoint, and AWS_IAM requires SigV4-signed requests."
+        },
+        {
+          "text": "An Application Load Balancer with the function as a target",
+          "correct": false,
+          "rationale": "An ALB authenticates users through OIDC or Amazon Cognito, not IAM-signed requests, and it adds a load balancer the simplest setup does not need."
+        },
+        {
+          "text": "An Amazon SQS queue that the function polls for requests",
+          "correct": false,
+          "rationale": "A queue is asynchronous, not an HTTPS request and response."
+        }
+      ],
+      "explanation": "Function URLs are a simple HTTPS endpoint for one function. AWS_IAM auth requires signed requests, and callers in other accounts also need permission in the function's resource-based policy.",
+      "difficulty": 2,
+      "tags": [
+        "lambda",
+        "function-url",
+        "iam"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
     }
   ]
 }

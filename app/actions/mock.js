@@ -6,7 +6,7 @@ import { requireUser } from "@/lib/auth/index.js";
 import { withUser } from "@/lib/db/index.js";
 import { getExam } from "@/lib/db/exams.js";
 import { getPool } from "@/lib/db/questions.js";
-import { clearResponse, createSession, questionHistory, recordResponse } from "@/lib/db/sessions.js";
+import { clearResponse, createSession, questionHistory, recordResponse, setReviewFlag } from "@/lib/db/sessions.js";
 import { stratifiedSample } from "@/lib/domain/sampling.js";
 
 export async function startMockAction() {
@@ -59,6 +59,20 @@ export async function saveMockAnswerAction(input) {
       else await recordResponse(db, user.id, a.sessionId, a.questionId, a.selected, a.timeMs ?? null);
     });
     return { ok: true };
+  } catch (e) {
+    return { ok: false, error: e.message };
+  }
+}
+
+const flagSchema = z.object({ sessionId: z.uuid(), questionId: z.uuid(), on: z.boolean() });
+
+/** Flags or unflags a question for review during a mock exam, so the flag survives a refresh. */
+export async function setMockFlagAction(input) {
+  const user = await requireUser();
+  const a = flagSchema.parse(input);
+  try {
+    const flags = await withUser(user.id, (db) => setReviewFlag(db, a.sessionId, a.questionId, a.on));
+    return { ok: true, flags };
   } catch (e) {
     return { ok: false, error: e.message };
   }

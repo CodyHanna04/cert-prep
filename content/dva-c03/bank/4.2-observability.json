@@ -455,6 +455,407 @@
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-08",
       "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-4.2-11",
+      "domain": "d4",
+      "objective": "4.2",
+      "type": "multi",
+      "stem": "A team wants its Lambda functions' logs in JSON, and wants only WARN and higher messages from the application code to reach CloudWatch Logs. The team does not want to change the function code. Which combination of settings will meet these requirements? (Select TWO.)",
+      "options": [
+        {
+          "text": "Set each function's log format to JSON",
+          "correct": true,
+          "rationale": "Lambda's advanced logging controls can emit logs in JSON without code changes."
+        },
+        {
+          "text": "Turn on active tracing with AWS X-Ray",
+          "correct": false,
+          "rationale": "Tracing records requests, not log format or log level."
+        },
+        {
+          "text": "Use the embedded metric format for every log line",
+          "correct": false,
+          "rationale": "EMF creates metrics from logs; it does not filter by log level."
+        },
+        {
+          "text": "Set each function's application log level to WARN",
+          "correct": true,
+          "rationale": "Lambda then filters out application logs below WARN before sending them to CloudWatch Logs."
+        },
+        {
+          "text": "Set the log group's retention period to one day",
+          "correct": false,
+          "rationale": "Retention deletes old logs; it does not filter by level."
+        }
+      ],
+      "explanation": "Lambda advanced logging controls set log format and log-level filtering per function.",
+      "difficulty": 3,
+      "tags": [
+        "lambda",
+        "logging",
+        "cloudwatch-logs"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/monitoring-cloudwatchlogs-logformat.html",
+        "https://docs.aws.amazon.com/lambda/latest/dg/monitoring-cloudwatchlogs-log-level.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-4.2-12",
+      "domain": "d4",
+      "objective": "4.2",
+      "type": "single",
+      "stem": "An order passes through an API, an Amazon SQS queue and three Lambda functions. When something goes wrong, developers struggle to find all the log lines for one order across the services. What should the developer do?",
+      "options": [
+        {
+          "text": "Write every service's logs to one shared log group",
+          "correct": false,
+          "rationale": "Mixing logs in one group does not link the lines for a given order."
+        },
+        {
+          "text": "Raise the log level to DEBUG in every one of the services so that more detail is logged",
+          "correct": false,
+          "rationale": "More log lines make the search harder, not easier."
+        },
+        {
+          "text": "Log a correlation ID in every entry and pass it with each message",
+          "correct": true,
+          "rationale": "One ID shared across services lets a single query find every log line for the order."
+        },
+        {
+          "text": "Keep the logs for a longer retention period",
+          "correct": false,
+          "rationale": "Retention keeps logs longer; it does not connect them."
+        }
+      ],
+      "explanation": "Propagate a correlation (or trace) ID through every hop and include it in structured logs.",
+      "difficulty": 2,
+      "tags": [
+        "logging",
+        "correlation-id",
+        "structured-logging"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/monitoring-cloudwatchlogs-logformat.html",
+        "https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-4.2-13",
+      "domain": "d4",
+      "objective": "4.2",
+      "type": "single",
+      "stem": "An application on EC2 instances writes lines containing \"PAYMENT_FAILED\" to a CloudWatch Logs log group. The team wants an alarm when more than five such lines appear in five minutes. The application code must not change. What should the developer create first?",
+      "options": [
+        {
+          "text": "A subscription filter that streams the logs to Amazon Data Firehose",
+          "correct": false,
+          "rationale": "Streaming the logs elsewhere does not create a metric to alarm on."
+        },
+        {
+          "text": "An X-Ray annotation named PAYMENT_FAILED on each failed request",
+          "correct": false,
+          "rationale": "That requires code changes and is for traces, not log-based alarms."
+        },
+        {
+          "text": "A Logs Insights query that runs every five minutes from a script",
+          "correct": false,
+          "rationale": "This needs custom scheduling code when a metric filter does the job."
+        },
+        {
+          "text": "A metric filter on the log group that counts PAYMENT_FAILED lines",
+          "correct": true,
+          "rationale": "The metric filter turns matching log lines into a metric, and the alarm watches that metric."
+        }
+      ],
+      "explanation": "CloudWatch Logs metric filters create metrics from log patterns without code changes.",
+      "difficulty": 2,
+      "tags": [
+        "cloudwatch-logs",
+        "metric-filters",
+        "alarms"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/MonitoringLogData.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-4.2-14",
+      "domain": "d4",
+      "objective": "4.2",
+      "type": "single",
+      "stem": "A container on Amazon EKS sometimes deadlocks: the process keeps running but stops answering requests, and it stays that way until someone restarts it. How can the developer have Kubernetes restart it automatically?",
+      "options": [
+        {
+          "text": "Add a liveness probe on a health endpoint",
+          "correct": true,
+          "rationale": "When the liveness probe keeps failing, Kubernetes restarts the container."
+        },
+        {
+          "text": "Add a readiness probe that calls the same endpoint",
+          "correct": false,
+          "rationale": "A failing readiness probe removes the pod from service but does not restart it."
+        },
+        {
+          "text": "Raise the container's memory limit in the pod spec",
+          "correct": false,
+          "rationale": "A deadlock is not a memory problem."
+        },
+        {
+          "text": "Increase the number of replicas in the Deployment",
+          "correct": false,
+          "rationale": "More replicas spread the load, but the stuck container stays stuck."
+        }
+      ],
+      "explanation": "Liveness probes restart unhealthy containers; readiness probes control whether a pod receives traffic.",
+      "difficulty": 2,
+      "tags": [
+        "eks",
+        "kubernetes",
+        "liveness-probe"
+      ],
+      "refs": [
+        "https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-4.2-15",
+      "domain": "d4",
+      "objective": "4.2",
+      "type": "single",
+      "stem": "An application handles millions of requests a day with AWS X-Ray tracing turned on. Tracing every request costs too much, but the team still wants a representative picture of performance. What should the developer configure?",
+      "options": [
+        {
+          "text": "Turn off tracing and rely on CloudWatch Logs alone",
+          "correct": false,
+          "rationale": "This loses the request-level view that traces give."
+        },
+        {
+          "text": "X-Ray sampling rules that trace a share of requests",
+          "correct": true,
+          "rationale": "Sampling rules control how many requests are recorded, keeping costs down while traces stay representative."
+        },
+        {
+          "text": "Record every request with annotations removed to save space",
+          "correct": false,
+          "rationale": "Annotations are small; the cost comes from the number of traces."
+        },
+        {
+          "text": "Put all traces into a single X-Ray group to reduce stored data",
+          "correct": false,
+          "rationale": "Groups filter traces for viewing; they do not change how many requests are recorded."
+        }
+      ],
+      "explanation": "X-Ray sampling rules set how many requests are traced, by fixed rate and reservoir.",
+      "difficulty": 2,
+      "tags": [
+        "xray",
+        "sampling"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/xray/latest/devguide/xray-console-sampling.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-4.2-16",
+      "domain": "d4",
+      "objective": "4.2",
+      "type": "single",
+      "stem": "A developer wants to attach a large JSON object with debugging details to X-Ray segments. The data does not need to be searchable in trace filters. How should the code record it?",
+      "options": [
+        {
+          "text": "As an annotation on the segment",
+          "correct": false,
+          "rationale": "Annotations are indexed key-value pairs for filtering, meant for simple values."
+        },
+        {
+          "text": "As the segment's name",
+          "correct": false,
+          "rationale": "The segment name identifies the service, not debugging data."
+        },
+        {
+          "text": "As metadata on the segment",
+          "correct": true,
+          "rationale": "Metadata holds any data you want stored with the trace; it is not indexed for searching."
+        },
+        {
+          "text": "As a CloudWatch metric dimension",
+          "correct": false,
+          "rationale": "Dimensions are for metrics and do not attach data to traces."
+        }
+      ],
+      "explanation": "Use annotations for indexed values to filter on, and metadata for other data you want kept with the trace.",
+      "difficulty": 2,
+      "tags": [
+        "xray",
+        "metadata",
+        "annotations"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-4.2-17",
+      "domain": "d4",
+      "objective": "4.2",
+      "type": "single",
+      "stem": "A team wants to be notified when its usage of an AWS service gets close to an account quota, before requests start failing. What should the developer configure?",
+      "options": [
+        {
+          "text": "An AWS CloudTrail trail that logs every call to the service",
+          "correct": false,
+          "rationale": "CloudTrail records API calls; it does not compare usage with quotas."
+        },
+        {
+          "text": "An EventBridge rule that matches every service API call",
+          "correct": false,
+          "rationale": "This produces a flood of events and no quota comparison."
+        },
+        {
+          "text": "A Lambda function that requests a quota increase every day",
+          "correct": false,
+          "rationale": "Automatic increase requests are not monitoring and may be denied."
+        },
+        {
+          "text": "A CloudWatch alarm on usage compared with the quota",
+          "correct": true,
+          "rationale": "Usage metrics can be compared with the applied quota, so the alarm fires before the limit is reached."
+        }
+      ],
+      "explanation": "Service Quotas and CloudWatch usage metrics support alarms that warn before a quota is reached.",
+      "difficulty": 2,
+      "tags": [
+        "cloudwatch",
+        "service-quotas",
+        "alarms"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/servicequotas/latest/userguide/configure-cloudwatch.html",
+        "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Service-Quota-Integration.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-4.2-18",
+      "domain": "d4",
+      "objective": "4.2",
+      "type": "single",
+      "stem": "A team wants to check its public API's checkout flow from outside AWS every five minutes, as a user would, and be alerted if the flow breaks even when no real users are active. What should the developer set up?",
+      "options": [
+        {
+          "text": "A CloudWatch Synthetics canary that runs the flow on a schedule",
+          "correct": true,
+          "rationale": "Canaries are scripts that run on a schedule against endpoints and report failures."
+        },
+        {
+          "text": "An Application Load Balancer health check on the checkout path",
+          "correct": false,
+          "rationale": "ALB health checks test targets from inside the VPC, not the full user flow."
+        },
+        {
+          "text": "A CloudWatch alarm on the API's 5XXError metric",
+          "correct": false,
+          "rationale": "With no real traffic, there are no errors to alarm on."
+        },
+        {
+          "text": "X-Ray tracing on the API and its backend services",
+          "correct": false,
+          "rationale": "Tracing records real requests; it does not create test traffic."
+        }
+      ],
+      "explanation": "Synthetic monitoring finds breakages before users do, even with no traffic.",
+      "difficulty": 2,
+      "tags": [
+        "cloudwatch-synthetics",
+        "health-checks"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-4.2-19",
+      "domain": "d4",
+      "objective": "4.2",
+      "type": "single",
+      "stem": "A service has separate CloudWatch alarms for high latency and for a high error rate. On-call developers receive too many notifications when only one of them briefly fires. They want to be paged only when both are in ALARM at the same time. What should the developer create?",
+      "options": [
+        {
+          "text": "A metric math expression that adds latency and the error rate together",
+          "correct": false,
+          "rationale": "A sum of unrelated metrics has no meaningful threshold."
+        },
+        {
+          "text": "A composite alarm that combines the two alarms with AND",
+          "correct": true,
+          "rationale": "Composite alarms evaluate a rule over other alarms, so they notify only when both are in ALARM."
+        },
+        {
+          "text": "A shorter evaluation period on both of the existing alarms",
+          "correct": false,
+          "rationale": "Shorter periods make the alarms fire more often, not less."
+        },
+        {
+          "text": "A second SNS topic for each of the existing alarms",
+          "correct": false,
+          "rationale": "More topics do not combine the alarm conditions."
+        }
+      ],
+      "explanation": "Composite alarms reduce alarm noise by combining the states of other alarms.",
+      "difficulty": 3,
+      "tags": [
+        "cloudwatch",
+        "composite-alarms"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Composite_Alarm.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
     }
   ]
 }

@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState, useTransition } from "react";
 import { Checkbox, CheckboxGroup, Radio, RadioGroup } from "react-aria-components";
-import { saveMockAnswerAction } from "@/app/actions/mock.js";
+import { saveMockAnswerAction, setMockFlagAction } from "@/app/actions/mock.js";
 import { finishSessionAction } from "@/app/actions/practice.js";
 import { Button } from "@/components/ui/index.js";
 import { Markdown } from "@/components/ui/Markdown.js";
@@ -12,13 +12,13 @@ const fmt = (s) => {
   return `${String(m).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
 };
 
-export function MockRunner({ sessionId, questions, saved, savedTime = {}, endsAt }) {
+export function MockRunner({ sessionId, questions, saved, savedTime = {}, savedFlags = [], endsAt }) {
   const [index, setIndex] = useState(0);
   // Visible time per question, accumulated across visits (shown as time stats on the results page).
   const spent = useRef(savedTime);
   const timer = useVisibleTime(savedTime[questions[0]?.id] ?? 0);
   const [answers, setAnswers] = useState(saved);
-  const [flags, setFlags] = useState(() => new Set());
+  const [flags, setFlags] = useState(() => new Set(savedFlags));
   const [reviewing, setReviewing] = useState(false);
   const [error, setError] = useState(null);
   const [left, setLeft] = useState(() => Math.max(0, Math.round((endsAt - Date.now()) / 1000)));
@@ -58,13 +58,19 @@ export function MockRunner({ sessionId, questions, saved, savedTime = {}, endsAt
     if (!res.ok) setError(res.error?.includes("Time is up") ? "Time is up." : "Could not save that answer. Check your connection.");
   }
 
-  const toggleFlag = () =>
+  async function toggleFlag() {
+    const on = !flags.has(q.id);
+    const id = q.id;
     setFlags((f) => {
       const n = new Set(f);
-      if (n.has(q.id)) n.delete(q.id);
-      else n.add(q.id);
+      if (on) n.add(id);
+      else n.delete(id);
       return n;
     });
+    const res = await setMockFlagAction({ sessionId, questionId: id, on });
+    if (res.ok) setFlags(new Set(res.flags));
+    else setError(res.error?.includes("not open") ? "This exam is no longer open." : "Could not save that flag. Check your connection.");
+  }
 
   const isLast = index === questions.length - 1;
   const pick = (i) => {
@@ -87,7 +93,7 @@ export function MockRunner({ sessionId, questions, saved, savedTime = {}, endsAt
 
   const header = (
     <div className="mb-4 flex flex-wrap items-center gap-3 text-sm">
-      <span className={`rounded-theme px-3 py-1 font-display text-lg tabular-nums ${urgent ? "bg-bad-soft text-bad" : "bg-idle-soft"}`} role="timer" aria-label="Time remaining">{fmt(left)}</span>
+      <span className={`rounded-theme px-3 py-1 font-display text-lg tabular-nums ${urgent ? "bg-bad-soft text-bad" : "bg-idle-soft"}`} role="timer" aria-label="Time remaining" suppressHydrationWarning>{fmt(left)}</span>
       <span className="text-muted">{answeredCount} of {questions.length} answered</span>
       <span className="flex-1" />
       <Button variant="secondary" onPress={() => setReviewing((r) => !r)}>{reviewing ? "Back to questions" : "Review and submit"}</Button>

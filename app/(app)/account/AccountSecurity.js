@@ -91,14 +91,17 @@ export function AccountSecurity({ welcome }) {
                   {s.userAgent ? s.userAgent.slice(0, 70) : "Unknown device"}
                   <span className="block text-xs text-muted">Last active {new Date(s.updatedAt).toLocaleString()}</span>
                 </span>
-                {s.token === current ? <Badge tone="ok">This device</Badge> : <Button variant="ghost" onPress={() => run(() => authClient.revokeSession({ token: s.token }))} isDisabled={busy}>Sign out</Button>}
+                {s.token === current ? (
+                  <>
+                    <Badge tone="ok">This device</Badge>
+                    <Button variant="secondary" onPress={signOut}>Sign out</Button>
+                  </>
+                ) : <Button variant="ghost" onPress={() => run(() => authClient.revokeSession({ token: s.token }))} isDisabled={busy}>Sign out</Button>}
               </li>
             ))}
           </ul>
         )}
       </Card>
-
-      <div><Button variant="secondary" onPress={signOut}>Sign out</Button></div>
     </>
   );
 }

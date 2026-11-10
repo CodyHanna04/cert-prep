@@ -144,3 +144,67 @@ export async function updateQuestionAction(input) {
     return { error: err.message };
   }
 }
+
+const createSchema = z.object({
+  objectiveId: z.uuid(),
+  type: z.enum(["single", "multi", "tf"]),
+  stem: z.string().trim().min(1),
+  explanation: z.string().max(10_000).optional(),
+  difficulty: z.coerce.number().int().min(1).max(5).optional(),
+  tags: z.string().max(500).optional(),
+  refs: z.array(z.string().max(2000)).max(20).optional(),
+  status: z.enum(["approved", "draft"]),
+  options: z
+    .array(z.object({ text: z.string().max(2000), correct: z.boolean(), rationale: z.string().max(2000).optional() }))
+    .max(8),
+});
+
+/** Writes a new question of your own into the active course, through the same checks as an import. */
+export async function createQuestionAction(input) {
+  const { user, exam: active } = await getAppContext();
+  if (!active) return { error: "Choose a course first." };
+  const parsed = createSchema.safeParse(input);
+  if (!parsed.success) return { error: "Those values were not valid." };
+  const e = parsed.data;
+
+  try {
+    const id = await withUser(user.id, async (db) => {
+      const exam = await getExam(db, active.id);
+      const domain = exam.domains.find((d) => d.objectives.some((o) => o.id === e.objectiveId));
+      if (!domain) throw new Error("Pick an objective from this course.");
+      const objective = domain.objectives.find((o) => o.id === e.objectiveId);
+      const candidate = {
+        domain: domain.key,
+        objective: objective.code,
+        type: e.type,
+        stem: e.stem,
+        options: e.options.map((o) => ({ text: o.text, correct: o.correct, rationale: o.rationale || undefined })),
+        explanation: e.explanation || undefined,
+        difficulty: e.difficulty,
+        tags: (e.tags ?? "").split(",").map((t) => t.trim().toLowerCase()).filter(Boolean),
+        refs: e.refs?.length ? e.refs : undefined,
+        source: "own",
+        reviewStatus: e.status,
+      };
+      const result = validateImport(
+        { formatVersion: 1, questions: [candidate] },
+        { ...exam, existing: await existingForImport(db, exam.id) },
+      );
+      if (result.fatal) throw new Error(result.fatal.join("; "));
+      const q = result.questions[0];
+      if (!q.ok) throw new Error(q.errors.join(" "));
+      if (q.duplicate) throw new Error("This course already has a question with the same text and answers.");
+      await commitImport(db, user.id, exam, [q.normalized]);
+      const { rows } = await db.query(
+        "SELECT id FROM question WHERE exam_id = $1 AND content_hash = $2 ORDER BY created_at DESC LIMIT 1",
+        [exam.id, q.normalized.contentHash],
+      );
+      return rows[0].id;
+    });
+    revalidatePath("/", "layout");
+    return { id };
+  } catch (err) {
+    if (err.code === "23505") return { error: "This course already has a question with the same text and answers." };
+    return { error: err.message };
+  }
+}

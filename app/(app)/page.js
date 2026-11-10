@@ -6,6 +6,7 @@ import { activityByDay, listSessions } from "@/lib/db/sessions.js";
 import { appTimeZone, daysUntil, fmtDateTime, resumeHref } from "@/lib/app/view.js";
 import { openCourseAction } from "@/app/actions/exam.js";
 import { DomainRing } from "@/components/DomainRing.js";
+import { BarStrip } from "@/components/Trend.js";
 import {
   Badge,
   Button,
@@ -74,11 +75,21 @@ export default async function DashboardPage() {
     const d = new Date();
     d.setDate(d.getDate() - (DAYS - 1 - i));
     const key = d.toLocaleDateString("en-CA", { timeZone: tz });
-    return { key, n: perDay.get(key) ?? 0 };
+    const n = perDay.get(key) ?? 0;
+    const day = new Date(`${key}T00:00:00`);
+    const long = day.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
+    return {
+      key,
+      value: n,
+      // A weekday letter under every bar (today in bold); the full date is in the tooltip.
+      label: day.toLocaleDateString(undefined, { weekday: "narrow" }),
+      date: day.toLocaleDateString(undefined, { month: "short", day: "numeric" }),
+      strong: i === DAYS - 1,
+      tip: `${i === DAYS - 1 ? "Today" : long}: ${n} answer${n === 1 ? "" : "s"}`,
+    };
   });
-  const maxBar = Math.max(1, ...bars.map((b) => b.n));
-  const answered = bars.reduce((s, b) => s + b.n, 0);
-  const activeDays = bars.filter((b) => b.n > 0).length;
+  const answered = bars.reduce((s, b) => s + b.value, 0);
+  const activeDays = bars.filter((b) => b.value > 0).length;
 
   return (
     <>
@@ -218,19 +229,10 @@ export default async function DashboardPage() {
               <span className="text-muted">active day{activeDays === 1 ? "" : "s"}</span>
             </p>
           </div>
-          <div
-            className="flex h-28 items-end gap-1.5"
-            role="img"
-            aria-label={`Questions answered per day: ${bars.map((b) => b.n).join(", ")}`}
-          >
-            {bars.map((b) => (
-              <div
-                key={b.key}
-                title={`${b.key}: ${b.n}`}
-                className="flex-1 rounded-t-sm bg-accent"
-                style={{ height: `${Math.max(4, (b.n / maxBar) * 100)}%`, opacity: b.n ? 1 : 0.18 }}
-              />
-            ))}
+          <BarStrip label={`Questions answered per day, last ${DAYS} days`} bars={bars} />
+          <div aria-hidden className="mt-0.5 flex justify-between text-[0.65rem] text-muted">
+            <span>{bars[0].date}</span>
+            <span className="font-semibold text-text">Today</span>
           </div>
         </Card>
 

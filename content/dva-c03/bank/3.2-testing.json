@@ -447,6 +447,406 @@
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-08",
       "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-3.2-11",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "single",
+      "stem": "Several developers test the same Lambda function from the Lambda console. They want to save test events once and let teammates use the same events. What should they use?",
+      "options": [
+        {
+          "text": "Shareable test events for the function",
+          "correct": true,
+          "rationale": "Shareable test events are saved so that other users in the account with permission can use them."
+        },
+        {
+          "text": "Private test events, copied to each teammate's account by hand",
+          "correct": false,
+          "rationale": "Private events are visible only to the user who created them."
+        },
+        {
+          "text": "Environment variables that contain the test payloads",
+          "correct": false,
+          "rationale": "Environment variables configure the function; they are not test events."
+        },
+        {
+          "text": "A Lambda layer that stores the JSON test files",
+          "correct": false,
+          "rationale": "Layers add files to the runtime; the console does not read test events from them."
+        }
+      ],
+      "explanation": "The Lambda console supports private and shareable test events.",
+      "difficulty": 1,
+      "tags": [
+        "lambda",
+        "testing",
+        "test-events"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/testing-functions.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-3.2-12",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "single",
+      "stem": "A developer iterates on a Lambda function in an AWS SAM application and tests each change against real AWS services. A full sam deploy takes several minutes each time. How can the developer push code changes to the development stack faster?",
+      "options": [
+        {
+          "text": "Run sam validate --lint before each deployment",
+          "correct": false,
+          "rationale": "Validation checks the template; it does not speed up deployments."
+        },
+        {
+          "text": "Run sam sync --watch against the development stack",
+          "correct": true,
+          "rationale": "sam sync updates code directly through service APIs when possible and watches for changes, instead of a full deployment."
+        },
+        {
+          "text": "Run sam local start-api to test every change locally",
+          "correct": false,
+          "rationale": "That runs the code locally, not against the deployed stack and real services."
+        },
+        {
+          "text": "Run sam package with a larger S3 bucket",
+          "correct": false,
+          "rationale": "Bucket size does not affect deployment speed."
+        }
+      ],
+      "explanation": "sam sync (AWS SAM Accelerate) shortens the feedback loop for testing in the cloud. It is meant for development stacks, not production.",
+      "difficulty": 3,
+      "tags": [
+        "sam",
+        "sam-sync",
+        "testing"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-sync.html",
+        "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/using-sam-cli-sync.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-3.2-13",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "single",
+      "stem": "A developer runs sam local invoke for a function that reads a TABLE_NAME environment variable. Locally the variable is empty, so the test fails. How should the developer provide a value for the local test?",
+      "options": [
+        {
+          "text": "Hardcode the table name in the function for local runs",
+          "correct": false,
+          "rationale": "This changes the code under test and can leak into a deployment."
+        },
+        {
+          "text": "Set the variable in the Lambda console for the deployed function",
+          "correct": false,
+          "rationale": "Console settings apply to the deployed function, not to a local invocation."
+        },
+        {
+          "text": "Pass a JSON file of environment variable values with --env-vars",
+          "correct": true,
+          "rationale": "The file overrides environment variables for the local invocation."
+        },
+        {
+          "text": "Add the value to the event payload passed with --event",
+          "correct": false,
+          "rationale": "The event is the function's input, not its environment."
+        }
+      ],
+      "explanation": "sam local invoke and start-api accept --env-vars to set environment variables locally.",
+      "difficulty": 2,
+      "tags": [
+        "sam",
+        "local-testing",
+        "environment-variables"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-local-invoke.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-3.2-14",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "single",
+      "stem": "A team defines its infrastructure with the AWS CDK. It wants a test that fails whenever the synthesized CloudFormation template changes in any way, so that every change is reviewed on purpose. Which kind of test should the team write?",
+      "options": [
+        {
+          "text": "A fine-grained assertion that checks one property of one resource",
+          "correct": false,
+          "rationale": "Fine-grained assertions check specific properties and miss changes elsewhere."
+        },
+        {
+          "text": "A unit test of the application's Lambda function code",
+          "correct": false,
+          "rationale": "This tests the function, not the infrastructure template."
+        },
+        {
+          "text": "An integration test that deploys the stack to production and checks it",
+          "correct": false,
+          "rationale": "Deploying to production is not a way to review template changes first."
+        },
+        {
+          "text": "A snapshot test that compares the synthesized template with a stored copy",
+          "correct": true,
+          "rationale": "Snapshot tests flag any difference from the last approved template."
+        }
+      ],
+      "explanation": "CDK snapshot tests catch any template change; fine-grained assertions check specific properties.",
+      "difficulty": 3,
+      "tags": [
+        "cdk",
+        "snapshot-testing"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/cdk/v2/guide/testing.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-3.2-15",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "single",
+      "stem": "A container image passes tests in the test environment. The team wants production to run exactly the same image, not a rebuild that could pick up different packages. How should the image be promoted?",
+      "options": [
+        {
+          "text": "Retag the tested image in Amazon ECR for production",
+          "correct": true,
+          "rationale": "Retagging points the new tag at the same image digest, so nothing is rebuilt."
+        },
+        {
+          "text": "Rebuild the image from the same Dockerfile in the production pipeline",
+          "correct": false,
+          "rationale": "A rebuild can produce a different image."
+        },
+        {
+          "text": "Use the latest tag in every environment's task definition",
+          "correct": false,
+          "rationale": "latest moves with every push, so production might run an image that was never tested."
+        },
+        {
+          "text": "Export the running test container to a file and import it in production",
+          "correct": false,
+          "rationale": "This is a manual process that bypasses the registry and its scanning."
+        }
+      ],
+      "explanation": "Promote by image digest or by retagging the tested image, not by rebuilding.",
+      "difficulty": 3,
+      "tags": [
+        "ecr",
+        "image-tags",
+        "environments"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-retag.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-3.2-16",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "single",
+      "stem": "A team wants to test a new deployment of a REST API in Amazon API Gateway with 10 percent of real production traffic before all clients use it. What should the developer configure?",
+      "options": [
+        {
+          "text": "A new stage named prod2, and ask 10 percent of clients to switch to it",
+          "correct": false,
+          "rationale": "This needs client changes and does not split traffic automatically."
+        },
+        {
+          "text": "A canary release on the prod stage with 10 percent of traffic",
+          "correct": true,
+          "rationale": "Canary settings split traffic on a stage between the current and the new deployment."
+        },
+        {
+          "text": "A usage plan that throttles the prod stage to 10 percent of its requests",
+          "correct": false,
+          "rationale": "Throttling limits requests; it does not route them to a new deployment."
+        },
+        {
+          "text": "Stage variables that pick a backend at random for each request",
+          "correct": false,
+          "rationale": "Stage variables hold fixed values per stage; they do not split traffic."
+        }
+      ],
+      "explanation": "API Gateway canary releases test a new deployment with a share of a stage's traffic.",
+      "difficulty": 3,
+      "tags": [
+        "api-gateway",
+        "canary-release"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/canary-release.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-3.2-17",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "single",
+      "stem": "Clients invoke a Lambda function through its live alias. The team wants version 8 to receive 5 percent of live traffic while version 7 keeps the rest, before switching over. What should the developer configure?",
+      "options": [
+        {
+          "text": "Reserved concurrency on version 8 equal to 5 percent of the total",
+          "correct": false,
+          "rationale": "Concurrency limits do not route traffic between versions."
+        },
+        {
+          "text": "A second alias for version 8 that clients pick at random",
+          "correct": false,
+          "rationale": "Clients would have to change their code to split traffic."
+        },
+        {
+          "text": "Weighted routing on live: version 7, plus 5 percent to version 8",
+          "correct": true,
+          "rationale": "Alias routing configuration splits invocations between two versions by weight."
+        },
+        {
+          "text": "Point live at $LATEST and deploy version 8 code to it",
+          "correct": false,
+          "rationale": "This sends all traffic to the new code at once."
+        }
+      ],
+      "explanation": "Weighted aliases shift a percentage of traffic to a new function version.",
+      "difficulty": 2,
+      "tags": [
+        "lambda",
+        "alias",
+        "traffic-shifting"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/configuring-alias-routing.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-3.2-18",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "multi",
+      "stem": "An AWS CodePipeline pipeline deploys an API to a test stack. The team wants automated integration tests to run against that stack's endpoint before the production stage. Which combination of steps will meet this requirement? (Select TWO.)",
+      "options": [
+        {
+          "text": "Run the integration tests in the build action, before the test stack is deployed",
+          "correct": false,
+          "rationale": "The endpoint does not exist yet when the build runs."
+        },
+        {
+          "text": "Hardcode the production endpoint in the integration test code",
+          "correct": false,
+          "rationale": "The tests must target the test stack, and hardcoding breaks when it changes."
+        },
+        {
+          "text": "Pass the test stack's endpoint URL to the test action as a variable",
+          "correct": true,
+          "rationale": "The deploy action's outputs, such as the endpoint, can be passed to later actions."
+        },
+        {
+          "text": "Run the integration tests manually after each production deployment",
+          "correct": false,
+          "rationale": "Tests after production do not stop a bad release."
+        },
+        {
+          "text": "Add a CodeBuild test action after the test deployment action",
+          "correct": true,
+          "rationale": "A CodeBuild action can run the integration test suite as its own pipeline step."
+        }
+      ],
+      "explanation": "Integration tests run as a pipeline action after deploying to a test environment, using that environment's outputs.",
+      "difficulty": 3,
+      "tags": [
+        "codepipeline",
+        "codebuild",
+        "integration-testing"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CodeBuild.html",
+        "https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-variables.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-3.2-19",
+      "domain": "d3",
+      "objective": "3.2",
+      "type": "single",
+      "stem": "A developer wants to check that one Task state in an AWS Step Functions state machine passes the right input to its Lambda function and handles the output correctly, without running the whole workflow. What should the developer use?",
+      "options": [
+        {
+          "text": "A new execution of the whole state machine with full logging turned on",
+          "correct": false,
+          "rationale": "This runs the entire workflow, which the developer wants to avoid."
+        },
+        {
+          "text": "The Lambda console's Test tab with the state's expected input",
+          "correct": false,
+          "rationale": "This tests the function alone, not the state's input and output handling."
+        },
+        {
+          "text": "An Amazon EventBridge rule that starts the state machine on a schedule",
+          "correct": false,
+          "rationale": "A schedule runs full executions and does not isolate one state."
+        },
+        {
+          "text": "The TestState API, to run that one state with a test input",
+          "correct": true,
+          "rationale": "TestState tests a single state in isolation and shows its input and output processing."
+        }
+      ],
+      "explanation": "The Step Functions TestState API tests individual states, including their input and output processing.",
+      "difficulty": 3,
+      "tags": [
+        "step-functions",
+        "testing"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/step-functions/latest/dg/test-state-isolation.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
     }
   ]
 }

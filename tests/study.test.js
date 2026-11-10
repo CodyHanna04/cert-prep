@@ -3,7 +3,18 @@ import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { setupTestDb } from "./helpers/db.js";
 import { enrollInPack, getExam } from "../lib/db/exams.js";
 import { commitImport, existingForImport, listQuestions, reviewList, toggleMark } from "../lib/db/questions.js";
-import { createSession, finishSession, getResponses, questionAttempts, recordResponse } from "../lib/db/sessions.js";
+import {
+  answersSinceWeek,
+  createSession,
+  finishSession,
+  getOpenSession,
+  getResponses,
+  getSession,
+  questionAttempts,
+  recordResponse,
+  reviewFlags,
+  setReviewFlag,
+} from "../lib/db/sessions.js";
 import { getPrefs, setPrefs } from "../lib/db/prefs.js";
 import { syncPackBank } from "../lib/db/bank.js";
 import { validateImport } from "../lib/content/validate-questions.js";
@@ -122,5 +133,48 @@ describe("library filters", () => {
     expect(await ext({ origin: "mine" })).toEqual(["own-1", "own-2", "own-3", "own-4"]);
     expect(await ext({ flagged: true })).toEqual(["own-3"]);
     expect(await ext({ type: "multi" })).toEqual([]);
+  });
+});
+
+describe("mock exam review flags", () => {
+  it("are saved on the session, survive a reload and stop changing once it is submitted", async () => {
+    const open = await t.withUser(user, (db) => getOpenSession(db, examId));
+    if (open) await t.withUser(user, (db) => finishSession(db, open.id));
+    const ids = qs.slice(0, 3).map((q) => q.id);
+    const s = await t.withUser(user, (db) =>
+      createSession(db, user, { examId, mode: "mock", questionIds: ids, timeLimitSec: 600 }),
+    );
+
+    await t.withUser(user, (db) => setReviewFlag(db, s.id, ids[0], true));
+    await t.withUser(user, (db) => setReviewFlag(db, s.id, ids[2], true));
+    expect(await t.withUser(user, (db) => setReviewFlag(db, s.id, ids[0], false))).toEqual([ids[2]]);
+    expect(reviewFlags(await t.withUser(user, (db) => getSession(db, s.id)))).toEqual([ids[2]]);
+    // Flagging twice keeps one entry.
+    expect(await t.withUser(user, (db) => setReviewFlag(db, s.id, ids[2], true))).toEqual([ids[2]]);
+
+    await expect(t.withUser(user, (db) => setReviewFlag(db, s.id, qs[3].id, true))).rejects.toThrow(/not part/);
+    // Another learner cannot see the session, so cannot flag in it.
+    await expect(t.withUser(other, (db) => setReviewFlag(db, s.id, ids[1], true))).rejects.toThrow(/not open/);
+    expect(reviewFlags(await t.withUser(user, (db) => getSession(db, s.id)))).toEqual([ids[2]]);
+
+    await t.withUser(user, (db) => finishSession(db, s.id));
+    await expect(t.withUser(user, (db) => setReviewFlag(db, s.id, ids[1], true))).rejects.toThrow(/not open/);
+  });
+});
+
+describe("trend data", () => {
+  it("returns the answers since a week with their week, domain and objective, optionally for one objective", async () => {
+    const tz = "America/New_York";
+    const { rows } = await t.withUser(user, (db) =>
+      db.query("SELECT to_char(date_trunc('week', now() AT TIME ZONE $1), 'YYYY-MM-DD') AS w", [tz]),
+    );
+    const week = rows[0].w;
+    const all = await t.withUser(user, (db) => answersSinceWeek(db, examId, week, tz));
+    expect(all.length).toBeGreaterThan(0);
+    expect(all.every((x) => x.week === week && x.domainId && x.objectiveId)).toBe(true);
+    const one = await t.withUser(user, (db) => answersSinceWeek(db, examId, week, tz, all[0].objectiveId));
+    expect(one.length).toBeGreaterThan(0);
+    expect(one.every((x) => x.objectiveId === all[0].objectiveId)).toBe(true);
+    expect(await t.withUser(other, (db) => answersSinceWeek(db, examId, week, tz))).toEqual([]);
   });
 });

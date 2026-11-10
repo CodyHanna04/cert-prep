@@ -2,7 +2,7 @@ import { notFound, redirect } from "next/navigation";
 import { getAppContext } from "@/lib/app/context.js";
 import { withUser } from "@/lib/db/index.js";
 import { getQuestionsByIds } from "@/lib/db/questions.js";
-import { finishSession, getResponses, getSession, hasExpired } from "@/lib/db/sessions.js";
+import { finishSession, getResponses, getSession, hasExpired, reviewFlags } from "@/lib/db/sessions.js";
 import { isUuid, publicQuestion } from "@/lib/app/feedback.js";
 import { MockRunner } from "./MockRunner.js";
 
@@ -35,5 +35,5 @@ export default async function MockSessionPage({ params }) {
   const savedTime = Object.fromEntries(data.responses.filter((r) => r.timeMs != null).map((r) => [r.questionId, r.timeMs]));
   const endsAt = new Date(data.session.startedAt).getTime() + data.session.timeLimitSec * 1000;
 
-  return <MockRunner sessionId={sessionId} questions={ordered.map(publicQuestion)} saved={saved} savedTime={savedTime} endsAt={endsAt} />;
+  return <MockRunner sessionId={sessionId} questions={ordered.map(publicQuestion)} saved={saved} savedTime={savedTime} savedFlags={reviewFlags(data.session)} endsAt={endsAt} />;
 }

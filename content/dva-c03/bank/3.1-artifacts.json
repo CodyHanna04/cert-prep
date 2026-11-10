@@ -449,6 +449,407 @@
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-08",
       "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-3.1-11",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "single",
+      "stem": "A developer zips a Node.js Lambda function's index.js file and deploys it. Every invocation fails with \"Cannot find module 'uuid'\". The function works on the developer's laptop. What should the developer do?",
+      "options": [
+        {
+          "text": "Add uuid to the function's environment variables in the console",
+          "correct": false,
+          "rationale": "Environment variables hold settings, not code modules."
+        },
+        {
+          "text": "Increase the function's memory so that npm can install the module at startup",
+          "correct": false,
+          "rationale": "Lambda does not run npm install; memory is not the issue."
+        },
+        {
+          "text": "Change the function's runtime to the latest Node.js version",
+          "correct": false,
+          "rationale": "Changing the runtime version does not add the function's third-party dependencies; they must be in the deployment package or a layer."
+        },
+        {
+          "text": "Include the node_modules folder with the uuid package in the .zip file",
+          "correct": true,
+          "rationale": "Lambda runs only what is in the deployment package (and its layers), so dependencies must be packaged."
+        }
+      ],
+      "explanation": "A Lambda .zip package must contain the function's dependencies, or get them from a layer.",
+      "difficulty": 1,
+      "tags": [
+        "lambda",
+        "packaging",
+        "dependencies"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/nodejs-package.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-3.1-12",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "single",
+      "stem": "Builds of the same commit sometimes produce different dependency versions, because the build installs whatever versions are newest that day. The team wants every build of a commit to use the same dependency versions. What should the developer do?",
+      "options": [
+        {
+          "text": "Commit the lock file, and install with npm ci in the build",
+          "correct": true,
+          "rationale": "npm ci installs exactly the versions recorded in the lock file and fails if they do not match package.json."
+        },
+        {
+          "text": "Run npm update on every build so that dependencies move to the newest allowed versions",
+          "correct": false,
+          "rationale": "Moving to the newest versions on each build is the cause of the drift."
+        },
+        {
+          "text": "Delete the lock file so that it does not conflict with package.json",
+          "correct": false,
+          "rationale": "Without the lock file, each build resolves versions again."
+        },
+        {
+          "text": "Build the dependencies once a week on a schedule and reuse them",
+          "correct": false,
+          "rationale": "This hides the drift for a week but still lets versions change between rebuilds."
+        }
+      ],
+      "explanation": "Reproducible builds pin dependency versions with a committed lock file.",
+      "difficulty": 2,
+      "tags": [
+        "dependencies",
+        "codebuild",
+        "reproducible-builds"
+      ],
+      "refs": [
+        "https://docs.npmjs.com/cli/v11/commands/npm-ci"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-3.1-13",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "multi",
+      "stem": "A REST API in Amazon API Gateway has dev and prod stages. Each stage must call a different alias (dev or prod) of the same Lambda function, without separate API definitions. Which combination of steps will meet this requirement? (Select TWO.)",
+      "options": [
+        {
+          "text": "Point the integration at $LATEST and branch on the stage in the code",
+          "correct": false,
+          "rationale": "This loses the separation that aliases give between dev and prod versions."
+        },
+        {
+          "text": "Grant API Gateway permission to invoke each alias in the function's resource policy",
+          "correct": true,
+          "rationale": "Each alias is a separate resource, so each needs its own invoke permission."
+        },
+        {
+          "text": "Set an environment variable on the function that names the stage",
+          "correct": false,
+          "rationale": "The function cannot change which alias API Gateway calls."
+        },
+        {
+          "text": "Use a stage variable for the alias name in the Lambda integration's function ARN",
+          "correct": true,
+          "rationale": "Each stage sets the variable, so one integration calls a different alias per stage."
+        },
+        {
+          "text": "Create a separate copy of the API definition for each stage",
+          "correct": false,
+          "rationale": "This is what the requirement wants to avoid."
+        }
+      ],
+      "explanation": "Stage variables let one API definition call stage-specific backends such as Lambda aliases.",
+      "difficulty": 3,
+      "tags": [
+        "api-gateway",
+        "stage-variables",
+        "lambda-alias"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/stage-variables.html",
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/aws-api-gateway-stage-variables-reference.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-3.1-14",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "single",
+      "stem": "A team stores feature settings in AWS AppConfig. Last week a teammate deployed a configuration with a typo in a JSON field name, which broke the application. How can the team catch this before a configuration is deployed?",
+      "options": [
+        {
+          "text": "Turn on versioning in the hosted configuration store",
+          "correct": false,
+          "rationale": "Versions help roll back but do not check a configuration before it is deployed."
+        },
+        {
+          "text": "Add a JSON Schema validator to the configuration profile",
+          "correct": true,
+          "rationale": "AppConfig runs validators before a deployment starts and stops it if the configuration fails validation."
+        },
+        {
+          "text": "Use the AllAtOnce deployment strategy for every configuration change",
+          "correct": false,
+          "rationale": "Deploying everywhere at once spreads a bad configuration faster."
+        },
+        {
+          "text": "Store the configuration in Amazon S3 instead of the AppConfig store",
+          "correct": false,
+          "rationale": "Moving the source does not add validation."
+        }
+      ],
+      "explanation": "AppConfig validators (JSON Schema or a Lambda function) check configurations before deployment.",
+      "difficulty": 3,
+      "tags": [
+        "appconfig",
+        "validation"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-creating-configuration-and-profile-validators.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-3.1-15",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "single",
+      "stem": "A Dockerfile copies the whole project and then runs npm install. Every small source change reinstalls all dependencies, so image builds are slow. How should the developer reorder the Dockerfile?",
+      "options": [
+        {
+          "text": "Run npm install after the CMD instruction at the end of the file",
+          "correct": false,
+          "rationale": "Instructions after CMD still run at build time; this does not use the cache better."
+        },
+        {
+          "text": "Combine every instruction into a single RUN command",
+          "correct": false,
+          "rationale": "One large layer is rebuilt in full whenever anything changes."
+        },
+        {
+          "text": "Copy package.json and the lock file, run npm install, and then copy the source code",
+          "correct": true,
+          "rationale": "The dependency layer stays cached until package files change, so source edits rebuild only the later layers."
+        },
+        {
+          "text": "Use a larger base image that includes more system packages",
+          "correct": false,
+          "rationale": "A bigger base image does not help the dependency layer stay cached."
+        }
+      ],
+      "explanation": "Order Dockerfile steps from least to most frequently changed, to make the most of layer caching.",
+      "difficulty": 2,
+      "tags": [
+        "docker",
+        "containers",
+        "build-cache"
+      ],
+      "refs": [
+        "https://docs.docker.com/build/cache/",
+        "https://docs.docker.com/build/cache/optimize/"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-3.1-16",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "single",
+      "stem": "A team wants each container image to be checked for known software vulnerabilities as soon as it is pushed to an Amazon ECR repository. What should the developer turn on?",
+      "options": [
+        {
+          "text": "Tag immutability on the repository",
+          "correct": false,
+          "rationale": "Immutability stops tags from being overwritten; it does not scan images."
+        },
+        {
+          "text": "A lifecycle policy that expires untagged images",
+          "correct": false,
+          "rationale": "Lifecycle policies clean up images; they do not check them for vulnerabilities."
+        },
+        {
+          "text": "Cross-Region replication for the repository",
+          "correct": false,
+          "rationale": "Replication copies images to other Regions without scanning them."
+        },
+        {
+          "text": "Image scanning on push for the repository",
+          "correct": true,
+          "rationale": "ECR scans each image as it is pushed and reports findings on known vulnerabilities."
+        }
+      ],
+      "explanation": "ECR image scanning finds known vulnerabilities in container images.",
+      "difficulty": 1,
+      "tags": [
+        "ecr",
+        "image-scanning"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-3.1-17",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "single",
+      "stem": "Clients call a REST API in Amazon API Gateway through URLs such as https://abc123.execute-api.us-east-1.amazonaws.com/prod. The company wants clients to use https://api.example.com/v1 instead, mapped to the prod stage. What should the developer set up?",
+      "options": [
+        {
+          "text": "A custom domain name with an API mapping from the v1 path to the prod stage",
+          "correct": true,
+          "rationale": "Custom domains give the API a friendly URL, and API mappings send a base path to a stage."
+        },
+        {
+          "text": "A Route 53 alias record that points directly at the execute-api URL",
+          "correct": false,
+          "rationale": "DNS alone does not make API Gateway accept requests for the custom host name."
+        },
+        {
+          "text": "A stage named v1 that is a copy of the prod stage",
+          "correct": false,
+          "rationale": "This changes the path on the default URL, not the host name."
+        },
+        {
+          "text": "A stage variable named domain set to api.example.com",
+          "correct": false,
+          "rationale": "Stage variables configure the stage's backends, not its public URL."
+        }
+      ],
+      "explanation": "Custom domain names and API mappings give APIs stable, friendly URLs.",
+      "difficulty": 2,
+      "tags": [
+        "api-gateway",
+        "custom-domain"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html",
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/rest-api-mappings.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-3.1-18",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "single",
+      "stem": "An AWS CodeBuild project runs npm install against a private AWS CodeArtifact repository and fails with a 401 Unauthorized error. The build role has permission to use CodeArtifact. What should the build run before npm install?",
+      "options": [
+        {
+          "text": "npm login with an IAM user name and password for the account",
+          "correct": false,
+          "rationale": "CodeArtifact uses temporary tokens from AWS credentials, not IAM user names and passwords."
+        },
+        {
+          "text": "aws codeartifact login --tool npm",
+          "correct": true,
+          "rationale": "The login command gets a temporary token and configures npm to use the repository."
+        },
+        {
+          "text": "aws ecr get-login-password, piped to npm login",
+          "correct": false,
+          "rationale": "That command is for Amazon ECR registries."
+        },
+        {
+          "text": "npm cache clean, so that npm can try the request again",
+          "correct": false,
+          "rationale": "Clearing the cache does not add the missing authorization token."
+        }
+      ],
+      "explanation": "Package managers authenticate to CodeArtifact with a temporary token from aws codeartifact login or get-authorization-token.",
+      "difficulty": 2,
+      "tags": [
+        "codeartifact",
+        "codebuild",
+        "npm"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/codeartifact/latest/ug/npm-auth.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-3.1-19",
+      "domain": "d3",
+      "objective": "3.1",
+      "type": "single",
+      "stem": "A CloudFormation template creates an Amazon RDS database for several environments. The master password is currently a template parameter with a default value. The password must not appear in the template, and each environment has its own secret in AWS Secrets Manager. What should the developer do?",
+      "options": [
+        {
+          "text": "Keep the password parameter and set NoEcho to false on it",
+          "correct": false,
+          "rationale": "NoEcho false shows the value; the password would still be stored as a default."
+        },
+        {
+          "text": "Put the password in the template's Outputs section for each environment",
+          "correct": false,
+          "rationale": "Outputs are visible to anyone who can describe the stack."
+        },
+        {
+          "text": "Use a dynamic reference to the environment's Secrets Manager secret",
+          "correct": true,
+          "rationale": "A {{resolve:secretsmanager:...}} reference fetches the value at deploy time without putting it in the template."
+        },
+        {
+          "text": "Hardcode a different password in each environment's copy of the template",
+          "correct": false,
+          "rationale": "This puts the passwords in the templates."
+        }
+      ],
+      "explanation": "CloudFormation dynamic references pull secrets and parameters from Secrets Manager and Parameter Store at deploy time.",
+      "difficulty": 3,
+      "tags": [
+        "cloudformation",
+        "secrets-manager",
+        "dynamic-references"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
     }
   ]
 }

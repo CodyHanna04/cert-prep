@@ -15,29 +15,31 @@ A walk through every page on the local dev build: desktop, phone width (375 px),
 | Courses | "65 questions" was the exam's length, which read like the practice bank. | The stats are now "65 on the exam", minutes, objectives and the shared bank's size ("Soon" when a pack has no bank). |
 | Unknown URLs | The default Next.js 404 (black page, white text). | A themed `app/not-found.js` with links to the dashboard and courses. It also explains that another account's records look the same as missing ones. |
 
+## Done since (2026-11-10)
+
+- **Mock exam flags** are saved on the session (`session.config.reviewFlags`), so they survive a refresh, and the results page's Flagged filter includes them.
+- **Trends on History:** weekly accuracy per domain (sparklines on a shared, data-fitted range), the time-per-question distribution, and the median time per week.
+- **Objective detail:** weekly accuracy for the objective over the last 8 weeks.
+- **Dashboard activity chart:** a weekday letter under each bar, the start date and Today, and a tooltip per day on hover or keyboard focus.
+- **New question form** (Library → New question, and Write a question on objective pages). It reuses the editor, follows the exam's option rules and runs the import checks.
+- **Polish:** Sign out moved into the Devices card; the import page links to an in-app format page with an example built from the course's own codes; the account link is marked on the Account page.
+- **CSP with nonces:** `proxy.js` sends a per-request script nonce with `'strict-dynamic'`; everything else is same-origin.
+- **Content:** CLF-C02 is still on guide v1.3 (checked 2026-11-10). DVA-C03 is at its coverage target on every objective.
+
 ## Backlog, by value
 
 **Study experience**
-1. **Mock flags are lost on refresh.** Flags in the mock runner are client state only. Store them with the response (`response.flagged` exists) or as a session field.
-2. **Trends on History** (T-076): accuracy by domain over time, and time per question. The data is already recorded.
-3. **Objective detail:** an attempts-over-time sparkline (F07).
-4. **Dashboard activity chart** has no day labels; hovering a bar shows nothing.
-5. **"New question" form** in the Library, reusing the editor (T-025).
-6. **Auto-unflag** after three correct answers in a row, as a setting (F09).
-
-**Content**
-7. **CLF-C02:** 282 approved, reviewed against guide v1.3 (2026-11-08). Next: re-check the guide's revisions page before each content pass.
-8. **DVA-C03:** 123 approved questions and a `style.md` (2026-11-08). Next: grow each objective toward its target of about 19 to 26.
+1. **Auto-unflag** after three correct answers in a row, as a setting (F09).
 
 **Polish**
-9. **Account:** the Sign out button sits loose between cards; put it in the Passkeys or Devices card.
-10. **Import page:** it points people to `docs/04-content-format.md`, which users can't see on the site. Link to an in-app format page, or show a short example.
-11. **Global bar:** the account link ("Dev User") has no active state on the Account page.
-12. **Theme lab** (T-013) and two more themes (Atlas, Soft modern), with design notes.
+2. **Theme lab** (T-013) and two more themes (Atlas, Soft modern), with design notes.
 
 **Production**
-13. **CSP with nonces** in the app. The proxy already sends HSTS (`max-age=63072000; preload`) and a frame/base/form CSP. To join the browser preload list, the header also needs `includeSubDomains`, and every subdomain must serve HTTPS. Otherwise drop `preload`.
-14. **Backups:** a nightly `pg_dump` and one restore drill before inviting anyone (doc 15 §6).
-15. **Remove the temporary sudo** for `deploy` on the LXC.
+3. **HSTS preload:** to join the browser preload list, the header also needs `includeSubDomains`, and every subdomain must serve HTTPS. Otherwise drop `preload`.
+4. **Backups:** a nightly `pg_dump` and one restore drill before inviting anyone (doc 15 §6).
+5. **Remove the temporary sudo** for `deploy` on the LXC.
+
+**Content**
+6. **Both packs:** re-check each guide's revisions page before every content pass (CLF-C02 v1.3 and DVA-C03 unrevised as of 2026-11-10).
 
 Done since the audit (2026-11-02): HSTS at the proxy, and the admin site checked from the tailnet with the admin account created.

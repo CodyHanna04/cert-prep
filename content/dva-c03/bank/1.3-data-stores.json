@@ -453,6 +453,717 @@
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-08",
       "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-1.3-11",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "An application writes an item to a DynamoDB table and immediately queries a global secondary index for it. The query sometimes misses the new item, and setting ConsistentRead to true on the query returns an error. What is the reason?",
+      "options": [
+        {
+          "text": "The table's provisioned read capacity is too low for the query's traffic",
+          "correct": false,
+          "rationale": "Low capacity causes throttling errors, not missing items."
+        },
+        {
+          "text": "Global secondary indexes do not support strongly consistent reads",
+          "correct": true,
+          "rationale": "Updates reach a GSI asynchronously, and strongly consistent reads are not available on GSIs."
+        },
+        {
+          "text": "The index projects the key attributes and no others",
+          "correct": false,
+          "rationale": "The projection decides which attributes come back, not whether a new item is visible."
+        },
+        {
+          "text": "The query uses a scan instead of a key condition expression",
+          "correct": false,
+          "rationale": "The scenario describes a query on the index."
+        }
+      ],
+      "explanation": "Strongly consistent reads work on tables and local secondary indexes; GSIs are eventually consistent.",
+      "difficulty": 3,
+      "tags": [
+        "dynamodb",
+        "gsi",
+        "consistency"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.html",
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.3-12",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "Two users edit the same document item in a DynamoDB table at the same time, and one user's changes silently overwrite the other's. How can the developer detect this conflict?",
+      "options": [
+        {
+          "text": "Read the item with strong consistency right before each update",
+          "correct": false,
+          "rationale": "Fresh reads do not stop a later write from overwriting a concurrent one."
+        },
+        {
+          "text": "Enable DynamoDB Streams on the table",
+          "correct": false,
+          "rationale": "Streams record changes after they happen; they do not block conflicting writes."
+        },
+        {
+          "text": "Add a version attribute and make each update conditional on it",
+          "correct": true,
+          "rationale": "The second write fails its condition, so the application knows the item changed since it was read."
+        },
+        {
+          "text": "Increase the table's write capacity",
+          "correct": false,
+          "rationale": "Capacity does not affect which write wins."
+        }
+      ],
+      "explanation": "Optimistic locking uses a version attribute and a condition expression on each write.",
+      "difficulty": 3,
+      "tags": [
+        "dynamodb",
+        "optimistic-locking",
+        "condition-expressions"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html#WorkingWithItems.ConditionalUpdate",
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBMapper.OptimisticLocking.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.3-13",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "An application moves points between two users' items in a DynamoDB table. Either both items must be updated, or neither. What should the developer use?",
+      "options": [
+        {
+          "text": "BatchWriteItem with both updates",
+          "correct": false,
+          "rationale": "Batch writes are not atomic; one write can succeed while the other fails."
+        },
+        {
+          "text": "Two UpdateItem calls with exponential backoff",
+          "correct": false,
+          "rationale": "Retries do not undo the first update if the second one fails."
+        },
+        {
+          "text": "A conditional write on the first of the two items",
+          "correct": false,
+          "rationale": "This protects one item but does not tie the two updates together."
+        },
+        {
+          "text": "TransactWriteItems with both updates",
+          "correct": true,
+          "rationale": "A transaction applies all of its writes or none of them."
+        }
+      ],
+      "explanation": "DynamoDB transactions give all-or-nothing changes across items.",
+      "difficulty": 2,
+      "tags": [
+        "dynamodb",
+        "transactions"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/transaction-apis.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.3-14",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "A DynamoDB Query for one customer's orders returns only part of the results, and the response includes a LastEvaluatedKey. How should the code get the remaining items?",
+      "options": [
+        {
+          "text": "Repeat the query with ExclusiveStartKey set to LastEvaluatedKey",
+          "correct": true,
+          "rationale": "Each response is one page of up to 1 MB; the key marks where the next page starts."
+        },
+        {
+          "text": "Repeat the query with ConsistentRead set to true",
+          "correct": false,
+          "rationale": "Consistency does not change the page size."
+        },
+        {
+          "text": "Switch to a Scan operation",
+          "correct": false,
+          "rationale": "Scans are paginated the same way and read far more data."
+        },
+        {
+          "text": "Increase the table's provisioned read capacity and repeat the query",
+          "correct": false,
+          "rationale": "Pagination comes from the per-response size limit, not from capacity."
+        }
+      ],
+      "explanation": "Query and Scan results are paginated; LastEvaluatedKey and ExclusiveStartKey walk the pages.",
+      "difficulty": 2,
+      "tags": [
+        "dynamodb",
+        "pagination"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Query.Pagination.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.3-15",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "A job scans a large DynamoDB table with a filter expression and returns only a few items, yet it consumes a lot of read capacity. Why?",
+      "options": [
+        {
+          "text": "Filter expressions use strongly consistent reads, which cost twice as much",
+          "correct": false,
+          "rationale": "Consistency is set separately and is not the cause."
+        },
+        {
+          "text": "Filters run after items are read, and capacity counts every item read",
+          "correct": true,
+          "rationale": "Filter expressions reduce what is returned, not what is read."
+        },
+        {
+          "text": "The filter expression is evaluated once for each attribute in the table",
+          "correct": false,
+          "rationale": "Capacity depends on the data read, not on attribute count."
+        },
+        {
+          "text": "A scan reads each item twice, once to filter and once to return it",
+          "correct": false,
+          "rationale": "A scan reads each item once."
+        }
+      ],
+      "explanation": "Use key conditions on a table or index to limit what is read; filters only trim the results.",
+      "difficulty": 2,
+      "tags": [
+        "dynamodb",
+        "scan",
+        "filter-expressions"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Scan.html",
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Query.FilterExpression.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.3-16",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "A game needs a real-time leaderboard that updates player scores constantly and returns the top 100 players in order, with very low latency. Which solution is the best fit?",
+      "options": [
+        {
+          "text": "A DynamoDB table scanned and sorted on each request",
+          "correct": false,
+          "rationale": "Scanning and sorting the whole table on every request is slow and costly."
+        },
+        {
+          "text": "Objects in Amazon S3, one per player",
+          "correct": false,
+          "rationale": "S3 has no way to rank objects by a value."
+        },
+        {
+          "text": "A sorted set in Amazon ElastiCache",
+          "correct": true,
+          "rationale": "Sorted sets keep members ordered by score and return ranges such as the top 100 quickly."
+        },
+        {
+          "text": "An Amazon RDS table queried with ORDER BY on every request",
+          "correct": false,
+          "rationale": "It works at small scale, but constant updates and sorting add load and latency compared with an in-memory sorted set."
+        }
+      ],
+      "explanation": "In-memory sorted sets are the standard pattern for leaderboards.",
+      "difficulty": 2,
+      "tags": [
+        "elasticache",
+        "leaderboard"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/elasticache-use-cases.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.3-17",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "A web application runs on several EC2 instances behind an Application Load Balancer. Users are signed out whenever the Auto Scaling group replaces an instance, because sessions are stored in instance memory. What should the developer do?",
+      "options": [
+        {
+          "text": "Turn on sticky sessions on the load balancer",
+          "correct": false,
+          "rationale": "Sticky sessions route users to the same instance, but sessions are still lost when it is replaced."
+        },
+        {
+          "text": "Store sessions on each instance's EBS volume",
+          "correct": false,
+          "rationale": "The volume belongs to one instance and goes away with it."
+        },
+        {
+          "text": "Increase the instances' memory",
+          "correct": false,
+          "rationale": "More memory does not keep sessions when an instance is terminated."
+        },
+        {
+          "text": "Store session data in Amazon ElastiCache",
+          "correct": true,
+          "rationale": "A shared session store keeps sessions available to every instance and survives instance replacement."
+        }
+      ],
+      "explanation": "Move session state out of the instances into a shared store such as ElastiCache or DynamoDB.",
+      "difficulty": 2,
+      "tags": [
+        "elasticache",
+        "sessions",
+        "stateless"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/ecommerce-caching-valkey.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.3-18",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "A new application stores orders, customers and invoices. It needs joins across these tables, multi-row transactions and ad hoc reporting queries written in SQL. Which data store fits these access patterns?",
+      "options": [
+        {
+          "text": "Amazon Aurora",
+          "correct": true,
+          "rationale": "A relational database supports joins, transactions and ad hoc SQL."
+        },
+        {
+          "text": "Amazon DynamoDB",
+          "correct": false,
+          "rationale": "DynamoDB is designed for known key-based access patterns and does not support joins."
+        },
+        {
+          "text": "Amazon ElastiCache",
+          "correct": false,
+          "rationale": "An in-memory cache is not a durable system of record for relational data."
+        },
+        {
+          "text": "Amazon S3",
+          "correct": false,
+          "rationale": "S3 stores objects; it does not provide relational transactions or joins."
+        }
+      ],
+      "explanation": "Pick the data store by access pattern: relational queries and joins point to Amazon RDS or Aurora.",
+      "difficulty": 1,
+      "tags": [
+        "aurora",
+        "rds",
+        "data-store-selection"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/databases-on-aws-how-to-choose.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.3-19",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "multi",
+      "stem": "Reporting queries on an Amazon Aurora MySQL database slow down the application's writes on the primary instance. Which combination of steps will reduce the load on the primary? (Select TWO.)",
+      "options": [
+        {
+          "text": "Increase the storage allocated to the primary instance",
+          "correct": false,
+          "rationale": "Aurora storage grows automatically, and more storage does not move read queries off the primary."
+        },
+        {
+          "text": "Add one or more Aurora Replicas to the cluster",
+          "correct": true,
+          "rationale": "Replicas serve read traffic from the same shared storage."
+        },
+        {
+          "text": "Point the reporting queries at the cluster endpoint",
+          "correct": false,
+          "rationale": "The cluster endpoint connects to the primary instance, which is the instance under load."
+        },
+        {
+          "text": "Increase the backup retention period",
+          "correct": false,
+          "rationale": "Backups do not change query load."
+        },
+        {
+          "text": "Point the reporting queries at the cluster's reader endpoint",
+          "correct": true,
+          "rationale": "The reader endpoint spreads read connections across the replicas."
+        }
+      ],
+      "explanation": "Offload reads to replicas and connect to them through the reader endpoint.",
+      "difficulty": 3,
+      "tags": [
+        "aurora",
+        "read-replicas"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Overview.Endpoints.html",
+        "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Replication.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.3-20",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "Audit records stored in Amazon S3 must not be deleted or overwritten by anyone, including administrators, for seven years. What should the developer configure?",
+      "options": [
+        {
+          "text": "An S3 Lifecycle rule that expires objects after seven years",
+          "correct": false,
+          "rationale": "Lifecycle rules delete objects on a schedule; they do not stop earlier deletion."
+        },
+        {
+          "text": "S3 Object Lock in compliance mode, with a seven-year retention period",
+          "correct": true,
+          "rationale": "Compliance mode prevents any user from deleting or overwriting a protected version until the retention period ends."
+        },
+        {
+          "text": "S3 Object Lock in governance mode, with a seven-year retention period",
+          "correct": false,
+          "rationale": "Users with special permissions can override governance mode."
+        },
+        {
+          "text": "S3 Versioning on the bucket, so that earlier versions are kept",
+          "correct": false,
+          "rationale": "Versioning keeps old versions, but users with permission can still delete them."
+        }
+      ],
+      "explanation": "Object Lock compliance mode enforces write-once-read-many retention that no user can override.",
+      "difficulty": 3,
+      "tags": [
+        "s3",
+        "object-lock",
+        "retention"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.3-21",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "multi",
+      "stem": "An application stores customer orders in DynamoDB. It must fetch one customer's orders placed between two dates, efficiently. Which combination of steps will meet this requirement? (Select TWO.)",
+      "options": [
+        {
+          "text": "Use order date as the partition key",
+          "correct": false,
+          "rationale": "Date-based partition keys concentrate traffic and do not group a customer's orders."
+        },
+        {
+          "text": "Store each customer's orders in a single item as a list",
+          "correct": false,
+          "rationale": "Items have a size limit, and the list cannot be queried by date range."
+        },
+        {
+          "text": "Query with a key condition on the customer ID and a BETWEEN range on the order date",
+          "correct": true,
+          "rationale": "The query reads only the items in that date range."
+        },
+        {
+          "text": "Scan the table with a filter on customer ID and date",
+          "correct": false,
+          "rationale": "A scan reads the whole table."
+        },
+        {
+          "text": "Use customer ID as the partition key and order date as the sort key",
+          "correct": true,
+          "rationale": "Items for one customer are stored together and sorted by date."
+        }
+      ],
+      "explanation": "A sort key lets a query read a range of items within one partition.",
+      "difficulty": 2,
+      "tags": [
+        "dynamodb",
+        "sort-key",
+        "query"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Query.KeyConditionExpressions.html",
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-sort-keys.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.3-22",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "An application overwrites an existing object in Amazon S3 and immediately reads it back. What does the read return?",
+      "options": [
+        {
+          "text": "Possibly the old version, for a few seconds after the write",
+          "correct": false,
+          "rationale": "This was true of S3 in the past, but S3 is now strongly consistent."
+        },
+        {
+          "text": "An error, until S3 finishes replicating the object",
+          "correct": false,
+          "rationale": "Reads succeed right away and return the latest version."
+        },
+        {
+          "text": "The new version, because S3 is strongly consistent",
+          "correct": true,
+          "rationale": "S3 provides strong read-after-write consistency for PUT and DELETE requests."
+        },
+        {
+          "text": "The old version, unless the bucket has versioning turned on",
+          "correct": false,
+          "rationale": "Versioning keeps older versions; it does not affect consistency."
+        }
+      ],
+      "explanation": "S3 reads after a successful write or delete return the latest data.",
+      "difficulty": 2,
+      "tags": [
+        "s3",
+        "consistency"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.3-23",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "A team needs an in-memory cache that supports data structures such as sorted sets and hashes, replication to a standby, and automatic failover. Which choice fits?",
+      "options": [
+        {
+          "text": "Amazon ElastiCache with Memcached",
+          "correct": false,
+          "rationale": "Memcached supports simple key-value data without sorted sets or hashes, and node-based Memcached clusters have no replication or automatic failover."
+        },
+        {
+          "text": "Amazon S3 with a short Lifecycle expiration rule",
+          "correct": false,
+          "rationale": "S3 is object storage, not an in-memory cache."
+        },
+        {
+          "text": "An Amazon EBS volume shared between instances",
+          "correct": false,
+          "rationale": "Block storage is not a cache and does not provide these data structures."
+        },
+        {
+          "text": "Amazon ElastiCache with Valkey or Redis OSS",
+          "correct": true,
+          "rationale": "These engines support rich data structures, replication and automatic failover."
+        }
+      ],
+      "explanation": "Pick Valkey or Redis OSS for data structures, replication and failover; Memcached for simple multithreaded caching.",
+      "difficulty": 2,
+      "tags": [
+        "elasticache",
+        "cache-engine"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/SelectEngine.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.3-24",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "A new DynamoDB table uses customer ID as the partition key and order ID as the sort key. The application also needs to query each customer's orders sorted by order date, with strongly consistent reads. The table has not been created yet. What should the developer add?",
+      "options": [
+        {
+          "text": "A local secondary index on order date, created with the table",
+          "correct": true,
+          "rationale": "An LSI keeps the table's partition key, adds another sort key and supports strongly consistent reads."
+        },
+        {
+          "text": "A global secondary index with order date as its partition key",
+          "correct": false,
+          "rationale": "GSIs do not support strongly consistent reads, and a date partition key does not group a customer's orders."
+        },
+        {
+          "text": "A local secondary index added after the table is in use",
+          "correct": false,
+          "rationale": "Local secondary indexes can be defined only when the table is created."
+        },
+        {
+          "text": "A scan with a filter on customer ID, sorted in the application",
+          "correct": false,
+          "rationale": "A scan reads the whole table and is slow and costly."
+        }
+      ],
+      "explanation": "LSIs share the table's partition key, must be created with the table and allow strongly consistent reads.",
+      "difficulty": 4,
+      "tags": [
+        "dynamodb",
+        "lsi"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LSI.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.3-25",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "A new feature stores user profile data and looks it up by user ID millions of times a day, with single-digit millisecond latency at any scale. There are no joins or complex queries. Which data store fits best?",
+      "options": [
+        {
+          "text": "Amazon RDS for MySQL on a large instance",
+          "correct": false,
+          "rationale": "A relational database can do lookups, but scaling it for this load takes more work, and its features go unused."
+        },
+        {
+          "text": "Amazon DynamoDB",
+          "correct": true,
+          "rationale": "DynamoDB serves key-value lookups at consistent low latency at any scale, without server management."
+        },
+        {
+          "text": "Amazon S3 with one object per user",
+          "correct": false,
+          "rationale": "S3 is object storage with higher per-request latency than a key-value database."
+        },
+        {
+          "text": "Amazon EFS mounted on each application server",
+          "correct": false,
+          "rationale": "A shared file system is not built for key lookups at this scale."
+        }
+      ],
+      "explanation": "Simple key-value access at scale points to DynamoDB.",
+      "difficulty": 1,
+      "tags": [
+        "dynamodb",
+        "data-store-selection"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/databases-on-aws-how-to-choose.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-1.3-26",
+      "domain": "d1",
+      "objective": "1.3",
+      "type": "single",
+      "stem": "A DynamoDB table holds millions of support tickets. A small number are escalated and have an escalatedAt attribute; the rest do not have it. A dashboard must list escalated tickets efficiently. What should the developer do?",
+      "options": [
+        {
+          "text": "Scan the table with a filter on escalatedAt",
+          "correct": false,
+          "rationale": "The scan reads every ticket to return a few."
+        },
+        {
+          "text": "Add escalatedAt to every item, with a placeholder value such as N/A",
+          "correct": false,
+          "rationale": "This puts every item in an index on that attribute and loses the benefit of a sparse index."
+        },
+        {
+          "text": "Create a sparse GSI keyed on escalatedAt",
+          "correct": true,
+          "rationale": "Items without the index key are left out, so this sparse index contains only escalated tickets."
+        },
+        {
+          "text": "Query the table's partition key for the value escalated",
+          "correct": false,
+          "rationale": "The partition key is not the escalation status, so this query does not apply."
+        }
+      ],
+      "explanation": "A sparse index includes only items that have the index key, which makes it efficient for finding a small subset.",
+      "difficulty": 4,
+      "tags": [
+        "dynamodb",
+        "gsi",
+        "sparse-index"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-indexes-general-sparse-indexes.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
     }
   ]
 }

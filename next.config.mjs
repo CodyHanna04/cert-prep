@@ -5,8 +5,7 @@ const securityHeaders = [
   // Enrollment links carry a secret in the URL: never leak it in a Referer header.
   { key: "Referrer-Policy", value: "no-referrer" },
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=()" },
-  // Not a full script policy (Next.js inlines scripts); blocks framing, plugins, base-tag and cross-site form posts.
-  { key: "Content-Security-Policy", value: "frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'" },
+  // The Content Security Policy is set per request in proxy.js, because it carries a fresh script nonce.
 ];
 
 /** @type {import('next').NextConfig} */

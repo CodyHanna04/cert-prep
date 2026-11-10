@@ -499,6 +499,551 @@
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-08",
       "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-2.1-12",
+      "domain": "d2",
+      "objective": "2.1",
+      "type": "single",
+      "stem": "A REST API in Amazon API Gateway must authorize each request by checking a custom API token in a request header against the company's own token database. What should the developer configure?",
+      "options": [
+        {
+          "text": "An Amazon Cognito user pool authorizer for the API's methods",
+          "correct": false,
+          "rationale": "A Cognito authorizer validates tokens issued by a Cognito user pool, not tokens from the company's own database."
+        },
+        {
+          "text": "A Lambda authorizer that validates the token and returns an IAM policy",
+          "correct": true,
+          "rationale": "A Lambda authorizer runs custom code to check the caller and returns a policy that allows or denies the request."
+        },
+        {
+          "text": "IAM authorization on the methods, with the custom token passed in the header",
+          "correct": false,
+          "rationale": "IAM authorization expects SigV4-signed requests made with AWS credentials, not a custom token."
+        },
+        {
+          "text": "A usage plan with API keys created from the token database",
+          "correct": false,
+          "rationale": "API keys identify callers for throttling and quotas; they are not meant for authorization."
+        }
+      ],
+      "explanation": "Custom authorization logic in API Gateway belongs in a Lambda authorizer.",
+      "difficulty": 2,
+      "tags": [
+        "api-gateway",
+        "lambda-authorizer"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html",
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-2.1-13",
+      "domain": "d2",
+      "objective": "2.1",
+      "type": "single",
+      "stem": "A backend service with no user present must call an API that is protected by an Amazon Cognito user pool. The API checks for an OAuth scope named orders.read. How should the service get a token?",
+      "options": [
+        {
+          "text": "Create a Cognito user for the service and store its password in the code",
+          "correct": false,
+          "rationale": "A shared user account with a stored password is not the machine-to-machine pattern and adds a secret to the code."
+        },
+        {
+          "text": "Use an identity pool to get temporary AWS credentials for the service",
+          "correct": false,
+          "rationale": "Identity pool credentials sign AWS requests; they are not OAuth tokens with scopes."
+        },
+        {
+          "text": "Use an app client's client credentials grant and request the orders.read scope",
+          "correct": true,
+          "rationale": "The client credentials grant is the OAuth flow for machine-to-machine access, and scopes come from a resource server."
+        },
+        {
+          "text": "Use the authorization code grant with a redirect to the hosted sign-in page",
+          "correct": false,
+          "rationale": "The authorization code grant needs a person to sign in."
+        }
+      ],
+      "explanation": "For service-to-service calls, use the client credentials grant with custom scopes defined on a resource server.",
+      "difficulty": 3,
+      "tags": [
+        "cognito",
+        "oauth",
+        "client-credentials"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-define-resource-servers.html",
+        "https://docs.aws.amazon.com/cognito/latest/developerguide/token-endpoint.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-2.1-14",
+      "domain": "d2",
+      "objective": "2.1",
+      "type": "single",
+      "stem": "A Lambda function's execution role allows s3:* on all resources. A bucket policy on one bucket explicitly denies s3:DeleteObject for that role. What happens when the function tries to delete an object in that bucket?",
+      "options": [
+        {
+          "text": "The request is allowed, because the role's identity policy is evaluated first",
+          "correct": false,
+          "rationale": "Policies are not evaluated in an order where the first match wins; an explicit deny overrides allows."
+        },
+        {
+          "text": "The request is allowed, because s3:* also includes the s3:DeleteObject action",
+          "correct": false,
+          "rationale": "The allow does match, but the explicit deny in the bucket policy still overrides it."
+        },
+        {
+          "text": "The request fails with a throttling error because the two policies conflict",
+          "correct": false,
+          "rationale": "Conflicting policies do not cause throttling; the deny simply takes effect."
+        },
+        {
+          "text": "The request is denied, because an explicit deny in any policy overrides every allow",
+          "correct": true,
+          "rationale": "IAM evaluates all applicable policies, and an explicit deny always wins."
+        }
+      ],
+      "explanation": "In IAM policy evaluation, an explicit deny in any applicable policy overrides every allow.",
+      "difficulty": 2,
+      "tags": [
+        "iam",
+        "policy-evaluation"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-2.1-15",
+      "domain": "d2",
+      "objective": "2.1",
+      "type": "single",
+      "stem": "A Lambda function needs to read items from one DynamoDB table named Orders with GetItem and Query. Which execution role policy follows least privilege?",
+      "options": [
+        {
+          "text": "Allow dynamodb:GetItem and dynamodb:Query on the Orders table's ARN",
+          "correct": true,
+          "rationale": "This grants only the actions the function uses, on the one table it uses."
+        },
+        {
+          "text": "Attach the AmazonDynamoDBFullAccess managed policy to the role",
+          "correct": false,
+          "rationale": "Full access grants writes, deletes and table management on every table."
+        },
+        {
+          "text": "Allow dynamodb:* on the Orders table's ARN and every index ARN",
+          "correct": false,
+          "rationale": "This includes write and delete actions that the function does not need."
+        },
+        {
+          "text": "Allow dynamodb:GetItem and dynamodb:Query on every table in the account (*)",
+          "correct": false,
+          "rationale": "The actions are right, but every table in the account becomes readable."
+        }
+      ],
+      "explanation": "Least privilege means the specific actions on the specific resources the code uses.",
+      "difficulty": 1,
+      "tags": [
+        "iam",
+        "least-privilege",
+        "dynamodb"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/using-identity-based-policies.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-2.1-16",
+      "domain": "d2",
+      "objective": "2.1",
+      "type": "single",
+      "stem": "A mobile app gets AWS credentials from an Amazon Cognito identity pool and calls DynamoDB directly. Each user must be able to read and write only the items whose partition key is that user's identity ID. How should the developer enforce this?",
+      "options": [
+        {
+          "text": "Filter the items by user ID in the app before showing them to the user",
+          "correct": false,
+          "rationale": "Client-side filtering does not stop a user from calling DynamoDB for other users' items."
+        },
+        {
+          "text": "A dynamodb:LeadingKeys condition set to the user's Cognito identity ID",
+          "correct": true,
+          "rationale": "The condition limits access to items whose partition key equals the caller's identity ID."
+        },
+        {
+          "text": "Create a separate DynamoDB table for each user of the mobile app",
+          "correct": false,
+          "rationale": "This does not scale and still needs a policy to keep users out of other tables."
+        },
+        {
+          "text": "Give the identity pool's authenticated role read access to the table and nothing else",
+          "correct": false,
+          "rationale": "Read-only access does not separate users' items and blocks the writes."
+        }
+      ],
+      "explanation": "Fine-grained access control for DynamoDB uses IAM conditions such as dynamodb:LeadingKeys with a policy variable.",
+      "difficulty": 4,
+      "tags": [
+        "dynamodb",
+        "cognito",
+        "fine-grained-access"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/specifying-conditions.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-2.1-17",
+      "domain": "d2",
+      "objective": "2.1",
+      "type": "single",
+      "stem": "An application in an Amazon ECS task must upload files to an Amazon S3 bucket. How should the application get AWS permissions?",
+      "options": [
+        {
+          "text": "Grant the permissions to the task execution role in the task definition",
+          "correct": false,
+          "rationale": "The task execution role is used by the ECS agent to pull images and send logs, not by the application."
+        },
+        {
+          "text": "Store an IAM user's access keys as environment variables in the task",
+          "correct": false,
+          "rationale": "Long-term keys in environment variables can leak and need manual rotation."
+        },
+        {
+          "text": "Grant the permissions to the task role that the task definition specifies",
+          "correct": true,
+          "rationale": "The task role provides credentials to the application code running in the task's containers."
+        },
+        {
+          "text": "Add the permissions to the bucket's ACL for the ECS service principal",
+          "correct": false,
+          "rationale": "ACLs and the service principal do not give a particular task's application its own permissions."
+        }
+      ],
+      "explanation": "Application permissions go on the task role; the execution role is for ECS itself.",
+      "difficulty": 2,
+      "tags": [
+        "ecs",
+        "iam",
+        "task-role"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html",
+        "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-2.1-18",
+      "domain": "d2",
+      "objective": "2.1",
+      "type": "multi",
+      "stem": "A developer signs in to the AWS CLI with an IAM user and must run commands as the DeployRole role in the same account. Which combination of steps will let the developer do this? (Select TWO.)",
+      "options": [
+        {
+          "text": "Run aws configure with the role's ARN as the access key ID",
+          "correct": false,
+          "rationale": "A role ARN is not an access key."
+        },
+        {
+          "text": "Make sure DeployRole's trust policy allows the developer's IAM user to assume it",
+          "correct": true,
+          "rationale": "AssumeRole succeeds only if the role trusts the caller and the caller is allowed sts:AssumeRole."
+        },
+        {
+          "text": "Attach DeployRole to the IAM user as a permissions boundary",
+          "correct": false,
+          "rationale": "A permissions boundary limits the user's own permissions; it does not let the user act as the role."
+        },
+        {
+          "text": "Add a CLI profile with role_arn set to DeployRole and source_profile set to the user's profile",
+          "correct": true,
+          "rationale": "The CLI calls AssumeRole with the source profile's credentials and uses the temporary credentials it returns."
+        },
+        {
+          "text": "Create access keys for DeployRole and put them in the credentials file",
+          "correct": false,
+          "rationale": "Roles do not have long-term access keys."
+        }
+      ],
+      "explanation": "A CLI role profile plus a trust policy that allows the caller lets the CLI assume the role automatically.",
+      "difficulty": 3,
+      "tags": [
+        "iam",
+        "sts",
+        "cli",
+        "assume-role"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-role.html",
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_permissions-to-switch.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-2.1-19",
+      "domain": "d2",
+      "objective": "2.1",
+      "type": "single",
+      "stem": "A Lambda function generates presigned URLs for Amazon S3 downloads with a requested expiration of 12 hours. Users report that the links stop working after about an hour. What is the most likely cause?",
+      "options": [
+        {
+          "text": "The bucket's lifecycle rules remove the objects after an hour",
+          "correct": false,
+          "rationale": "The scenario does not mention lifecycle rules, and the objects would be missing for every request."
+        },
+        {
+          "text": "Presigned URLs cannot be valid for longer than one hour",
+          "correct": false,
+          "rationale": "Presigned URLs can be valid for longer; the limit here comes from the signing credentials."
+        },
+        {
+          "text": "The function's timeout ends the URL's validity when it returns",
+          "correct": false,
+          "rationale": "The URL does not depend on the function staying running."
+        },
+        {
+          "text": "The function's temporary signing credentials expire first",
+          "correct": true,
+          "rationale": "A presigned URL stops working when the credentials that signed it expire, even if the requested expiration is later."
+        }
+      ],
+      "explanation": "A presigned URL is valid until its expiration time or until the signing credentials expire, whichever comes first.",
+      "difficulty": 4,
+      "tags": [
+        "s3",
+        "presigned-url",
+        "sts"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-2.1-20",
+      "domain": "d2",
+      "objective": "2.1",
+      "type": "single",
+      "stem": "Users of a web app sign in through an Amazon Cognito user pool, and an identity pool gives them AWS credentials. Members of the admins group need extra permissions that regular users must not get. What should the developer configure?",
+      "options": [
+        {
+          "text": "Identity pool role-based access that maps the admins group to its own role",
+          "correct": true,
+          "rationale": "The identity pool can choose a role from the user's groups in the user pool token, so admins get their own role."
+        },
+        {
+          "text": "One authenticated role for everyone, with admin checks done in the browser code",
+          "correct": false,
+          "rationale": "Checks in browser code can be bypassed, and every user still gets the same AWS permissions."
+        },
+        {
+          "text": "Separate user pools for admins and for regular users of the app",
+          "correct": false,
+          "rationale": "This duplicates user management and is not needed to give admins a different role."
+        },
+        {
+          "text": "A resource policy on each AWS resource listing the admins' user names",
+          "correct": false,
+          "rationale": "AWS resource policies do not evaluate Cognito user names."
+        }
+      ],
+      "explanation": "Identity pools support role-based access control, choosing an IAM role from user pool groups or rules.",
+      "difficulty": 3,
+      "tags": [
+        "cognito",
+        "identity-pool",
+        "rbac"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/cognito/latest/developerguide/role-based-access-control.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-2.1-21",
+      "domain": "d2",
+      "objective": "2.1",
+      "type": "multi",
+      "stem": "A REST API in Amazon API Gateway in account A must be callable by an application that runs under an IAM role in account B, and by no other accounts. Which combination of steps will meet this requirement? (Select TWO.)",
+      "options": [
+        {
+          "text": "Make the API private and create a VPC endpoint in account A",
+          "correct": false,
+          "rationale": "A private API restricts network access through VPC endpoints; it does not grant account B's role access."
+        },
+        {
+          "text": "Add a resource policy to the API that allows execute-api:Invoke for the role in account B",
+          "correct": true,
+          "rationale": "For cross-account calls, the API's resource policy must grant access to the other account's principal."
+        },
+        {
+          "text": "Turn on CORS for the API's resources and methods",
+          "correct": false,
+          "rationale": "CORS controls browser cross-origin requests, not which AWS accounts can call the API."
+        },
+        {
+          "text": "Use IAM authorization on the methods, and sign requests with SigV4 from account B",
+          "correct": true,
+          "rationale": "IAM authorization identifies the caller from signed requests made with account B's credentials."
+        },
+        {
+          "text": "Create an API key in account A and share it with account B",
+          "correct": false,
+          "rationale": "API keys are for usage plans, not for authorizing an account's callers."
+        }
+      ],
+      "explanation": "Cross-account access to an API uses IAM authorization together with a resource policy that names the other account's principal.",
+      "difficulty": 4,
+      "tags": [
+        "api-gateway",
+        "iam",
+        "cross-account",
+        "resource-policy"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-resource-policies.html",
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-resource-policies-examples.html",
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-2.1-22",
+      "domain": "d2",
+      "objective": "2.1",
+      "type": "single",
+      "stem": "An application signs users in with an Amazon Cognito user pool. A new requirement says users must enter a code from an authenticator app in addition to their password. What should the developer turn on?",
+      "options": [
+        {
+          "text": "An IAM policy condition that requires aws:MultiFactorAuthPresent",
+          "correct": false,
+          "rationale": "That condition applies to AWS API calls with IAM credentials, not to app sign-in."
+        },
+        {
+          "text": "MFA in the user pool, with authenticator app (TOTP) codes",
+          "correct": true,
+          "rationale": "User pools support MFA with time-based one-time passwords from authenticator apps."
+        },
+        {
+          "text": "A longer minimum password length in the user pool",
+          "correct": false,
+          "rationale": "A stronger password is still a single factor."
+        },
+        {
+          "text": "A Lambda authorizer that asks users for a second password",
+          "correct": false,
+          "rationale": "A second password is not a second factor, and authorizers do not run sign-in."
+        }
+      ],
+      "explanation": "Cognito user pools provide MFA for application users, including TOTP authenticator apps.",
+      "difficulty": 2,
+      "tags": [
+        "cognito",
+        "mfa"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-mfa.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-2.1-23",
+      "domain": "d2",
+      "objective": "2.1",
+      "type": "single",
+      "stem": "A CI/CD system that runs outside AWS deploys to an AWS account by using a long-term IAM access key. The security team wants to remove that key. The CI system can issue OpenID Connect (OIDC) tokens. What should the developer set up?",
+      "options": [
+        {
+          "text": "A new access key for the IAM user every week",
+          "correct": false,
+          "rationale": "Rotating the key still leaves a long-term key in the CI system."
+        },
+        {
+          "text": "An Amazon Cognito user pool account for the CI system",
+          "correct": false,
+          "rationale": "A user pool signs in application users; it is not how a CI system federates to an IAM role."
+        },
+        {
+          "text": "An IAM OIDC provider and a role that trusts it",
+          "correct": true,
+          "rationale": "The role trusts the provider, and the CI system exchanges its token for temporary credentials (AssumeRoleWithWebIdentity)."
+        },
+        {
+          "text": "An EC2 instance profile attached to the CI system",
+          "correct": false,
+          "rationale": "Instance profiles apply to EC2 instances, not to systems outside AWS."
+        }
+      ],
+      "explanation": "OIDC federation gives external workloads temporary credentials without long-term keys.",
+      "difficulty": 3,
+      "tags": [
+        "iam",
+        "oidc",
+        "federation",
+        "sts"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
     }
   ]
 }

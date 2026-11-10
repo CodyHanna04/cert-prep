@@ -450,6 +450,590 @@
       "generator": "claude-opus-5-5",
       "generatedAt": "2026-11-08",
       "lastVerified": "2026-11-08"
+    },
+    {
+      "id": "dva-c03-2.2-11",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "multi",
+      "stem": "A role in account B must decrypt data with a customer managed AWS KMS key that belongs to account A. Calls from account B currently fail with AccessDenied. Which combination of steps will allow the decryption? (Select TWO.)",
+      "options": [
+        {
+          "text": "Update the key policy in account A to allow account B to use the key for kms:Decrypt",
+          "correct": true,
+          "rationale": "A key used across accounts must be allowed by its key policy."
+        },
+        {
+          "text": "Create a grant in account B on its own copy of the key",
+          "correct": false,
+          "rationale": "Account B has no copy of the key; the key and its policy live in account A."
+        },
+        {
+          "text": "Use an AWS managed key, which can be shared with other accounts",
+          "correct": false,
+          "rationale": "AWS managed keys cannot be used across accounts; their policies cannot be changed."
+        },
+        {
+          "text": "Give the role in account B an IAM policy that allows kms:Decrypt on the key's ARN",
+          "correct": true,
+          "rationale": "Account B must also delegate the permission to its role with an IAM policy."
+        },
+        {
+          "text": "Enable automatic key rotation on the key in account A",
+          "correct": false,
+          "rationale": "Rotation changes key material on a schedule; it does not grant access."
+        }
+      ],
+      "explanation": "Cross-account KMS use needs both the key policy in the owning account and an IAM policy in the calling account.",
+      "difficulty": 4,
+      "tags": [
+        "kms",
+        "cross-account",
+        "key-policy"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html",
+        "https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-key"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-2.2-12",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "An application needs a software license key at startup. The value must be stored encrypted, it never changes, and the team wants the lowest-cost option. Where should the developer store it?",
+      "options": [
+        {
+          "text": "An AWS Secrets Manager secret, encrypted with the default key",
+          "correct": false,
+          "rationale": "Secrets Manager suits credentials that need rotation and charges per secret, so it is not the lowest-cost choice for a value that never changes."
+        },
+        {
+          "text": "A plaintext environment variable in the application's configuration",
+          "correct": false,
+          "rationale": "Anyone who can read the configuration sees the value in plaintext."
+        },
+        {
+          "text": "Store it as a SecureString parameter in AWS Systems Manager Parameter Store",
+          "correct": true,
+          "rationale": "SecureString parameters are encrypted with AWS KMS, and the standard parameter tier has no additional charge."
+        },
+        {
+          "text": "A String parameter in Parameter Store, encrypted by the application",
+          "correct": false,
+          "rationale": "This adds custom encryption code when SecureString already handles encryption."
+        }
+      ],
+      "explanation": "For an encrypted configuration value such as a license key, a Parameter Store SecureString is the simple, low-cost choice. AWS recommends Secrets Manager for credentials such as passwords and API keys.",
+      "difficulty": 2,
+      "tags": [
+        "parameter-store",
+        "secrets"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html",
+        "https://docs.aws.amazon.com/systems-manager/latest/userguide/secure-string-parameter-kms-encryption.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-2.2-13",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "A multi-tenant application encrypts each tenant's records with one AWS KMS key. Data encrypted for one tenant must fail to decrypt if it is presented as another tenant's data, and the tenant ID should appear in AWS CloudTrail logs of key use. What should the developer use?",
+      "options": [
+        {
+          "text": "A separate KMS key alias for each tenant, each pointing to the same underlying key",
+          "correct": false,
+          "rationale": "Aliases are names; data encrypted through one alias decrypts through any alias for that key."
+        },
+        {
+          "text": "Automatic key rotation, with the tenant ID used as the rotation period",
+          "correct": false,
+          "rationale": "Rotation is a schedule for new key material and has no notion of tenants."
+        },
+        {
+          "text": "A tag on the KMS key with every tenant's ID as the tag value",
+          "correct": false,
+          "rationale": "Key tags describe the key; they are not bound to individual ciphertexts."
+        },
+        {
+          "text": "An encryption context with the tenant ID on each encrypt and decrypt call",
+          "correct": true,
+          "rationale": "The encryption context is bound to the ciphertext, must match on decrypt, and is recorded in CloudTrail."
+        }
+      ],
+      "explanation": "Encryption context is additional authenticated data that ties ciphertext to its context and shows up in audit logs.",
+      "difficulty": 4,
+      "tags": [
+        "kms",
+        "encryption-context"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/kms/latest/developerguide/encrypt_context.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-2.2-14",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "A busy Lambda function calls GetSecretValue on every invocation to read a database password from AWS Secrets Manager. This adds latency and cost. The password rotates monthly. What should the developer do?",
+      "options": [
+        {
+          "text": "Cache the secret with the AWS Parameters and Secrets Lambda Extension",
+          "correct": true,
+          "rationale": "Caching the value with a refresh interval avoids a call on every invocation while still picking up rotated values."
+        },
+        {
+          "text": "Copy the password into an environment variable each time the function is deployed",
+          "correct": false,
+          "rationale": "The function would keep the old password after the monthly rotation."
+        },
+        {
+          "text": "Increase the function's memory so that GetSecretValue returns faster",
+          "correct": false,
+          "rationale": "Memory does not remove the per-invocation API call or its cost."
+        },
+        {
+          "text": "Read the secret once per day with a scheduled EventBridge rule",
+          "correct": false,
+          "rationale": "A scheduled rule cannot hand the value to running function environments."
+        }
+      ],
+      "explanation": "Cache secrets in the execution environment, with a refresh so that rotated values are picked up.",
+      "difficulty": 3,
+      "tags": [
+        "secrets-manager",
+        "lambda",
+        "caching"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieving-secrets_lambda.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-2.2-15",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "A security policy requires that every connection from an application to its Amazon RDS for PostgreSQL database is encrypted in transit. Unencrypted connections must be refused. What should the developer do?",
+      "options": [
+        {
+          "text": "Enable encryption at rest on the database instance with an AWS KMS key",
+          "correct": false,
+          "rationale": "Encryption at rest protects stored data, not connections."
+        },
+        {
+          "text": "Set rds.force_ssl to 1 in the parameter group and connect over SSL/TLS",
+          "correct": true,
+          "rationale": "The parameter makes the database reject connections that do not use SSL/TLS."
+        },
+        {
+          "text": "Place the database in a private subnet with a restrictive security group",
+          "correct": false,
+          "rationale": "Network isolation limits who can connect but does not encrypt the connection."
+        },
+        {
+          "text": "Store the database password in AWS Secrets Manager with rotation",
+          "correct": false,
+          "rationale": "Protecting the password does not encrypt traffic."
+        }
+      ],
+      "explanation": "Encryption in transit to RDS is enforced in the database's parameters; clients connect with SSL/TLS.",
+      "difficulty": 3,
+      "tags": [
+        "rds",
+        "tls",
+        "encryption-in-transit"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html",
+        "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/PostgreSQL.Concepts.General.SSL.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-2.2-16",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "An Amazon S3 bucket uses SSE-KMS by default. An application writes millions of small objects, and the AWS KMS request charges are high. What should the developer enable to reduce them?",
+      "options": [
+        {
+          "text": "Automatic rotation of the KMS key used by the bucket",
+          "correct": false,
+          "rationale": "Rotation changes key material; it does not reduce KMS requests."
+        },
+        {
+          "text": "Client-side encryption with a new data key for every object",
+          "correct": false,
+          "rationale": "A new data key per object still needs a KMS request per object."
+        },
+        {
+          "text": "Turn on S3 Bucket Keys for the bucket's SSE-KMS encryption",
+          "correct": true,
+          "rationale": "A bucket-level key cuts the number of requests that S3 makes to AWS KMS."
+        },
+        {
+          "text": "S3 Versioning on the bucket, so objects are encrypted once",
+          "correct": false,
+          "rationale": "Versioning keeps object versions and has no effect on KMS requests."
+        }
+      ],
+      "explanation": "S3 Bucket Keys reduce request traffic from S3 to AWS KMS for SSE-KMS.",
+      "difficulty": 2,
+      "tags": [
+        "s3",
+        "kms",
+        "bucket-keys"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-2.2-17",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "A log group has a data protection policy that masks email addresses and credit card numbers. Developers must keep seeing masked values, but the security team must be able to see the original values during investigations. What should the developer do?",
+      "options": [
+        {
+          "text": "Remove the data protection policy whenever an investigation starts",
+          "correct": false,
+          "rationale": "This unmasks the data for everyone who can read the log group."
+        },
+        {
+          "text": "Copy the log group to an unencrypted S3 bucket for the security team",
+          "correct": false,
+          "rationale": "Copying sensitive logs widens exposure and does not use the masking controls."
+        },
+        {
+          "text": "Give the security team logs:GetLogEvents on the log group",
+          "correct": false,
+          "rationale": "Reading events still returns masked values without the unmask permission."
+        },
+        {
+          "text": "Grant the logs:Unmask permission to the security team's role",
+          "correct": true,
+          "rationale": "Users with logs:Unmask can view the unmasked data; everyone else sees masked values."
+        }
+      ],
+      "explanation": "CloudWatch Logs data protection masks sensitive data, and the logs:Unmask permission controls who can see the originals.",
+      "difficulty": 3,
+      "tags": [
+        "cloudwatch-logs",
+        "data-protection",
+        "pii"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/mask-sensitive-log-data.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-2.2-18",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "Compliance rules require that a customer managed AWS KMS key gets new key material every year. Data encrypted under the old key material must still decrypt, and the application must not change. What should the developer do?",
+      "options": [
+        {
+          "text": "Enable automatic key rotation on the customer managed KMS key, yearly",
+          "correct": true,
+          "rationale": "KMS keeps the old key material for decryption and uses the new material for new encryption, under the same key ID."
+        },
+        {
+          "text": "Create a new key every year and re-encrypt the existing data by hand",
+          "correct": false,
+          "rationale": "This works but changes the key the application uses and adds manual work."
+        },
+        {
+          "text": "Delete the key every year so that AWS KMS creates a replacement",
+          "correct": false,
+          "rationale": "Deleting the key makes data encrypted with it unrecoverable."
+        },
+        {
+          "text": "Change the key's alias to point to a new key every year",
+          "correct": false,
+          "rationale": "The alias change alone breaks decryption of older data unless the old key is also kept."
+        }
+      ],
+      "explanation": "Automatic rotation of a customer managed key is transparent to applications.",
+      "difficulty": 2,
+      "tags": [
+        "kms",
+        "key-rotation"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-2.2-19",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "A developer requested a public certificate in AWS Certificate Manager (ACM) with DNS validation for api.example.com. The domain is hosted in Amazon Route 53. The certificate has stayed in Pending validation status. What should the developer do?",
+      "options": [
+        {
+          "text": "Import the certificate into ACM again with a new private key",
+          "correct": false,
+          "rationale": "Importing does not validate a requested certificate and is a different workflow."
+        },
+        {
+          "text": "Add the CNAME record that ACM provides to the hosted zone",
+          "correct": true,
+          "rationale": "ACM validates domain control by finding that CNAME record; it can be created from the ACM console."
+        },
+        {
+          "text": "Wait for the validation email and click the approval link in it",
+          "correct": false,
+          "rationale": "That applies to email validation, not DNS validation."
+        },
+        {
+          "text": "Attach the certificate to a load balancer to finish validation",
+          "correct": false,
+          "rationale": "A certificate cannot be used before it is issued."
+        }
+      ],
+      "explanation": "DNS validation needs the CNAME record that ACM supplies to exist in the domain's DNS.",
+      "difficulty": 2,
+      "tags": [
+        "acm",
+        "route53",
+        "certificates"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/acm/latest/userguide/dns-validation.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-2.2-20",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "multi",
+      "stem": "An application stores a third-party API key in AWS Secrets Manager. The key must change every 30 days without downtime, and the third party offers an API to issue new keys. Which combination of steps will meet this requirement? (Select TWO.)",
+      "options": [
+        {
+          "text": "Copy the key into an environment variable every 30 days",
+          "correct": false,
+          "rationale": "Manual copying does not rotate the key at the provider and risks downtime."
+        },
+        {
+          "text": "Write a rotation Lambda function that creates, sets, tests and finishes the new key",
+          "correct": true,
+          "rationale": "For a third-party key, a custom rotation function calls the provider's API in the rotation steps."
+        },
+        {
+          "text": "Move the key to a Parameter Store SecureString with rotation turned on",
+          "correct": false,
+          "rationale": "Parameter Store does not rotate parameter values."
+        },
+        {
+          "text": "Turn on rotation for the secret with a 30-day schedule",
+          "correct": true,
+          "rationale": "Secrets Manager runs rotation on the schedule and stores each new version."
+        },
+        {
+          "text": "Enable automatic rotation on the KMS key that encrypts the secret",
+          "correct": false,
+          "rationale": "Rotating the KMS key changes the encryption key, not the API key stored in the secret."
+        }
+      ],
+      "explanation": "Secrets Manager rotation uses a Lambda function; for non-database secrets, the function implements the provider's steps.",
+      "difficulty": 3,
+      "tags": [
+        "secrets-manager",
+        "rotation",
+        "lambda"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html",
+        "https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_lambda.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-2.2-21",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "A company must manage its own encryption keys outside AWS, but it wants Amazon S3 to perform the encryption and decryption of objects. Which option should the developer use?",
+      "options": [
+        {
+          "text": "Server-side encryption with Amazon S3 managed keys (SSE-S3)",
+          "correct": false,
+          "rationale": "With SSE-S3, AWS manages the keys."
+        },
+        {
+          "text": "Server-side encryption with AWS KMS keys (SSE-KMS)",
+          "correct": false,
+          "rationale": "The keys are in AWS KMS, not managed by the company outside AWS."
+        },
+        {
+          "text": "Server-side encryption with customer-provided keys (SSE-C)",
+          "correct": true,
+          "rationale": "With SSE-C, the client sends its own key with each request, and S3 encrypts or decrypts without storing the key."
+        },
+        {
+          "text": "Client-side encryption done before each upload",
+          "correct": false,
+          "rationale": "This keeps keys outside AWS, but S3 would not perform the encryption."
+        }
+      ],
+      "explanation": "SSE-C: the customer manages the keys, and S3 encrypts with the key supplied in each request, without storing it. Since April 2026, SSE-C is blocked by default on new general purpose buckets, so it must be allowed in the bucket's encryption settings first.",
+      "difficulty": 3,
+      "tags": [
+        "s3",
+        "encryption",
+        "sse-c"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-2.2-22",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "A new DynamoDB table must be encrypted at rest with a key whose key policy the company controls and whose use is logged in AWS CloudTrail. What should the developer choose when creating the table?",
+      "options": [
+        {
+          "text": "The default AWS owned key for encryption at rest",
+          "correct": false,
+          "rationale": "AWS owned keys are not in the company's account, and their policies cannot be changed."
+        },
+        {
+          "text": "Client-side encryption of every attribute in the application",
+          "correct": false,
+          "rationale": "This adds custom code and is not the table's encryption-at-rest setting."
+        },
+        {
+          "text": "Turning off encryption so that a key can be added later",
+          "correct": false,
+          "rationale": "DynamoDB always encrypts data at rest; it cannot be turned off."
+        },
+        {
+          "text": "A customer managed AWS KMS key for the table's encryption",
+          "correct": true,
+          "rationale": "A customer managed key has a key policy the company controls, and its use is recorded in CloudTrail."
+        }
+      ],
+      "explanation": "DynamoDB encrypts all tables at rest; a customer managed key adds control and auditing.",
+      "difficulty": 2,
+      "tags": [
+        "dynamodb",
+        "kms",
+        "encryption-at-rest"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/EncryptionAtRest.html",
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/encryption.howitworks.html",
+        "https://docs.aws.amazon.com/kms/latest/developerguide/logging-using-cloudtrail.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
+    },
+    {
+      "id": "dva-c03-2.2-23",
+      "domain": "d2",
+      "objective": "2.2",
+      "type": "single",
+      "stem": "A company requires that every new Amazon EBS volume in an account and Region is encrypted, even when a developer forgets to choose encryption. What should the developer turn on?",
+      "options": [
+        {
+          "text": "EBS encryption by default for the account in that Region",
+          "correct": true,
+          "rationale": "With encryption by default, new volumes and snapshot copies are encrypted automatically."
+        },
+        {
+          "text": "Automatic rotation on the KMS key used for EBS",
+          "correct": false,
+          "rationale": "Rotation changes key material; it does not make unencrypted volumes encrypted."
+        },
+        {
+          "text": "Encryption on each EC2 instance's root volume by hand",
+          "correct": false,
+          "rationale": "Manual steps are what the requirement wants to avoid."
+        },
+        {
+          "text": "An S3 bucket policy that requires the aws:SecureTransport condition",
+          "correct": false,
+          "rationale": "That applies to S3 requests, not to EBS volumes."
+        }
+      ],
+      "explanation": "EBS encryption by default is a per-Region account setting.",
+      "difficulty": 2,
+      "tags": [
+        "ebs",
+        "encryption-at-rest"
+      ],
+      "refs": [
+        "https://docs.aws.amazon.com/ebs/latest/userguide/encryption-by-default.html"
+      ],
+      "source": "ai-draft",
+      "reviewStatus": "approved",
+      "generator": "claude-opus-5-5",
+      "generatedAt": "2026-11-10",
+      "lastVerified": "2026-11-10"
     }
   ]
 }

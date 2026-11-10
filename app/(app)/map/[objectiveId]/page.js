@@ -4,23 +4,35 @@ import { getAppContext } from "@/lib/app/context.js";
 import { withUser } from "@/lib/db/index.js";
 import { getExamProgress } from "@/lib/db/progress.js";
 import { listQuestions } from "@/lib/db/questions.js";
-import { questionHistory } from "@/lib/db/sessions.js";
-import { indexExam } from "@/lib/app/view.js";
+import { answersSinceWeek, questionHistory } from "@/lib/db/sessions.js";
+import { appTimeZone, indexExam } from "@/lib/app/view.js";
+import { scoreAxis, weekStarts, weeklyAccuracy } from "@/lib/domain/trend.js";
+import { Sparkline } from "@/components/Trend.js";
 import { Badge, Card, LinkButton, Meter, PageHeader, StatusBadge, pct } from "@/components/ui/index.js";
+
+const WEEKS = 8;
 
 export default async function ObjectivePage({ params }) {
   const { objectiveId } = await params;
   const { user, exam: active } = await getAppContext();
   if (!active) notFound();
+  const tz = appTimeZone();
+  const weeks = weekStarts(new Date().toLocaleDateString("en-CA", { timeZone: tz }), WEEKS);
   const data = await withUser(user.id, async (db) => {
     const res = await getExamProgress(db, active.id);
-    const questions = await listQuestions(db, active.id, { objectiveId, limit: 200 });
-    const history = await questionHistory(db, active.id);
-    return { ...res, questions, history };
+    const ob = indexExam(res.exam).objectiveById.get(objectiveId);
+    if (!ob) return null;
+    const [questions, history, recent] = await Promise.all([
+      listQuestions(db, active.id, { objectiveId, limit: 200 }),
+      questionHistory(db, active.id),
+      answersSinceWeek(db, active.id, weeks[0], tz, objectiveId),
+    ]);
+    return { ...res, ob, questions, history, recent };
   });
-  const { exam, progress, questions, history } = data;
-  const ob = indexExam(exam).objectiveById.get(objectiveId);
-  if (!ob) notFound();
+  if (!data) notFound();
+  const { exam, progress, ob, questions, history, recent } = data;
+  const perWeek = weeklyAccuracy(recent, weeks, () => "all").get("all");
+  const axis = scoreAxis([...(perWeek ?? []).filter((c) => c.pct != null).map((c) => c.pct), exam.readinessTargetPct]);
   const row = progress.objectives.find((o) => o.objectiveId === objectiveId);
   const approved = questions.filter((q) => q.reviewStatus === "approved");
   const drafts = questions.filter((q) => q.reviewStatus === "draft");
@@ -32,11 +44,14 @@ export default async function ObjectivePage({ params }) {
         title={`${ob.code} ${ob.title}`}
         subtitle={`${ob.domain.name} · ${ob.domain.weightPct}% of the exam`}
         actions={
-          row.poolSize > 0 ? (
-            <LinkButton href={`/practice?scope=objective&id=${objectiveId}`} variant="primary">Practice this objective</LinkButton>
-          ) : (
-            <LinkButton href="/library/import" variant="primary">Add questions</LinkButton>
-          )
+          <>
+            <LinkButton href={`/library/questions/new?objective=${objectiveId}`}>Write a question</LinkButton>
+            {row.poolSize > 0 ? (
+              <LinkButton href={`/practice?scope=objective&id=${objectiveId}`} variant="primary">Practice this objective</LinkButton>
+            ) : (
+              <LinkButton href="/library/import" variant="primary">Add questions</LinkButton>
+            )}
+          </>
         }
       />
       <div className="grid gap-4 md:grid-cols-3">
@@ -52,6 +67,32 @@ export default async function ObjectivePage({ params }) {
             <div>
               <dt className="text-muted">Coverage</dt>
               <dd>{row.sample} of {row.poolSize} questions attempted ({pct(row.coverage * 100)})</dd>
+            </div>
+            <div>
+              <dt className="text-muted">Attempts over time</dt>
+              {perWeek ? (
+                <dd className="mt-1">
+                  <Sparkline
+                    label={`Weekly accuracy on ${ob.code}, last ${WEEKS} weeks`}
+                    target={exam.readinessTargetPct}
+                    min={axis.lo}
+                    max={axis.hi}
+                    height={44}
+                    points={perWeek.map((c) => ({
+                      key: c.week,
+                      value: c.pct,
+                      tip: c.n
+                        ? `Week of ${shortDate(c.week)}: ${Math.round(c.pct)}% (${c.correct} of ${c.n})`
+                        : `Week of ${shortDate(c.week)}: no attempts`,
+                    }))}
+                  />
+                  <p className="mt-1 text-xs text-muted">
+                    {recent.length} attempt{recent.length === 1 ? "" : "s"} in the last {WEEKS} weeks, accuracy per week
+                  </p>
+                </dd>
+              ) : (
+                <dd className="text-xs text-muted">No attempts in the last {WEEKS} weeks.</dd>
+              )}
             </div>
           </dl>
         </Card>
@@ -101,3 +142,6 @@ export default async function ObjectivePage({ params }) {
     </>
   );
 }
+
+const shortDate = (w) =>
+  new Date(`${w}T00:00:00`).toLocaleDateString(undefined, { month: "short", day: "numeric" });
