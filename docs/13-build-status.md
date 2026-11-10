@@ -180,6 +180,7 @@ Changes made from the first round of feedback:
   - **Terms to watch:** the Lambda guide now calls standard functions "Event Functions". The exam guide still says Lambda functions, so the questions keep that.
 - **CLF-C02 is still on guide v1.3** (revisions page checked 2026-11-10). Every objective is at or above its target. The revisions page also lists retired services dropped from the out-of-scope list (Elastic Transcoder, MediaStore, Lookout for Metrics and others). None appear in questions, and the lint keeps blocking them.
 - **Tests:** new unit tests for the trend helpers and the CSP, plus DB tests for mock review flags and trend data.
+- **Completed courses move down:** a course marked Passed or Finished sorts last on Courses (with its result badge and an Open button), and the dashboard shows it in a compact Completed list under the active course cards. Order logic: `courseState` and `byCourseState` in `lib/app/view.js`, with a unit test.
 - **New pack: AWS Certified Solutions Architect - Associate (SAA-C03)**, with no questions yet.
   - Built from guide version 1.1 (October 29, 2026). No successor is announced.
   - Contents: `content/saa-c03/` holds `blueprint.json` (4 domains weighted 30/26/24/20, 14 task statements, a lint profile from the out-of-scope list plus retired names), `in-scope-services.md` and `style.md`.

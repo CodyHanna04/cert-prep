@@ -6,11 +6,11 @@ import { readPackBank } from "@/lib/content/bank.js";
 import { enrollAction, openCourseAction } from "@/app/actions/exam.js";
 import { DomainRing } from "@/components/DomainRing.js";
 import { Badge, Button, OutcomeBadge, PageHeader } from "@/components/ui/index.js";
+import { byCourseState, courseState } from "@/lib/app/view.js";
 
 export const metadata = { title: "Courses" };
 
 const SHADES = [1, 0.72, 0.5, 0.34, 0.24, 0.18];
-const STATE_ORDER = { studying: 0, paused: 1, new: 2 };
 
 export default async function CoursesPage() {
   const { user } = await getAppContext();
@@ -25,9 +25,10 @@ export default async function CoursesPage() {
     .map((p) => ({
       pack: p,
       exam: activeByCode.get(p.code) ?? null,
-      state: activeByCode.has(p.code) ? "studying" : pausedCodes.has(p.code) ? "paused" : "new",
+      state: courseState(activeByCode.get(p.code), pausedCodes.has(p.code)),
     }))
-    .sort((a, b) => STATE_ORDER[a.state] - STATE_ORDER[b.state]);
+    // Completed courses (passed or finished) move to the end.
+    .sort(byCourseState);
 
   return (
     <>
@@ -112,15 +113,15 @@ export default async function CoursesPage() {
                   Blueprint: {p.source.title}, retrieved {p.source.retrievedOn}.
                 </p>
                 <div className="flex items-center gap-3">
-                  {state === "studying" &&
-                    (exam.outcome ? <OutcomeBadge exam={exam} /> : <Badge tone="ok">Studying</Badge>)}
+                  {state === "studying" && <Badge tone="ok">Studying</Badge>}
+                  {state === "completed" && <OutcomeBadge exam={exam} />}
                   {state === "paused" && <Badge tone="idle">Paused</Badge>}
-                  {state === "studying" ? (
+                  {exam ? (
                     <form action={openCourseAction}>
                       <input type="hidden" name="examId" value={exam.id} />
                       <input type="hidden" name="to" value="/course" />
-                      <Button type="submit" variant="primary">
-                        Continue
+                      <Button type="submit" variant={state === "completed" ? "secondary" : "primary"}>
+                        {state === "completed" ? "Open" : "Continue"}
                       </Button>
                     </form>
                   ) : (

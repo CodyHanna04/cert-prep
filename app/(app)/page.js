@@ -59,6 +59,10 @@ export default async function DashboardPage() {
     ),
   );
 
+  // Passed or finished courses drop out of the progress cards into a compact list below them.
+  const current = courses.filter((c) => !c.exam.outcome);
+  const completed = courses.filter((c) => c.exam.outcome);
+
   const open = courses
     .map((c) => ({ course: c, session: c.sessions.find((s) => s.status === "in-progress") }))
     .filter((x) => x.session);
@@ -131,8 +135,17 @@ export default async function DashboardPage() {
       )}
 
       <h2 className="mb-3 font-display text-xl tracking-tight">Your courses</h2>
+      {current.length === 0 && (
+        <p className="mb-4 rounded-theme border border-dashed border-line p-5 text-sm text-muted">
+          Every course you started is done.{" "}
+          <Link href="/courses" className="text-accent underline">
+            Browse courses
+          </Link>{" "}
+          to start another.
+        </p>
+      )}
       <div className="grid gap-4 lg:grid-cols-2">
-        {courses.map(({ exam, progress }) => {
+        {current.map(({ exam, progress }) => {
           const r = progress.readiness;
           const onTarget = progress.objectives.filter((o) => o.status === "on-target").length;
           const days = daysUntil(exam.examDate);
@@ -165,15 +178,14 @@ export default async function DashboardPage() {
                     {exam.code} · target {exam.readinessTargetPct}%
                   </p>
                   <div className="mt-2 flex flex-wrap gap-2">
-                    <OutcomeBadge exam={exam} />
-                    {exam.outcome ? null : r.available ? (
+                    {r.available ? (
                       <Badge tone={r.meetsTarget ? "ok" : "warn"}>
                         {r.meetsTarget ? "At or above target" : "Below target"}
                       </Badge>
                     ) : (
                       <Badge tone="idle">Building a baseline</Badge>
                     )}
-                    {days != null && !exam.outcome && (
+                    {days != null && (
                       <Badge tone={days <= 14 ? "warn" : "info"}>
                         {days < 0
                           ? "Exam date passed"
@@ -216,6 +228,28 @@ export default async function DashboardPage() {
           );
         })}
       </div>
+
+      {completed.length > 0 && (
+        <section aria-labelledby="completed-heading" className="mt-6">
+          <h2 id="completed-heading" className="mb-3 font-display text-xl tracking-tight">
+            Completed
+          </h2>
+          <ul className="divide-y divide-line rounded-theme border border-line bg-surface shadow-card">
+            {completed.map(({ exam }) => (
+              <li key={exam.id} className="flex flex-wrap items-center gap-3 px-5 py-3">
+                <span className="min-w-0 flex-1">
+                  <span className="font-medium">{exam.name}</span>{" "}
+                  <span className="text-sm text-muted">{exam.code}</span>
+                </span>
+                <OutcomeBadge exam={exam} />
+                <CourseButton examId={exam.id} to="/course">
+                  Open
+                </CourseButton>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <div className="mt-6 grid gap-4 md:grid-cols-3">
         <Card title={`Last ${DAYS} days`} className="md:col-span-2">
