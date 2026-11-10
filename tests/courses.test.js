@@ -10,6 +10,7 @@ import {
   setExamOutcome,
 } from "../lib/db/exams.js";
 import { listPacks } from "../lib/content/packs.js";
+import { readPackBank } from "../lib/content/bank.js";
 
 /** Starting, pausing and resuming courses: the paths behind the Courses page. */
 let t;
@@ -103,11 +104,21 @@ describe("course catalog", () => {
   it("lists each shipped pack with the facts the Courses page shows", () => {
     const packs = listPacks();
     const codes = packs.map((p) => p.code).sort();
-    expect(codes).toEqual(["CLF-C02", "DVA-C03"]);
+    expect(codes).toEqual(["CLF-C02", "DVA-C03", "SAA-C03"]);
     for (const p of packs) {
       expect(p.domainWeights.reduce((n, d) => n + d.weightPct, 0)).toBe(100);
       expect(p.marketing?.tagline).toBeTruthy();
       expect(p.questionCount).toBeGreaterThan(0);
     }
+  });
+
+  it("a pack with no question bank yet is listed and can be started", async () => {
+    const saa = JSON.parse(readFileSync("content/saa-c03/blueprint.json", "utf8"));
+    expect(readPackBank("SAA-C03").version).toBeNull();
+    const id = await t.withUser(other, (db) => enrollInPack(db, other, saa));
+    const exam = await t.withUser(other, (db) => getExam(db, id));
+    expect(exam.code).toBe("SAA-C03");
+    expect(exam.domains.flatMap((d) => d.objectives)).toHaveLength(14);
+    await t.withUser(other, (db) => archiveExam(db, id, true));
   });
 });

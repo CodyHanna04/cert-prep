@@ -180,6 +180,11 @@ Changes made from the first round of feedback:
   - **Terms to watch:** the Lambda guide now calls standard functions "Event Functions". The exam guide still says Lambda functions, so the questions keep that.
 - **CLF-C02 is still on guide v1.3** (revisions page checked 2026-11-10). Every objective is at or above its target. The revisions page also lists retired services dropped from the out-of-scope list (Elastic Transcoder, MediaStore, Lookout for Metrics and others). None appear in questions, and the lint keeps blocking them.
 - **Tests:** new unit tests for the trend helpers and the CSP, plus DB tests for mock review flags and trend data.
+- **New pack: AWS Certified Solutions Architect - Associate (SAA-C03)**, with no questions yet.
+  - Built from guide version 1.1 (October 29, 2026). No successor is announced.
+  - Contents: `content/saa-c03/` holds `blueprint.json` (4 domains weighted 30/26/24/20, 14 task statements, a lint profile from the out-of-scope list plus retired names), `in-scope-services.md` and `style.md`.
+  - It shows on Courses with "Soon" for practice questions and can be started now.
+  - Test: an empty pack is listed and can be started.
 
 ## Run it
 
@@ -241,7 +246,7 @@ First real account (no public sign-up): `npm run user:create -- "Your Name"` pri
 - T-012 domain/objective editor, T-013 theme lab and design notes, "create exam manually", pack-reload diff (part of T-011).
 - T-081 browser end-to-end test (the data-layer golden path is tested; the UI was exercised by hand).
 - T-082 remainder: adapt and install `docker/nginx-study.conf.example` (untested draft), the Namecheap record, certificates, scheduled `pg_dump` and a restore drill. T-083 remainder: nginx rate limits, the pre-exposure checklist run-through.
-- Content: the CLF-C02 shared bank has 284 approved questions on guide v1.3, above the 260 coverage target. DVA-C03 has 263 approved questions (44 multiple-response), at its target on every objective.
+- Content: the CLF-C02 shared bank has 284 approved questions on guide v1.3, above the 260 coverage target. DVA-C03 has 263 approved questions (44 multiple-response), at its target on every objective. SAA-C03 has a blueprint and no questions yet (target 260).
 
 ## Findings that changed the plan
 

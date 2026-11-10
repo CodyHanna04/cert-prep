@@ -40,6 +40,7 @@ A walk through every page on the local dev build: desktop, phone width (375 px),
 5. **Remove the temporary sudo** for `deploy` on the LXC.
 
 **Content**
-6. **Both packs:** re-check each guide's revisions page before every content pass (CLF-C02 v1.3 and DVA-C03 unrevised as of 2026-11-10).
+6. **SAA-C03:** the blueprint is in (guide v1.1); draft the first questions, about 260 to reach the target.
+7. **Every pack:** re-check each guide's revisions page before every content pass (CLF-C02 v1.3, DVA-C03 unrevised and SAA-C03 v1.1 as of 2026-11-10).
 
 Done since the audit (2026-11-02): HSTS at the proxy, and the admin site checked from the tailnet with the admin account created.

@@ -1,0 +1,310 @@
+{
+  "formatVersion": 1,
+  "sources": [
+    {
+      "title": "AWS Certified Solutions Architect - Associate (SAA-C03) Exam Guide, Version 1.1 (October 29, 2026)",
+      "url": "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/solutions-architect-associate-03.html",
+      "retrievedOn": "2026-11-10",
+      "note": "Domains, weights, task statements, response types, scoring and service lists transcribed from the HTML guide and its sub-pages (domains 1-4, in-scope, out-of-scope, technologies and concepts, revisions). Revisions: 1.0 2026-08-28, 1.1 2026-10-29; AWS publishes updates about a month before they reach the exam. The `scope` arrays are CONDENSED from the guide's 'Knowledge of / Skills in' bullets."
+    },
+    {
+      "title": "AWS Certified Solutions Architect - Associate (certification page)",
+      "url": "https://aws.amazon.com/certification/certified-solutions-architect-associate/",
+      "retrievedOn": "2026-11-10",
+      "note": "Source of the 130-minute duration, 65-question total and 150 USD price; these are not in the guide. The page announces no successor to SAA-C03."
+    }
+  ],
+  "version": {
+    "current": "SAA-C03",
+    "note": "No newer version is announced on the certification page or in the guide (checked 2026-11-10). Guide version 1.1 (2026-10-29) should reach the exam about a month after publication."
+  },
+  "exam": {
+    "code": "SAA-C03",
+    "name": "AWS Certified Solutions Architect - Associate",
+    "vendor": "Amazon Web Services",
+    "passMarkPct": 72,
+    "passMarkNote": "Official pass mark is a scaled score of 720 on a 100-1000 scale (compensatory scoring: only the overall result matters). The raw-percentage equivalent is not published, so 72% is a PROXY for display on mock results only.",
+    "readinessTargetPct": 80,
+    "readinessTargetNote": "Your own per-exam target for dashboard/map status (default 80%). Not a vendor figure.",
+    "scaledPassScore": 720,
+    "scaleRange": [
+      100,
+      1000
+    ],
+    "timeLimitMin": 130,
+    "timeLimitNote": "From the AWS certification page, not the exam guide.",
+    "questionCount": 65,
+    "scoredQuestionCount": 50,
+    "unscoredQuestionCount": 15,
+    "unscoredNote": "15 unscored questions are not identified on the real exam. Unanswered = incorrect; no penalty for guessing.",
+    "questionTypes": {
+      "single": "Multiple choice: 1 correct response, 3 distractors (4 options).",
+      "multi": "Multiple response: 2 or more correct responses out of 5 or more options."
+    },
+    "profile": {
+      "single": {
+        "options": 4
+      },
+      "multi": {
+        "minOptions": 5,
+        "minCorrect": 2
+      },
+      "bannedOptionText": [
+        "all of the above",
+        "none of the above"
+      ],
+      "outOfScopeTerms": [
+        "Managed Workflows for Apache Airflow",
+        "Amazon MWAA",
+        "Lightsail",
+        "RDS on VMware",
+        "AWS CDK",
+        "CloudShell",
+        "CodeArtifact",
+        "CodeBuild",
+        "CodeCommit",
+        "CodeDeploy",
+        "Corretto",
+        "Fault Injection",
+        "Location Service",
+        "GameLift",
+        "AWS IoT",
+        "MXNet",
+        "Deep Learning AMI",
+        "Deep Learning Containers",
+        "HealthLake",
+        "Inferentia",
+        "Amazon Personalize",
+        "PyTorch",
+        "TensorFlow",
+        "Console Mobile Application",
+        "Distro for OpenTelemetry",
+        "AWS Elemental",
+        "Interactive Video Service",
+        "Amazon IVS",
+        "Migration Evaluator",
+        "Cloud Map",
+        "Braket",
+        "Ground Station",
+        "Elastic Transcoder",
+        "DeepComposer",
+        "DevOps Guru",
+        "Elastic Inference",
+        "Managed Blockchain",
+        "Sumerian",
+        "QuickSight"
+      ]
+    },
+    "marketing": {
+      "tagline": "Design secure, resilient, fast and cost-aware systems on AWS.",
+      "level": "Associate",
+      "audience": "Builders with about a year of hands-on AWS experience who choose services and shape architectures.",
+      "highlights": [
+        "Security leads at 30%, then resilience (26%), performance (24%) and cost (20%).",
+        "Scenario questions: pick the design that meets the requirement with the stated trade-off.",
+        "The broadest associate exam here: networking, storage, databases, analytics and migration all appear."
+      ]
+    },
+    "domains": [
+      {
+        "key": "d1",
+        "name": "Design Secure Architectures",
+        "weightPct": 30,
+        "objectives": [
+          {
+            "code": "1.1",
+            "title": "Design secure access to AWS resources",
+            "scope": [
+              "Access controls and management across multiple accounts; security strategy for multiple accounts (AWS Control Tower, SCPs)",
+              "Federated access and identity services (IAM, IAM Identity Center); when to federate a directory service with IAM roles",
+              "Security best practices for IAM users and the root user (least privilege, MFA)",
+              "Flexible authorization model: IAM users, groups, roles and policies",
+              "Role-based access control (AWS STS, role switching, cross-account access)",
+              "Appropriate use of resource policies for AWS services",
+              "AWS global infrastructure (Availability Zones, Regions); the shared responsibility model"
+            ]
+          },
+          {
+            "code": "1.2",
+            "title": "Design secure workloads and applications",
+            "scope": [
+              "Application configuration and credentials security; secure application access",
+              "AWS service endpoints; controlling ports, protocols and network traffic",
+              "VPC security components (security groups, route tables, network ACLs, NAT gateways)",
+              "Network segmentation (public and private subnets)",
+              "Integrating services to secure applications (AWS Shield, AWS WAF, IAM Identity Center, AWS Secrets Manager)",
+              "Security services by use case (Amazon Cognito, Amazon GuardDuty, Amazon Macie)",
+              "Threat vectors external to AWS (DDoS, SQL injection)",
+              "Securing external network connections (VPN, AWS Direct Connect)"
+            ]
+          },
+          {
+            "code": "1.3",
+            "title": "Determine appropriate data security controls",
+            "scope": [
+              "Data access and governance; data retention and classification; aligning with compliance requirements",
+              "Encryption at rest (AWS KMS) and in transit (ACM with TLS); key management",
+              "Access policies for encryption keys; rotating keys and renewing certificates",
+              "Data backups and replication; data recovery",
+              "Policies for data access, lifecycle and protection"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "d2",
+        "name": "Design Resilient Architectures",
+        "weightPct": 26,
+        "objectives": [
+          {
+            "code": "2.1",
+            "title": "Design scalable and loosely coupled architectures",
+            "scope": [
+              "Event-driven, microservice and multi-tier architectures; stateless vs stateful workloads",
+              "Loose coupling with managed services (Amazon SQS, publish/subscribe, AWS Transfer Family, AWS Secrets Manager)",
+              "API creation and management (Amazon API Gateway, REST APIs)",
+              "Horizontal vs vertical scaling; scaling strategies per component",
+              "Caching strategies; edge accelerators (CDN)",
+              "Load balancing (Application Load Balancer)",
+              "Containers: when to use them, migrating applications into containers, orchestration (Amazon ECS, Amazon EKS)",
+              "Serverless technologies and patterns (AWS Fargate, AWS Lambda); workflow orchestration (AWS Step Functions)",
+              "Storage types (object, file, block); when to use read replicas; purpose-built services"
+            ]
+          },
+          {
+            "code": "2.2",
+            "title": "Design highly available and/or fault-tolerant architectures",
+            "scope": [
+              "AWS global infrastructure (Availability Zones, Regions, Amazon Route 53); HA across AZs or Regions",
+              "Disaster recovery strategies (backup and restore, pilot light, warm standby, active-active failover; RPO and RTO)",
+              "Failover strategies; distributed design patterns; mitigating single points of failure",
+              "Immutable infrastructure; automation to ensure infrastructure integrity",
+              "Load balancing (ALB); proxies (Amazon RDS Proxy); basic networking (route tables)",
+              "Service quotas and throttling, including quotas for a standby environment",
+              "Durability and availability of data (backups, replication)",
+              "Workload visibility (AWS X-Ray); metrics based on business requirements",
+              "Improving reliability of legacy applications that cannot be changed; managed services by use case (Amazon Comprehend, Amazon Polly)"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "d3",
+        "name": "Design High-Performing Architectures",
+        "weightPct": 24,
+        "objectives": [
+          {
+            "code": "3.1",
+            "title": "Determine high-performing and/or scalable storage solutions",
+            "scope": [
+              "Storage services by use case (Amazon S3, Amazon EFS, Amazon EBS)",
+              "Storage types (object, file, block); hybrid storage solutions",
+              "Storage configurations that meet performance demands and scale for future needs"
+            ]
+          },
+          {
+            "code": "3.2",
+            "title": "Design high-performing and elastic compute solutions",
+            "scope": [
+              "Compute services by use case (AWS Batch, Amazon EMR, AWS Fargate, AWS Lambda)",
+              "Container orchestration (Amazon ECS, Amazon EKS); distributed computing and edge services",
+              "Scaling (Amazon EC2 Auto Scaling, AWS Auto Scaling); metrics and conditions for scaling actions",
+              "Decoupling workloads so components scale independently (queuing, publish/subscribe)",
+              "Choosing compute options and sizes (EC2 instance types, Lambda memory)"
+            ]
+          },
+          {
+            "code": "3.3",
+            "title": "Determine high-performing database solutions",
+            "scope": [
+              "Database types and services (serverless, relational vs non-relational, in-memory; Amazon Aurora, Amazon DynamoDB)",
+              "Data access patterns (read-intensive vs write-intensive); capacity planning (capacity units, instance types, Provisioned IOPS)",
+              "Read replicas; database replication",
+              "Caching (Amazon ElastiCache); database connections and proxies",
+              "Choosing a database engine (MySQL vs PostgreSQL); heterogeneous and homogeneous migrations"
+            ]
+          },
+          {
+            "code": "3.4",
+            "title": "Determine high-performing and/or scalable network architectures",
+            "scope": [
+              "Edge networking (Amazon CloudFront, AWS Global Accelerator)",
+              "Network design (subnet tiers, routing, IP addressing); topologies (global, hybrid, multi-tier)",
+              "Connection options (AWS VPN, AWS Direct Connect, AWS PrivateLink)",
+              "Load balancing strategy (Application Load Balancer); placement of resources",
+              "Network configurations that scale for future needs"
+            ]
+          },
+          {
+            "code": "3.5",
+            "title": "Determine high-performing data ingestion and transformation solutions",
+            "scope": [
+              "Building and securing data lakes (AWS Lake Formation); secure access to ingestion points",
+              "Data streaming architectures (Amazon Kinesis); ingestion patterns and frequency",
+              "Data transfer solutions (AWS DataSync, AWS Storage Gateway); sizes and speeds",
+              "Data transformation (AWS Glue); converting formats such as .csv to .parquet",
+              "Analytics and visualization (Amazon Athena, Amazon Quick); compute for processing (Amazon EMR)"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "d4",
+        "name": "Design Cost-Optimized Architectures",
+        "weightPct": 20,
+        "objectives": [
+          {
+            "code": "4.1",
+            "title": "Design cost-optimized storage solutions",
+            "scope": [
+              "Storage services by use case and cost (Amazon S3, Amazon EFS, Amazon EBS, Amazon FSx)",
+              "Storage tiering and S3 object lifecycles; data lifecycles; access patterns",
+              "Block storage options (HDD vs SSD volume types); right-sizing storage; storage auto scaling",
+              "Backup and archival solutions",
+              "Hybrid storage and transfer (AWS DataSync, AWS Transfer Family, AWS Storage Gateway); lowest-cost transfer to AWS",
+              "Access options (S3 Requester Pays); batch vs individual uploads",
+              "Cost management features and tools (cost allocation tags, multi-account billing, AWS Cost Explorer, AWS Budgets, AWS Cost and Usage Report)"
+            ]
+          },
+          {
+            "code": "4.2",
+            "title": "Design cost-optimized compute solutions",
+            "scope": [
+              "Purchasing options (Spot Instances, Reserved Instances, Savings Plans)",
+              "Instance families and sizes (memory optimized, compute optimized)",
+              "Cost-effective compute services (AWS Lambda, Amazon EC2, AWS Fargate); containers, serverless and microservices",
+              "Scaling strategies (auto scaling, hibernation; horizontal vs vertical)",
+              "Load balancer choice (ALB Layer 7, NLB Layer 4, Gateway Load Balancer)",
+              "Availability needs by workload class (production vs non-production); hybrid compute (AWS Outposts); edge processing",
+              "Cost management features and tools (cost allocation tags, multi-account billing, AWS Cost Explorer, AWS Budgets, AWS Cost and Usage Report)"
+            ]
+          },
+          {
+            "code": "4.3",
+            "title": "Design cost-optimized database solutions",
+            "scope": [
+              "Cost-effective database services (DynamoDB vs Amazon RDS, serverless) and types (time series, columnar)",
+              "Capacity planning (capacity units); caching; connections and proxies; read replicas",
+              "Backup and retention policies (snapshot frequency); data retention",
+              "Choosing a database engine (MySQL vs PostgreSQL); migrating schemas and data between locations or engines",
+              "Cost management features and tools (cost allocation tags, multi-account billing, AWS Cost Explorer, AWS Budgets, AWS Cost and Usage Report)"
+            ]
+          },
+          {
+            "code": "4.4",
+            "title": "Design cost-optimized network architectures",
+            "scope": [
+              "NAT gateways (NAT instance vs NAT gateway costs; one shared NAT gateway vs one per Availability Zone)",
+              "Network connections (AWS Direct Connect vs VPN vs internet); bandwidth (one or several VPNs, Direct Connect speed)",
+              "Routing to reduce data transfer costs (between Regions and AZs, private vs public, AWS Global Accelerator, VPC endpoints)",
+              "Routing, topology and peering (AWS Transit Gateway, VPC peering); DNS",
+              "CDNs and edge caching; load balancing (ALB); throttling strategy; reviewing workloads for network savings",
+              "Cost management features and tools (cost allocation tags, multi-account billing, AWS Cost Explorer, AWS Budgets, AWS Cost and Usage Report)"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "questions": []
+}
